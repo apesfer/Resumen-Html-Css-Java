@@ -1,0 +1,97 @@
+/*
+Estilos de la guía de Java.
+Autor: apesfer
+Fecha: 20/10/2026
+*/
+
+:root {
+    --guia-tinta: #252638;
+    --guia-papel: #f2f1f7;
+    --guia-blanco: #fff;
+    --guia-verde: #483b72;
+    --guia-linea: #d8d4e4;
+    --guia-suave: #615d70;
+}
+
+.guia-java {
+    background: var(--guia-papel);
+    color: var(--guia-tinta);
+}
+
+.guia-java a:hover {
+    color: #a34257;
+}
+
+.guia-java :focus-visible {
+    outline-color: #b44b60;
+}
+
+.guia-java .guia-portada {
+    background: linear-gradient(115deg, #27213f, #51417b 70%, #76536d);
+}
+
+.guia-java .guia-portada h1 em {
+    color: #e5d5f2;
+}
+
+.guia-java .campo-busqueda>span,
+.guia-java .atajos-css a {
+    color: #483b72;
+}
+
+.guia-java .atajos-css a {
+    background: #e9e5f0;
+}
+
+.guia-java .atajos-css a:hover {
+    border-color: #c7bddb;
+    background: #ded7eb;
+}
+
+.guia-java #resultado-java {
+    margin: 7px 0 0;
+    color: #e1d9ed;
+    font-size: .82rem;
+}
+
+.guia-java .nota-css {
+    border-left-color: #b44b60;
+    background: #e9e5f0;
+}
+
+.guia-java .nota-css code,
+.guia-java .regla-practica code {
+    background: #ded7eb;
+    color: #30264d;
+}
+
+.guia-java .cabecera-categoria>span {
+    color: #b44b60;
+}
+
+.guia-java .cabecera-categoria h2,
+.guia-java .regla-practica h2,
+.guia-java .sin-resultados-css h2,
+.guia-java .concepto-css h3 {
+    color: #483b72;
+}
+
+.guia-java .concepto-css .propiedad code {
+    color: #8b354b;
+}
+
+.guia-java .regla-practica {
+    background: #e8e3ef;
+}
+
+.guia-java .pie-guia {
+    background: #27213f;
+}
+
+.guia-java .pie-guia a {
+    color: #e5d5f2;
+}
+
+.guia-java [hidden] {
+    display: none !important;
+}

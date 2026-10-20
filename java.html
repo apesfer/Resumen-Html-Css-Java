@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!--
+Guía de Java para principiantes.
+Explica los fundamentos del lenguaje con ejemplos sencillos.
+Autor: apesfer
+Fecha: 20/10/2026
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Guía de Java para principiantes: sintaxis, variables, control, métodos, clases y colecciones.">
+    <title>Guía fácil de Java</title>
+    <link rel="stylesheet" href="src/css.css">
+    <link rel="stylesheet" href="src/java.css">
+</head>
+
+<body id="inicio" class="guia-css guia-java">
+    <header class="guia-portada">
+        <nav class="mini-nav-guias" aria-label="Cambiar entre guías">
+            <a href="index.html">HTML</a>
+            <a href="css.html">CSS</a>
+            <a href="java.html" aria-current="page">Java</a>
+            <a class="subir-inicio" href="#inicio" aria-label="Volver al principio" title="Volver al principio">↑</a>
+        </nav>
+        <p class="guia-etiqueta">Guía de consulta / Java para principiantes</p>
+        <h1>Java, explicado <em>paso a paso.</em></h1>
+        <p class="guia-bajada">Aprende a escribir programas, tomar decisiones y organizar tu código con ejemplos claros.
+            Busca por concepto, palabra o fragmento de código.</p>
+        <form class="buscador-css" role="search" onsubmit="return false">
+            <label for="buscar-java">¿Qué quieres aprender o encontrar?</label>
+            <div class="campo-busqueda">
+                <span aria-hidden="true">⌕</span>
+                <input id="buscar-java" type="search" placeholder="Prueba: variable, bucle, método, clase, array..."
+                    autocomplete="off">
+                <button id="limpiar-java" type="button" aria-label="Limpiar búsqueda"
+                    title="Limpiar búsqueda">×</button>
+            </div>
+            <p id="resultado-java" aria-live="polite">Cargando conceptos...</p>
+        </form>
+    </header>
+
+    <main class="guia-contenido">
+        <nav class="atajos-css" aria-label="Categorías de Java">
+            <a href="#fundamentos">Fundamentos</a>
+            <a href="#variables">Variables y tipos</a>
+            <a href="#operadores">Operadores</a>
+            <a href="#control">Condiciones y bucles</a>
+            <a href="#metodos">Métodos</a>
+            <a href="#arrays">Arrays y cadenas</a>
+            <a href="#objetos">Clases y objetos</a>
+            <a href="#errores">Excepciones</a>
+            <a href="#colecciones">Colecciones</a>
+            <a href="#ejemplos">Ejemplos frecuentes</a>
+        </nav>
+
+        <aside class="nota-css"><strong>La idea básica:</strong> Java es un lenguaje de programación. El código se
+            escribe en clases y métodos; las instrucciones suelen terminar en punto y coma. Java distingue entre
+            mayúsculas y minúsculas: <code>nombre</code> y <code>Nombre</code> son identificadores distintos.</aside>
+
+        <section class="categoria-css" id="fundamentos" data-categoria>
+            <div class="cabecera-categoria"><span>00</span>
+                <div>
+                    <p>Preparar y entender un programa</p>
+                    <h2>Fundamentos</h2>
+                </div>
+            </div>
+            <div class="rejilla-conceptos">
+                <article class="concepto-css" data-palabras="programa punto entrada main ejecutar clase aplicación">
+                    <h3>Programa mínimo</h3>
+                    <p>El método <code>main</code> es el punto de entrada habitual de una aplicación Java. La clase
+                        pública debe guardarse en un archivo con el mismo nombre.</p>
+                    <pre><code>public class Hola {
+    public static void main(String[] args) {
+        System.out.println("¡Hola!");
+    }
+}</code></pre>
+                    <p class="propiedad">Archivo: <code>Hola.java</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="comentarios documentación autor javadoc">
+                    <h3>Comentarios</h3>
+                    <p>Los comentarios de una línea empiezan con <code>//</code>; los de varias líneas se escriben entre
+                        <code>/*</code> y <code>*/</code>. Javadoc documenta clases y métodos.
+                    </p>
+                    <pre><code>// Comentario breve
+/**
+ * Describe una clase.
+ * @author Tu nombre
+ */</code></pre>
+                    <p class="propiedad">Javadoc: <code>/** ... */</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="imprimir pantalla salida consola println print">
+                    <h3>Mostrar información</h3>
+                    <p><code>System.out.println</code> escribe y termina la línea; <code>System.out.print</code> escribe
+                        sin añadir un salto de línea.</p>
+                    <pre><code>System.out.println("Resultado:");
+System.out.print(2 + 3);</code></pre>
+                    <p class="propiedad">Salida estándar: <code>System.out</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="paquete package importar import organizar">
+                    <h3>Paquetes e imports</h3>
+                    <p>Un paquete agrupa clases relacionadas. La declaración <code>package</code>, si se usa, va al
+                        principio del archivo; <code>import</code> permite usar clases de otros paquetes.</p>
+                    <pre><code>package ejemplos;
+
+import java.util.Scanner;</code></pre>
+                    <p class="propiedad">Paquetes: <code>package</code> e <code>import</code></p>
+                </article>
+            </div>
+        </section>
+
+        <section class="categoria-css" id="variables" data-categoria>
+            <div class="cabecera-categoria"><span>01</span>
+                <div>
+                    <p>Guardar y representar datos</p>
+                    <h2>Variables y tipos</h2>
+                </div>
+            </div>
+            <div class="rejilla-conceptos">
+                <article class="concepto-css" data-palabras="variable declarar asignar valor nombre">
+                    <h3>Declarar una variable</h3>
+                    <p>Una variable tiene un tipo y un nombre. Puedes asignarle un valor al declararla o después.</p>
+                    <pre><code>int edad = 20;
+edad = 21;</code></pre>
+                    <p class="propiedad">Forma: <code>tipo nombre = valor;</code></p>
+                </article>
+                <article class="concepto-css"
+                    data-palabras="primitivos byte short int long entero float double decimal">
+                    <h3>Tipos numéricos</h3>
+                    <p><code>byte</code>, <code>short</code>, <code>int</code> y <code>long</code> representan enteros.
+                        <code>float</code> y <code>double</code> representan números decimales; para dinero suele ser
+                        más apropiado <code>BigDecimal</code>.
+                    </p>
+                    <pre><code>int unidades = 12;
+double precio = 4.99;
+long poblacion = 8000000L;</code></pre>
+                    <p class="propiedad">Primitivos numéricos</p>
+                </article>
+                <article class="concepto-css" data-palabras="boolean lógico verdadero falso true false char carácter">
+                    <h3>Booleanos y caracteres</h3>
+                    <p><code>boolean</code> solo admite <code>true</code> o <code>false</code>. <code>char</code>
+                        representa un carácter y se escribe entre comillas simples.</p>
+                    <pre><code>boolean activo = true;
+char inicial = 'A';</code></pre>
+                    <p class="propiedad">Tipos: <code>boolean</code> y <code>char</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="String cadena texto comillas inmutable">
+                    <h3>Cadenas de texto</h3>
+                    <p><code>String</code> representa texto y se escribe entre comillas dobles. Es un objeto, no un tipo
+                        primitivo; sus operaciones habituales devuelven otra cadena.</p>
+                    <pre><code>String nombre = "Ana";
+String saludo = "Hola, " + nombre;</code></pre>
+                    <p class="propiedad">Clase: <code>String</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="constante final inmutable mayúscula">
+                    <h3>Constantes con final</h3>
+                    <p><code>final</code> impide asignar otro valor a una variable después de inicializarla. Por
+                        convención, las constantes se nombran en mayúsculas con guiones bajos.</p>
+                    <pre><code>final double IVA = 0.21;</code></pre>
+                    <p class="propiedad">Modificador: <code>final</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="conversión casting convertir tipo parse">
+                    <h3>Convertir tipos</h3>
+                    <p>Algunas conversiones numéricas se hacen explícitamente con un cast. Para convertir texto a
+                        número, se usan métodos como <code>Integer.parseInt</code>.</p>
+                    <pre><code>double medida = 8.7;
+int entera = (int) medida;
+int cantidad = Integer.parseInt("12");</code></pre>
+                    <p class="propiedad">Conversión explícita: <code>(tipo) valor</code></p>
+                </article>
+            </div>
+        </section>
+
+        <section class="categoria-css" id="operadores" data-categoria>
+            <div class="cabecera-categoria"><span>02</span>
+                <div>
+                    <p>Calcular y comparar valores</p>
+                    <h2>Operadores</h2>
+                </div>
+            </div>
+            <div class="rejilla-conceptos">
+                <article class="concepto-css" data-palabras="aritméticos sumar restar multiplicar dividir resto módulo">
+                    <h3>Operaciones aritméticas</h3>
+                    <p>Los operadores básicos son suma, resta, multiplicación, división y resto. La división entre
+                        enteros devuelve un entero.</p>
+                    <pre><code>int suma = 7 + 3;
+int division = 7 / 3; // 2
+int resto = 7 % 3;    // 1</code></pre>
+                    <p class="propiedad">Operadores: <code>+ - * / %</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="comparación igualdad distinto mayor menor equals">
+                    <h3>Comparar valores</h3>
+                    <p>Las comparaciones producen un booleano. Para comparar el contenido de cadenas, usa
+                        <code>equals</code>, no <code>==</code>.
+                    </p>
+                    <pre><code>boolean mayor = edad >= 18;
+boolean mismoTexto = nombre.equals("Ana");</code></pre>
+                    <p class="propiedad">Comparación: <code>== != &lt; &gt; &lt;= &gt;=</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="lógicos and or not y o no && || !">
+                    <h3>Operadores lógicos</h3>
+                    <p><code>&amp;&amp;</code> significa «y», <code>||</code> significa «o» y <code>!</code> niega una
+                        condición. Los operadores cortocircuitan cuando ya conocen el resultado.</p>
+                    <pre><code>boolean puedeEntrar = edad >= 18 && tieneEntrada;</code></pre>
+                    <p class="propiedad">Operadores: <code>&amp;&amp; || !</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="incremento decremento asignación abreviada += ++">
+                    <h3>Actualizar una variable</h3>
+                    <p>Las asignaciones compuestas combinan una operación con la asignación. <code>++</code> aumenta
+                        una unidad y <code>--</code> la reduce.</p>
+                    <pre><code>int puntos = 10;
+puntos += 5;
+puntos++;</code></pre>
+                    <p class="propiedad">Atajos: <code>+= -= *= /= ++ --</code></p>
+                </article>
+            </div>
+        </section>
+
+        <section class="categoria-css" id="control" data-categoria>
+            <div class="cabecera-categoria"><span>03</span>
+                <div>
+                    <p>Elegir qué hacer y cuántas veces</p>
+                    <h2>Condiciones y bucles</h2>
+                </div>
+            </div>
+            <div class="rejilla-conceptos">
+                <article class="concepto-css" data-palabras="if else condición si sino decisión">
+                    <h3>Condición if / else</h3>
+                    <p>Ejecuta un bloque u otro según se cumpla una condición booleana.</p>
+                    <pre><code>if (edad >= 18) {
+    System.out.println("Mayor de edad");
+} else {
+    System.out.println("Menor de edad");
+}</code></pre>
+                    <p class="propiedad">Estructura: <code>if</code> y <code>else</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="switch case elegir opciones break default">
+                    <h3>Varias opciones con switch</h3>
+                    <p><code>switch</code> permite elegir entre varios casos. En la forma tradicional,
+                        <code>break</code>
+                        evita continuar al siguiente caso.
+                    </p>
+                    <pre><code>switch (dia) {
+    case 1:
+        System.out.println("Lunes");
+        break;
+    default:
+        System.out.println("Otro día");
+}</code></pre>
+                    <p class="propiedad">Elementos: <code>case</code>, <code>break</code>, <code>default</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="for bucle repetir contador iteración">
+                    <h3>Bucle for</h3>
+                    <p>Usa <code>for</code> cuando la repetición tiene un contador o un número conocido de vueltas.</p>
+                    <pre><code>for (int i = 0; i < 5; i++) {
+    System.out.println(i);
+}</code></pre>
+                    <p class="propiedad">Partes: inicio, condición y actualización</p>
+                </article>
+                <article class="concepto-css" data-palabras="while mientras bucle condición">
+                    <h3>Bucle while</h3>
+                    <p><code>while</code> repite mientras la condición sea verdadera. Si es falsa desde el principio, el
+                        bloque no se ejecuta.</p>
+                    <pre><code>int intentos = 0;
+while (intentos < 3) {
+    intentos++;
+}</code></pre>
+                    <p class="propiedad">Evalúa la condición antes de cada vuelta</p>
+                </article>
+                <article class="concepto-css" data-palabras="do while hacer repetir al menos una vez">
+                    <h3>Bucle do / while</h3>
+                    <p>El bloque se ejecuta al menos una vez, porque la condición se comprueba al final.</p>
+                    <pre><code>do {
+    intentos++;
+} while (intentos < 3);</code></pre>
+                    <p class="propiedad">Termina la condición con punto y coma</p>
+                </article>
+                <article class="concepto-css" data-palabras="break continue salir saltar bucle">
+                    <h3>Controlar un bucle</h3>
+                    <p><code>break</code> sale del bucle; <code>continue</code> omite el resto de la vuelta actual y
+                        pasa a la siguiente.</p>
+                    <pre><code>for (int i = 0; i < 10; i++) {
+    if (i == 5) continue;
+    if (i == 8) break;
+}</code></pre>
+                    <p class="propiedad">Usa estos saltos con moderación para mantener claro el flujo</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="categoria-css" id="metodos" data-categoria>
+            <div class="cabecera-categoria"><span>04</span>
+                <div>
+                    <p>Reutilizar instrucciones</p>
+                    <h2>Métodos</h2>
+                </div>
+            </div>
+            <div class="rejilla-conceptos">
+                <article class="concepto-css" data-palabras="método función declarar llamada">
+                    <h3>Declarar y llamar a un método</h3>
+                    <p>Un método agrupa instrucciones con un nombre. Se ejecuta cuando se llama desde el programa.</p>
+                    <pre><code>static void saludar() {
+    System.out.println("Hola");
+}
+
+saludar();</code></pre>
+                    <p class="propiedad"><code>void</code> indica que no devuelve un valor</p>
+                </article>
+                <article class="concepto-css" data-palabras="parámetro argumento entrada método">
+                    <h3>Parámetros</h3>
+                    <p>Los parámetros reciben los datos que necesita el método. Al llamarlo, se pasan argumentos del
+                        tipo esperado.</p>
+                    <pre><code>static void saludar(String nombre) {
+    System.out.println("Hola, " + nombre);
+}
+
+saludar("Ana");</code></pre>
+                    <p class="propiedad">Parámetro: <code>String nombre</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="return devolver resultado tipo retorno">
+                    <h3>Devolver un resultado</h3>
+                    <p>El tipo antes del nombre indica qué devuelve el método. <code>return</code> entrega el resultado
+                        y termina la ejecución del método.</p>
+                    <pre><code>static int sumar(int a, int b) {
+    return a + b;
+}</code></pre>
+                    <p class="propiedad">El resultado debe coincidir con el tipo declarado</p>
+                </article>
+                <article class="concepto-css" data-palabras="sobrecarga overload mismo nombre parámetros">
+                    <h3>Sobrecarga</h3>
+                    <p>Puedes declarar métodos con el mismo nombre si sus listas de parámetros son diferentes. Cambiar
+                        solo el tipo devuelto no basta.</p>
+                    <pre><code>static int doble(int n) { return n * 2; }
+static double doble(double n) { return n * 2; }</code></pre>
+                    <p class="propiedad">Se distingue por el nombre y los parámetros</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="categoria-css" id="arrays" data-categoria>
+            <div class="cabecera-categoria"><span>05</span>
+                <div>
+                    <p>Trabajar con secuencias de datos</p>
+                    <h2>Arrays y cadenas</h2>
+                </div>
+            </div>
+            <div class="rejilla-conceptos">
+                <article class="concepto-css" data-palabras="array arreglo vector colección tamaño índice">
+                    <h3>Crear un array</h3>
+                    <p>Un array guarda varios valores del mismo tipo y tiene tamaño fijo. Sus posiciones empiezan en
+                        cero.</p>
+                    <pre><code>int[] notas = {7, 9, 8};
+System.out.println(notas[0]); // 7</code></pre>
+                    <p class="propiedad">Tamaño: <code>notas.length</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="recorrer array for each for-each">
+                    <h3>Recorrer un array</h3>
+                    <p>Un <code>for</code> clásico permite usar el índice. El <code>for-each</code> recorre directamente
+                        cada elemento cuando no hace falta la posición.</p>
+                    <pre><code>for (int nota : notas) {
+    System.out.println(nota);
+}</code></pre>
+                    <p class="propiedad">Bucle: <code>for (tipo elemento : colección)</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="String longitud length concatenar equals texto">
+                    <h3>Operaciones con String</h3>
+                    <p><code>length()</code> devuelve la longitud; <code>charAt</code> obtiene un carácter y
+                        <code>equals</code> compara el contenido. Los índices empiezan en cero.
+                    </p>
+                    <pre><code>String texto = "Java";
+int longitud = texto.length();
+boolean igual = texto.equals("Java");</code></pre>
+                    <p class="propiedad">Métodos: <code>length()</code>, <code>charAt()</code>, <code>equals()</code>
+                    </p>
+                </article>
+                <article class="concepto-css" data-palabras="null referencia vacío nulo comprobar">
+                    <h3>La referencia null</h3>
+                    <p><code>null</code> indica que una variable de referencia no apunta a ningún objeto. Compruébala
+                        antes de llamar a métodos para evitar un <code>NullPointerException</code>.</p>
+                    <pre><code>if (nombre != null) {
+    System.out.println(nombre.length());
+}</code></pre>
+                    <p class="propiedad">Una referencia puede ser <code>null</code>; un primitivo no</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="categoria-css" id="objetos" data-categoria>
+            <div class="cabecera-categoria"><span>06</span>
+                <div>
+                    <p>Modelar conceptos con tipos propios</p>
+                    <h2>Clases y objetos</h2>
+                </div>
+            </div>
+            <div class="rejilla-conceptos">
+                <article class="concepto-css" data-palabras="clase objeto instancia new constructor">
+                    <h3>Crear una clase y un objeto</h3>
+                    <p>Una clase define datos y comportamientos. Un objeto es una instancia creada con
+                        <code>new</code>.
+                    </p>
+                    <pre><code>class Persona {
+    String nombre;
+}
+
+Persona persona = new Persona();</code></pre>
+                    <p class="propiedad">Clase: <code>Persona</code>; objeto: <code>persona</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="constructor inicializar objeto parámetros">
+                    <h3>Constructor</h3>
+                    <p>El constructor inicializa un objeto. Tiene el mismo nombre que la clase y no declara tipo de
+                        retorno.</p>
+                    <pre><code>class Persona {
+    String nombre;
+    Persona(String nombre) {
+        this.nombre = nombre;
+    }
+}</code></pre>
+                    <p class="propiedad"><code>this</code> se refiere al objeto actual</p>
+                </article>
+                <article class="concepto-css" data-palabras="encapsulación private public getter setter">
+                    <h3>Encapsulación</h3>
+                    <p>Los campos <code>private</code> solo se usan directamente dentro de la clase. Métodos públicos
+                        pueden ofrecer acceso controlado.</p>
+                    <pre><code>private int edad;
+public int getEdad() {
+    return edad;
+}</code></pre>
+                    <p class="propiedad">Modificadores: <code>private</code>, <code>public</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="herencia extends super clase padre">
+                    <h3>Herencia</h3>
+                    <p><code>extends</code> crea una clase basada en otra. La subclase hereda miembros accesibles y
+                        puede especializar el comportamiento.</p>
+                    <pre><code>class Animal {
+    void hacerSonido() { }
+}
+class Perro extends Animal { }</code></pre>
+                    <p class="propiedad">Una clase Java solo puede extender una clase</p>
+                </article>
+                <article class="concepto-css" data-palabras="polimorfismo sobrescribir override método">
+                    <h3>Sobrescribir un método</h3>
+                    <p>Una subclase puede proporcionar su propia implementación. <code>@Override</code> ayuda a detectar
+                        errores al sobrescribir.</p>
+                    <pre><code>@Override
+void hacerSonido() {
+    System.out.println("Guau");
+}</code></pre>
+                    <p class="propiedad">Anotación: <code>@Override</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="interface interfaz implements contrato abstract">
+                    <h3>Interfaces</h3>
+                    <p>Una interfaz define un contrato que una clase puede implementar. Una clase puede implementar
+                        varias interfaces.</p>
+                    <pre><code>interface Volador {
+    void volar();
+}
+class Ave implements Volador {
+    public void volar() {
+        System.out.println("Despega");
+    }
+}</code></pre>
+                    <p class="propiedad">Palabras clave: <code>interface</code>, <code>implements</code></p>
+                </article>
+            </div>
+        </section>
+
+        <section class="categoria-css" id="errores" data-categoria>
+            <div class="cabecera-categoria"><span>07</span>
+                <div>
+                    <p>Anticipar y gestionar problemas</p>
+                    <h2>Excepciones</h2>
+                </div>
+            </div>
+            <div class="rejilla-conceptos">
+                <article class="concepto-css" data-palabras="excepción error try catch">
+                    <h3>Capturar una excepción</h3>
+                    <p>Un bloque <code>try</code> contiene una operación que puede fallar y <code>catch</code> gestiona
+                        una excepción concreta.</p>
+                    <pre><code>try {
+    int numero = Integer.parseInt("42");
+} catch (NumberFormatException error) {
+    System.out.println("No es un número");
+}</code></pre>
+                    <p class="propiedad">Control: <code>try</code> y <code>catch</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="finally cerrar limpieza siempre">
+                    <h3>Bloque finally</h3>
+                    <p><code>finally</code> se usa para acciones de limpieza que deben intentarse tanto si ocurre una
+                        excepción como si no.</p>
+                    <pre><code>try {
+    // Operación
+} catch (Exception error) {
+    // Gestionar el error
+} finally {
+    // Limpieza
+}</code></pre>
+                    <p class="propiedad">En muchos casos, <code>try-with-resources</code> es preferible para recursos
+                    </p>
+                </article>
+                <article class="concepto-css" data-palabras="throws lanzar excepción método checked">
+                    <h3>Declarar excepciones</h3>
+                    <p><code>throws</code> declara que un método puede propagar una excepción comprobada. El código que
+                        lo llama deberá gestionarla o declararla también.</p>
+                    <pre><code>void leerArchivo() throws IOException {
+    // Leer datos
+}</code></pre>
+                    <p class="propiedad">Declaración: <code>throws</code>; lanzamiento: <code>throw</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="try resources archivo cerrar autocloseable">
+                    <h3>Gestionar recursos</h3>
+                    <p><code>try-with-resources</code> cierra automáticamente los recursos que implementan
+                        <code>AutoCloseable</code>.
+                    </p>
+                    <pre><code>try (Scanner entrada = new Scanner(archivo)) {
+    while (entrada.hasNextLine()) {
+        System.out.println(entrada.nextLine());
+    }
+}</code></pre>
+                    <p class="propiedad">El recurso se declara entre paréntesis tras <code>try</code></p>
+                </article>
+            </div>
+        </section>
+
+        <section class="categoria-css" id="colecciones" data-categoria>
+            <div class="cabecera-categoria"><span>08</span>
+                <div>
+                    <p>Guardar grupos de elementos</p>
+                    <h2>Colecciones</h2>
+                </div>
+            </div>
+            <div class="rejilla-conceptos">
+                <article class="concepto-css" data-palabras="ArrayList lista agregar add tamaño dinámica">
+                    <h3>Lista dinámica: ArrayList</h3>
+                    <p><code>ArrayList</code> permite guardar una lista cuyo tamaño puede cambiar. Usa tipos envoltorio,
+                        como <code>Integer</code>, en los genéricos.</p>
+                    <pre><code>List&lt;String&gt; nombres = new ArrayList&lt;&gt;();
+nombres.add("Ana");
+nombres.add("Luis");</code></pre>
+                    <p class="propiedad">Imports: <code>java.util.List</code> y <code>java.util.ArrayList</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="HashMap mapa clave valor diccionario">
+                    <h3>Mapa de clave y valor</h3>
+                    <p><code>HashMap</code> asocia claves con valores. Las claves son únicas; usa <code>put</code> para
+                        añadir o reemplazar y <code>get</code> para consultar.</p>
+                    <pre><code>Map&lt;String, Integer&gt; edades = new HashMap&lt;&gt;();
+edades.put("Ana", 20);
+int edad = edades.get("Ana");</code></pre>
+                    <p class="propiedad">Interfaz: <code>Map&lt;K, V&gt;</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="Set conjunto único duplicados HashSet">
+                    <h3>Conjunto sin duplicados</h3>
+                    <p><code>Set</code> representa una colección de elementos únicos. <code>HashSet</code> no garantiza
+                        un orden concreto al recorrer sus elementos.</p>
+                    <pre><code>Set&lt;String&gt; etiquetas = new HashSet&lt;&gt;();
+etiquetas.add("Java");
+etiquetas.add("Java"); // No duplica el valor</code></pre>
+                    <p class="propiedad">Interfaz: <code>Set&lt;E&gt;</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="genéricos tipo parámetro seguridad tipos">
+                    <h3>Genéricos</h3>
+                    <p>Los genéricos indican qué tipos acepta una colección y permiten detectar incompatibilidades
+                        antes de ejecutar el programa.</p>
+                    <pre><code>List&lt;Integer&gt; edades = new ArrayList&lt;&gt;();
+edades.add(20);</code></pre>
+                    <p class="propiedad">Tipo de elemento: <code>&lt;Integer&gt;</code></p>
+                </article>
+            </div>
+        </section>
+
+        <section class="categoria-css" id="ejemplos" data-categoria>
+            <div class="cabecera-categoria"><span>09</span>
+                <div>
+                    <p>Pequeños patrones que aparecen a menudo</p>
+                    <h2>Ejemplos de uso frecuente</h2>
+                </div>
+            </div>
+            <div class="rejilla-conceptos">
+                <article class="concepto-css"
+                    data-palabras="Scanner teclado entrada usuario leer pedir nombre System.in">
+                    <h3>Leer texto con Scanner</h3>
+                    <p><code>Scanner</code> permite leer lo que escribe la persona en la consola.
+                        <code>nextLine()</code>
+                        lee la línea completa, incluidos los espacios. Importa la clase desde <code>java.util</code>.
+                    </p>
+                    <pre><code>import java.util.Scanner;
+
+Scanner entrada = new Scanner(System.in);
+System.out.print("¿Cómo te llamas? ");
+String nombre = entrada.nextLine();
+System.out.println("Hola, " + nombre);
+entrada.close();</code></pre>
+                    <p class="propiedad">Al cerrar este Scanner también se cierra <code>System.in</code>. Hazlo solo
+                        cuando ya no necesites leer más datos de la consola.</p>
+                </article>
+                <article class="concepto-css"
+                    data-palabras="Scanner nextInt nextLine salto línea consumir número teclado">
+                    <h3>El detalle de nextInt() y nextLine()</h3>
+                    <p><code>nextInt()</code> lee el número, pero deja pendiente el salto de línea. Si después llamas a
+                        <code>nextLine()</code>, consume ese salto y parece que se salta la pregunta; lee una línea
+                        primero para descartarlo.
+                    </p>
+                    <pre><code>System.out.print("Edad: ");
+int edad = entrada.nextInt();
+entrada.nextLine(); // Consume el salto pendiente
+System.out.print("Nombre: ");
+String nombre = entrada.nextLine();</code></pre>
+                    <p class="propiedad">Alternativa: leer todo con <code>nextLine()</code> y convertir el texto.</p>
+                </article>
+                <article class="concepto-css" data-palabras="Scanner validar entrada hasNextInt número error usuario">
+                    <h3>Comprobar que la entrada es un número</h3>
+                    <p>Usa <code>hasNextInt()</code> antes de <code>nextInt()</code> para comprobar la entrada. Si no es
+                        un entero, descarta esa línea antes de volver a preguntar.</p>
+                    <pre><code>while (!entrada.hasNextInt()) {
+    System.out.println("Escribe un número entero.");
+    entrada.nextLine();
+}
+int numero = entrada.nextInt();
+entrada.nextLine();</code></pre>
+                    <p class="propiedad">Validación: <code>hasNextInt()</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="aleatorio Random número random dado azar">
+                    <h3>Generar un número aleatorio</h3>
+                    <p>Con <code>Random</code>, <code>nextInt(límite)</code> genera valores desde cero hasta el límite
+                        sin incluirlo. Suma uno si quieres un dado del 1 al 6.</p>
+                    <pre><code>import java.util.Random;
+
+Random azar = new Random();
+int dado = azar.nextInt(6) + 1;</code></pre>
+                    <p class="propiedad">Para 1 hasta N: <code>nextInt(N) + 1</code></p>
+                </article>
+                <article class="concepto-css" data-palabras="printf formato salida decimal dinero dos decimales">
+                    <h3>Dar formato a la salida</h3>
+                    <p><code>printf</code> permite controlar cómo se muestran los valores. <code>%.2f</code> muestra un
+                        número decimal con dos cifras decimales y <code>%n</code> añade un salto de línea.</p>
+                    <pre><code>double precio = 12.5;
+System.out.printf("Precio: %.2f €%n", precio);</code></pre>
+                    <p class="propiedad">Formato habitual: <code>%s</code> texto, <code>%d</code> entero,
+                        <code>%.2f</code> decimal
+                    </p>
+                </article>
+                <article class="concepto-css" data-palabras="bucle for repetir contador vueltas del uno al cinco">
+                    <h3>Repetir un número de veces con for</h3>
+                    <p>El <code>for</code> es útil cuando sabes cuántas vueltas necesitas. Aquí <code>i</code> empieza
+                        en
+                        1, el bucle continúa mientras sea menor o igual que 5, y aumenta en cada vuelta.</p>
+                    <pre><code>for (int i = 1; i <= 5; i++) {
+    System.out.println(i);
+}</code></pre>
+                    <p class="propiedad">Muestra los números del 1 al 5; el contador cambia con <code>i++</code>.</p>
+                </article>
+                <article class="concepto-css" data-palabras="bucle while mientras condición repetir hasta contador">
+                    <h3>Repetir mientras se cumpla una condición</h3>
+                    <p><code>while</code> comprueba la condición antes de entrar. Si es verdadera, ejecuta el bloque y
+                        vuelve a comprobarla. Es importante actualizar el contador para que el bucle pueda terminar.</p>
+                    <pre><code>int cuenta = 3;
+while (cuenta > 0) {
+    System.out.println(cuenta);
+    cuenta--;
+}
+System.out.println("¡Despegue!");</code></pre>
+                    <p class="propiedad">Muestra una cuenta atrás del 3 al 1 y luego «¡Despegue!».</p>
+                </article>
+                <article class="concepto-css"
+                    data-palabras="bucle do while do-while hacer primero ejecutar al menos una vez">
+                    <h3>Ejecutar al menos una vez con do / while</h3>
+                    <p><code>do / while</code> ejecuta primero el bloque y comprueba la condición al final. Por eso se
+                        ejecuta al menos una vez, incluso si la condición comienza siendo falsa.</p>
+                    <pre><code>int numero = 1;
+do {
+    System.out.println(numero);
+    numero++;
+} while (numero <= 3);</code></pre>
+                    <p class="propiedad">Muestra los números del 1 al 3; recuerda el punto y coma tras
+                        <code>while</code>.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <p id="sin-resultados-java" class="sin-resultados-css" hidden>
+            <strong>No se encontraron conceptos.</strong>
+            Prueba con otra palabra, por ejemplo: Scanner, entrada, bucle, método, clase o colección.
+        </p>
+
+        <section class="regla-practica">
+            <h2>Una última pista</h2>
+            <p>Empieza con programas pequeños: declara datos, muestra resultados y divide las tareas en métodos.
+                Después organiza el código en clases y usa colecciones cuando necesites manejar grupos de elementos.
+                Compila y prueba con frecuencia: los mensajes de error suelen indicar el archivo y la línea que debes
+                revisar.</p>
+        </section>
+    </main>
+
+    <footer class="pie-guia">
+        <p>Guía de apoyo para aprender los fundamentos de Java.</p>
+        <a href="index.html">HTML</a><a href="css.html">CSS</a>
+    </footer>
+
+    <script>
+        const campoBusquedaJava = document.querySelector("#buscar-java");
+        const limpiarBusquedaJava = document.querySelector("#limpiar-java");
+        const conceptosJava = [...document.querySelectorAll(".concepto-css")];
+        const categoriasJava = [...document.querySelectorAll("[data-categoria]")];
+        const contadorJava = document.querySelector("#resultado-java");
+        const sinResultadosJava = document.querySelector("#sin-resultados-java");
+
+        function normalizarJava(texto) {
+            return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
+        }
+
+        function filtrarConceptosJava() {
+            const consulta = normalizarJava(campoBusquedaJava.value.trim());
+            let cantidad = 0;
+
+            conceptosJava.forEach((concepto) => {
+                const texto = normalizarJava(`${concepto.textContent} ${concepto.dataset.palabras}`);
+                const coincide = consulta.split(/\s+/).filter(Boolean).every((palabra) => texto.includes(palabra));
+                concepto.hidden = !coincide;
+                if (coincide) cantidad += 1;
+            });
+
+            categoriasJava.forEach((categoria) => {
+                categoria.hidden = !categoria.querySelector(".concepto-css:not([hidden])");
+            });
+
+            sinResultadosJava.hidden = cantidad > 0 || consulta === "";
+            contadorJava.textContent = consulta
+                ? `${cantidad} ${cantidad === 1 ? "resultado" : "resultados"}`
+                : `${conceptosJava.length} conceptos en ${categoriasJava.length} categorías`;
+        }
+
+        campoBusquedaJava.addEventListener("input", filtrarConceptosJava);
+        limpiarBusquedaJava.addEventListener("click", () => {
+            campoBusquedaJava.value = "";
+            filtrarConceptosJava();
+            campoBusquedaJava.focus();
+        });
+
+        filtrarConceptosJava();
+    </script>
+</body>
+
+</html>

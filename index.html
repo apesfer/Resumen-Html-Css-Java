@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- 
+Guía de HTML para principiantes.
+ Contiene todos los conceptos de CSS, con ejemplos y explicación.
+ Se puede buscar por propiedad, valor o selector.
+ Autor: apesfer
+ Fecha: 20/10/2026
+-->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		content="Guía amplia, clara y buscable de HTML: elementos, atributos, formularios, medios y accesibilidad.">
+	<title>Guía fácil de HTML</title>
+	<link rel="stylesheet" href="src/index.css">
+</head>
+
+<body id="inicio" class="guia-html">
+	<header class="guia-portada">
+		<nav class="mini-nav-guias" aria-label="Cambiar entre guías">
+			<a href="index.html" aria-current="page">HTML</a>
+			<a href="css.html">CSS</a>
+			<a href="java.html">Java</a>
+			<a class="subir-inicio" href="#inicio" aria-label="Volver al principio" title="Volver al principio">↑</a>
+		</nav>
+		<p class="guia-etiqueta">Guía de consulta / HTML para principiantes</p>
+		<h1>HTML, explicado <em>paso a paso.</em></h1>
+		<p class="guia-bajada">Aprende qué elementos existen, para qué sirven y cómo usarlos. Busca por etiqueta,
+			atributo o lo que quieres construir.</p>
+		<form class="buscador-css" role="search" onsubmit="return false">
+			<label for="buscar-html">¿Qué quieres crear o encontrar?</label>
+			<div class="campo-busqueda">
+				<span aria-hidden="true">⌕</span>
+				<input id="buscar-html" type="search" placeholder="Prueba: enlace, formulario, imagen, tabla..."
+					autocomplete="off">
+				<button id="limpiar-html" type="button" aria-label="Limpiar búsqueda"
+					title="Limpiar búsqueda">×</button>
+			</div>
+			<p id="resultado-html" aria-live="polite">Cargando conceptos...</p>
+		</form>
+	</header>
+
+	<main class="guia-contenido">
+		<nav class="atajos-css" aria-label="Categorías de HTML">
+			<a href="#fundamentos">Estructura</a>
+			<a href="#texto">Texto</a>
+			<a href="#listas">Listas</a>
+			<a href="#enlaces">Enlaces e imágenes</a>
+			<a href="#tablas">Tablas</a>
+			<a href="#formularios">Formularios</a>
+			<a href="#semantica">Estructura semántica</a>
+			<a href="#multimedia">Multimedia</a>
+			<a href="#interactivos">Elementos interactivos</a>
+			<a href="#accesibilidad">Accesibilidad</a>
+			<a href="#atributos">Atributos y caracteres</a>
+			<a href="#integracion">CSS, JavaScript y validación</a>
+		</nav>
+
+		<aside class="nota-css"><strong>La idea básica:</strong> HTML describe el contenido y su significado; CSS
+			controla su aspecto y JavaScript puede añadir comportamiento. Un elemento suele tener etiqueta de apertura,
+			contenido y etiqueta de cierre: <code>&lt;p&gt;Hola&lt;/p&gt;</code>. Los atributos añaden información:
+			<code>&lt;a href="..."&gt;</code>. Escribe las etiquetas en minúsculas, anídalas correctamente y usa la
+			etiqueta adecuada para cada contenido.
+		</aside>
+
+		<section class="categoria-css" id="fundamentos" data-categoria>
+			<div class="cabecera-categoria"><span>01</span>
+				<div>
+					<p>El documento y sus partes</p>
+					<h2>Estructura básica</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="documento completo html doctype raíz">
+					<h3>Documento HTML mínimo</h3>
+					<p><code>&lt;!doctype html&gt;</code> declara HTML moderno; <code>html</code> contiene todo;
+						<code>head</code> guarda información del documento y <code>body</code> el contenido visible. La
+						indentación ayuda a leer, aunque no cambia el resultado.
+					</p>
+					<pre><code>&lt;!doctype html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;title&gt;Mi página&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;&lt;h1&gt;Hola&lt;/h1&gt;&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+					<p class="propiedad">Partes: <code>doctype</code>, <code>html</code>, <code>head</code>,
+						<code>body</code>
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="doctype tipo documento estándar">
+					<h3>Declaración doctype</h3>
+					<p>Debe estar al principio del archivo. Le indica al navegador que interprete el documento con los
+						estándares modernos; no es una etiqueta HTML normal ni se cierra.</p>
+					<pre><code>&lt;!doctype html&gt;</code></pre>
+					<p class="propiedad">Declaración requerida para páginas HTML actuales.</p>
+				</article>
+				<article class="concepto-css" data-palabras="html lang idioma atributo raíz">
+					<h3>Elemento raíz e idioma</h3>
+					<p><code>lang</code> declara el idioma principal de la página. Ayuda a lectores de pantalla,
+						correctores y buscadores. Usa códigos como <code>es</code>, <code>en</code> o <code>gl</code>;
+						si una parte cambia de idioma, puede llevar su propio <code>lang</code>.</p>
+					<pre><code>&lt;html lang="es"&gt;
+  ...
+&lt;/html&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;html&gt;</code>; atributo recomendado: <code>lang</code>
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="head metadatos título descripción hoja estilo">
+					<h3>Cabecera técnica: head</h3>
+					<p><code>&lt;head&gt;</code> contiene datos sobre la página: título, codificación, descripción,
+						enlaces a CSS e iconos. Normalmente no contiene el texto principal que se muestra dentro del
+						documento.</p>
+					<pre><code>&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Mi página&lt;/title&gt;
+&lt;/head&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;head&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="body cuerpo contenido visible página">
+					<h3>Contenido de la página: body</h3>
+					<p>Dentro de <code>&lt;body&gt;</code> va el contenido que forma la página: encabezados, texto,
+						imágenes, formularios y demás elementos visibles o interactivos.</p>
+					<pre><code>&lt;body&gt;
+  &lt;h1&gt;Bienvenida&lt;/h1&gt;
+  &lt;p&gt;Este es el contenido.&lt;/p&gt;
+&lt;/body&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;body&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="codificación caracteres utf 8 tildes ñ">
+					<h3>Codificación de caracteres</h3>
+					<p>Indica cómo interpretar letras y símbolos. <code>utf-8</code> permite representar la mayoría de
+						escrituras y evita problemas con tildes, eñes y símbolos. Es mejor ponerlo al comienzo de
+						<code>head</code>.
+					</p>
+					<pre><code>&lt;meta charset="utf-8"&gt;</code></pre>
+					<p class="propiedad">Elemento vacío: <code>&lt;meta&gt;</code>; atributo: <code>charset</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="título pestaña documento title navegador">
+					<h3>Título de la pestaña</h3>
+					<p><code>&lt;title&gt;</code> define el título de la pestaña, el nombre usado en marcadores y parte
+						del resultado de búsqueda. Debe ser breve y describir esta página, no solo el sitio.</p>
+					<pre><code>&lt;title&gt;Recetas de temporada | Mi cocina&lt;/title&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;title&gt;</code>, dentro de <code>&lt;head&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="meta viewport móvil responsive pantalla">
+					<h3>Adaptación de la ventana móvil</h3>
+					<p>Esta etiqueta hace que el ancho de diseño coincida con el ancho del dispositivo móvil. Sin ella,
+						el navegador puede presentar una versión reducida de una página pensada para escritorio.</p>
+					<pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;meta&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="meta description descripción buscador resumen página">
+					<h3>Descripción de la página</h3>
+					<p>Una descripción breve resume el contenido y puede mostrarse en resultados de búsqueda. No
+						sustituye al título ni garantiza que el buscador use exactamente ese texto.</p>
+					<pre><code>&lt;meta name="description" content="Guía de rutas por Galicia"&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;meta&gt;</code>, atributo <code>name="description"</code>
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="anidar etiquetas cerrar autocierre vacío estructura">
+					<h3>Anidar y cerrar etiquetas</h3>
+					<p>Los elementos deben cerrarse en orden inverso al que se abrieron. Los elementos vacíos, como
+						<code>img</code> y <code>br</code>, no envuelven contenido ni llevan etiqueta de cierre.
+					</p>
+					<pre><code>&lt;p&gt;Texto &lt;strong&gt;importante&lt;/strong&gt;.&lt;/p&gt;
+&lt;img src="foto.jpg" alt="Paisaje"&gt;</code></pre>
+					<p class="propiedad">No cruces etiquetas: abre, cierra y anida cada elemento correctamente.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="texto" data-categoria>
+			<div class="cabecera-categoria"><span>02</span>
+				<div>
+					<p>Títulos, párrafos y significado</p>
+					<h2>Texto y contenido</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="encabezado título h1 h2 h3 h4 h5 h6 jerarquía">
+					<h3>Encabezados: h1 a h6</h3>
+					<p>Representan títulos y niveles de sección: <code>h1</code> es el nivel principal; <code>h2</code>
+						abre una sección y <code>h3</code> puede organizar una subsección. Elige por jerarquía, no por
+						el tamaño visual: CSS cambia su aspecto.</p>
+					<pre><code>&lt;h1&gt;Viajes&lt;/h1&gt;
+&lt;h2&gt;Rutas de montaña&lt;/h2&gt;
+&lt;h3&gt;Ruta del río&lt;/h3&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>&lt;h1&gt;</code> … <code>&lt;h6&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="p párrafo bloque texto">
+					<h3>Párrafo</h3>
+					<p><code>&lt;p&gt;</code> representa un párrafo. El navegador separa los párrafos visualmente; no
+						uses muchos espacios ni saltos <code>br</code> para fingir una estructura de párrafos.</p>
+					<pre><code>&lt;p&gt;Un párrafo completo de texto.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;p&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="strong importancia semántica negrita">
+					<h3>Importancia: strong</h3>
+					<p><code>&lt;strong&gt;</code> marca contenido de gran importancia, seriedad o urgencia. Los
+						navegadores suelen mostrarlo en negrita, pero su sentido no es simplemente «poner letras
+						gruesas».</p>
+					<pre><code>&lt;p&gt;&lt;strong&gt;Aviso importante:&lt;/strong&gt; cierra la puerta.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento semántico: <code>&lt;strong&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="em énfasis énfasis hablado cursiva">
+					<h3>Énfasis: em</h3>
+					<p><code>&lt;em&gt;</code> marca énfasis que puede cambiar el sentido de una frase; se puede anidar
+						para aumentar el énfasis. Normalmente se presenta en cursiva.</p>
+					<pre><code>&lt;p&gt;Yo &lt;em&gt;nunca&lt;/em&gt; dije eso.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento semántico: <code>&lt;em&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="b i bold italic presentación sin significado">
+					<h3>Negrita y cursiva sin énfasis semántico</h3>
+					<p><code>&lt;b&gt;</code> llama la atención sin añadir importancia; <code>&lt;i&gt;</code> marca una
+						voz, término o expresión distinta. Para importancia usa <code>strong</code>; para énfasis usa
+						<code>em</code>. Si solo quieres cambiar aspecto, usa CSS.
+					</p>
+					<pre><code>&lt;p&gt;La palabra &lt;i&gt;in situ&lt;/i&gt; es latina.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>&lt;b&gt;</code>, <code>&lt;i&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="salto línea br nueva línea dirección">
+					<h3>Salto de línea: br</h3>
+					<p><code>&lt;br&gt;</code> introduce un salto de línea que forma parte del contenido, como en una
+						dirección o un poema. No lo uses para crear espacio entre bloques; para eso se usan párrafos o
+						CSS.</p>
+					<pre><code>&lt;p&gt;Calle Mayor, 12&lt;br&gt;Santiago&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento vacío: <code>&lt;br&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="separador horizontal hr cambio temático">
+					<h3>Cambio temático: hr</h3>
+					<p><code>&lt;hr&gt;</code> representa un cambio de tema o separación entre secciones del contenido;
+						normalmente el navegador lo pinta como una línea horizontal.</p>
+					<pre><code>&lt;p&gt;Fin del capítulo uno.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Comienza otro tema.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento vacío: <code>&lt;hr&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="blockquote cita larga cita bloque fuente cite">
+					<h3>Cita larga: blockquote</h3>
+					<p><code>&lt;blockquote&gt;</code> contiene una cita extensa que forma un bloque. <code>cite</code>
+						puede indicar la URL de la fuente, aunque no suele mostrarse como texto; incluye una atribución
+						legible si hace falta.</p>
+					<pre><code>&lt;blockquote cite="https://ejemplo.test/fuente"&gt;
+  &lt;p&gt;Una cita extensa.&lt;/p&gt;
+&lt;/blockquote&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;blockquote&gt;</code>; atributo: <code>cite</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="q cita corta comillas inline cite">
+					<h3>Cita breve: q</h3>
+					<p><code>&lt;q&gt;</code> marca una cita corta dentro de una frase; el navegador suele añadir
+						comillas según el idioma. Para textos citados largos, usa <code>blockquote</code>.</p>
+					<pre><code>&lt;p&gt;Ella dijo: &lt;q&gt;Volveré pronto&lt;/q&gt;.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;q&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="abbr abreviatura sigla título title significado">
+					<h3>Abreviaturas: abbr</h3>
+					<p><code>&lt;abbr&gt;</code> representa una abreviatura. El atributo <code>title</code> puede
+						explicar su forma completa; no dependas solo del tooltip para información imprescindible.</p>
+					<pre><code>&lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;abbr&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="fecha hora time datetime máquina">
+					<h3>Fechas y horas: time</h3>
+					<p><code>&lt;time&gt;</code> marca una fecha u hora legible por personas; <code>datetime</code>
+						aporta una versión normalizada para máquinas. Puede contener una fecha, una hora o una duración.
+					</p>
+					<pre><code>&lt;time datetime="2026-10-20"&gt;20 de octubre&lt;/time&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;time&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="mark resaltado búsqueda texto">
+					<h3>Texto relevante: mark</h3>
+					<p><code>&lt;mark&gt;</code> resalta texto relevante en su contexto, por ejemplo una coincidencia de
+						búsqueda. No equivale a marcar importancia duradera con <code>strong</code>.</p>
+					<pre><code>&lt;p&gt;Busca la palabra &lt;mark&gt;HTML&lt;/mark&gt;.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;mark&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="small letra pequeña nota legal">
+					<h3>Texto secundario: small</h3>
+					<p><code>&lt;small&gt;</code> representa comentarios secundarios, letra pequeña o notas legales. El
+						tamaño visual puede modificarse con CSS.</p>
+					<pre><code>&lt;p&gt;Precio: 10 € &lt;small&gt;Impuestos incluidos&lt;/small&gt;&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;small&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="del ins eliminado insertado cambio texto datetime cite">
+					<h3>Cambios en un documento</h3>
+					<p><code>&lt;del&gt;</code> marca texto eliminado y <code>&lt;ins&gt;</code> texto añadido. Pueden
+						incluir <code>datetime</code> para el momento del cambio y <code>cite</code> para su
+						explicación.</p>
+					<pre><code>&lt;p&gt;Precio: &lt;del&gt;20 €&lt;/del&gt; &lt;ins&gt;15 €&lt;/ins&gt;&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>&lt;del&gt;</code>, <code>&lt;ins&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="sub subíndice super superíndice fórmula nota">
+					<h3>Subíndices y superíndices</h3>
+					<p><code>&lt;sub&gt;</code> desplaza texto como subíndice y <code>&lt;sup&gt;</code> como
+						superíndice; útiles en fórmulas, referencias o exponentes.</p>
+					<pre><code>H&lt;sub&gt;2&lt;/sub&gt;O y x&lt;sup&gt;2&lt;/sup&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>&lt;sub&gt;</code>, <code>&lt;sup&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="código code pre kbd samp var programación">
+					<h3>Código y texto de ordenador</h3>
+					<p><code>&lt;code&gt;</code> marca código breve; <code>&lt;pre&gt;</code> conserva espacios y
+						saltos; <code>&lt;kbd&gt;</code> indica entrada del teclado; <code>&lt;samp&gt;</code>, salida
+						de un programa; <code>&lt;var&gt;</code>, una variable.</p>
+					<pre><code>&lt;pre&gt;&lt;code&gt;console.log("Hola");&lt;/code&gt;&lt;/pre&gt;
+Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
+					<p class="propiedad">Elementos: <code>code</code>, <code>pre</code>, <code>kbd</code>,
+						<code>samp</code>, <code>var</code>
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="wbr oportunidad salto palabra URL línea">
+					<h3>Punto posible de salto: wbr</h3>
+					<p><code>&lt;wbr&gt;</code> indica dónde el navegador puede partir una palabra larga si no cabe. No
+						fuerza un salto como <code>br</code>.</p>
+					<pre><code>&lt;p&gt;una-palabra-muy-larga&lt;wbr&gt;-que-puede-partirse&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento vacío: <code>&lt;wbr&gt;</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="listas" data-categoria>
+			<div class="cabecera-categoria"><span>03</span>
+				<div>
+					<p>Agrupar elementos y pasos</p>
+					<h2>Listas y agrupaciones</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="ul lista desordenada viñetas puntos">
+					<h3>Lista sin orden: ul</h3>
+					<p><code>&lt;ul&gt;</code> agrupa elementos en los que el orden no importa. Cada entrada debe ir
+						dentro de un <code>&lt;li&gt;</code>.</p>
+					<pre><code>&lt;ul&gt;
+  &lt;li&gt;Pan&lt;/li&gt;
+  &lt;li&gt;Leche&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>&lt;ul&gt;</code> y <code>&lt;li&gt;</code></p>
+				</article>
+				<article class="concepto-css"
+					data-palabras="ol lista ordenada pasos numeración número start reversed type">
+					<h3>Lista ordenada: ol</h3>
+					<p><code>&lt;ol&gt;</code> agrupa pasos o elementos cuyo orden importa. <code>start</code> cambia el
+						número inicial, <code>reversed</code> invierte el conteo y <code>type</code> el estilo de
+						numeración.</p>
+					<pre><code>&lt;ol start="3"&gt;
+  &lt;li&gt;Preparar&lt;/li&gt;
+  &lt;li&gt;Servir&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+					<p class="propiedad">Elementos y atributos: <code>ol</code>, <code>li</code>, <code>start</code>,
+						<code>reversed</code>, <code>type</code>
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="li elemento lista value">
+					<h3>Elemento de lista: li</h3>
+					<p><code>&lt;li&gt;</code> representa una entrada dentro de <code>ul</code>, <code>ol</code> o un
+						menú. En una lista ordenada se puede usar <code>value</code> para cambiar el número de una
+						entrada y las siguientes.</p>
+					<pre><code>&lt;ol&gt;
+  &lt;li&gt;Primero&lt;/li&gt;
+  &lt;li value="5"&gt;Quinto&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;li&gt;</code>; atributo opcional: <code>value</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="dl lista definición descripción dt dd término">
+					<h3>Lista de términos y descripciones</h3>
+					<p><code>&lt;dl&gt;</code> contiene términos <code>&lt;dt&gt;</code> y sus descripciones
+						<code>&lt;dd&gt;</code>. Sirve para glosarios, metadatos o pares de nombre y valor.
+					</p>
+					<pre><code>&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;Lenguaje para estructurar páginas.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>dl</code>, <code>dt</code>, <code>dd</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="div contenedor genérico bloque agrupar sin significado">
+					<h3>Contenedor genérico de bloque: div</h3>
+					<p><code>&lt;div&gt;</code> agrupa contenido sin añadir significado especial. Úsalo cuando no haya
+						un elemento semántico más adecuado y necesites agrupar para CSS o JavaScript.</p>
+					<pre><code>&lt;div class="tarjeta"&gt;
+  &lt;h2&gt;Título&lt;/h2&gt;
+  &lt;p&gt;Descripción&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+					<p class="propiedad">Elemento genérico de bloque: <code>&lt;div&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="span contenedor en línea texto genérico">
+					<h3>Contenedor genérico en línea: span</h3>
+					<p><code>&lt;span&gt;</code> agrupa una parte del texto sin crear un bloque ni añadir significado.
+						Puede recibir una clase para aplicar CSS o localizarlo con JavaScript.</p>
+					<pre><code>&lt;p&gt;El estado es &lt;span class="activo"&gt;activo&lt;/span&gt;.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento genérico en línea: <code>&lt;span&gt;</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="enlaces" data-categoria>
+			<div class="cabecera-categoria"><span>04</span>
+				<div>
+					<p>Navegar, descargar y mostrar imágenes</p>
+					<h2>Enlaces e imágenes</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="a enlace link href dirección URL">
+					<h3>Enlace: a y href</h3>
+					<p><code>&lt;a&gt;</code> crea un enlace cuando tiene <code>href</code>. El texto debe explicar el
+						destino o la acción; evita «pincha aquí» sin contexto.</p>
+					<pre><code>&lt;a href="contacto.html"&gt;Contactar&lt;/a&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;a&gt;</code>; destino: <code>href</code></p>
+				</article>
+				<article class="concepto-css"
+					data-palabras="enlace externo nueva pestaña target blank seguridad noopener noreferrer">
+					<h3>Enlaces externos y nueva pestaña</h3>
+					<p><code>target="_blank"</code> abre normalmente otra pestaña. Explica ese comportamiento a la
+						persona; los navegadores modernos aíslan la página nueva, y <code>rel="noopener"</code> puede
+						dejarse explícito. Usa <code>noreferrer</code> si tampoco quieres enviar la referencia de
+						origen.</p>
+					<pre><code>&lt;a href="https://ejemplo.test"
+   target="_blank" rel="noopener"&gt;Visitar sitio&lt;/a&gt;</code></pre>
+					<p class="propiedad">Atributos: <code>target</code>, <code>rel</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="enlace interno ancla id fragmento sección">
+					<h3>Enlace a una sección de la página</h3>
+					<p>Un enlace cuyo <code>href</code> empieza con <code>#</code> lleva a un elemento cuyo
+						<code>id</code> coincide. El identificador debe ser único en el documento.
+					</p>
+					<pre><code>&lt;a href="#horario"&gt;Ver horario&lt;/a&gt;
+&lt;h2 id="horario"&gt;Horario&lt;/h2&gt;</code></pre>
+					<p class="propiedad">Atributos: <code>href</code>, <code>id</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="mailto correo email teléfono tel llamada">
+					<h3>Enlaces de correo y teléfono</h3>
+					<p><code>mailto:</code> abre una aplicación de correo; <code>tel:</code> permite llamar desde
+						dispositivos compatibles. Indica claramente la dirección o el número.</p>
+					<pre><code>&lt;a href="mailto:hola@ejemplo.test"&gt;Enviar correo&lt;/a&gt;
+&lt;a href="tel:+34123456789"&gt;Llamar&lt;/a&gt;</code></pre>
+					<p class="propiedad">Esquemas de URL: <code>mailto:</code>, <code>tel:</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="descarga archivo download atributo enlace">
+					<h3>Enlace para descargar</h3>
+					<p>El atributo <code>download</code> sugiere descargar el recurso en lugar de abrirlo. Su efecto
+						depende del navegador y del origen del archivo.</p>
+					<pre><code>&lt;a href="guia.pdf" download&gt;Descargar guía&lt;/a&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>a</code>; atributo: <code>download</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="imagen img src alt texto alternativo">
+					<h3>Imagen: img, src y alt</h3>
+					<p><code>src</code> indica el archivo; <code>alt</code> ofrece una alternativa textual para quien no
+						ve la imagen o si no carga. Describe la información relevante, no empieces con «imagen de». Si
+						es puramente decorativa, usa <code>alt=""</code>.</p>
+					<pre><code>&lt;img src="montana.jpg"
+     alt="Pico nevado al amanecer"&gt;</code></pre>
+					<p class="propiedad">Elemento vacío: <code>&lt;img&gt;</code>; atributos esenciales:
+						<code>src</code>, <code>alt</code>
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="imagen width height dimensiones intrinsic lazy loading">
+					<h3>Dimensiones y carga de imágenes</h3>
+					<p>Indicar <code>width</code> y <code>height</code> ayuda al navegador a reservar espacio y evitar
+						saltos visuales. <code>loading="lazy"</code> puede aplazar imágenes fuera de pantalla; no lo
+						uses normalmente en la imagen principal visible al abrir.</p>
+					<pre><code>&lt;img src="bosque.jpg" alt="Bosque"
+     width="800" height="600" loading="lazy"&gt;</code></pre>
+					<p class="propiedad">Atributos: <code>width</code>, <code>height</code>, <code>loading</code></p>
+				</article>
+				<article class="concepto-css"
+					data-palabras="picture source responsive imagen formatos avif webp media srcset">
+					<h3>Imágenes adaptables: picture</h3>
+					<p><code>&lt;picture&gt;</code> permite ofrecer diferentes formatos o versiones según una condición.
+						Cada <code>&lt;source&gt;</code> propone una opción y el <code>&lt;img&gt;</code> final es
+						obligatorio como alternativa y aporta el texto <code>alt</code>.</p>
+					<pre><code>&lt;picture&gt;
+  &lt;source srcset="foto.webp" type="image/webp"&gt;
+  &lt;img src="foto.jpg" alt="Costa rocosa"&gt;
+&lt;/picture&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>picture</code>, <code>source</code>, <code>img</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="srcset sizes imagen adaptable resolución retina">
+					<h3>Variantes de imagen: srcset y sizes</h3>
+					<p><code>srcset</code> ofrece archivos con distintas resoluciones; <code>sizes</code> describe
+						cuánto espacio ocupará la imagen en pantalla para que el navegador elija. El atributo
+						<code>src</code> sigue siendo una alternativa útil.
+					</p>
+					<pre><code>&lt;img src="foto-800.jpg"
+  srcset="foto-400.jpg 400w, foto-800.jpg 800w"
+  sizes="(max-width: 600px) 100vw, 800px"
+  alt="Costa rocosa"&gt;</code></pre>
+					<p class="propiedad">Atributos: <code>srcset</code>, <code>sizes</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="figure figcaption imagen pie leyenda ilustración">
+					<h3>Imagen con pie: figure y figcaption</h3>
+					<p><code>&lt;figure&gt;</code> agrupa una ilustración, imagen, gráfico o ejemplo que puede
+						entenderse como unidad; <code>&lt;figcaption&gt;</code> aporta su pie o explicación.</p>
+					<pre><code>&lt;figure&gt;
+  &lt;img src="mapa.jpg" alt="Mapa de la ruta"&gt;
+  &lt;figcaption&gt;Ruta junto al río.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>&lt;figure&gt;</code>, <code>&lt;figcaption&gt;</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="tablas" data-categoria>
+			<div class="cabecera-categoria"><span>05</span>
+				<div>
+					<p>Datos relacionados en filas y columnas</p>
+					<h2>Tablas</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="table tabla datos filas columnas">
+					<h3>Tabla de datos: table</h3>
+					<p>Usa una tabla para datos con relaciones entre filas y columnas, no para maquetar una página.
+						<code>tr</code> crea filas, <code>th</code> encabezados y <code>td</code> celdas de datos.
+					</p>
+					<pre><code>&lt;table&gt;
+  &lt;tr&gt;&lt;th&gt;Día&lt;/th&gt;&lt;th&gt;Ruta&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Lunes&lt;/td&gt;&lt;td&gt;Costa&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>table</code>, <code>tr</code>, <code>th</code>,
+						<code>td</code>
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="thead tbody tfoot encabezado cuerpo pie tabla">
+					<h3>Dividir una tabla por secciones</h3>
+					<p><code>thead</code> agrupa encabezados, <code>tbody</code> el cuerpo y <code>tfoot</code> el
+						resumen o pie. Facilitan la lectura y permiten dar estilo distinto a cada sección.</p>
+					<pre><code>&lt;table&gt;
+  &lt;thead&gt;...&lt;/thead&gt;
+  &lt;tbody&gt;...&lt;/tbody&gt;
+  &lt;tfoot&gt;...&lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>thead</code>, <code>tbody</code>, <code>tfoot</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="caption título tabla leyenda">
+					<h3>Título de tabla: caption</h3>
+					<p><code>&lt;caption&gt;</code> ofrece un título o explicación breve de la tabla. Se coloca
+						inmediatamente después de la etiqueta de apertura de <code>table</code>.</p>
+					<pre><code>&lt;table&gt;
+  &lt;caption&gt;Horario semanal&lt;/caption&gt;
+  ...
+&lt;/table&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;caption&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="th encabezado scope col row columna fila accesibilidad">
+					<h3>Encabezados y asociaciones: th, scope</h3>
+					<p><code>&lt;th&gt;</code> marca una celda de encabezado. <code>scope="col"</code> identifica
+						encabezado de columna y <code>scope="row"</code> de fila, ayudando a relacionar datos al navegar
+						con tecnologías de apoyo.</p>
+					<pre><code>&lt;th scope="col"&gt;Precio&lt;/th&gt;
+&lt;th scope="row"&gt;Café&lt;/th&gt;</code></pre>
+					<p class="propiedad">Elemento y atributo: <code>th</code>, <code>scope</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="colspan rowspan fusionar celdas columnas filas">
+					<h3>Unir celdas: colspan y rowspan</h3>
+					<p><code>colspan</code> hace que una celda abarque varias columnas; <code>rowspan</code>, varias
+						filas. Úsalos cuando los datos realmente necesiten esa relación, manteniendo una estructura
+						comprensible.</p>
+					<pre><code>&lt;td colspan="2"&gt;Total&lt;/td&gt;
+&lt;td rowspan="2"&gt;Mañana&lt;/td&gt;</code></pre>
+					<p class="propiedad">Atributos numéricos: <code>colspan</code>, <code>rowspan</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="colgroup col grupo columna tabla">
+					<h3>Describir columnas: colgroup y col</h3>
+					<p><code>&lt;colgroup&gt;</code> contiene elementos <code>&lt;col&gt;</code> para identificar
+						columnas y aplicarles ciertos estilos. No sustituye a los encabezados ni a los datos de cada
+						celda.</p>
+					<pre><code>&lt;table&gt;
+  &lt;colgroup&gt;&lt;col&gt;&lt;col span="2"&gt;&lt;/colgroup&gt;
+  ...
+&lt;/table&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>colgroup</code>, <code>col</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="formularios" data-categoria>
+			<div class="cabecera-categoria"><span>06</span>
+				<div>
+					<p>Recoger datos y ofrecer controles</p>
+					<h2>Formularios</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="form formulario action method enviar datos">
+					<h3>Formulario: form</h3>
+					<p><code>&lt;form&gt;</code> agrupa controles que se pueden enviar. <code>action</code> indica el
+						destino y <code>method</code> suele ser <code>get</code> (datos en la URL) o <code>post</code>
+						(datos en la petición). Un formulario necesita un servicio o servidor para procesar lo enviado.
+					</p>
+					<pre><code>&lt;form action="/contacto" method="post"&gt;
+  ...
+&lt;/form&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;form&gt;</code>; atributos: <code>action</code>,
+						<code>method</code>
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="label etiqueta campo formulario for id">
+					<h3>Etiqueta accesible: label</h3>
+					<p><code>&lt;label&gt;</code> da nombre visible a un control. Asocia su <code>for</code> con el
+						<code>id</code> del campo; también puede envolver directamente el control. Pulsar la etiqueta
+						activa el campo correspondiente.
+					</p>
+					<pre><code>&lt;label for="correo"&gt;Correo electrónico&lt;/label&gt;
+&lt;input id="correo" name="correo" type="email"&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;label&gt;</code>; asociación: <code>for</code> =
+						<code>id</code>
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="input campo entrada texto type name value placeholder">
+					<h3>Campo de entrada: input</h3>
+					<p><code>&lt;input&gt;</code> crea un control de una línea. <code>type</code> define su función,
+						<code>name</code> la clave enviada y <code>value</code> su valor. <code>placeholder</code> es
+						solo una pista, no reemplaza a <code>label</code>.
+					</p>
+					<pre><code>&lt;input type="text" id="nombre"
+  name="nombre" autocomplete="name"&gt;</code></pre>
+					<p class="propiedad">Elemento vacío: <code>&lt;input&gt;</code></p>
+				</article>
+				<article class="concepto-css"
+					data-palabras="tipos input text email password number tel url search date time datetime local checkbox radio range color file">
+					<h3>Tipos frecuentes de input</h3>
+					<p><code>text</code>, <code>email</code>, <code>password</code>, <code>number</code>,
+						<code>tel</code>, <code>url</code>, <code>search</code>, <code>date</code>, <code>time</code>,
+						<code>datetime-local</code>, <code>checkbox</code>, <code>radio</code>, <code>range</code>,
+						<code>color</code> y <code>file</code> adaptan el control y su teclado. Elige el tipo que
+						corresponda al dato.
+					</p>
+					<pre><code>&lt;input type="email" name="correo"&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>type</code> de <code>input</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="textarea texto largo mensaje filas columnas">
+					<h3>Texto de varias líneas: textarea</h3>
+					<p><code>&lt;textarea&gt;</code> permite escribir texto largo. Su contenido inicial va entre las
+						etiquetas; <code>rows</code> y <code>cols</code> sugieren dimensiones. Para límites de longitud
+						usa <code>minlength</code> y <code>maxlength</code>.</p>
+					<pre><code>&lt;label for="mensaje"&gt;Mensaje&lt;/label&gt;
+&lt;textarea id="mensaje" name="mensaje"
+  rows="5" maxlength="1000"&gt;&lt;/textarea&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;textarea&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="select option lista desplegable opciones">
+					<h3>Lista desplegable: select y option</h3>
+					<p><code>&lt;select&gt;</code> agrupa opciones <code>&lt;option&gt;</code>. El atributo
+						<code>value</code> de cada opción es lo que se envía. <code>selected</code> marca la opción
+						inicial.
+					</p>
+					<pre><code>&lt;select name="talla"&gt;
+  &lt;option value="m"&gt;Mediana&lt;/option&gt;
+  &lt;option value="l" selected&gt;Grande&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>select</code>, <code>option</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="optgroup agrupar opciones desplegable label">
+					<h3>Agrupar opciones: optgroup</h3>
+					<p><code>&lt;optgroup&gt;</code> pone un título a un grupo de opciones dentro de una lista
+						desplegable. El atributo <code>label</code> es obligatorio para nombrar el grupo.</p>
+					<pre><code>&lt;optgroup label="Bebidas"&gt;
+  &lt;option value="te"&gt;Té&lt;/option&gt;
+&lt;/optgroup&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;optgroup&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="button botón submit reset button enviar">
+					<h3>Botones y tipos</h3>
+					<p><code>type="submit"</code> envía el formulario; <code>type="reset"</code> restablece valores y
+						suele sorprender a las personas; <code>type="button"</code> no envía por sí solo. Dentro de un
+						formulario, declara siempre el tipo para evitar envíos accidentales.</p>
+					<pre><code>&lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;button type="button"&gt;Mostrar ayuda&lt;/button&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;button&gt;</code>; valores de <code>type</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="checkbox casilla marcar checked multiple">
+					<h3>Casilla: checkbox</h3>
+					<p>Permite activar una opción independiente; pueden marcarse varias. <code>checked</code> la marca
+						inicialmente y <code>required</code> puede exigir aceptarla.</p>
+					<pre><code>&lt;input type="checkbox" id="aviso"
+  name="aviso" value="si"&gt;
+&lt;label for="aviso"&gt;Acepto el aviso&lt;/label&gt;</code></pre>
+					<p class="propiedad">Control: <code>input type="checkbox"</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="radio botón opciones una sola selección mismo name">
+					<h3>Opción única: radio</h3>
+					<p>Un grupo de radios permite elegir una sola opción. Los controles relacionados comparten el mismo
+						<code>name</code>; cada uno tiene un <code>value</code> distinto y una etiqueta propia.
+					</p>
+					<pre><code>&lt;input type="radio" id="envio1"
+  name="envio" value="normal"&gt;
+&lt;label for="envio1"&gt;Normal&lt;/label&gt;</code></pre>
+					<p class="propiedad">Control: <code>input type="radio"</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="fieldset legend agrupar controles formulario">
+					<h3>Agrupar controles: fieldset y legend</h3>
+					<p><code>&lt;fieldset&gt;</code> agrupa controles relacionados; <code>&lt;legend&gt;</code>
+						proporciona el título del grupo, especialmente útil para radios y casillas.</p>
+					<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Método de envío&lt;/legend&gt;
+  ...
+&lt;/fieldset&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>fieldset</code>, <code>legend</code></p>
+				</article>
+				<article class="concepto-css"
+					data-palabras="required obligatorio validación minlength maxlength min max step pattern">
+					<h3>Validación básica del navegador</h3>
+					<p><code>required</code> hace obligatorio el campo; <code>minlength</code>/<code>maxlength</code>
+						limitan texto; <code>min</code>/<code>max</code>/<code>step</code> validan números y fechas;
+						<code>pattern</code> comprueba un patrón. Esto ayuda a la experiencia, pero el servidor debe
+						validar también.
+					</p>
+					<pre><code>&lt;input type="number" name="edad"
+  min="0" max="120" required&gt;</code></pre>
+					<p class="propiedad">Atributos de validación: <code>required</code>, <code>min</code>,
+						<code>max</code>, <code>step</code>, <code>pattern</code>
+					</p>
+				</article>
+				<article class="concepto-css"
+					data-palabras="autocomplete autocompletar nombre email address formulario">
+					<h3>Autocompletar formularios</h3>
+					<p><code>autocomplete</code> indica el tipo de dato para que el navegador pueda completar campos:
+						<code>name</code>, <code>email</code>, <code>street-address</code>, <code>postal-code</code>,
+						entre otros. Usa tokens adecuados para facilitar formularios accesibles.
+					</p>
+					<pre><code>&lt;input name="email" type="email"
+  autocomplete="email"&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>autocomplete</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="datalist sugerencias lista input autocomplete">
+					<h3>Sugerencias: datalist</h3>
+					<p><code>&lt;datalist&gt;</code> ofrece sugerencias a un campo, pero normalmente permite escribir
+						otros valores. El <code>list</code> del input debe coincidir con el <code>id</code> del
+						datalist.</p>
+					<pre><code>&lt;input list="ciudades" name="ciudad"&gt;
+&lt;datalist id="ciudades"&gt;
+  &lt;option value="Lugo"&gt;
+&lt;/datalist&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>input</code>, <code>datalist</code>, <code>option</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="output resultado cálculo formulario for">
+					<h3>Resultado calculado: output</h3>
+					<p><code>&lt;output&gt;</code> representa el resultado de un cálculo o de una acción del usuario.
+						Puede asociarse a controles con <code>for</code>; JavaScript suele actualizar su contenido.</p>
+					<pre><code>&lt;output name="total" for="cantidad precio"&gt;0&lt;/output&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;output&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="disabled readonly deshabilitado solo lectura formulario">
+					<h3>Deshabilitado o solo lectura</h3>
+					<p><code>disabled</code> impide interactuar y normalmente excluye el valor del envío.
+						<code>readonly</code> impide editar un campo compatible pero conserva su valor en el envío. No
+						uses estos atributos para ocultar información que debe validarse en el servidor.
+					</p>
+					<pre><code>&lt;input value="ABC" readonly&gt;
+&lt;button disabled&gt;No disponible&lt;/button&gt;</code></pre>
+					<p class="propiedad">Atributos booleanos: <code>disabled</code>, <code>readonly</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="semantica" data-categoria>
+			<div class="cabecera-categoria"><span>07</span>
+				<div>
+					<p>Dar significado a las regiones del documento</p>
+					<h2>Estructura semántica</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="header cabecera encabezado página sección">
+					<h3>Cabecera: header</h3>
+					<p><code>&lt;header&gt;</code> contiene contenido introductorio o de navegación para la página o una
+						sección, como un logotipo o título. Puede haber varios; no es lo mismo que <code>head</code>.
+					</p>
+					<pre><code>&lt;header&gt;
+  &lt;h1&gt;Mi sitio&lt;/h1&gt;
+  &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+					<p class="propiedad">Elemento semántico: <code>&lt;header&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="nav navegación menú enlaces">
+					<h3>Navegación: nav</h3>
+					<p><code>&lt;nav&gt;</code> contiene un bloque importante de enlaces de navegación, como el menú
+						principal o un índice. No es necesario envolver en <code>nav</code> cada enlace aislado.</p>
+					<pre><code>&lt;nav aria-label="Principal"&gt;
+  &lt;a href="/"&gt;Inicio&lt;/a&gt;
+  &lt;a href="/contacto"&gt;Contacto&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+					<p class="propiedad">Elemento semántico: <code>&lt;nav&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="main contenido principal único">
+					<h3>Contenido principal: main</h3>
+					<p><code>&lt;main&gt;</code> identifica el contenido principal y único de la página. Normalmente
+						debe haber uno visible por documento; no lo uses para barras laterales, menús o contenido
+						repetido.</p>
+					<pre><code>&lt;main&gt;
+  &lt;h1&gt;Artículo principal&lt;/h1&gt;
+  ...
+&lt;/main&gt;</code></pre>
+					<p class="propiedad">Elemento semántico: <code>&lt;main&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="section sección tema encabezado">
+					<h3>Sección temática: section</h3>
+					<p><code>&lt;section&gt;</code> agrupa contenido relacionado que forma una sección temática;
+						normalmente tiene un encabezado. No es solo un contenedor para estilos: si no tiene significado
+						propio, quizá corresponde un <code>div</code>.</p>
+					<pre><code>&lt;section&gt;
+  &lt;h2&gt;Próximas rutas&lt;/h2&gt;
+  ...
+&lt;/section&gt;</code></pre>
+					<p class="propiedad">Elemento semántico: <code>&lt;section&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="article artículo independiente noticia publicación">
+					<h3>Contenido independiente: article</h3>
+					<p><code>&lt;article&gt;</code> es una pieza que puede entenderse por separado, como una noticia,
+						publicación, comentario o ficha independiente.</p>
+					<pre><code>&lt;article&gt;
+  &lt;h2&gt;Una noticia&lt;/h2&gt;
+  &lt;p&gt;Texto de la noticia.&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+					<p class="propiedad">Elemento semántico: <code>&lt;article&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="aside lateral relacionado nota barra lateral">
+					<h3>Contenido complementario: aside</h3>
+					<p><code>&lt;aside&gt;</code> agrupa contenido relacionado indirectamente con el contenido
+						principal, como una nota, glosario o barra lateral.</p>
+					<pre><code>&lt;aside&gt;
+  &lt;h2&gt;Consejo&lt;/h2&gt;
+  &lt;p&gt;Lleva agua suficiente.&lt;/p&gt;
+&lt;/aside&gt;</code></pre>
+					<p class="propiedad">Elemento semántico: <code>&lt;aside&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="footer pie página sección copyright">
+					<h3>Pie: footer</h3>
+					<p><code>&lt;footer&gt;</code> contiene información de cierre de una página o sección: autoría,
+						enlaces relacionados o información legal.</p>
+					<pre><code>&lt;footer&gt;
+  &lt;p&gt;© 2026 Mi sitio&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+					<p class="propiedad">Elemento semántico: <code>&lt;footer&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="address contacto autor propietario email">
+					<h3>Información de contacto: address</h3>
+					<p><code>&lt;address&gt;</code> contiene información de contacto de la persona u organización
+						responsable del contenido más cercano. No es una etiqueta genérica para cualquier dirección
+						postal.</p>
+					<pre><code>&lt;address&gt;
+  &lt;a href="mailto:hola@ejemplo.test"&gt;Escríbenos&lt;/a&gt;
+&lt;/address&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;address&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="details summary desplegable acordeón disclosure">
+					<h3>Contenido desplegable: details y summary</h3>
+					<p><code>&lt;details&gt;</code> crea un control expandible nativo; <code>&lt;summary&gt;</code> es
+						su encabezado visible. El atributo booleano <code>open</code> lo muestra inicialmente expandido.
+					</p>
+					<pre><code>&lt;details&gt;
+  &lt;summary&gt;¿Cuándo abre?&lt;/summary&gt;
+  &lt;p&gt;De lunes a viernes.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>&lt;details&gt;</code>, <code>&lt;summary&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="hgroup título subtítulo grupo encabezado">
+					<h3>Título con subtítulo: hgroup</h3>
+					<p><code>&lt;hgroup&gt;</code> agrupa un encabezado con contenido relacionado, como un subtítulo o
+						texto alternativo asociado. No sustituye los niveles <code>h1</code>–<code>h6</code>.</p>
+					<pre><code>&lt;hgroup&gt;
+  &lt;h1&gt;El bosque&lt;/h1&gt;
+  &lt;p&gt;Una guía de naturaleza&lt;/p&gt;
+&lt;/hgroup&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;hgroup&gt;</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="multimedia" data-categoria>
+			<div class="cabecera-categoria"><span>08</span>
+				<div>
+					<p>Audio, vídeo y contenido externo</p>
+					<h2>Multimedia</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="audio sonido música controls source">
+					<h3>Audio: audio</h3>
+					<p><code>&lt;audio&gt;</code> incorpora sonido. <code>controls</code> ofrece controles del
+						navegador; es preferible que la reproducción empiece por decisión de la persona. Añade texto
+						alternativo o transcripción para la información hablada importante.</p>
+					<pre><code>&lt;audio controls&gt;
+  &lt;source src="audio.ogg" type="audio/ogg"&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+  Tu navegador no puede reproducir el audio.
+&lt;/audio&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>audio</code>, <code>source</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="video película vídeo controles poster source">
+					<h3>Vídeo: video</h3>
+					<p><code>&lt;video&gt;</code> reproduce vídeo. <code>controls</code> muestra controles;
+						<code>poster</code> define una imagen inicial; <code>width</code>/<code>height</code> reservan
+						espacio. Para accesibilidad, ofrece subtítulos y, cuando haga falta, descripción/transcripción.
+					</p>
+					<pre><code>&lt;video controls poster="portada.jpg"
+  width="640" height="360"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>video</code>, <code>source</code>, <code>track</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="track subtítulos captions srtt vtt idioma">
+					<h3>Subtítulos y pistas: track</h3>
+					<p><code>&lt;track&gt;</code> añade pistas de texto a audio o vídeo, como subtítulos
+						(<code>kind="subtitles"</code>), leyendas (<code>captions</code>) o descripciones.
+						<code>src</code> suele apuntar a un archivo WebVTT y <code>srclang</code> indica el idioma.
+					</p>
+					<pre><code>&lt;track kind="captions" src="es.vtt"
+  srclang="es" label="Español" default&gt;</code></pre>
+					<p class="propiedad">Elemento vacío: <code>&lt;track&gt;</code></p>
+				</article>
+				<article class="concepto-css"
+					data-palabras="source fuente formato alternativo media picture audio video">
+					<h3>Fuentes alternativas: source</h3>
+					<p><code>&lt;source&gt;</code> ofrece archivos multimedia alternativos dentro de
+						<code>picture</code>, <code>audio</code> o <code>video</code>. El navegador selecciona una
+						opción compatible; indica su formato con <code>type</code>.
+					</p>
+					<pre><code>&lt;source src="audio.ogg" type="audio/ogg"&gt;</code></pre>
+					<p class="propiedad">Elemento vacío: <code>&lt;source&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="iframe incrustar página mapa video externo title sandbox">
+					<h3>Incrustar otra página: iframe</h3>
+					<p><code>&lt;iframe&gt;</code> inserta otra página o servicio. Dale un <code>title</code>
+						descriptivo. Usa <code>sandbox</code> con los permisos mínimos si el contenido no es de
+						confianza; puede limitar funciones que el marco necesita.</p>
+					<pre><code>&lt;iframe src="https://ejemplo.test/mapa"
+  title="Mapa del centro"&gt;&lt;/iframe&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;iframe&gt;</code>; atributos: <code>title</code>,
+						<code>sandbox</code>, <code>loading</code>
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="mapa image map area zonas clicables">
+					<h3>Mapa de imagen: map y area</h3>
+					<p><code>&lt;map&gt;</code> asocia zonas interactivas a una imagen; cada <code>&lt;area&gt;</code>
+						define una forma y enlace. Cada zona requiere una alternativa textual con <code>alt</code>;
+						puede ser difícil de adaptar y usar en pantallas táctiles.</p>
+					<pre><code>&lt;map name="plano"&gt;
+  &lt;area shape="rect" coords="0,0,80,80"
+    href="sala.html" alt="Sala principal"&gt;
+&lt;/map&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>map</code>, <code>area</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="svg vectorial inline figura gráfico">
+					<h3>Gráficos vectoriales SVG</h3>
+					<p><code>&lt;svg&gt;</code> es un formato de gráficos vectoriales que puede incluirse en HTML. Los
+						elementos geométricos tienen atributos propios; proporciona una alternativa accesible si el
+						gráfico comunica información.</p>
+					<pre><code>&lt;svg viewBox="0 0 100 100" role="img"
+  aria-labelledby="titulo-svg"&gt;
+  &lt;title id="titulo-svg"&gt;Círculo verde&lt;/title&gt;
+  &lt;circle cx="50" cy="50" r="40" fill="green"&gt;
+  &lt;/circle&gt;
+&lt;/svg&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;svg&gt;</code>; alternativa: título o descripción accesible
+					</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="interactivos" data-categoria>
+			<div class="cabecera-categoria"><span>09</span>
+				<div>
+					<p>Controles, diálogos y acciones</p>
+					<h2>Elementos interactivos</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="dialog diálogo modal showModal cerrar close">
+					<h3>Diálogo: dialog</h3>
+					<p><code>&lt;dialog&gt;</code> crea un diálogo nativo. Para abrirlo como modal se usa su método
+						<code>showModal()</code> desde JavaScript; botones con <code>formmethod="dialog"</code> pueden
+						cerrarlo. Informa de su título y conserva una forma clara de cerrar.
+					</p>
+					<pre><code>&lt;dialog id="aviso"&gt;
+  &lt;h2&gt;Aviso&lt;/h2&gt;
+  &lt;form method="dialog"&gt;
+    &lt;button&gt;Cerrar&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/dialog&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;dialog&gt;</code>; abrir/cerrar con JavaScript o formulario
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="button acción pulsar botón">
+					<h3>Botón para una acción</h3>
+					<p>Usa <code>&lt;button&gt;</code> para realizar una acción en la página; usa
+						<code>&lt;a href&gt;</code> para navegar a otro destino. Los botones tienen foco y se pueden
+						activar con teclado.
+					</p>
+					<pre><code>&lt;button type="button"&gt;Mostrar detalles&lt;/button&gt;</code></pre>
+					<p class="propiedad">Elemento interactivo: <code>&lt;button&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="progress barra progreso max value">
+					<h3>Progreso de una tarea: progress</h3>
+					<p><code>&lt;progress&gt;</code> representa cuánto se ha completado de una tarea. Con
+						<code>max</code> se define el total; con <code>value</code>, la cantidad actual. Para progreso
+						indeterminado se omite <code>value</code>. Añade una etiqueta asociada.
+					</p>
+					<pre><code>&lt;label for="subida"&gt;Subida&lt;/label&gt;
+&lt;progress id="subida" value="3" max="10"&gt;30%&lt;/progress&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;progress&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="meter medida escala valor min max low high optimum">
+					<h3>Medida dentro de un intervalo: meter</h3>
+					<p><code>&lt;meter&gt;</code> representa una medida dentro de un rango conocido, como nivel de
+						batería. No representa el progreso de una tarea (para eso está <code>progress</code>).</p>
+					<pre><code>&lt;label for="espacio"&gt;Espacio usado&lt;/label&gt;
+&lt;meter id="espacio" min="0" max="100"
+  value="65"&gt;65%&lt;/meter&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;meter&gt;</code></p>
+				</article>
+				<article class="concepto-css"
+					data-palabras="template plantilla contenido no renderizado clonar javascript">
+					<h3>Plantilla: template</h3>
+					<p><code>&lt;template&gt;</code> guarda contenido HTML que no se muestra al cargar la página.
+						JavaScript puede clonar su contenido para crear elementos. Una plantilla sola no añade
+						comportamiento ni contenido visible.</p>
+					<pre><code>&lt;template id="ficha"&gt;
+  &lt;article&gt;&lt;h2&gt;Título&lt;/h2&gt;&lt;/article&gt;
+&lt;/template&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;template&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="slot web components componente">
+					<h3>Hueco de un componente: slot</h3>
+					<p><code>&lt;slot&gt;</code> define dónde se inserta contenido en el Shadow DOM de un componente
+						web. Fuera de ese contexto no tiene el mismo propósito que un contenedor corriente.</p>
+					<pre><code>&lt;slot name="titulo"&gt;Título alternativo&lt;/slot&gt;</code></pre>
+					<p class="propiedad">Elemento de componentes web: <code>&lt;slot&gt;</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="accesibilidad" data-categoria>
+			<div class="cabecera-categoria"><span>10</span>
+				<div>
+					<p>Contenido comprensible y utilizable por todas las personas</p>
+					<h2>Accesibilidad</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css"
+					data-palabras="alt texto alternativo imagen accesibilidad lector pantalla">
+					<h3>Texto alternativo de imágenes</h3>
+					<p>El atributo <code>alt</code> comunica la información de una imagen a quienes no pueden verla.
+						Imágenes decorativas llevan <code>alt=""</code>; gráficos informativos necesitan una alternativa
+						que explique el dato o un resumen cercano.</p>
+					<pre><code>&lt;img src="grafico.png"
+  alt="Las ventas aumentaron cada mes"&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>alt</code> de <code>img</code> y <code>area</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="teclado orden tabulación tabindex foco">
+					<h3>Orden de teclado y tabindex</h3>
+					<p>Los controles nativos ya se pueden usar con teclado. En general evita valores positivos de
+						<code>tabindex</code>, que crean un orden inesperado. <code>tabindex="0"</code> incorpora un
+						elemento a la secuencia; <code>-1</code> permite enfocarlo por código sin añadirlo a Tab.
+					</p>
+					<pre><code>&lt;div tabindex="0"&gt;Contenido enfocable&lt;/div&gt;</code></pre>
+					<p class="propiedad">Atributo global: <code>tabindex</code>. No lo uses para convertir cualquier
+						cosa en botón.</p>
+				</article>
+				<article class="concepto-css"
+					data-palabras="aria-label aria labelledby accessible name nombre accesible">
+					<h3>Nombre accesible: aria-label y aria-labelledby</h3>
+					<p>Prefiere etiquetas HTML visibles y semánticas. Si un control no tiene un nombre visible adecuado,
+						<code>aria-label</code> puede aportar uno; <code>aria-labelledby</code> referencia texto
+						existente mediante su <code>id</code>. ARIA cambia la información accesible, no crea
+						funcionalidad.
+					</p>
+					<pre><code>&lt;nav aria-label="Principal"&gt;...&lt;/nav&gt;</code></pre>
+					<p class="propiedad">Atributos ARIA: <code>aria-label</code>, <code>aria-labelledby</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="aria hidden ocultar lector pantalla decorativo">
+					<h3>Ocultar elementos de tecnologías de apoyo</h3>
+					<p><code>aria-hidden="true"</code> quita un elemento y sus descendientes del árbol accesible, pero
+						no los oculta visualmente ni impide interacción. No lo pongas en controles enfocables ni en
+						contenido que alguien necesite.</p>
+					<pre><code>&lt;span aria-hidden="true"&gt;★&lt;/span&gt;</code></pre>
+					<p class="propiedad">Atributo ARIA: <code>aria-hidden</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="skip link saltar navegación contenido principal">
+					<h3>Enlace para saltar navegación</h3>
+					<p>Un enlace al principio que lleva al contenido principal permite evitar repetir menús. Hazlo
+						visible al recibir foco y apunta al <code>id</code> del <code>main</code>.</p>
+					<pre><code>&lt;a href="#contenido"&gt;Saltar al contenido&lt;/a&gt;
+&lt;main id="contenido"&gt;...&lt;/main&gt;</code></pre>
+					<p class="propiedad">Patrón de navegación por teclado con <code>href</code>, <code>id</code> y
+						<code>main</code>
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="role roles aria landmark región">
+					<h3>Roles ARIA y elementos nativos</h3>
+					<p><code>role</code> cambia el rol que se expone a tecnologías de apoyo, pero no añade el
+						comportamiento del elemento nativo. Siempre que exista una etiqueta HTML adecuada, como
+						<code>button</code> o <code>nav</code>, es preferible usarla antes que reconstruirla con
+						<code>div role</code>.
+					</p>
+					<pre><code>&lt;nav aria-label="Secciones"&gt;...&lt;/nav&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>role</code>; úsalo solo cuando la semántica nativa no baste.
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="accesibilidad encabezados jerarquía título heading">
+					<h3>Orden de encabezados</h3>
+					<p>Organiza los títulos según las secciones: no elijas un nivel solo por su tamaño, ni saltes
+						niveles sin motivo. Un esquema claro ayuda a recorrer el documento y a entender su estructura.
+					</p>
+					<pre><code>&lt;h1&gt;Guía&lt;/h1&gt;
+&lt;h2&gt;Primer tema&lt;/h2&gt;
+&lt;h3&gt;Detalle del tema&lt;/h3&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>h1</code>–<code>h6</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="atributos" data-categoria>
+			<div class="cabecera-categoria"><span>11</span>
+				<div>
+					<p>Información adicional y escritura correcta</p>
+					<h2>Atributos y caracteres</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="id identificador único fragmento">
+					<h3>Identificador único: id</h3>
+					<p><code>id</code> identifica un elemento de forma única en el documento. Se utiliza para enlaces
+						internos, etiquetas de formulario y selectores CSS; no repitas el mismo id.</p>
+					<pre><code>&lt;section id="contacto"&gt;...&lt;/section&gt;</code></pre>
+					<p class="propiedad">Atributo global: <code>id</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="class clase grupos reutilizar css">
+					<h3>Clases: class</h3>
+					<p><code>class</code> asigna uno o varios nombres reutilizables. Se separan por espacios; sirven
+						para CSS, JavaScript y organización semántica ligera.</p>
+					<pre><code>&lt;p class="aviso importante"&gt;Lee esto&lt;/p&gt;</code></pre>
+					<p class="propiedad">Atributo global: <code>class</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="data atributo personalizado dataset javascript">
+					<h3>Atributos personalizados: data-*</h3>
+					<p>Los atributos <code>data-*</code> guardan información propia asociada al elemento, accesible
+						desde JavaScript. No son una alternativa para atributos estándar ya existentes.</p>
+					<pre><code>&lt;button data-producto="42"&gt;Ver&lt;/button&gt;</code></pre>
+					<p class="propiedad">Atributos globales: <code>data-*</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="title tooltip información adicional atributo">
+					<h3>Atributo title</h3>
+					<p><code>title</code> aporta información adicional y algunos navegadores la muestran al pasar el
+						ratón. No lo uses como único nombre de un control ni para información imprescindible, porque
+						puede no aparecer en móviles o teclado.</p>
+					<pre><code>&lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;</code></pre>
+					<p class="propiedad">Atributo global: <code>title</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="hidden ocultar elemento atributo booleano">
+					<h3>Ocultar contenido: hidden</h3>
+					<p><code>hidden</code> indica que un contenido no es relevante en ese momento y el navegador
+						normalmente no lo muestra. Para mostrarlo de forma interactiva, cambia el estado con JavaScript.
+						No lo uses para esconder contenido que debería seguir disponible.</p>
+					<pre><code>&lt;p hidden&gt;Aún no disponible&lt;/p&gt;</code></pre>
+					<p class="propiedad">Atributo global booleano: <code>hidden</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="lang idioma parte texto lenguaje">
+					<h3>Idioma de un fragmento: lang</h3>
+					<p><code>lang</code> puede declararse en la raíz y cambiarse en una palabra o frase en otro idioma.
+						Los lectores de pantalla pueden cambiar pronunciación y los correctores el idioma de revisión.
+					</p>
+					<pre><code>&lt;p lang="en"&gt;Good morning&lt;/p&gt;</code></pre>
+					<p class="propiedad">Atributo global: <code>lang</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="dir dirección texto ltr rtl auto">
+					<h3>Dirección de escritura: dir</h3>
+					<p><code>dir="ltr"</code> indica izquierda a derecha; <code>rtl</code>, derecha a izquierda;
+						<code>auto</code> deja inferirla del texto. Para contenido escrito en ambos sentidos, usa
+						elementos apropiados y no simules dirección con espacios.
+					</p>
+					<pre><code>&lt;p dir="rtl"&gt;نص عربي&lt;/p&gt;</code></pre>
+					<p class="propiedad">Atributo global: <code>dir</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="contenteditable editar texto navegador">
+					<h3>Contenido editable: contenteditable</h3>
+					<p><code>contenteditable="true"</code> permite editar contenido en el navegador, pero no lo guarda
+						por sí solo ni lo envía a un servidor. Necesita una solución adicional para persistencia y
+						manejo accesible.</p>
+					<pre><code>&lt;div contenteditable="true"&gt;
+  Texto editable
+&lt;/div&gt;</code></pre>
+					<p class="propiedad">Atributo global: <code>contenteditable</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="tabindex foco teclado global">
+					<h3>Atributos globales</h3>
+					<p>Muchos elementos admiten atributos como <code>id</code>, <code>class</code>, <code>lang</code>,
+						<code>dir</code>, <code>title</code>, <code>hidden</code>, <code>tabindex</code>,
+						<code>style</code> y <code>data-*</code>. Comprueba que el atributo sea válido para el uso
+						concreto.
+					</p>
+					<pre><code>&lt;p id="nota" class="destacado" lang="es"&gt;
+  Una nota
+&lt;/p&gt;</code></pre>
+					<p class="propiedad">Atributos globales: reutilizables en gran parte de los elementos HTML</p>
+				</article>
+				<article class="concepto-css"
+					data-palabras="entidades carácter especial menor mayor ampersand amp espacio">
+					<h3>Caracteres reservados y entidades</h3>
+					<p>Para mostrar caracteres que tienen significado en HTML, usa entidades: <code>&amp;amp;</code>
+						muestra &amp;, <code>&amp;lt;</code> muestra &lt;, <code>&amp;gt;</code> muestra &gt; y
+						<code>&amp;quot;</code> muestra comillas dobles. UTF-8 permite escribir directamente muchos
+						caracteres acentuados.
+					</p>
+					<pre><code>&amp;lt;p&amp;gt; se muestra como &lt;p&gt;</code></pre>
+					<p class="propiedad">Entidades con nombre y referencias numéricas</p>
+				</article>
+				<article class="concepto-css" data-palabras="comentarios html ocultar nota código">
+					<h3>Comentarios HTML</h3>
+					<p>Los comentarios son notas del código que no se muestran como contenido de la página. No coloques
+						información secreta: cualquier visitante puede inspeccionar el HTML descargado.</p>
+					<pre><code>&lt;!-- Nota para quien mantiene el documento --&gt;</code></pre>
+					<p class="propiedad">Sintaxis: <code>&lt;!-- ... --&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="void elementos vacíos img br meta link input hr">
+					<h3>Elementos vacíos</h3>
+					<p>Algunos elementos no envuelven contenido y no tienen etiqueta de cierre: <code>area</code>,
+						<code>base</code>, <code>br</code>, <code>col</code>, <code>embed</code>, <code>hr</code>,
+						<code>img</code>, <code>input</code>, <code>link</code>, <code>meta</code>, <code>param</code>,
+						<code>source</code>, <code>track</code> y <code>wbr</code>. En HTML, la barra final opcional no
+						los convierte en XML.
+					</p>
+					<pre><code>&lt;img src="foto.jpg" alt="Vista"&gt;
+&lt;br&gt;</code></pre>
+					<p class="propiedad">No escribas etiquetas de cierre para elementos vacíos HTML.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="integracion" data-categoria>
+			<div class="cabecera-categoria"><span>12</span>
+				<div>
+					<p>Conectar HTML con estilos, scripts y herramientas</p>
+					<h2>CSS, JavaScript y validación</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="link css stylesheet hoja estilo externo rel href">
+					<h3>Conectar una hoja CSS</h3>
+					<p><code>&lt;link&gt;</code> enlaza recursos externos en <code>head</code>. Para CSS, usa
+						<code>rel="stylesheet"</code> y una ruta válida en <code>href</code>. La separación permite
+						mantener el contenido y el diseño por separado.
+					</p>
+					<pre><code>&lt;link rel="stylesheet" href="estilos.css"&gt;</code></pre>
+					<p class="propiedad">Elemento vacío: <code>&lt;link&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="style css interno etiqueta">
+					<h3>CSS dentro de style</h3>
+					<p><code>&lt;style&gt;</code> contiene reglas CSS dentro del documento, normalmente en
+						<code>head</code>. Para varios documentos suele ser más sencillo y mantenible una hoja externa.
+					</p>
+					<pre><code>&lt;style&gt;
+  p { color: teal; }
+&lt;/style&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;style&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="script javascript externo src defer module">
+					<h3>Conectar JavaScript: script</h3>
+					<p><code>&lt;script&gt;</code> incluye o carga JavaScript. Un archivo externo se referencia con
+						<code>src</code>; <code>defer</code> espera a que el HTML esté analizado. Los módulos usan
+						<code>type="module"</code>.
+					</p>
+					<pre><code>&lt;script src="app.js" defer&gt;&lt;/script&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;script&gt;</code>; atributos: <code>src</code>,
+						<code>defer</code>, <code>type</code>
+					</p>
+				</article>
+				<article class="concepto-css" data-palabras="noscript javascript desactivado alternativa">
+					<h3>Alternativa sin JavaScript: noscript</h3>
+					<p><code>&lt;noscript&gt;</code> contiene un mensaje o alternativa para navegadores que no ejecutan
+						scripts. No es sustituto de asegurar que el contenido esencial esté disponible y que los
+						controles tengan sentido.</p>
+					<pre><code>&lt;noscript&gt;
+  Activa JavaScript para usar esta función.
+&lt;/noscript&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;noscript&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="base URL rutas relativas página">
+					<h3>URL base para rutas relativas</h3>
+					<p><code>&lt;base&gt;</code> define una URL base para los enlaces relativos del documento y
+						opcionalmente un destino. Afecta a todas las rutas relativas; úsala con cuidado. Solo debe haber
+						un elemento base y se coloca antes de URLs relativas en <code>head</code>.</p>
+					<pre><code>&lt;base href="https://ejemplo.test/docs/"&gt;</code></pre>
+					<p class="propiedad">Elemento vacío: <code>&lt;base&gt;</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="favicon icon link icono pestaña">
+					<h3>Icono de la pestaña: favicon</h3>
+					<p>Un <code>link</code> con <code>rel="icon"</code> indica el icono asociado a la página. Puede
+						enlazar un archivo PNG, SVG o ICO compatible.</p>
+					<pre><code>&lt;link rel="icon" href="icono.svg" type="image/svg+xml"&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>link</code>; relación: <code>icon</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="validar validador errores html w3c">
+					<h3>Validar el documento</h3>
+					<p>Un validador HTML detecta errores de sintaxis, anidamiento y atributos. Que el documento valide
+						no garantiza por sí solo accesibilidad, buen contenido o funcionamiento; revisa también con
+						teclado y pruebas reales.</p>
+					<pre><code>&lt;!-- Cierra los elementos en el orden correcto --&gt;
+&lt;p&gt;&lt;strong&gt;Correcto&lt;/strong&gt;&lt;/p&gt;</code></pre>
+					<p class="propiedad">Comprobación recomendada durante el desarrollo.</p>
+				</article>
+				<article class="concepto-css" data-palabras="open graph redes sociales preview vista previa meta">
+					<h3>Vista previa al compartir</h3>
+					<p>Metadatos como <code>og:title</code>, <code>og:description</code> y <code>og:image</code>
+						describen cómo presentar una página al compartirla. Son metadatos de Open Graph y se colocan en
+						<code>head</code>.
+					</p>
+					<pre><code>&lt;meta property="og:title" content="Guía de rutas"&gt;
+&lt;meta property="og:description" content="Paseos por Galicia"&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>meta</code>; propiedades sociales: <code>og:*</code></p>
+				</article>
+				<article class="concepto-css"
+					data-palabras="atributo obsoleto deprecated bgcolor font center html antiguo">
+					<h3>Atributos antiguos que conviene evitar</h3>
+					<p>Atributos como <code>bgcolor</code>, <code>align</code>, <code>font</code>,
+						<code>width</code>/<code>height</code> presentacionales y etiquetas como <code>center</code>
+						están obsoletos para diseño. Usa HTML para estructura y significado; usa CSS para colores,
+						alineación y tamaños.
+					</p>
+					<pre><code>&lt;p class="centrado"&gt;Texto&lt;/p&gt;
+/* En CSS: .centrado { text-align: center; } */</code></pre>
+					<p class="propiedad">Preferir CSS moderno y elementos semánticos.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="sin-resultados-css" id="sin-resultados-html" hidden>
+			<h2>No encuentro ese término</h2>
+			<p>Prueba con otra palabra, por ejemplo: título, enlace, formulario, imagen, tabla o accesibilidad.</p>
+		</section>
+
+		<section class="regla-practica">
+			<h2>Una última pista</h2>
+			<p>Empieza por escribir el contenido con las etiquetas que expresan su significado: títulos para títulos,
+				párrafos para párrafos, listas para listas, enlaces para navegar y botones para acciones. Después añade
+				clases para personalizarlo con CSS. Una página bien estructurada es más fácil de mantener, entender y
+				usar con teclado y tecnologías de apoyo.</p>
+		</section>
+	</main>
+
+	<footer class="pie-guia">
+		<p>Guía de apoyo para aprender HTML semántico y accesible.</p>
+		<a href="css.html">Consultar la guía de CSS</a>
+		<a href="java.html">Consultar la guía de Java</a>
+	</footer>
+
+	<script>
+		const campoBusquedaHtml = document.querySelector("#buscar-html");
+		const limpiarBusquedaHtml = document.querySelector("#limpiar-html");
+		const conceptosHtml = [...document.querySelectorAll(".concepto-css")];
+		const categoriasHtml = [...document.querySelectorAll("[data-categoria]")];
+		const contadorHtml = document.querySelector("#resultado-html");
+		const sinResultadosHtml = document.querySelector("#sin-resultados-html");
+
+		function normalizarHtml(texto) {
+			return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
+		}
+
+		function filtrarConceptosHtml() {
+			const consulta = normalizarHtml(campoBusquedaHtml.value.trim());
+			let cantidad = 0;
+
+			conceptosHtml.forEach((concepto) => {
+				const texto = normalizarHtml(`${concepto.textContent} ${concepto.dataset.palabras}`);
+				const coincide = consulta.split(/\s+/).filter(Boolean).every((palabra) => texto.includes(palabra));
+				concepto.hidden = !coincide;
+				if (coincide) cantidad += 1;
+			});
+
+			categoriasHtml.forEach((categoria) => {
+				categoria.hidden = !categoria.querySelector(".concepto-css:not([hidden])");
+			});
+
+			sinResultadosHtml.hidden = cantidad > 0 || consulta === "";
+			contadorHtml.textContent = consulta
+				? `${cantidad} ${cantidad === 1 ? "resultado" : "resultados"}`
+				: `${conceptosHtml.length} conceptos en ${categoriasHtml.length} categorías`;
+		}
+
+		campoBusquedaHtml.addEventListener("input", filtrarConceptosHtml);
+		limpiarBusquedaHtml.addEventListener("click", () => {
+			campoBusquedaHtml.value = "";
+			filtrarConceptosHtml();
+			campoBusquedaHtml.focus();
+		});
+
+		filtrarConceptosHtml();
+	</script>
+</body>
+
+</html>
