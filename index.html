@@ -171,34 +171,41 @@ Guía de HTML para principiantes.
 				<article class="concepto-css" data-palabras="etiqueta apertura cierre nombre elemento sintaxis">
 					<h3>Cómo leer una etiqueta</h3>
 					<p>Una etiqueta de apertura va entre signos menor y mayor. El nombre, como <code>p</code>, dice qué
-					elemento es. La etiqueta de cierre lleva una barra, y entre ambas va el contenido.</p>
+						elemento es. La etiqueta de cierre lleva una barra, y entre ambas va el contenido.</p>
 					<pre><code>&lt;p&gt;Este es el contenido.&lt;/p&gt;</code></pre>
 					<p class="propiedad">Apertura: <code>&lt;p&gt;</code>; cierre: <code>&lt;/p&gt;</code></p>
 				</article>
 				<article class="concepto-css" data-palabras="atributo nombre valor comillas etiqueta id class src href">
 					<h3>Atributos: nombre y valor</h3>
-					<p>Los atributos se escriben dentro de la etiqueta de apertura. El nombre indica qué información se da
-					y el valor suele ir entre comillas. Escribe las etiquetas en minúsculas para facilitar la lectura.</p>
+					<p>Los atributos se escriben dentro de la etiqueta de apertura. El nombre indica qué información se
+						da
+						y el valor suele ir entre comillas. Escribe las etiquetas en minúsculas para facilitar la
+						lectura.</p>
 					<pre><code>&lt;a href="contacto.html" class="enlace"&gt;
   Contacto
 &lt;/a&gt;</code></pre>
 					<p class="propiedad">Atributos: <code>href</code> y <code>class</code></p>
 				</article>
-				<article class="concepto-css" data-palabras="booleano atributo sin valor disabled checked required selected open">
+				<article class="concepto-css"
+					data-palabras="booleano atributo sin valor disabled checked required selected open">
 					<h3>Atributos booleanos</h3>
 					<p>Un atributo booleano se activa por estar presente: no hace falta escribir <code>true</code> o
-						<code>false</code>. Para desactivarlo, quítalo. Si un botón contiene <code>disabled</code>, queda
-						deshabilitado.</p>
+						<code>false</code>. Para desactivarlo, quítalo. Si un botón contiene <code>disabled</code>,
+						queda
+						deshabilitado.
+					</p>
 					<pre><code>&lt;input type="checkbox" checked&gt;
 &lt;button disabled&gt;No disponible&lt;/button&gt;</code></pre>
-					<p class="propiedad">Ejemplos: <code>checked</code>, <code>required</code>, <code>selected</code>, <code>open</code></p>
+					<p class="propiedad">Ejemplos: <code>checked</code>, <code>required</code>, <code>selected</code>,
+						<code>open</code></p>
 				</article>
 				<article class="concepto-css" data-palabras="metadatos robots indexar buscadores noindex follow">
 					<h3>Instrucciones para buscadores: robots</h3>
 					<p>Este metadato puede sugerir si un buscador debe incluir la página en resultados y seguir sus
 						enlaces. No es un control de seguridad ni garantiza que todos los buscadores lo respeten.</p>
 					<pre><code>&lt;meta name="robots" content="index, follow"&gt;</code></pre>
-					<p class="propiedad">Elemento: <code>meta</code>; contenido frecuente: <code>noindex</code>, <code>nofollow</code></p>
+					<p class="propiedad">Elemento: <code>meta</code>; contenido frecuente: <code>noindex</code>,
+						<code>nofollow</code></p>
 				</article>
 				<article class="concepto-css" data-palabras="color pestaña navegador theme color móvil">
 					<h3>Color de la interfaz del navegador</h3>
@@ -390,11 +397,13 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 						<code>reversed</code>, <code>type</code>
 					</p>
 				</article>
-				<article class="concepto-css" data-palabras="numeración romanos letras type lista ordered decimal alpha roman">
+				<article class="concepto-css"
+					data-palabras="numeración romanos letras type lista ordered decimal alpha roman">
 					<h3>Elegir el tipo de numeración</h3>
 					<p>En <code>ol</code>, <code>type</code> puede usar <code>1</code> para números,
 						<code>A</code>/<code>a</code> para letras y <code>I</code>/<code>i</code> para números romanos.
-						El aspecto también se puede cambiar con CSS.</p>
+						El aspecto también se puede cambiar con CSS.
+					</p>
 					<pre><code>&lt;ol type="I"&gt;
   &lt;li&gt;Primera parte&lt;/li&gt;
   &lt;li&gt;Segunda parte&lt;/li&gt;
@@ -449,7 +458,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
     &lt;ul&gt;&lt;li&gt;Manzana&lt;/li&gt;&lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;</code></pre>
-					<p class="propiedad">No pongas una lista secundaria suelta directamente entre elementos de la lista principal.</p>
+					<p class="propiedad">No pongas una lista secundaria suelta directamente entre elementos de la lista
+						principal.</p>
 				</article>
 			</div>
 		</section>
@@ -483,7 +493,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				<article class="concepto-css" data-palabras="target destino blank self nueva pestaña ventana enlace">
 					<h3>Elegir dónde se abre: target</h3>
 					<p>Sin <code>target</code>, el enlace normalmente se abre en la pestaña actual. <code>_blank</code>
-						pide abrir otra pestaña; <code>_self</code> indica explícitamente la actual. Evita abrir pestañas
+						pide abrir otra pestaña; <code>_self</code> indica explícitamente la actual. Evita abrir
+						pestañas
 						nuevas sin necesidad y avisa cuando lo hagas.</p>
 					<pre><code>&lt;a href="https://ejemplo.test" target="_blank"
   rel="noopener"&gt;Sitio externo&lt;/a&gt;</code></pre>
@@ -516,7 +527,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				<article class="concepto-css" data-palabras="enlace destino base URL ruta relativa fragmento protocolo">
 					<h3>Rutas relativas, absolutas y fragmentos</h3>
 					<p>Una ruta relativa, como <code>contacto.html</code> o <code>../index.html</code>, se calcula desde
-						la carpeta actual. Una URL absoluta incluye protocolo y dominio. Un fragmento con <code>#id</code>
+						la carpeta actual. Una URL absoluta incluye protocolo y dominio. Un fragmento con
+						<code>#id</code>
 						apunta a una parte concreta del documento.</p>
 					<pre><code>&lt;a href="../contacto.html#formulario"&gt;Contactar&lt;/a&gt;</code></pre>
 					<p class="propiedad">Atributo de destino: <code>href</code></p>
@@ -586,7 +598,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				</article>
 				<article class="concepto-css" data-palabras="svg imagen gráfica archivo externo img vectorial">
 					<h3>Usar un SVG como imagen</h3>
-					<p>Un archivo SVG puede incluirse con <code>img</code> como cualquier imagen. Si comunica información,
+					<p>Un archivo SVG puede incluirse con <code>img</code> como cualquier imagen. Si comunica
+						información,
 						describe su contenido en <code>alt</code>; si solo decora, usa <code>alt=""</code>.</p>
 					<pre><code>&lt;img src="icono.svg" alt="Buscar"&gt;</code></pre>
 					<p class="propiedad">Elemento: <code>img</code>; archivo vectorial: SVG</p>
@@ -605,8 +618,10 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				<article class="concepto-css" data-palabras="table tabla datos cuadrícula filas columnas estructura">
 					<h3>La tabla completa: table</h3>
 					<p><code>&lt;table&gt;</code> es el contenedor de datos relacionados en filas y columnas, como un
-						horario o una lista de precios. No se usa para colocar las partes de una página: para eso se utiliza
-						CSS con Flex o Grid. Dentro de la tabla se ponen un título, grupos de filas y las filas de datos.</p>
+						horario o una lista de precios. No se usa para colocar las partes de una página: para eso se
+						utiliza
+						CSS con Flex o Grid. Dentro de la tabla se ponen un título, grupos de filas y las filas de
+						datos.</p>
 					<pre><code>&lt;table&gt;
   &lt;caption&gt;Horario de rutas&lt;/caption&gt;
   &lt;thead&gt;...&lt;/thead&gt;
@@ -616,7 +631,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				</article>
 				<article class="concepto-css" data-palabras="tr fila row table row">
 					<h3>Fila: tr</h3>
-					<p><code>&lt;tr&gt;</code> significa «fila de tabla». Dentro se colocan las celdas de esa fila, en el
+					<p><code>&lt;tr&gt;</code> significa «fila de tabla». Dentro se colocan las celdas de esa fila, en
+						el
 						orden en que deben leerse: encabezados <code>th</code> o datos <code>td</code>.</p>
 					<pre><code>&lt;tr&gt;
   &lt;th scope="row"&gt;Monte Pindo&lt;/th&gt;
@@ -627,7 +643,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				<article class="concepto-css" data-palabras="th encabezado cabecera celda título columna fila">
 					<h3>Celda de encabezado: th</h3>
 					<p><code>&lt;th&gt;</code> nombra una columna o una fila. El navegador suele mostrarlo en negrita y
-						centrado, pero lo importante es su significado: tecnologías de apoyo pueden anunciar el encabezado
+						centrado, pero lo importante es su significado: tecnologías de apoyo pueden anunciar el
+						encabezado
 						asociado al dato.</p>
 					<pre><code>&lt;th scope="col"&gt;Día&lt;/th&gt;
 &lt;th scope="row"&gt;Monte Pindo&lt;/th&gt;</code></pre>
@@ -635,9 +652,11 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				</article>
 				<article class="concepto-css" data-palabras="td dato celda contenido table data">
 					<h3>Celda de datos: td</h3>
-					<p><code>&lt;td&gt;</code> contiene un dato normal de la tabla: una hora, un precio o una descripción.
+					<p><code>&lt;td&gt;</code> contiene un dato normal de la tabla: una hora, un precio o una
+						descripción.
 						Va dentro de una fila <code>tr</code>. Si el contenido describe la fila o la columna, usa
-						<code>th</code> en vez de <code>td</code>.</p>
+						<code>th</code> en vez de <code>td</code>.
+					</p>
 					<pre><code>&lt;td&gt;Sábado&lt;/td&gt;
 &lt;td&gt;08:30&lt;/td&gt;</code></pre>
 					<p class="propiedad">Elemento: <code>&lt;td&gt;</code></p>
@@ -645,7 +664,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				<article class="concepto-css" data-palabras="thead encabezado cabeza filas superiores título">
 					<h3>Grupo de encabezados: thead</h3>
 					<p><code>&lt;thead&gt;</code> agrupa una o más filas con los encabezados de la tabla. Normalmente
-						contiene filas <code>tr</code> con celdas <code>th</code>. Ayuda a entender la estructura y permite
+						contiene filas <code>tr</code> con celdas <code>th</code>. Ayuda a entender la estructura y
+						permite
 						aplicar estilos o repetición de encabezados al imprimir.</p>
 					<pre><code>&lt;thead&gt;
   &lt;tr&gt;&lt;th scope="col"&gt;Día&lt;/th&gt;&lt;/tr&gt;
@@ -654,7 +674,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				</article>
 				<article class="concepto-css" data-palabras="tbody cuerpo filas principales datos tabla">
 					<h3>Grupo de filas de datos: tbody</h3>
-					<p><code>&lt;tbody&gt;</code> agrupa las filas principales de datos. Una tabla puede tener uno o varios
+					<p><code>&lt;tbody&gt;</code> agrupa las filas principales de datos. Una tabla puede tener uno o
+						varios
 						grupos de cuerpo; cada grupo contiene filas <code>tr</code>.</p>
 					<pre><code>&lt;tbody&gt;
   &lt;tr&gt;&lt;td&gt;Sábado&lt;/td&gt;&lt;/tr&gt;
@@ -663,7 +684,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				</article>
 				<article class="concepto-css" data-palabras="tfoot pie final resumen totales tabla">
 					<h3>Grupo de pie: tfoot</h3>
-					<p><code>&lt;tfoot&gt;</code> agrupa filas de resumen o totales. Puede colocarse después del cuerpo en
+					<p><code>&lt;tfoot&gt;</code> agrupa filas de resumen o totales. Puede colocarse después del cuerpo
+						en
 						el HTML; el navegador conserva su función de pie. No es obligatorio si no hay resumen.</p>
 					<pre><code>&lt;tfoot&gt;
   &lt;tr&gt;&lt;th scope="row"&gt;Total&lt;/th&gt;&lt;td&gt;2 rutas&lt;/td&gt;&lt;/tr&gt;
@@ -673,18 +695,22 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				<article class="concepto-css" data-palabras="caption título nombre leyenda descripción tabla">
 					<h3>Título de la tabla: caption</h3>
 					<p><code>&lt;caption&gt;</code> da un título o descripción breve que ayuda a entender qué datos se
-						están viendo. Se escribe justo después de abrir <code>table</code> y debe ser único por tabla.</p>
+						están viendo. Se escribe justo después de abrir <code>table</code> y debe ser único por tabla.
+					</p>
 					<pre><code>&lt;table&gt;
   &lt;caption&gt;Salidas de octubre&lt;/caption&gt;
   ...
 &lt;/table&gt;</code></pre>
 					<p class="propiedad">Elemento: <code>&lt;caption&gt;</code></p>
 				</article>
-				<article class="concepto-css" data-palabras="scope col row rowgroup colgroup asociación encabezado accesibilidad">
+				<article class="concepto-css"
+					data-palabras="scope col row rowgroup colgroup asociación encabezado accesibilidad">
 					<h3>Relacionar encabezados: scope</h3>
 					<p><code>scope</code> se pone en un <code>th</code> para decir qué datos encabeza: <code>col</code>
-						para una columna, <code>row</code> para una fila, <code>colgroup</code> para un grupo de columnas
-						y <code>rowgroup</code> para un grupo de filas. Así los lectores de pantalla pueden relacionar mejor
+						para una columna, <code>row</code> para una fila, <code>colgroup</code> para un grupo de
+						columnas
+						y <code>rowgroup</code> para un grupo de filas. Así los lectores de pantalla pueden relacionar
+						mejor
 						cada dato con su encabezado.</p>
 					<pre><code>&lt;th scope="col"&gt;Hora&lt;/th&gt;
 &lt;th scope="row"&gt;Monte Pindo&lt;/th&gt;</code></pre>
@@ -694,43 +720,56 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 					<h3>Ocupar varias columnas: colspan</h3>
 					<p><code>colspan</code> hace que una celda ocupe el número indicado de columnas. Por ejemplo,
 						<code>colspan="2"</code> la extiende sobre dos columnas. Las celdas siguientes de esa fila deben
-						ajustarse para que la tabla siga teniendo una cuadrícula coherente.</p>
+						ajustarse para que la tabla siga teniendo una cuadrícula coherente.
+					</p>
 					<pre><code>&lt;th colspan="2"&gt;Datos de salida&lt;/th&gt;</code></pre>
-					<p class="propiedad">Atributo numérico de <code>td</code> o <code>th</code>: <code>colspan</code></p>
+					<p class="propiedad">Atributo numérico de <code>td</code> o <code>th</code>: <code>colspan</code>
+					</p>
 				</article>
 				<article class="concepto-css" data-palabras="rowspan filas abarcar unir vertical celdas cero">
 					<h3>Ocupar varias filas: rowspan</h3>
 					<p><code>rowspan</code> hace que una celda se extienda hacia abajo por varias filas. Por ejemplo,
-						<code>rowspan="2"</code> ocupa dos filas; las filas siguientes no deben repetir esa celda. El valor
-						<code>rowspan="0"</code> puede abarcar el resto de filas del grupo actual.</p>
+						<code>rowspan="2"</code> ocupa dos filas; las filas siguientes no deben repetir esa celda. El
+						valor
+						<code>rowspan="0"</code> puede abarcar el resto de filas del grupo actual.
+					</p>
 					<pre><code>&lt;th scope="rowgroup" rowspan="2"&gt;Sábado&lt;/th&gt;</code></pre>
-					<p class="propiedad">Atributo numérico de <code>td</code> o <code>th</code>: <code>rowspan</code></p>
+					<p class="propiedad">Atributo numérico de <code>td</code> o <code>th</code>: <code>rowspan</code>
+					</p>
 				</article>
-				<article class="concepto-css" data-palabras="headers id asociación compleja accesibilidad varios encabezados">
+				<article class="concepto-css"
+					data-palabras="headers id asociación compleja accesibilidad varios encabezados">
 					<h3>Asociación explícita: headers e id</h3>
-					<p>En tablas complejas, un <code>th</code> puede llevar un <code>id</code> y una celda <code>td</code>
+					<p>En tablas complejas, un <code>th</code> puede llevar un <code>id</code> y una celda
+						<code>td</code>
 						puede indicar en <code>headers</code> los identificadores de todos sus encabezados relacionados,
 						separados por espacios. Para tablas simples suele bastar con <code>scope</code>.</p>
 					<pre><code>&lt;th id="ruta" scope="col"&gt;Ruta&lt;/th&gt;
 &lt;td headers="ruta dia"&gt;Monte Pindo&lt;/td&gt;</code></pre>
-					<p class="propiedad">Atributos: <code>headers</code> en celdas y <code>id</code> único en los encabezados</p>
+					<p class="propiedad">Atributos: <code>headers</code> en celdas y <code>id</code> único en los
+						encabezados</p>
 				</article>
 				<article class="concepto-css" data-palabras="colgroup col columnas grupo span estilo tabla">
 					<h3>Agrupar columnas: colgroup y col</h3>
 					<p><code>&lt;colgroup&gt;</code> agrupa columnas y <code>&lt;col&gt;</code> representa una o varias
-						columnas; <code>span</code> indica cuántas abarca. Se colocan al principio de la tabla, después de
+						columnas; <code>span</code> indica cuántas abarca. Se colocan al principio de la tabla, después
+						de
 						<code>caption</code> y antes de las filas. Sirven para identificar columnas y aplicarles algunos
-						estilos, pero no reemplazan sus encabezados.</p>
+						estilos, pero no reemplazan sus encabezados.
+					</p>
 					<pre><code>&lt;colgroup&gt;
   &lt;col&gt;
   &lt;col span="2"&gt;
 &lt;/colgroup&gt;</code></pre>
-					<p class="propiedad">Elementos: <code>&lt;colgroup&gt;</code>, <code>&lt;col&gt;</code>; atributo: <code>span</code></p>
+					<p class="propiedad">Elementos: <code>&lt;colgroup&gt;</code>, <code>&lt;col&gt;</code>; atributo:
+						<code>span</code></p>
 				</article>
-				<article class="concepto-css" data-palabras="columna fila encabezado table scope colspan rowspan ejemplo horario">
+				<article class="concepto-css"
+					data-palabras="columna fila encabezado table scope colspan rowspan ejemplo horario">
 					<h3>Ejemplo completo: horario de rutas</h3>
 					<p>En la primera fila, «Salida» encabeza dos columnas con <code>colspan</code>; «Ruta» ocupa ambas
-						filas de encabezado con <code>rowspan</code>. Cada fila identifica su ruta con un encabezado de fila.
+						filas de encabezado con <code>rowspan</code>. Cada fila identifica su ruta con un encabezado de
+						fila.
 						El pie combina dos celdas para mostrar el total.</p>
 					<pre><code>&lt;table&gt;
   &lt;caption&gt;Horario de rutas&lt;/caption&gt;
@@ -761,7 +800,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
     &lt;/tr&gt;
   &lt;/tfoot&gt;
 &lt;/table&gt;</code></pre>
-					<p class="propiedad">Fíjate en el orden: <code>caption</code>, encabezados, filas de datos y resumen final.</p>
+					<p class="propiedad">Fíjate en el orden: <code>caption</code>, encabezados, filas de datos y resumen
+						final.</p>
 				</article>
 			</div>
 		</section>
@@ -811,7 +851,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				</article>
 				<article class="concepto-css" data-palabras="placeholder ejemplo pista etiqueta label diferencia campo">
 					<h3>Placeholder no sustituye a label</h3>
-					<p><code>placeholder</code> es una pista dentro del campo que desaparece al escribir. No dice de forma
+					<p><code>placeholder</code> es una pista dentro del campo que desaparece al escribir. No dice de
+						forma
 						permanente qué debe rellenarse. Mantén una etiqueta <code>label</code> visible para que el campo
 						conserve un nombre claro.</p>
 					<pre><code>&lt;label for="correo"&gt;Correo&lt;/label&gt;
@@ -864,7 +905,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				<article class="concepto-css" data-palabras="select multiple varias opciones lista desplegable">
 					<h3>Elegir varias opciones: multiple</h3>
 					<p>El atributo booleano <code>multiple</code> permite seleccionar más de una opción. La combinación
-						de teclas para elegir varias puede variar por dispositivo; para pocas opciones pueden ser más claras
+						de teclas para elegir varias puede variar por dispositivo; para pocas opciones pueden ser más
+						claras
 						varias casillas.</p>
 					<pre><code>&lt;select name="pais" multiple&gt;
   &lt;option value="es"&gt;España&lt;/option&gt;
@@ -952,7 +994,7 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				<article class="concepto-css" data-palabras="checked checkbox radio marcada valor inicial">
 					<h3>Opción marcada inicialmente: checked</h3>
 					<p><code>checked</code> marca una casilla o botón de opción al abrir la página. En un mismo grupo de
-					radios normalmente solo una opción debería aparecer marcada.</p>
+						radios normalmente solo una opción debería aparecer marcada.</p>
 					<pre><code>&lt;input type="radio" name="envio"
   value="normal" checked&gt;</code></pre>
 					<p class="propiedad">Atributo booleano de <code>input</code>: <code>checked</code></p>
@@ -1000,17 +1042,21 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 					<h3>Enviar archivos: enctype</h3>
 					<p>Si el formulario envía archivos, usa <code>method="post"</code> y
 						<code>enctype="multipart/form-data"</code>. El campo de archivo usa <code>type="file"</code>;
-						<code>accept</code> puede sugerir formatos, pero el servidor debe comprobarlos también.</p>
+						<code>accept</code> puede sugerir formatos, pero el servidor debe comprobarlos también.
+					</p>
 					<pre><code>&lt;form method="post" enctype="multipart/form-data"&gt;
   &lt;input type="file" name="foto" accept="image/*"&gt;
 &lt;/form&gt;</code></pre>
-					<p class="propiedad">Atributos: <code>enctype</code>, <code>type="file"</code>, <code>accept</code></p>
+					<p class="propiedad">Atributos: <code>enctype</code>, <code>type="file"</code>, <code>accept</code>
+					</p>
 				</article>
 				<article class="concepto-css" data-palabras="form novalidate validation enviar servidor validación">
 					<h3>Controlar la validación del formulario</h3>
 					<p>El navegador comprueba restricciones como <code>required</code> antes de enviar. El atributo
-						<code>novalidate</code> desactiva esa comprobación al enviar el formulario; no elimina la necesidad
-						de validar los datos en el servidor.</p>
+						<code>novalidate</code> desactiva esa comprobación al enviar el formulario; no elimina la
+						necesidad
+						de validar los datos en el servidor.
+					</p>
 					<pre><code>&lt;form action="/buscar" method="get"&gt;
   &lt;input name="q" required&gt;
 &lt;/form&gt;</code></pre>
@@ -1132,7 +1178,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				</article>
 				<article class="concepto-css" data-palabras="search búsqueda buscador región semántica landmark">
 					<h3>Región de búsqueda: search</h3>
-					<p><code>&lt;search&gt;</code> identifica una zona de búsqueda o filtrado. Puede contener un formulario
+					<p><code>&lt;search&gt;</code> identifica una zona de búsqueda o filtrado. Puede contener un
+						formulario
 						con su etiqueta y campo; no reemplaza las etiquetas accesibles de los controles.</p>
 					<pre><code>&lt;search&gt;
   &lt;form role="search"&gt;
@@ -1142,11 +1189,14 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 &lt;/search&gt;</code></pre>
 					<p class="propiedad">Elemento semántico: <code>&lt;search&gt;</code></p>
 				</article>
-				<article class="concepto-css" data-palabras="header footer article section encabezados landmarks regiones">
+				<article class="concepto-css"
+					data-palabras="header footer article section encabezados landmarks regiones">
 					<h3>Landmarks: regiones que orientan</h3>
-					<p><code>header</code>, <code>nav</code>, <code>main</code>, <code>aside</code> y <code>footer</code>
+					<p><code>header</code>, <code>nav</code>, <code>main</code>, <code>aside</code> y
+						<code>footer</code>
 						ayudan a recorrer la página con tecnologías de apoyo. Usa <code>main</code> para el contenido
-						principal, normalmente una vez, y nombra con <code>aria-label</code> las navegaciones distintas.</p>
+						principal, normalmente una vez, y nombra con <code>aria-label</code> las navegaciones distintas.
+					</p>
 					<pre><code>&lt;nav aria-label="Navegación principal"&gt;...&lt;/nav&gt;
 &lt;main&gt;...&lt;/main&gt;</code></pre>
 					<p class="propiedad">Elige elementos semánticos antes de añadir roles ARIA.</p>
@@ -1245,18 +1295,22 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				<article class="concepto-css" data-palabras="canvas dibujo píxeles javascript gráfico">
 					<h3>Lienzo de dibujo: canvas</h3>
 					<p><code>&lt;canvas&gt;</code> reserva una superficie para gráficos dibujados con JavaScript. El
-						contenido entre las etiquetas sirve de alternativa si el navegador no lo representa; para gráficos
+						contenido entre las etiquetas sirve de alternativa si el navegador no lo representa; para
+						gráficos
 						informativos, ofrece también una explicación accesible.</p>
 					<pre><code>&lt;canvas id="grafico" width="320" height="180"&gt;
   Gráfico de ventas por mes
 &lt;/canvas&gt;</code></pre>
 					<p class="propiedad">Elemento: <code>&lt;canvas&gt;</code>; se dibuja con JavaScript</p>
 				</article>
-				<article class="concepto-css" data-palabras="iframe sandbox permisos allow cámara micrófono fullscreen referrerpolicy">
+				<article class="concepto-css"
+					data-palabras="iframe sandbox permisos allow cámara micrófono fullscreen referrerpolicy">
 					<h3>Limitar permisos de un iframe</h3>
-					<p><code>sandbox</code> restringe lo que puede hacer el contenido incrustado; añade solo los permisos
-						necesarios, como <code>allow-scripts</code>. <code>allow</code> controla funciones específicas del
-					dispositivo o pantalla. No concedas permisos amplios a contenido que no controles.</p>
+					<p><code>sandbox</code> restringe lo que puede hacer el contenido incrustado; añade solo los
+						permisos
+						necesarios, como <code>allow-scripts</code>. <code>allow</code> controla funciones específicas
+						del
+						dispositivo o pantalla. No concedas permisos amplios a contenido que no controles.</p>
 					<pre><code>&lt;iframe src="widget.html" title="Mapa"
   sandbox="allow-scripts" loading="lazy"&gt;&lt;/iframe&gt;</code></pre>
 					<p class="propiedad">Atributos: <code>sandbox</code>, <code>allow</code>, <code>loading</code></p>
@@ -1333,11 +1387,15 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 					<pre><code>&lt;slot name="titulo"&gt;Título alternativo&lt;/slot&gt;</code></pre>
 					<p class="propiedad">Elemento de componentes web: <code>&lt;slot&gt;</code></p>
 				</article>
-				<article class="concepto-css" data-palabras="popover desplegable popup popover show hide auto manual botón">
+				<article class="concepto-css"
+					data-palabras="popover desplegable popup popover show hide auto manual botón">
 					<h3>Contenido emergente nativo: popover</h3>
-					<p>El atributo <code>popover</code> convierte un elemento en un panel que se puede mostrar y ocultar.
-						<code>popover="auto"</code> permite cerrar al pulsar fuera o con Escape; <code>manual</code> deja
-						el control al código o a botones con <code>popovertarget</code>.</p>
+					<p>El atributo <code>popover</code> convierte un elemento en un panel que se puede mostrar y
+						ocultar.
+						<code>popover="auto"</code> permite cerrar al pulsar fuera o con Escape; <code>manual</code>
+						deja
+						el control al código o a botones con <code>popovertarget</code>.
+					</p>
 					<pre><code>&lt;button popovertarget="ayuda"&gt;Ayuda&lt;/button&gt;
 &lt;div id="ayuda" popover&gt;Texto de ayuda&lt;/div&gt;</code></pre>
 					<p class="propiedad">Atributos: <code>popover</code>, <code>popovertarget</code></p>
@@ -1423,14 +1481,19 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 &lt;h3&gt;Detalle del tema&lt;/h3&gt;</code></pre>
 					<p class="propiedad">Elementos: <code>h1</code>–<code>h6</code></p>
 				</article>
-				<article class="concepto-css" data-palabras="aria live anuncio dinámico estado alert status lector pantalla">
+				<article class="concepto-css"
+					data-palabras="aria live anuncio dinámico estado alert status lector pantalla">
 					<h3>Anuncios dinámicos: aria-live</h3>
-					<p>Cuando JavaScript actualiza un contador o mensaje, <code>aria-live</code> puede pedir a la tecnología
-						de apoyo que anuncie el cambio: <code>polite</code> espera un momento adecuado y <code>assertive</code>
-						interrumpe, así que debe reservarse para mensajes urgentes. Para avisos breves también existen los
+					<p>Cuando JavaScript actualiza un contador o mensaje, <code>aria-live</code> puede pedir a la
+						tecnología
+						de apoyo que anuncie el cambio: <code>polite</code> espera un momento adecuado y
+						<code>assertive</code>
+						interrumpe, así que debe reservarse para mensajes urgentes. Para avisos breves también existen
+						los
 						roles <code>status</code> y <code>alert</code>.</p>
 					<pre><code>&lt;p aria-live="polite"&gt;3 resultados&lt;/p&gt;</code></pre>
-					<p class="propiedad">Atributo: <code>aria-live</code>; no lo uses para anunciar cambios irrelevantes.</p>
+					<p class="propiedad">Atributo: <code>aria-live</code>; no lo uses para anunciar cambios
+						irrelevantes.</p>
 				</article>
 			</div>
 		</section>
@@ -1511,7 +1574,7 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 					<h3>Elegir teclado móvil: inputmode</h3>
 					<p><code>inputmode</code> sugiere qué teclado virtual mostrar, sin cambiar cómo se valida el campo.
 						Por ejemplo, <code>numeric</code> sugiere números y <code>email</code> un teclado cómodo para
-					direcciones. Si el dato tiene un tipo propio, elige primero el <code>type</code> adecuado.</p>
+						direcciones. Si el dato tiene un tipo propio, elige primero el <code>type</code> adecuado.</p>
 					<pre><code>&lt;input type="text" inputmode="numeric" name="codigo"&gt;</code></pre>
 					<p class="propiedad">Atributo de entrada: <code>inputmode</code></p>
 				</article>
@@ -1642,12 +1705,15 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 				<article class="concepto-css" data-palabras="async defer script javascript carga diferencia">
 					<h3>Cargar scripts: async y defer</h3>
 					<p><code>defer</code> descarga el archivo en paralelo y lo ejecuta cuando el HTML ya se ha leído,
-						manteniendo el orden de los scripts diferidos. <code>async</code> lo ejecuta tan pronto termina la
-						descarga y no garantiza el orden. Para muchos scripts de página, <code>defer</code> es más previsible.</p>
+						manteniendo el orden de los scripts diferidos. <code>async</code> lo ejecuta tan pronto termina
+						la
+						descarga y no garantiza el orden. Para muchos scripts de página, <code>defer</code> es más
+						previsible.</p>
 					<pre><code>&lt;script src="app.js" defer&gt;&lt;/script&gt;</code></pre>
 					<p class="propiedad">Atributos booleanos: <code>defer</code>, <code>async</code></p>
 				</article>
-				<article class="concepto-css" data-palabras="link preload precargar recurso fuente imagen rel performance">
+				<article class="concepto-css"
+					data-palabras="link preload precargar recurso fuente imagen rel performance">
 					<h3>Priorizar un recurso: preload</h3>
 					<p><code>rel="preload"</code> pide descargar pronto un recurso que la página necesitará enseguida,
 						como una fuente o imagen principal. Úsalo con moderación: precargar archivos innecesarios puede
