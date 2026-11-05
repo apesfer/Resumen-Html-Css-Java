@@ -13,7 +13,7 @@ Guía de HTML para principiantes.
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description"
-		content="Guía amplia, clara y buscable de HTML: elementos, atributos, formularios, medios y accesibilidad.">
+		content="Guía amplia, clara y buscable de HTML: elementos, atributos, formularios, medios, accesibilidad y plantillas.">
 	<title>Guía fácil de HTML</title>
 	<link rel="stylesheet" href="src/index.css">
 </head>
@@ -24,6 +24,7 @@ Guía de HTML para principiantes.
 			<a href="index.html" aria-current="page">HTML</a>
 			<a href="css.html">CSS</a>
 			<a href="java.html">Java</a>
+			<a href="js.html">JavaScript</a>
 			<a class="subir-inicio" href="#inicio" aria-label="Volver al principio" title="Volver al principio">↑</a>
 		</nav>
 		<p class="guia-etiqueta">Guía de consulta / HTML para principiantes</p>
@@ -57,6 +58,7 @@ Guía de HTML para principiantes.
 			<a href="#accesibilidad">Accesibilidad</a>
 			<a href="#atributos">Atributos y caracteres</a>
 			<a href="#integracion">CSS, JavaScript y validación</a>
+      <a href="#plantillas">Plantillas</a>
 		</nav>
 
 		<aside class="nota-css"><strong>La idea básica:</strong> HTML describe el contenido y su significado; CSS
@@ -197,7 +199,8 @@ Guía de HTML para principiantes.
 					<pre><code>&lt;input type="checkbox" checked&gt;
 &lt;button disabled&gt;No disponible&lt;/button&gt;</code></pre>
 					<p class="propiedad">Ejemplos: <code>checked</code>, <code>required</code>, <code>selected</code>,
-						<code>open</code></p>
+						<code>open</code>
+					</p>
 				</article>
 				<article class="concepto-css" data-palabras="metadatos robots indexar buscadores noindex follow">
 					<h3>Instrucciones para buscadores: robots</h3>
@@ -205,7 +208,8 @@ Guía de HTML para principiantes.
 						enlaces. No es un control de seguridad ni garantiza que todos los buscadores lo respeten.</p>
 					<pre><code>&lt;meta name="robots" content="index, follow"&gt;</code></pre>
 					<p class="propiedad">Elemento: <code>meta</code>; contenido frecuente: <code>noindex</code>,
-						<code>nofollow</code></p>
+						<code>nofollow</code>
+					</p>
 				</article>
 				<article class="concepto-css" data-palabras="color pestaña navegador theme color móvil">
 					<h3>Color de la interfaz del navegador</h3>
@@ -213,6 +217,42 @@ Guía de HTML para principiantes.
 						dispositivos, como la barra superior móvil.</p>
 					<pre><code>&lt;meta name="theme-color" content="#245b49"&gt;</code></pre>
 					<p class="propiedad">Metadato opcional dentro de <code>head</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="canonical link rel url principal duplicado seo buscadores">
+					<h3>Enlace canónico</h3>
+					<p><code>rel="canonical"</code> indica a los buscadores cuál es la dirección principal de una
+					página cuando el mismo contenido puede abrirse desde varias URLs.</p>
+					<pre><code>&lt;link rel="canonical" href="https://ejemplo.test/guia/html"&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>link</code>; relación: <code>canonical</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="manifest webmanifest pwa instalar aplicación icono nombre link rel">
+					<h3>Manifiesto de aplicación web</h3>
+					<p>Un archivo de manifiesto (JSON) describe el nombre, los iconos y los colores de una web que
+					puede instalarse como aplicación. Se enlaza desde <code>head</code>.</p>
+					<pre><code>&lt;link rel="manifest" href="manifest.webmanifest"&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>link</code>; relación: <code>manifest</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="color-scheme meta claro oscuro modo oscuro navegador formulario">
+					<h3>Esquema de color admitido</h3>
+					<p>El metadato <code>color-scheme</code> avisa al navegador de que la página admite modo claro
+					y oscuro, de modo que los controles y el fondo por defecto se adapten.</p>
+					<pre><code>&lt;meta name="color-scheme" content="light dark"&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>meta</code>; nombre: <code>color-scheme</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="head orden meta charset title viewport link script recomendado">
+					<h3>Orden recomendado en head</h3>
+					<p>Pon primero <code>charset</code> (dentro de los primeros 1024 bytes), después
+					<code>viewport</code>, el título y las hojas de estilo. Los scripts, mejor con
+					<code>defer</code> o al final, para no bloquear la carga.</p>
+					<pre><code>&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Mi página&lt;/title&gt;
+  &lt;meta name="description" content="Resumen breve"&gt;
+  &lt;link rel="stylesheet" href="estilos.css"&gt;
+  &lt;script src="app.js" defer&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+					<p class="propiedad">Un orden coherente facilita el mantenimiento y evita errores de codificación.</p>
 				</article>
 			</div>
 		</section>
@@ -362,6 +402,62 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 					<pre><code>&lt;p&gt;una-palabra-muy-larga&lt;wbr&gt;-que-puede-partirse&lt;/p&gt;</code></pre>
 					<p class="propiedad">Elemento vacío: <code>&lt;wbr&gt;</code></p>
 				</article>
+				<article class="concepto-css" data-palabras="pre preformateado espacios saltos línea código bloque ascii">
+					<h3>Texto preformateado: pre</h3>
+					<p><code>pre</code> conserva los espacios y los saltos de línea tal como están escritos y suele
+					mostrarse con letra monoespaciada. Para código, anida un <code>code</code> dentro.</p>
+					<pre><code>&lt;pre&gt;&lt;code&gt;function saludar() {
+  return "Hola";
+}&lt;/code&gt;&lt;/pre&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>pre</code>; combina bien con <code>code</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="dfn definición término definir primera aparición glosario">
+					<h3>Definir un término: dfn</h3>
+					<p><code>dfn</code> marca el término que se define en ese momento, normalmente la primera vez
+					que aparece en el texto.</p>
+					<pre><code>&lt;p&gt;Un &lt;dfn&gt;hipervínculo&lt;/dfn&gt; es un enlace
+que conecta dos recursos.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>dfn</code>; puede acompañarse de <code>abbr</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="cite obra título libro película referencia fuente cita">
+					<h3>Título de una obra: cite</h3>
+					<p><code>cite</code> marca el título de una obra (libro, película, artículo). No se usa para el
+					nombre de una persona.</p>
+					<pre><code>&lt;p&gt;Mi lectura favorita es &lt;cite&gt;Don Quijote de la Mancha&lt;/cite&gt;.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>cite</code>; en <code>blockquote</code> el atributo <code>cite</code> guarda una URL.</p>
+				</article>
+				<article class="concepto-css" data-palabras="ruby rt rp pronunciación furigana pinyin anotación caracteres">
+					<h3>Anotaciones de pronunciación: ruby</h3>
+					<p><code>ruby</code> muestra una pequeña anotación sobre un texto, habitual para indicar la
+					pronunciación en japonés o chino. <code>rt</code> contiene la anotación y <code>rp</code> el
+					respaldo para navegadores sin soporte.</p>
+					<pre><code>&lt;ruby&gt;漢&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;kan&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>ruby</code>, <code>rt</code>, <code>rp</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="bdi bdo bidireccional árabe hebreo dirección texto usuario nombre">
+					<h3>Dirección del texto aislada: bdi y bdo</h3>
+					<p><code>bdi</code> aísla un fragmento cuyo sentido de escritura se desconoce (por ejemplo, un
+					nombre escrito por el usuario). <code>bdo</code> fuerza una dirección concreta.</p>
+					<pre><code>&lt;p&gt;Usuario: &lt;bdi&gt;إيان&lt;/bdi&gt; ha comentado.&lt;/p&gt;
+&lt;p&gt;&lt;bdo dir="rtl"&gt;Texto al revés&lt;/bdo&gt;&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>bdi</code>, <code>bdo</code>; atributo: <code>dir</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="data value valor máquina código producto referencia">
+					<h3>Valor legible por máquinas: data</h3>
+					<p><code>data</code> asocia a un texto un valor que un programa puede leer, sin cambiar lo que
+					ve la persona. Para fechas y horas usa mejor <code>time</code>.</p>
+					<pre><code>&lt;p&gt;&lt;data value="8412"&gt;Café de la casa&lt;/data&gt;&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>data</code>; atributo: <code>value</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="s u tachado subrayado texto incorrecto precio anterior anotación">
+					<h3>Tachado y subrayado con significado: s y u</h3>
+					<p><code>s</code> marca contenido que ya no es correcto o relevante (como un precio anterior).
+					<code>u</code> marca texto con una anotación no textual, como una falta ortográfica
+					señalada. Para un simple efecto visual, usa CSS.</p>
+					<pre><code>&lt;p&gt;Precio: &lt;s&gt;30 €&lt;/s&gt; 24 €&lt;/p&gt;
+&lt;p&gt;Esto tiene una &lt;u&gt;falta&lt;/u&gt; marcada.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>s</code>, <code>u</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -461,6 +557,29 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 					<p class="propiedad">No pongas una lista secundaria suelta directamente entre elementos de la lista
 						principal.</p>
 				</article>
+				<article class="concepto-css" data-palabras="menu lista barra herramientas acciones li menú">
+					<h3>Menú de comandos: menu</h3>
+					<p><code>menu</code> es una lista sin orden pensada para conjuntos de acciones o barras de
+					herramientas. Funciona como <code>ul</code> y se lee como una lista.</p>
+					<pre><code>&lt;menu&gt;
+  &lt;li&gt;&lt;button type="button"&gt;Copiar&lt;/button&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;button type="button"&gt;Pegar&lt;/button&gt;&lt;/li&gt;
+&lt;/menu&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>menu</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="lista navegación nav ul enlaces menú principal estructura">
+					<h3>Listas de navegación</h3>
+					<p>Un menú de enlaces suele ser una lista dentro de <code>nav</code>: así los lectores de
+					pantalla anuncian cuántos enlaces hay y es fácil de estilizar con CSS.</p>
+					<pre><code>&lt;nav aria-label="Principal"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="/"&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/guias"&gt;Guías&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/contacto"&gt;Contacto&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+					<p class="propiedad">Estructura: <code>nav</code> > <code>ul</code> > <code>li</code> > <code>a</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -529,7 +648,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 					<p>Una ruta relativa, como <code>contacto.html</code> o <code>../index.html</code>, se calcula desde
 						la carpeta actual. Una URL absoluta incluye protocolo y dominio. Un fragmento con
 						<code>#id</code>
-						apunta a una parte concreta del documento.</p>
+						apunta a una parte concreta del documento.
+					</p>
 					<pre><code>&lt;a href="../contacto.html#formulario"&gt;Contactar&lt;/a&gt;</code></pre>
 					<p class="propiedad">Atributo de destino: <code>href</code></p>
 				</article>
@@ -603,6 +723,50 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 						describe su contenido en <code>alt</code>; si solo decora, usa <code>alt=""</code>.</p>
 					<pre><code>&lt;img src="icono.svg" alt="Buscar"&gt;</code></pre>
 					<p class="propiedad">Elemento: <code>img</code>; archivo vectorial: SVG</p>
+				</article>
+				<article class="concepto-css" data-palabras="enlace texto descriptivo haz clic aquí accesibilidad leer más contexto">
+					<h3>Enlaces con texto descriptivo</h3>
+					<p>El texto del enlace debe tener sentido por sí solo, porque muchas personas navegan por una
+					lista de enlaces. Evita «haz clic aquí» o «leer más» sin contexto.</p>
+					<pre><code>&lt;!-- Mejor --&gt;
+&lt;a href="guia.pdf"&gt;Descargar la guía de rutas (PDF, 2 MB)&lt;/a&gt;
+
+&lt;!-- Evitar --&gt;
+&lt;a href="guia.pdf"&gt;Haz clic aquí&lt;/a&gt;</code></pre>
+					<p class="propiedad">Un buen enlace dice adónde lleva.</p>
+				</article>
+				<article class="concepto-css" data-palabras="enlace botón a button diferencia navegar acción href cuándo usar">
+					<h3>Enlace o botón</h3>
+					<p>Usa <code>a</code> cuando la acción lleva a otra dirección o sección; usa
+					<code>button</code> cuando ejecuta una acción en la página (abrir un menú, enviar, borrar).
+					No uses un <code>a</code> sin <code>href</code> como botón.</p>
+					<pre><code>&lt;a href="/precios"&gt;Ver precios&lt;/a&gt;
+&lt;button type="button"&gt;Abrir menú&lt;/button&gt;</code></pre>
+					<p class="propiedad">Navegar: <code>a</code>; actuar: <code>button</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="nofollow ugc sponsored rel enlace seo patrocinado comentarios">
+					<h3>Valoración de enlaces: nofollow, ugc, sponsored</h3>
+					<p>El atributo <code>rel</code> puede indicar a los buscadores la naturaleza del enlace:
+					<code>sponsored</code> para publicidad, <code>ugc</code> para contenido generado por
+					usuarios y <code>nofollow</code> si no quieres dar tu respaldo.</p>
+					<pre><code>&lt;a href="https://tienda.test" rel="sponsored noopener"&gt;Tienda&lt;/a&gt;
+&lt;a href="https://foro.test/usuario" rel="ugc nofollow"&gt;Perfil&lt;/a&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>rel</code>; se pueden combinar valores separados por espacios.</p>
+				</article>
+				<article class="concepto-css" data-palabras="hreflang idioma enlace destino alternativa traducción lang">
+					<h3>Idioma del destino: hreflang</h3>
+					<p><code>hreflang</code> indica el idioma del recurso enlazado. Es informativo y ayuda a
+					identificar traducciones.</p>
+					<pre><code>&lt;a href="/en/guide" hreflang="en" lang="en"&gt;English version&lt;/a&gt;</code></pre>
+					<p class="propiedad">Atributos: <code>hreflang</code>, <code>lang</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="fetchpriority imagen principal lcp rendimiento high low prioridad">
+					<h3>Prioridad de carga: fetchpriority</h3>
+					<p><code>fetchpriority="high"</code> sugiere al navegador que descargue antes una imagen clave
+					(la principal de la página). No uses <code>loading="lazy"</code> en esa imagen.</p>
+					<pre><code>&lt;img src="portada.jpg" alt="Costa de Galicia"
+  width="1200" height="600" fetchpriority="high"&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>fetchpriority</code>; valores: <code>high</code>, <code>low</code>, <code>auto</code></p>
 				</article>
 			</div>
 		</section>
@@ -743,7 +907,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 					<p>En tablas complejas, un <code>th</code> puede llevar un <code>id</code> y una celda
 						<code>td</code>
 						puede indicar en <code>headers</code> los identificadores de todos sus encabezados relacionados,
-						separados por espacios. Para tablas simples suele bastar con <code>scope</code>.</p>
+						separados por espacios. Para tablas simples suele bastar con <code>scope</code>.
+					</p>
 					<pre><code>&lt;th id="ruta" scope="col"&gt;Ruta&lt;/th&gt;
 &lt;td headers="ruta dia"&gt;Monte Pindo&lt;/td&gt;</code></pre>
 					<p class="propiedad">Atributos: <code>headers</code> en celdas y <code>id</code> único en los
@@ -762,7 +927,8 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
   &lt;col span="2"&gt;
 &lt;/colgroup&gt;</code></pre>
 					<p class="propiedad">Elementos: <code>&lt;colgroup&gt;</code>, <code>&lt;col&gt;</code>; atributo:
-						<code>span</code></p>
+						<code>span</code>
+					</p>
 				</article>
 				<article class="concepto-css"
 					data-palabras="columna fila encabezado table scope colspan rowspan ejemplo horario">
@@ -1062,6 +1228,98 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 &lt;/form&gt;</code></pre>
 					<p class="propiedad">Atributo booleano: <code>novalidate</code></p>
 				</article>
+				<article class="concepto-css" data-palabras="input number min max step numérico cantidad rango incremento">
+					<h3>Números: number, min, max y step</h3>
+					<p><code>type="number"</code> muestra un campo numérico. <code>min</code>, <code>max</code> y
+					<code>step</code> limitan el rango y el incremento permitido; el navegador los valida al
+					enviar.</p>
+					<pre><code>&lt;label for="cantidad"&gt;Cantidad&lt;/label&gt;
+&lt;input type="number" id="cantidad" name="cantidad"
+  min="1" max="10" step="1" value="1"&gt;</code></pre>
+					<p class="propiedad">Atributos: <code>min</code>, <code>max</code>, <code>step</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="input date time datetime-local month week calendario fecha hora">
+					<h3>Fechas y horas: date, time y datetime-local</h3>
+					<p>Estos tipos abren un selector de fecha u hora adaptado al dispositivo. El valor enviado
+					siempre tiene un formato estándar (<code>2026-12-25</code>), sea cual sea cómo se muestre.</p>
+					<pre><code>&lt;label for="dia"&gt;Día&lt;/label&gt;
+&lt;input type="date" id="dia" name="dia" min="2026-11-05"&gt;
+
+&lt;label for="hora"&gt;Hora&lt;/label&gt;
+&lt;input type="time" id="hora" name="hora"&gt;
+
+&lt;input type="datetime-local" name="cita"&gt;</code></pre>
+					<p class="propiedad">Tipos: <code>date</code>, <code>time</code>, <code>datetime-local</code>, <code>month</code>, <code>week</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="input range color deslizador selector color slider output">
+					<h3>Deslizador y color: range y color</h3>
+					<p><code>type="range"</code> crea un deslizador con valores entre <code>min</code> y
+					<code>max</code>. <code>type="color"</code> abre un selector de color. Combínalos con
+					<code>output</code> para mostrar el valor.</p>
+					<pre><code>&lt;label for="volumen"&gt;Volumen&lt;/label&gt;
+&lt;input type="range" id="volumen" min="0" max="100" value="50"&gt;
+
+&lt;label for="tema"&gt;Color&lt;/label&gt;
+&lt;input type="color" id="tema" value="#245b78"&gt;</code></pre>
+					<p class="propiedad">Tipos: <code>range</code>, <code>color</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="input hidden oculto identificador token datos enviar formulario">
+					<h3>Campo oculto: hidden</h3>
+					<p>Un campo <code>hidden</code> envía un dato con el formulario sin mostrarlo. No es seguro
+					para información sensible: cualquiera puede verlo y modificarlo en el navegador.</p>
+					<pre><code>&lt;input type="hidden" name="idPedido" value="8412"&gt;</code></pre>
+					<p class="propiedad">Tipo: <code>hidden</code>; valida siempre en el servidor.</p>
+				</article>
+				<article class="concepto-css" data-palabras="input password contraseña autocomplete new-password current-password one-time-code">
+					<h3>Contraseñas y códigos: password y autocomplete</h3>
+					<p><code>type="password"</code> oculta lo que se escribe. Con <code>autocomplete</code> ayudas
+					a los gestores de contraseñas y a los móviles a rellenar el campo correctamente.</p>
+					<pre><code>&lt;input type="password" name="clave"
+  autocomplete="current-password"&gt;
+&lt;input type="password" name="nueva"
+  autocomplete="new-password" minlength="12"&gt;
+&lt;input name="codigo" inputmode="numeric"
+  autocomplete="one-time-code"&gt;</code></pre>
+					<p class="propiedad">Valores habituales: <code>current-password</code>, <code>new-password</code>, <code>one-time-code</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="formaction formmethod formtarget formnovalidate botón enviar varios destinos">
+					<h3>Enviar a otro destino: formaction y formmethod</h3>
+					<p>Un botón de envío puede sobrescribir el destino, el método o la validación del formulario
+					con <code>formaction</code>, <code>formmethod</code>, <code>formtarget</code> y
+					<code>formnovalidate</code>.</p>
+					<pre><code>&lt;form action="/guardar" method="post"&gt;
+  &lt;input name="titulo"&gt;
+  &lt;button&gt;Guardar&lt;/button&gt;
+  &lt;button formaction="/borrador" formnovalidate&gt;
+    Guardar borrador
+  &lt;/button&gt;
+&lt;/form&gt;</code></pre>
+					<p class="propiedad">Atributos de botón: <code>formaction</code>, <code>formmethod</code>, <code>formnovalidate</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="form atributo asociar control fuera formulario id input">
+					<h3>Un control fuera del formulario: atributo form</h3>
+					<p>El atributo <code>form</code> asocia un control con un formulario aunque no esté dentro de
+					él, usando el <code>id</code> del formulario.</p>
+					<pre><code>&lt;form id="buscador" action="/buscar"&gt;&lt;/form&gt;
+
+&lt;input type="search" name="q" form="buscador"&gt;
+&lt;button form="buscador"&gt;Buscar&lt;/button&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>form</code>, con el <code>id</code> del formulario</p>
+				</article>
+				<article class="concepto-css" data-palabras="input search buscador q type search limpiar campo búsqueda">
+					<h3>Buscar con search</h3>
+					<p><code>type="search"</code> indica un campo de búsqueda. Algunos navegadores añaden un botón
+					para borrar el texto. Envuélvelo en un elemento <code>search</code> o en un formulario con
+					<code>role="search"</code>.</p>
+					<pre><code>&lt;search&gt;
+  &lt;form action="/buscar"&gt;
+    &lt;label for="q"&gt;Buscar&lt;/label&gt;
+    &lt;input type="search" id="q" name="q"&gt;
+    &lt;button&gt;Buscar&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/search&gt;</code></pre>
+					<p class="propiedad">Tipo: <code>search</code>; elemento: <code>search</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -1201,6 +1459,36 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 &lt;main&gt;...&lt;/main&gt;</code></pre>
 					<p class="propiedad">Elige elementos semánticos antes de añadir roles ARIA.</p>
 				</article>
+				<article class="concepto-css" data-palabras="section article div diferencia semántico elegir contenedor cuándo usar">
+					<h3>Elegir entre section, article y div</h3>
+					<p>Usa <code>article</code> para contenido que tiene sentido por sí solo (una noticia, un
+					comentario), <code>section</code> para agrupar un tema con su propio título, y
+					<code>div</code> cuando solo necesitas un contenedor para estilos o scripts.</p>
+					<pre><code>&lt;article&gt;
+  &lt;h2&gt;Nueva guía&lt;/h2&gt;
+  &lt;section&gt;
+    &lt;h3&gt;Novedades&lt;/h3&gt;
+    &lt;p&gt;...&lt;/p&gt;
+  &lt;/section&gt;
+  &lt;div class="botones"&gt;...&lt;/div&gt;
+&lt;/article&gt;</code></pre>
+					<p class="propiedad">Pregunta clave: ¿tiene significado propio? Si no, <code>div</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="estructura página header nav main footer esquema plantilla semántica">
+					<h3>Esquema típico de una página</h3>
+					<p>Una página bien estructurada tiene una cabecera, un menú, un único <code>main</code>, y un
+					pie. Los lectores de pantalla usan estas regiones para saltar entre zonas.</p>
+					<pre><code>&lt;body&gt;
+  &lt;header&gt;...&lt;/header&gt;
+  &lt;nav&gt;...&lt;/nav&gt;
+  &lt;main&gt;
+    &lt;article&gt;...&lt;/article&gt;
+    &lt;aside&gt;...&lt;/aside&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;...&lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+					<p class="propiedad">Un único <code>main</code> visible por página.</p>
+				</article>
 			</div>
 		</section>
 
@@ -1315,6 +1603,58 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
   sandbox="allow-scripts" loading="lazy"&gt;&lt;/iframe&gt;</code></pre>
 					<p class="propiedad">Atributos: <code>sandbox</code>, <code>allow</code>, <code>loading</code></p>
 				</article>
+				<article class="concepto-css" data-palabras="autoplay muted loop playsinline video bucle silencio móvil reproducción">
+					<h3>Reproducción automática: autoplay, muted y loop</h3>
+					<p>Los navegadores suelen bloquear el sonido automático. Un vídeo decorativo puede reproducirse
+					solo si está silenciado. <code>loop</code> lo repite y <code>playsinline</code> evita que
+					iOS lo abra a pantalla completa.</p>
+					<pre><code>&lt;video src="fondo.mp4" autoplay muted loop playsinline
+  aria-hidden="true"&gt;&lt;/video&gt;</code></pre>
+					<p class="propiedad">Atributos: <code>autoplay</code>, <code>muted</code>, <code>loop</code>, <code>playsinline</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="preload none metadata auto audio video carga anticipada ancho banda">
+					<h3>Cuánto cargar: preload</h3>
+					<p>En <code>audio</code> y <code>video</code>, <code>preload</code> indica cuánto descargar
+					antes de que alguien pulse reproducir: <code>none</code> (nada), <code>metadata</code>
+					(duración y dimensiones) o <code>auto</code> (lo que el navegador decida).</p>
+					<pre><code>&lt;video controls preload="metadata" poster="portada.jpg"&gt;
+  &lt;source src="clase.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>preload</code>; valores: <code>none</code>, <code>metadata</code>, <code>auto</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="embed object pdf incrustar plugin recurso externo type data">
+					<h3>Contenido externo: embed y object</h3>
+					<p><code>embed</code> y <code>object</code> incrustan recursos externos, como un PDF o un SVG
+					interactivo. <code>object</code> permite contenido alternativo si no se puede mostrar.
+					Muchas veces es más claro ofrecer un enlace de descarga.</p>
+					<pre><code>&lt;object data="folleto.pdf" type="application/pdf"
+  width="600" height="800"&gt;
+  &lt;a href="folleto.pdf"&gt;Descargar el folleto (PDF)&lt;/a&gt;
+&lt;/object&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>object</code>, <code>embed</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="math mathml fórmula matemática mfrac msup mi mn mo ecuación">
+					<h3>Fórmulas matemáticas: MathML</h3>
+					<p>MathML describe fórmulas con etiquetas que el navegador puede dibujar y que las tecnologías
+					de apoyo pueden leer.</p>
+					<pre><code>&lt;math&gt;
+  &lt;mfrac&gt;
+    &lt;mi&gt;a&lt;/mi&gt;
+    &lt;mn&gt;2&lt;/mn&gt;
+  &lt;/mfrac&gt;
+  &lt;mo&gt;+&lt;/mo&gt;
+  &lt;msup&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;
+&lt;/math&gt;</code></pre>
+					<p class="propiedad">Elemento raíz: <code>math</code>; comunes: <code>mi</code>, <code>mn</code>, <code>mo</code>, <code>mfrac</code>, <code>msup</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="iframe loading lazy mapa vídeo youtube retrasar carga title">
+					<h3>Retrasar un iframe: loading lazy</h3>
+					<p><code>loading="lazy"</code> en un <code>iframe</code> retrasa su descarga hasta que está
+					cerca de la zona visible. Añade siempre un <code>title</code> que explique su contenido.</p>
+					<pre><code>&lt;iframe src="https://ejemplo.test/mapa" title="Mapa de la ruta"
+  loading="lazy" width="600" height="400"&gt;&lt;/iframe&gt;</code></pre>
+					<p class="propiedad">Atributos: <code>loading</code>, <code>title</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -1399,6 +1739,31 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 					<pre><code>&lt;button popovertarget="ayuda"&gt;Ayuda&lt;/button&gt;
 &lt;div id="ayuda" popover&gt;Texto de ayuda&lt;/div&gt;</code></pre>
 					<p class="propiedad">Atributos: <code>popover</code>, <code>popovertarget</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="details name acordeón exclusivo grupo summary faq abrir uno">
+					<h3>Acordeón exclusivo: details con name</h3>
+					<p>Varios <code>details</code> que comparten el mismo valor de <code>name</code> forman un
+					grupo: al abrir uno, el navegador cierra los demás.</p>
+					<pre><code>&lt;details name="faq" open&gt;
+  &lt;summary&gt;¿Qué es HTML?&lt;/summary&gt;
+  &lt;p&gt;Un lenguaje de marcado.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details name="faq"&gt;
+  &lt;summary&gt;¿Qué es CSS?&lt;/summary&gt;
+  &lt;p&gt;Un lenguaje de estilos.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+					<p class="propiedad">Atributos: <code>name</code> (grupo) y <code>open</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="inert desactivar zona foco interacción modal fondo bloquear">
+					<h3>Desactivar una zona: inert</h3>
+					<p>El atributo <code>inert</code> hace que un elemento y todo su contenido no puedan recibir
+					foco ni clics, y que las tecnologías de apoyo los ignoren. Es útil para bloquear el fondo
+					mientras se muestra un panel.</p>
+					<pre><code>&lt;main inert&gt;
+  &lt;!-- Contenido bloqueado --&gt;
+&lt;/main&gt;
+&lt;div role="dialog" aria-modal="true"&gt;...&lt;/div&gt;</code></pre>
+					<p class="propiedad">Atributo global: <code>inert</code></p>
 				</article>
 			</div>
 		</section>
@@ -1490,10 +1855,90 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 						<code>assertive</code>
 						interrumpe, así que debe reservarse para mensajes urgentes. Para avisos breves también existen
 						los
-						roles <code>status</code> y <code>alert</code>.</p>
+						roles <code>status</code> y <code>alert</code>.
+					</p>
 					<pre><code>&lt;p aria-live="polite"&gt;3 resultados&lt;/p&gt;</code></pre>
 					<p class="propiedad">Atributo: <code>aria-live</code>; no lo uses para anunciar cambios
 						irrelevantes.</p>
+				</article>
+				<article class="concepto-css" data-palabras="aria-expanded aria-controls menú desplegable acordeón estado abierto cerrado botón">
+					<h3>Indicar si algo está abierto: aria-expanded</h3>
+					<p>En un botón que muestra u oculta un panel, <code>aria-expanded</code> indica si está abierto
+					y <code>aria-controls</code> señala qué panel gobierna. Debes actualizar el valor con
+					JavaScript.</p>
+					<pre><code>&lt;button aria-expanded="false" aria-controls="menu"&gt;Menú&lt;/button&gt;
+&lt;ul id="menu" hidden&gt;...&lt;/ul&gt;</code></pre>
+					<p class="propiedad">Atributos: <code>aria-expanded</code>, <code>aria-controls</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="aria-current page enlace actual menú navegación activo">
+					<h3>Página actual: aria-current</h3>
+					<p><code>aria-current="page"</code> marca el enlace de la página donde estás. Los lectores de
+					pantalla lo anuncian y puedes usarlo como selector CSS.</p>
+					<pre><code>&lt;nav aria-label="Principal"&gt;
+  &lt;a href="/" aria-current="page"&gt;Inicio&lt;/a&gt;
+  &lt;a href="/guias"&gt;Guías&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>aria-current</code>; valores: <code>page</code>, <code>step</code>, <code>true</code>...</p>
+				</article>
+				<article class="concepto-css" data-palabras="aria-describedby descripción ayuda error campo formulario asociar texto">
+					<h3>Ayudas y errores asociados: aria-describedby</h3>
+					<p><code>aria-describedby</code> vincula un control con texto adicional (una ayuda o un error)
+					mediante su <code>id</code>. El lector lo anuncia después del nombre del campo.</p>
+					<pre><code>&lt;label for="clave"&gt;Contraseña&lt;/label&gt;
+&lt;input type="password" id="clave" aria-describedby="ayuda-clave"&gt;
+&lt;p id="ayuda-clave"&gt;Mínimo 12 caracteres.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>aria-describedby</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="aria-invalid error validación formulario mensaje aria-errormessage invalid">
+					<h3>Campos con error: aria-invalid</h3>
+					<p>Marca un campo con <code>aria-invalid="true"</code> cuando su valor no es válido y asocia el
+					mensaje de error con <code>aria-describedby</code>. El error debe explicar cómo corregirlo,
+					no basarse solo en un color.</p>
+					<pre><code>&lt;input id="correo" type="email" aria-invalid="true"
+  aria-describedby="error-correo"&gt;
+&lt;p id="error-correo"&gt;Escribe un correo con el formato nombre@dominio.es&lt;/p&gt;</code></pre>
+					<p class="propiedad">Atributos: <code>aria-invalid</code>, <code>aria-describedby</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="role alert status aria-live mensaje aviso confirmación error dinámico">
+					<h3>Mensajes importantes: role alert y status</h3>
+					<p><code>role="status"</code> anuncia mensajes de cortesía (confirmaciones) sin interrumpir;
+					<code>role="alert"</code> los anuncia de inmediato y debe reservarse para errores urgentes.</p>
+					<pre><code>&lt;p role="status"&gt;Cambios guardados&lt;/p&gt;
+&lt;p role="alert"&gt;No se pudo conectar con el servidor&lt;/p&gt;</code></pre>
+					<p class="propiedad">Roles: <code>status</code>, <code>alert</code>; el contenedor debe existir antes del mensaje.</p>
+				</article>
+				<article class="concepto-css" data-palabras="aria-disabled disabled botón deshabilitado foco accesible">
+					<h3>Deshabilitar o marcar como no disponible: aria-disabled</h3>
+					<p>El atributo <code>disabled</code> quita el control del orden de tabulación. Si quieres que
+					siga siendo localizable y puedas explicar por qué no está disponible, puedes usar
+					<code>aria-disabled="true"</code> y evitar la acción por código.</p>
+					<pre><code>&lt;button type="submit" aria-disabled="true"&gt;Enviar&lt;/button&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>aria-disabled</code>; no bloquea la acción por sí solo.</p>
+				</article>
+				<article class="concepto-css" data-palabras="tamaño botón táctil 44px foco visible outline accesibilidad móvil objetivo">
+					<h3>Zonas táctiles y foco visible</h3>
+					<p>Los botones y enlaces deben ser lo bastante grandes para pulsarse con el dedo (como
+					referencia, unos 44 px) y mostrar con claridad el foco de teclado. No elimines
+					<code>outline</code> sin ofrecer una alternativa.</p>
+					<pre><code>button, a.boton {
+  min-height: 44px;
+  min-width: 44px;
+}
+:focus-visible {
+  outline: 3px solid #bd573d;
+  outline-offset: 3px;
+}</code></pre>
+					<p class="propiedad">Recomendación: objetivos amplios y foco claro (CSS).</p>
+				</article>
+				<article class="concepto-css" data-palabras="color contraste información error icono texto daltonismo accesibilidad">
+					<h3>No depender solo del color</h3>
+					<p>Un estado (error, éxito, obligatorio) no debe indicarse únicamente con un color. Añade
+					texto, un icono o un símbolo, y comprueba el contraste con el fondo.</p>
+					<pre><code>&lt;p class="error"&gt;
+  &lt;span aria-hidden="true"&gt;⚠&lt;/span&gt;
+  Error: falta el correo electrónico.
+&lt;/p&gt;</code></pre>
+					<p class="propiedad">Contraste de texto recomendado: al menos 4,5:1.</p>
 				</article>
 			</div>
 		</section>
@@ -1627,6 +2072,45 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 &lt;br&gt;</code></pre>
 					<p class="propiedad">No escribas etiquetas de cierre para elementos vacíos HTML.</p>
 				</article>
+				<article class="concepto-css" data-palabras="draggable arrastrar soltar drag drop dragstart evento">
+					<h3>Elementos arrastrables: draggable</h3>
+					<p><code>draggable="true"</code> permite arrastrar un elemento. La lógica de soltar se programa
+					con los eventos de JavaScript (<code>dragstart</code>, <code>dragover</code>,
+					<code>drop</code>).</p>
+					<pre><code>&lt;li draggable="true"&gt;Tarea 1&lt;/li&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>draggable</code>; valores: <code>true</code>, <code>false</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="translate no traducir nombre marca código traductor">
+					<h3>Evitar la traducción automática: translate</h3>
+					<p><code>translate="no"</code> indica a los traductores automáticos que no traduzcan un
+					fragmento, como el nombre de una marca o un fragmento de código.</p>
+					<pre><code>&lt;p&gt;Visita &lt;span translate="no"&gt;GitHub&lt;/span&gt; para ver el código.&lt;/p&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>translate</code>; valores: <code>yes</code>, <code>no</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="accesskey atajo teclado tecla acceso conflicto">
+					<h3>Atajos de teclado: accesskey</h3>
+					<p><code>accesskey</code> asigna una tecla de atajo a un elemento. Su activación varía según
+					navegador y sistema, y puede chocar con los atajos de otras herramientas, así que se usa
+					poco.</p>
+					<pre><code>&lt;a href="#contenido" accesskey="s"&gt;Saltar al contenido&lt;/a&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>accesskey</code>; úsalo con precaución.</p>
+				</article>
+				<article class="concepto-css" data-palabras="enterkeyhint autocapitalize teclado móvil intro buscar enviar mayúsculas">
+					<h3>Teclado móvil: enterkeyhint y autocapitalize</h3>
+					<p><code>enterkeyhint</code> cambia la etiqueta de la tecla de intro (ir, buscar, enviar...).
+					<code>autocapitalize</code> controla si el teclado empieza en mayúsculas.</p>
+					<pre><code>&lt;input type="search" enterkeyhint="search"&gt;
+&lt;input name="usuario" autocapitalize="none" autocomplete="username"&gt;</code></pre>
+					<p class="propiedad">Atributos: <code>enterkeyhint</code>, <code>autocapitalize</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="style atributo inline estilos css directo elemento prioridad">
+					<h3>Estilos en línea: style</h3>
+					<p>El atributo <code>style</code> aplica CSS directamente a un elemento. Tiene mucha prioridad
+					y mezcla contenido con diseño, así que conviene reservarlo para casos puntuales, como un
+					valor calculado por JavaScript.</p>
+					<pre><code>&lt;p style="color: teal; font-weight: 700;"&gt;Texto&lt;/p&gt;</code></pre>
+					<p class="propiedad">Mejor práctica: usar clases y una hoja externa.</p>
+				</article>
 			</div>
 		</section>
 
@@ -1744,12 +2228,230 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 /* En CSS: .centrado { text-align: center; } */</code></pre>
 					<p class="propiedad">Preferir CSS moderno y elementos semánticos.</p>
 				</article>
+				<article class="concepto-css" data-palabras="preconnect dns-prefetch origen externo fuentes cdn rendimiento conexión">
+					<h3>Conexión anticipada: preconnect y dns-prefetch</h3>
+					<p><code>preconnect</code> abre cuanto antes la conexión con otro dominio que vas a usar
+					(fuentes, CDN). <code>dns-prefetch</code> solo resuelve su nombre y es más ligero.</p>
+					<pre><code>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link rel="dns-prefetch" href="https://cdn.ejemplo.test"&gt;</code></pre>
+					<p class="propiedad">Úsalos con pocos dominios importantes.</p>
+				</article>
+				<article class="concepto-css" data-palabras="prefetch modulepreload precarga siguiente página módulo javascript">
+					<h3>Cargar páginas y módulos: prefetch y modulepreload</h3>
+					<p><code>prefetch</code> descarga con baja prioridad un recurso que probablemente se necesitará
+					después (la página siguiente). <code>modulepreload</code> precarga un módulo de JavaScript y
+					sus dependencias.</p>
+					<pre><code>&lt;link rel="prefetch" href="/siguiente.html"&gt;
+&lt;link rel="modulepreload" href="/app/main.js"&gt;</code></pre>
+					<p class="propiedad">Relaciones: <code>prefetch</code>, <code>modulepreload</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="json-ld ld+json datos estructurados schema.org seo script resultado enriquecido">
+					<h3>Datos estructurados: JSON-LD</h3>
+					<p>Un bloque <code>script</code> de tipo <code>application/ld+json</code> describe el contenido
+					con vocabulario de schema.org, para que los buscadores lo entiendan mejor. No se muestra en
+					la página.</p>
+					<pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Guía de HTML",
+  "author": { "@type": "Person", "name": "Ana" }
+}
+&lt;/script&gt;</code></pre>
+					<p class="propiedad">Tipo de script: <code>application/ld+json</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="integrity sri subresource integrity hash crossorigin cdn seguridad sha384">
+					<h3>Verificar recursos externos: integrity</h3>
+					<p>Con <code>integrity</code> el navegador comprueba que un archivo cargado desde un CDN no ha
+					cambiado: si su hash no coincide, no lo ejecuta. Requiere <code>crossorigin</code>.</p>
+					<pre><code>&lt;script src="https://cdn.ejemplo.test/lib.js"
+  integrity="sha384-HASH_DEL_ARCHIVO"
+  crossorigin="anonymous"&gt;&lt;/script&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>integrity</code>; acompáñalo de <code>crossorigin</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="link media stylesheet print oscuro hoja estilos condicional imprimir">
+					<h3>CSS según el medio: media en link</h3>
+					<p>El atributo <code>media</code> de <code>link</code> carga una hoja solo cuando se cumple una
+					condición, como imprimir o cierto ancho de pantalla.</p>
+					<pre><code>&lt;link rel="stylesheet" href="base.css"&gt;
+&lt;link rel="stylesheet" href="imprimir.css" media="print"&gt;
+&lt;link rel="stylesheet" href="grande.css"
+  media="(min-width: 900px)"&gt;</code></pre>
+					<p class="propiedad">Atributo: <code>media</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="alternate hreflang idioma versión traducción seo link x-default">
+					<h3>Versiones en otros idiomas: alternate</h3>
+					<p><code>rel="alternate"</code> con <code>hreflang</code> informa a los buscadores de las
+					versiones de la misma página en otros idiomas. <code>x-default</code> es la versión por
+					defecto.</p>
+					<pre><code>&lt;link rel="alternate" hreflang="es" href="https://ejemplo.test/es/"&gt;
+&lt;link rel="alternate" hreflang="en" href="https://ejemplo.test/en/"&gt;
+&lt;link rel="alternate" hreflang="x-default" href="https://ejemplo.test/"&gt;</code></pre>
+					<p class="propiedad">Relación: <code>alternate</code>; atributo: <code>hreflang</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="type module import importmap módulo javascript esm">
+					<h3>Módulos y mapas de importación</h3>
+					<p>Con <code>type="module"</code> el navegador carga el script como un módulo de JavaScript
+					(diferido por defecto y con alcance propio). <code>importmap</code> define alias para las
+					rutas de importación.</p>
+					<pre><code>&lt;script type="importmap"&gt;
+{ "imports": { "utiles": "/js/utiles.js" } }
+&lt;/script&gt;
+&lt;script type="module"&gt;
+  import { saludar } from "utiles";
+  saludar();
+&lt;/script&gt;</code></pre>
+					<p class="propiedad">Tipos de script: <code>module</code>, <code>importmap</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="plantillas" data-categoria>
+			<div class="cabecera-categoria"><span>13</span>
+				<div>
+					<p>Piezas completas para copiar y adaptar</p>
+					<h2>Plantillas listas para usar</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="plantilla página completa base empezar documento html5 estructura">
+					<h3>Plantilla de página básica</h3>
+					<p>Un punto de partida completo: idioma, metadatos, estilos, enlace para saltar la navegación,
+					regiones semánticas y script diferido.</p>
+					<pre><code>&lt;!doctype html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;Título de la página&lt;/title&gt;
+  &lt;meta name="description" content="Resumen de la página"&gt;
+  &lt;link rel="stylesheet" href="estilos.css"&gt;
+  &lt;script src="app.js" defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a class="saltar" href="#contenido"&gt;Saltar al contenido&lt;/a&gt;
+  &lt;header&gt;&lt;h1&gt;Mi sitio&lt;/h1&gt;&lt;/header&gt;
+  &lt;nav aria-label="Principal"&gt;...&lt;/nav&gt;
+  &lt;main id="contenido"&gt;...&lt;/main&gt;
+  &lt;footer&gt;&lt;p&gt;&amp;copy; 2026 Mi sitio&lt;/p&gt;&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+					<p class="propiedad">Úsala como base y quita lo que no necesites.</p>
+				</article>
+				<article class="concepto-css" data-palabras="formulario contacto plantilla label email textarea checkbox enviar completo">
+					<h3>Formulario de contacto completo</h3>
+					<p>Un formulario sencillo y accesible: cada campo con su etiqueta, tipos y validaciones
+					adecuados, y un botón de envío claro.</p>
+					<pre><code>&lt;form action="/contacto" method="post"&gt;
+  &lt;p&gt;
+    &lt;label for="nombre"&gt;Nombre&lt;/label&gt;
+    &lt;input id="nombre" name="nombre" autocomplete="name" required&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;label for="correo"&gt;Correo&lt;/label&gt;
+    &lt;input id="correo" name="correo" type="email"
+      autocomplete="email" required&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;label for="mensaje"&gt;Mensaje&lt;/label&gt;
+    &lt;textarea id="mensaje" name="mensaje" rows="5"
+      maxlength="1000" required&gt;&lt;/textarea&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;input id="acepto" name="acepto" type="checkbox" required&gt;
+    &lt;label for="acepto"&gt;Acepto la política de privacidad&lt;/label&gt;
+  &lt;/p&gt;
+  &lt;button type="submit"&gt;Enviar mensaje&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>form</code>, <code>label</code>, <code>input</code>, <code>textarea</code>, <code>button</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="tarjeta card article figure imagen titulo texto enlace bloque noticia producto">
+					<h3>Tarjeta de contenido</h3>
+					<p>Una tarjeta que se entiende por sí sola es un <code>article</code> con su imagen, título,
+					resumen y enlace.</p>
+					<pre><code>&lt;article class="tarjeta"&gt;
+  &lt;figure&gt;
+    &lt;img src="ruta.jpg" alt="Sendero junto al mar"
+      width="600" height="400" loading="lazy"&gt;
+  &lt;/figure&gt;
+  &lt;h3&gt;Ruta de la costa&lt;/h3&gt;
+  &lt;p&gt;Un paseo de 8 km con vistas al Atlántico.&lt;/p&gt;
+  &lt;a href="/rutas/costa"&gt;Ver la ruta de la costa&lt;/a&gt;
+&lt;/article&gt;</code></pre>
+					<p class="propiedad">Estructura: <code>article</code> > <code>figure</code> + <code>h3</code> + <code>p</code> + <code>a</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="menú navegación nav plantilla ul aria-current responsive enlaces">
+					<h3>Menú de navegación principal</h3>
+					<p>Un menú de enlaces en forma de lista, con un nombre accesible y la página actual marcada.</p>
+					<pre><code>&lt;nav aria-label="Principal"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="/" aria-current="page"&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/guias"&gt;Guías&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/ejemplos"&gt;Ejemplos&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/contacto"&gt;Contacto&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+					<p class="propiedad">Si hay varios <code>nav</code>, dale a cada uno un <code>aria-label</code> distinto.</p>
+				</article>
+				<article class="concepto-css" data-palabras="faq preguntas frecuentes acordeón details summary plantilla">
+					<h3>Preguntas frecuentes desplegables</h3>
+					<p>Una sección de preguntas frecuentes, sin JavaScript, con <code>details</code> y
+					<code>summary</code>.</p>
+					<pre><code>&lt;section aria-labelledby="faq-titulo"&gt;
+  &lt;h2 id="faq-titulo"&gt;Preguntas frecuentes&lt;/h2&gt;
+  &lt;details name="faq"&gt;
+    &lt;summary&gt;¿Cómo empiezo?&lt;/summary&gt;
+    &lt;p&gt;Crea un archivo &lt;code&gt;index.html&lt;/code&gt; y ábrelo en el navegador.&lt;/p&gt;
+  &lt;/details&gt;
+  &lt;details name="faq"&gt;
+    &lt;summary&gt;¿Necesito instalar algo?&lt;/summary&gt;
+    &lt;p&gt;Solo un editor de texto y un navegador.&lt;/p&gt;
+  &lt;/details&gt;
+&lt;/section&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>details</code>, <code>summary</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="galería imágenes figure figcaption lista ul grid fotos plantilla">
+					<h3>Galería de imágenes</h3>
+					<p>Una lista de figuras, cada una con su imagen y su pie. Los estilos de cuadrícula se añaden
+					con CSS.</p>
+					<pre><code>&lt;ul class="galeria"&gt;
+  &lt;li&gt;
+    &lt;figure&gt;
+      &lt;img src="a.jpg" alt="Faro al atardecer" width="400" height="300"&gt;
+      &lt;figcaption&gt;Faro al atardecer&lt;/figcaption&gt;
+    &lt;/figure&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;figure&gt;
+      &lt;img src="b.jpg" alt="Playa con marea baja" width="400" height="300"&gt;
+      &lt;figcaption&gt;Marea baja&lt;/figcaption&gt;
+    &lt;/figure&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+					<p class="propiedad">Elementos: <code>figure</code>, <code>figcaption</code>, <code>img</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="artículo índice contenido enlaces internos secciones id nav plantilla blog">
+					<h3>Artículo con índice y secciones</h3>
+					<p>Un artículo largo con un índice que enlaza a cada sección mediante identificadores.</p>
+					<pre><code>&lt;article&gt;
+  &lt;h1&gt;Guía de rutas&lt;/h1&gt;
+  &lt;nav aria-label="Índice"&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href="#inicio"&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#consejos"&gt;Consejos&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/nav&gt;
+  &lt;section id="inicio"&gt;&lt;h2&gt;Inicio&lt;/h2&gt;&lt;p&gt;...&lt;/p&gt;&lt;/section&gt;
+  &lt;section id="consejos"&gt;&lt;h2&gt;Consejos&lt;/h2&gt;&lt;p&gt;...&lt;/p&gt;&lt;/section&gt;
+&lt;/article&gt;</code></pre>
+					<p class="propiedad">Cada sección enlazada necesita un <code>id</code> único.</p>
+				</article>
 			</div>
 		</section>
 
 		<section class="sin-resultados-css" id="sin-resultados-html" hidden>
 			<h2>No encuentro ese término</h2>
-			<p>Prueba con otra palabra, por ejemplo: título, enlace, formulario, imagen, tabla o accesibilidad.</p>
+			<p>Prueba con otra palabra, por ejemplo: título, enlace, formulario, imagen, tabla, accesibilidad o plantilla.</p>
 		</section>
 
 		<section class="regla-practica">
@@ -1765,6 +2467,7 @@ Presiona &lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;S&lt;/kbd&gt;.</code></pre>
 		<p>Guía de apoyo para aprender HTML semántico y accesible.</p>
 		<a href="css.html">Consultar la guía de CSS</a>
 		<a href="java.html">Consultar la guía de Java</a>
+		<a href="js.html">Consultar la guía de JavaScript</a>
 	</footer>
 
 	<script>

@@ -24,6 +24,7 @@ Guía de CSS para principiantes.
 			<a href="index.html">HTML</a>
 			<a href="css.html" aria-current="page">CSS</a>
 			<a href="java.html">Java</a>
+			<a href="js.html">JavaScript</a>
 			<a class="subir-inicio" href="#inicio" aria-label="Volver al principio" title="Volver al principio">↑</a>
 		</nav>
 		<p class="guia-etiqueta">Chuleta de consulta / edición para principiantes</p>
@@ -178,6 +179,60 @@ font-size: clamp(1rem, 2vw, 1.5rem);</code></pre>
 					<pre><code>:root { --acento: teal; }
 a { color: var(--acento, navy); }</code></pre>
 					<p class="propiedad">Funciones y sintaxis: <code>--nombre</code>, <code>var()</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="nesting anidar &amp; selector dentro regla css nativo sass">
+					<h3>Anidamiento de reglas</h3>
+					<p>CSS permite escribir reglas dentro de otras, sin necesidad de un preprocesador.
+					<code>&amp;</code> representa al selector padre. Agrupa los estilos de un componente y evita
+					repetir el nombre de la clase.</p>
+					<pre><code>.tarjeta {
+  padding: 1rem;
+
+  h3 { margin: 0; }
+
+  &amp;:hover { background: #f4f4f4; }
+
+  .destacada &amp; { border-color: gold; }
+}</code></pre>
+					<p class="propiedad">Símbolo: <code>&amp;</code>; disponible en los navegadores actuales.</p>
+				</article>
+				<article class="concepto-css" data-palabras="@property registrar variable tipo syntax inherits animar variable">
+					<h3>Propiedades personalizadas registradas: @property</h3>
+					<p><code>@property</code> declara una variable CSS con tipo, valor inicial y herencia. Gracias
+					al tipo, el navegador puede animarla (por ejemplo, un ángulo de un degradado).</p>
+					<pre><code>@property --angulo {
+  syntax: "&lt;angle&gt;";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.rueda {
+  background: conic-gradient(from var(--angulo), red, blue);
+  transition: --angulo .5s;
+}
+.rueda:hover { --angulo: 180deg; }</code></pre>
+					<p class="propiedad">At-rule: <code>@property</code>; descriptores: <code>syntax</code>, <code>inherits</code>, <code>initial-value</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="@scope ámbito zona limitar estilos componente to">
+					<h3>Limitar estilos a una zona: @scope</h3>
+					<p><code>@scope</code> aplica reglas solo dentro de una parte del documento y, si quieres, deja
+					fuera una zona interior con <code>to</code>. Evita nombres de clase muy largos para no pisar
+					otros estilos.</p>
+					<pre><code>@scope (.tarjeta) to (.contenido) {
+  h3 { color: teal; }
+  a  { text-decoration: none; }
+}</code></pre>
+					<p class="propiedad">Comprueba el soporte del navegador antes de usarlo en producción.</p>
+				</article>
+				<article class="concepto-css" data-palabras="all initial unset revert reset propiedades restablecer">
+					<h3>Restablecer todas las propiedades: all</h3>
+					<p><code>all</code> aplica un valor global (<code>initial</code>, <code>inherit</code>,
+					<code>unset</code>, <code>revert</code>) a todas las propiedades a la vez. Es útil para
+					aislar un componente de estilos heredados.</p>
+					<pre><code>.aislado {
+  all: revert;
+}</code></pre>
+					<p class="propiedad">Propiedad: <code>all</code>; no afecta a <code>direction</code> ni a <code>unicode-bidi</code>.</p>
 				</article>
 			</div>
 		</section>
@@ -417,6 +472,51 @@ text-underline-offset: 4px;</code></pre>
 text-indent: 2em;</code></pre>
 					<p class="propiedad">Propiedades: <code>text-align-last</code> y <code>text-indent</code></p>
 				</article>
+				<article class="concepto-css" data-palabras="text-wrap balance pretty viudas huérfanas titulares saltos línea">
+					<h3>Equilibrar títulos: text-wrap</h3>
+					<p><code>text-wrap: balance</code> reparte las palabras de un texto corto entre sus líneas para
+					evitar una última línea con una sola palabra. <code>pretty</code> mejora el reparto en
+					párrafos largos.</p>
+					<pre><code>h1, h2 { text-wrap: balance; }
+p { text-wrap: pretty; }</code></pre>
+					<p class="propiedad">Propiedad: <code>text-wrap</code>; valores: <code>balance</code>, <code>pretty</code>, <code>nowrap</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="line-clamp lineas recortar puntos suspensivos webkit-box resumen">
+					<h3>Limitar un texto a unas líneas</h3>
+					<p><code>line-clamp</code> corta el texto tras un número de líneas y añade puntos suspensivos.
+					Es útil en resúmenes o tarjetas.</p>
+					<pre><code>.resumen {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}</code></pre>
+					<p class="propiedad">Propiedades: <code>line-clamp</code>, <code>-webkit-line-clamp</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="font-variation-settings fuente variable wght ejes peso ancho opsz">
+					<h3>Fuentes variables</h3>
+					<p>Una fuente variable contiene muchos pesos o anchuras en un solo archivo. Se controlan con
+					<code>font-weight</code> y con <code>font-variation-settings</code> para los ejes
+					personalizados.</p>
+					<pre><code>@font-face {
+  font-family: "Inter";
+  src: url("inter-var.woff2") format("woff2");
+  font-weight: 100 900;
+}
+.titulo { font-weight: 650; }
+.ancho  { font-variation-settings: "wdth" 110; }</code></pre>
+					<p class="propiedad">Propiedad: <code>font-variation-settings</code>; el rango de pesos se declara en <code>@font-face</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="tab-size tabulador pre código espacios">
+					<h3>Ancho de las tabulaciones: tab-size</h3>
+					<p><code>tab-size</code> define cuántos espacios ocupa una tabulación en un bloque
+					<code>pre</code> o en texto con espacios conservados.</p>
+					<pre><code>pre {
+  tab-size: 2;
+}</code></pre>
+					<p class="propiedad">Propiedad: <code>tab-size</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -529,6 +629,65 @@ backdrop-filter: blur(8px);</code></pre>
 					<pre><code>background: url("fondo.jpg") center / cover no-repeat;</code></pre>
 					<p class="propiedad">Atajo: <code>background</code>. Cada capa puede tener su propia imagen,
 						posición, tamaño y repetición separados por comas.</p>
+				</article>
+				<article class="concepto-css" data-palabras="color-mix mezclar colores porcentaje oscurecer aclarar variable">
+					<h3>Mezclar colores: color-mix</h3>
+					<p><code>color-mix()</code> calcula un color mezclando otros dos en un porcentaje. Sirve para
+					generar variantes (más claras, más oscuras o semitransparentes) a partir de una sola
+					variable.</p>
+					<pre><code>:root { --marca: #245b78; }
+.boton:hover {
+  background: color-mix(in srgb, var(--marca) 80%, black);
+}
+.tenue {
+  background: color-mix(in srgb, var(--marca) 20%, transparent);
+}</code></pre>
+					<p class="propiedad">Función: <code>color-mix(in espacio, color1 %, color2)</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="oklch lch lab hwb espacios color moderno gamut perceptual">
+					<h3>Colores modernos: oklch</h3>
+					<p><code>oklch(luminosidad croma matiz)</code> describe el color de forma más intuitiva y
+					uniforme para el ojo que <code>hsl</code>, y permite colores más vivos en pantallas
+					modernas.</p>
+					<pre><code>.a { color: oklch(60% 0.15 250); }
+.b { color: oklch(60% 0.15 30); }
+.c { color: oklch(60% 0.15 140 / 50%); }</code></pre>
+					<p class="propiedad">Funciones: <code>oklch()</code>, <code>oklab()</code>, <code>lch()</code>, <code>hwb()</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="light-dark color-scheme modo oscuro tema claro función">
+					<h3>Modo claro y oscuro: light-dark</h3>
+					<p><code>light-dark(claro, oscuro)</code> elige un color según el esquema activo. Necesita
+					declarar <code>color-scheme</code> para que el navegador sepa qué modos admites.</p>
+					<pre><code>:root { color-scheme: light dark; }
+body {
+  background: light-dark(#fff, #14181a);
+  color: light-dark(#222, #eee);
+}</code></pre>
+					<p class="propiedad">Propiedades: <code>color-scheme</code> y la función <code>light-dark()</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="currentcolor color actual borde icono svg heredar">
+					<h3>El color actual: currentColor</h3>
+					<p><code>currentColor</code> toma el valor de la propiedad <code>color</code> del elemento.
+					Permite que bordes, sombras o iconos SVG sigan el color del texto sin repetirlo.</p>
+					<pre><code>.enlace {
+  color: teal;
+  border-bottom: 2px solid currentColor;
+}
+svg { fill: currentColor; }</code></pre>
+					<p class="propiedad">Palabra clave: <code>currentColor</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="mix-blend-mode blend multiply screen overlay mezcla capas background-blend-mode">
+					<h3>Mezcla de capas: mix-blend-mode</h3>
+					<p><code>mix-blend-mode</code> combina un elemento con lo que hay detrás
+					(<code>multiply</code>, <code>screen</code>, <code>overlay</code>...).
+					<code>background-blend-mode</code> hace lo mismo entre las capas de fondo de un elemento.</p>
+					<pre><code>.sello { mix-blend-mode: multiply; }
+
+.portada {
+  background: url("foto.jpg") center/cover, #245b78;
+  background-blend-mode: multiply;
+}</code></pre>
+					<p class="propiedad">Propiedades: <code>mix-blend-mode</code>, <code>background-blend-mode</code></p>
 				</article>
 			</div>
 		</section>
@@ -819,6 +978,43 @@ outline-offset: 3px;</code></pre>
 						<code>outline-style</code>, <code>outline-color</code>, <code>outline-offset</code>
 					</p>
 				</article>
+				<article class="concepto-css" data-palabras="scrollbar-width scrollbar-color scrollbar-gutter barra desplazamiento estilo scroll">
+					<h3>Barras de desplazamiento</h3>
+					<p><code>scrollbar-width</code> y <code>scrollbar-color</code> cambian el grosor y los colores
+					de la barra sin trucos específicos de cada navegador. <code>scrollbar-gutter</code> reserva
+					su espacio para que el contenido no se mueva.</p>
+					<pre><code>.panel {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #245b78 #e0ebee;
+  scrollbar-gutter: stable;
+}</code></pre>
+					<p class="propiedad">Propiedades: <code>scrollbar-width</code>, <code>scrollbar-color</code>, <code>scrollbar-gutter</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="shape-outside float forma circular texto rodear imagen shape-margin">
+					<h3>Texto alrededor de una forma: shape-outside</h3>
+					<p><code>shape-outside</code> hace que el texto rodee un float siguiendo una forma (círculo,
+					polígono o la transparencia de una imagen), en lugar de un rectángulo.</p>
+					<pre><code>.foto {
+  float: left;
+  width: 200px;
+  height: 200px;
+  shape-outside: circle(50%);
+  shape-margin: 1rem;
+  border-radius: 50%;
+}</code></pre>
+					<p class="propiedad">Propiedades: <code>shape-outside</code>, <code>shape-margin</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="image-rendering pixelated pixel art escalar imagen nitidez">
+					<h3>Imágenes pixeladas: image-rendering</h3>
+					<p><code>image-rendering</code> controla cómo se escala una imagen. Con <code>pixelated</code>
+					los píxeles se mantienen nítidos, útil para pixel art o códigos QR.</p>
+					<pre><code>.sprite {
+  width: 128px;
+  image-rendering: pixelated;
+}</code></pre>
+					<p class="propiedad">Propiedad: <code>image-rendering</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -1082,6 +1278,69 @@ inset: 0;</code></pre>
 					<p class="propiedad">Propiedades: <code>overscroll-behavior</code>,
 						<code>overscroll-behavior-x</code>, <code>overscroll-behavior-y</code>
 					</p>
+				</article>
+				<article class="concepto-css" data-palabras="subgrid grid filas columnas heredar alinear tarjetas anidada">
+					<h3>Subgrid</h3>
+					<p>Con <code>subgrid</code>, una cuadrícula interior reutiliza las filas o columnas de la
+					cuadrícula padre. Sirve para que partes internas de varias tarjetas (título, texto, botón)
+					queden alineadas entre sí.</p>
+					<pre><code>.lista {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.tarjeta {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+}</code></pre>
+					<p class="propiedad">Valores: <code>subgrid</code> en <code>grid-template-rows</code> o <code>grid-template-columns</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="place-items place-content place-self centrar grid atajo align justify">
+					<h3>Atajos de alineación: place-items y place-content</h3>
+					<p><code>place-items</code> combina <code>align-items</code> y <code>justify-items</code>;
+					<code>place-content</code> y <code>place-self</code> hacen lo mismo con sus equivalentes.
+					<code>display: grid; place-items: center</code> es la forma más corta de centrar.</p>
+					<pre><code>.centrado {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}</code></pre>
+					<p class="propiedad">Atajos: <code>place-items</code>, <code>place-content</code>, <code>place-self</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="cqw cqh cqi cqb container units unidades contenedor container-type">
+					<h3>Medidas relativas al contenedor: cqw</h3>
+					<p>Dentro de un contenedor con <code>container-type</code>, las unidades <code>cqw</code>,
+					<code>cqi</code>... valen un 1 % del tamaño de ese contenedor, no de la ventana.</p>
+					<pre><code>.zona { container-type: inline-size; }
+.zona h2 {
+  font-size: clamp(1rem, 6cqi, 2.5rem);
+}</code></pre>
+					<p class="propiedad">Unidades: <code>cqw</code>, <code>cqh</code>, <code>cqi</code>, <code>cqb</code>, <code>cqmin</code>, <code>cqmax</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="anchor positioning anchor-name position-anchor tooltip popover menú anclar">
+					<h3>Posición anclada a otro elemento</h3>
+					<p>El posicionamiento por ancla coloca un elemento (tooltip, menú) junto a otro sin JavaScript.
+					El elemento de referencia recibe un <code>anchor-name</code>; el otro lo usa para situarse.</p>
+					<pre><code>.boton { anchor-name: --boton; }
+.aviso {
+  position: fixed;
+  position-anchor: --boton;
+  top: anchor(bottom);
+  left: anchor(left);
+}</code></pre>
+					<p class="propiedad">Soporte reciente: comprueba la compatibilidad antes de usarlo.</p>
+				</article>
+				<article class="concepto-css" data-palabras="field-sizing content textarea autoajustar altura campo formulario">
+					<h3>Altura que se ajusta al contenido: field-sizing</h3>
+					<p><code>field-sizing: content</code> hace que un <code>textarea</code> o un <code>input</code>
+					crezca según lo que se escribe, sin JavaScript.</p>
+					<pre><code>textarea {
+  field-sizing: content;
+  min-height: 3lh;
+  max-height: 12lh;
+}</code></pre>
+					<p class="propiedad">Soporte limitado: úsalo como mejora progresiva.</p>
+				</article>
 			</div>
 		</section>
 
@@ -1239,6 +1498,49 @@ li::marker { color: tomato; }</code></pre>
 						<code>::first-letter</code>, <code>::first-line</code>
 					</p>
 				</article>
+				<article class="concepto-css" data-palabras="target ancla fragmento hash resaltar sección :target-within">
+					<h3>Elemento al que apunta el enlace: :target</h3>
+					<p><code>:target</code> selecciona el elemento cuyo <code>id</code> coincide con el fragmento
+					de la URL (<code>#seccion</code>). Permite resaltar la sección a la que se ha saltado.</p>
+					<pre><code>:target {
+  outline: 3px solid gold;
+  scroll-margin-top: 1rem;
+}</code></pre>
+					<p class="propiedad">Pseudoclase: <code>:target</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="empty first-child last-child only-child vacío primero último hijo">
+					<h3>Elementos vacíos y primer o último hijo</h3>
+					<p><code>:empty</code> selecciona elementos sin contenido; <code>:first-child</code>,
+					<code>:last-child</code> y <code>:only-child</code> seleccionan según su posición entre
+					hermanos.</p>
+					<pre><code>p:empty { display: none; }
+li:first-child { font-weight: 700; }
+li:last-child  { border-bottom: 0; }</code></pre>
+					<p class="propiedad">Pseudoclases: <code>:empty</code>, <code>:first-child</code>, <code>:last-child</code>, <code>:only-child</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="checked disabled required optional valid invalid user-invalid placeholder-shown read-only formulario estado">
+					<h3>Estados de formularios</h3>
+					<p>Hay pseudoclases para estilizar campos según su estado: <code>:checked</code>,
+					<code>:disabled</code>, <code>:required</code>, <code>:placeholder-shown</code>,
+					<code>:valid</code> e <code>:invalid</code>. <code>:user-invalid</code> solo se aplica tras
+					interactuar, evitando mostrar errores antes de tiempo.</p>
+					<pre><code>input:required { border-left: 3px solid orange; }
+input:user-invalid { border-color: crimson; }
+input:disabled { opacity: .5; }
+input:checked + label { font-weight: 700; }</code></pre>
+					<p class="propiedad">Pseudoclases: <code>:checked</code>, <code>:disabled</code>, <code>:invalid</code>, <code>:user-invalid</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="nesting &amp; combinar selector hijo hermano composición anidado variante">
+					<h3>Variantes con el selector &amp;</h3>
+					<p>Con el anidamiento, <code>&amp;</code> puede ir antes, después o dentro de un selector para
+					crear variantes sin repetir el nombre de la clase.</p>
+					<pre><code>.boton {
+  &amp;.grande { padding: 1rem 2rem; }
+  &amp;:not(:disabled):hover { filter: brightness(1.1); }
+  &amp; + &amp; { margin-left: .5rem; }
+}</code></pre>
+					<p class="propiedad"><code>&amp;</code> equivale al selector exterior.</p>
+				</article>
 			</div>
 		</section>
 
@@ -1373,6 +1675,51 @@ pointer-events: none;</code></pre>
 					<pre><code>.boton-icono { user-select: none; }</code></pre>
 					<p class="propiedad">Propiedad: <code>user-select</code></p>
 				</article>
+				<article class="concepto-css" data-palabras="@media hover pointer any-hover táctil ratón dispositivo">
+					<h3>Efectos solo con ratón: hover</h3>
+					<p><code>@media (hover: hover)</code> se cumple cuando el dispositivo principal puede pasar el
+					cursor. Así evitas efectos que en pantallas táctiles se quedan «pegados».</p>
+					<pre><code>@media (hover: hover) {
+  .tarjeta:hover { transform: translateY(-4px); }
+}
+@media (pointer: coarse) {
+  .boton { min-height: 44px; }
+}</code></pre>
+					<p class="propiedad">Características: <code>hover</code>, <code>pointer</code>, <code>any-hover</code>, <code>any-pointer</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="starting-style entrada animar display none transition-behavior allow-discrete popover dialog">
+					<h3>Animar la aparición: @starting-style</h3>
+					<p><code>@starting-style</code> define el estado inicial de un elemento recién mostrado, de
+					modo que una transición pueda animar su entrada. Con <code>transition-behavior:
+					allow-discrete</code> también se anima el cambio de <code>display</code>.</p>
+					<pre><code>dialog[open] {
+  opacity: 1;
+  transition: opacity .3s, display .3s allow-discrete;
+}
+@starting-style {
+  dialog[open] { opacity: 0; }
+}
+dialog { opacity: 0; }</code></pre>
+					<p class="propiedad">Útil con <code>dialog</code>, <code>popover</code> y elementos que aparecen al cambiar <code>display</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="view-transition startViewTransition transición vista cambio página animar estado">
+					<h3>Transiciones entre páginas o estados: view transitions</h3>
+					<p>Las transiciones de vista animan el cambio entre dos estados del documento. El navegador
+					captura el estado anterior y el nuevo, y los funde; se personaliza con pseudoelementos.</p>
+					<pre><code>@view-transition { navigation: auto; }
+
+::view-transition-old(root) { animation: salir .3s; }
+::view-transition-new(root) { animation: entrar .3s; }</code></pre>
+					<p class="propiedad">Compatibilidad variable según el tipo (misma página o entre páginas).</p>
+				</article>
+				<article class="concepto-css" data-palabras="will-change rendimiento optimizar animación gpu capa transform">
+					<h3>Avisar de cambios: will-change</h3>
+					<p><code>will-change</code> anuncia al navegador qué propiedad va a cambiar para que se
+					prepare. Úsalo solo cuando detectes un problema real y quítalo al terminar: abusar de él
+					consume memoria.</p>
+					<pre><code>.menu { will-change: transform; }</code></pre>
+					<p class="propiedad">Propiedad: <code>will-change</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -1503,6 +1850,41 @@ pointer-events: none;</code></pre>
 					<pre><code>.widget { contain: content; }</code></pre>
 					<p class="propiedad">Propiedades: <code>contain</code>, <code>container</code></p>
 				</article>
+				<article class="concepto-css" data-palabras="env safe-area-inset viewport-fit cover notch móvil iphone">
+					<h3>Zonas seguras de pantallas con muescas</h3>
+					<p>En móviles con muescas o barras del sistema, <code>env(safe-area-inset-*)</code> indica
+					cuánto espacio dejar para no tapar el contenido. Requiere <code>viewport-fit=cover</code> en
+					el meta viewport.</p>
+					<pre><code>&lt;meta name="viewport"
+  content="width=device-width, initial-scale=1, viewport-fit=cover"&gt;
+
+.barra {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}</code></pre>
+					<p class="propiedad">Función: <code>env()</code>; valores: <code>safe-area-inset-top|right|bottom|left</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="media query rango width &gt;= sintaxis moderna min-width max-width">
+					<h3>Rangos en media queries</h3>
+					<p>Las consultas de medios admiten operadores de comparación, más legibles que
+					<code>min-width</code> y <code>max-width</code>.</p>
+					<pre><code>@media (width &gt;= 768px) { ... }
+@media (400px &lt;= width &lt;= 900px) { ... }
+@media (orientation: landscape) { ... }</code></pre>
+					<p class="propiedad">Operadores: <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>=</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="prefers-contrast forced-colors alto contraste accesibilidad windows">
+					<h3>Contraste alto y colores forzados</h3>
+					<p><code>prefers-contrast</code> detecta si se prefiere más contraste;
+					<code>forced-colors</code> se activa cuando el sistema impone su paleta (modo de alto
+					contraste de Windows). Conviene probar que bordes y estados siguen siendo visibles.</p>
+					<pre><code>@media (prefers-contrast: more) {
+  .tarjeta { border: 2px solid; }
+}
+@media (forced-colors: active) {
+  .boton { border: 1px solid ButtonText; }
+}</code></pre>
+					<p class="propiedad">Características: <code>prefers-contrast</code>, <code>forced-colors</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -1624,6 +2006,69 @@ animation-fill-mode: both;</code></pre>
 -webkit-tap-highlight-color: transparent;</code></pre>
 					<p class="propiedad">Prefijo de navegador: <code>-webkit-</code></p>
 				</article>
+				<article class="concepto-css" data-palabras="translate rotate scale propiedades individuales transform independiente animar">
+					<h3>Transformaciones individuales</h3>
+					<p><code>translate</code>, <code>rotate</code> y <code>scale</code> son propiedades
+					independientes: puedes cambiar una sin reescribir las demás, como ocurría con
+					<code>transform</code>.</p>
+					<pre><code>.icono {
+  translate: 10px 0;
+  rotate: 15deg;
+  scale: 1.2;
+  transition: rotate .3s;
+}
+.icono:hover { rotate: 90deg; }</code></pre>
+					<p class="propiedad">Propiedades: <code>translate</code>, <code>rotate</code>, <code>scale</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="3d perspective rotateY transform-style preserve-3d backface-visibility tarjeta girar">
+					<h3>Efectos en tres dimensiones</h3>
+					<p><code>perspective</code> da profundidad a los elementos hijos. Con <code>transform-style:
+					preserve-3d</code> y <code>backface-visibility</code> se pueden construir tarjetas que
+					giran.</p>
+					<pre><code>.escena { perspective: 800px; }
+.carta {
+  transform-style: preserve-3d;
+  transition: transform .6s;
+}
+.carta:hover { transform: rotateY(180deg); }
+.cara { backface-visibility: hidden; }</code></pre>
+					<p class="propiedad">Propiedades: <code>perspective</code>, <code>transform-style</code>, <code>backface-visibility</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="linear easing rebote muelle curva animación funciones temporización cubic-bezier">
+					<h3>Curvas de animación personalizadas: linear()</h3>
+					<p>La función <code>linear()</code> define una curva de velocidad con varios puntos, lo que
+					permite efectos como rebotes o muelles que no se logran con <code>cubic-bezier()</code>.</p>
+					<pre><code>.pelota {
+  transition: translate .8s
+    linear(0, 0.6 20%, 1 40%, 0.85 55%, 1 70%, 0.95 85%, 1);
+}</code></pre>
+					<p class="propiedad">Funciones: <code>linear()</code>, <code>cubic-bezier()</code>, <code>steps()</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="offset-path offset-distance motion path recorrido animar curva trayectoria">
+					<h3>Mover por un recorrido: offset-path</h3>
+					<p><code>offset-path</code> define un trayecto (por ejemplo, una curva) y
+					<code>offset-distance</code> indica en qué punto está el elemento, de 0 % a 100 %.
+					Animándolo se logra un movimiento a lo largo de la línea.</p>
+					<pre><code>.avion {
+  offset-path: path("M0 0 C 100 0, 100 100, 200 100");
+  animation: viaje 3s linear infinite;
+}
+@keyframes viaje {
+  to { offset-distance: 100%; }
+}</code></pre>
+					<p class="propiedad">Propiedades: <code>offset-path</code>, <code>offset-distance</code>, <code>offset-rotate</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="content-visibility auto rendimiento contain-intrinsic-size renderizado secciones largas">
+					<h3>No dibujar lo que no se ve: content-visibility</h3>
+					<p><code>content-visibility: auto</code> evita calcular y pintar secciones que están fuera de
+					pantalla. <code>contain-intrinsic-size</code> reserva un tamaño aproximado para que la barra
+					de desplazamiento no salte.</p>
+					<pre><code>.seccion-larga {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}</code></pre>
+					<p class="propiedad">Propiedades: <code>content-visibility</code>, <code>contain-intrinsic-size</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -1644,6 +2089,7 @@ animation-fill-mode: both;</code></pre>
 	<footer class="pie-guia">
 		<p>Guía de apoyo basada en los ejercicios del espacio de trabajo.</p>
 		<a href="java.html">Consultar la guía de Java</a>
+		<a href="js.html">Consultar la guía de JavaScript</a>
 	</footer>
 
 	<script>

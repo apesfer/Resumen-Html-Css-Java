@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!--
+Guía de JavaScript para principiantes.
+Explica el lenguaje, el DOM, la asincronía y los patrones más habituales con ejemplos.
+Autor: apesfer
+Fecha: 05/11/2026
+-->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		content="Guía de JavaScript para principiantes: variables, funciones, arrays, objetos, DOM, eventos, fetch, módulos y ejemplos.">
+	<title>Guía fácil de JavaScript</title>
+	<link rel="stylesheet" href="src/css.css">
+	<link rel="stylesheet" href="src/js.css">
+</head>
+
+<body id="inicio" class="guia-css guia-js">
+	<header class="guia-portada">
+		<nav class="mini-nav-guias" aria-label="Cambiar entre guías">
+			<a href="index.html">HTML</a>
+			<a href="css.html">CSS</a>
+			<a href="java.html">Java</a>
+			<a href="js.html" aria-current="page">JavaScript</a>
+			<a class="subir-inicio" href="#inicio" aria-label="Volver al principio" title="Volver al principio">↑</a>
+		</nav>
+		<p class="guia-etiqueta">Guía de consulta / JavaScript para principiantes</p>
+		<h1>JavaScript, explicado <em>paso a paso.</em></h1>
+		<p class="guia-bajada">Aprende a dar vida a tus páginas: datos, funciones, listas, eventos y peticiones.
+			Busca por concepto, método o fragmento de código.</p>
+		<form class="buscador-css" role="search" onsubmit="return false">
+			<label for="buscar-js">¿Qué quieres aprender o encontrar?</label>
+			<div class="campo-busqueda">
+				<span aria-hidden="true">⌕</span>
+				<input id="buscar-js" type="search" placeholder="Prueba: map, fetch, evento, clase, async..."
+					autocomplete="off">
+				<button id="limpiar-js" type="button" aria-label="Limpiar búsqueda"
+					title="Limpiar búsqueda">×</button>
+			</div>
+			<p id="resultado-js" aria-live="polite">Cargando conceptos...</p>
+		</form>
+	</header>
+
+	<main class="guia-contenido">
+		<nav class="atajos-css" aria-label="Categorías de JavaScript">
+			<a href="#fundamentos">Fundamentos</a>
+			<a href="#variables">Variables y tipos</a>
+			<a href="#operadores">Operadores</a>
+			<a href="#control">Condiciones y bucles</a>
+			<a href="#funciones">Funciones</a>
+			<a href="#arrays">Arrays</a>
+			<a href="#objetos">Objetos y colecciones</a>
+			<a href="#texto">Texto, números y fechas</a>
+			<a href="#clases">Clases</a>
+			<a href="#dom">DOM y eventos</a>
+			<a href="#asincrono">Asincronía y red</a>
+			<a href="#modulos">Módulos y APIs del navegador</a>
+			<a href="#errores">Errores y depuración</a>
+			<a href="#ejemplos">Ejemplos de uso frecuente</a>
+		</nav>
+
+		<aside class="nota-css"><strong>La idea básica:</strong> HTML da estructura a la página, CSS le da aspecto y
+			JavaScript le da comportamiento. Un programa guarda datos en <code>const</code> y <code>let</code>, los
+			organiza en arrays y objetos, los transforma con funciones y reacciona a lo que hace la persona mediante
+			eventos. JavaScript distingue entre mayúsculas y minúsculas y no tiene relación con Java más allá del
+			nombre.</aside>
+
+		<section class="categoria-css" id="fundamentos" data-categoria>
+			<div class="cabecera-categoria"><span>00</span>
+				<div>
+					<p>Preparar y entender un programa</p>
+					<h2>Fundamentos</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="script html defer src incluir enlazar archivo js página">
+					<h3>Añadir JavaScript a una página</h3>
+					<p>El código se incluye con la etiqueta <code>script</code>. Lo habitual es un archivo externo
+					con <code>defer</code>, que espera a que el HTML esté leído antes de ejecutarse, de modo que
+					ya puedes acceder a los elementos de la página.</p>
+					<pre><code>&lt;script src="app.js" defer&gt;&lt;/script&gt;</code></pre>
+					<p class="propiedad">Elemento: <code>&lt;script&gt;</code>; atributos: <code>src</code>, <code>defer</code>, <code>type="module"</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="console log consola depurar imprimir mostrar mensaje herramientas desarrollador">
+					<h3>Mostrar mensajes: console.log</h3>
+					<p><code>console.log</code> escribe un valor en la consola del navegador (F12 → Consola). Es la
+					forma más rápida de comprobar qué contiene una variable. Acepta varios valores a la vez.</p>
+					<pre><code>console.log("Hola, mundo");
+console.log("Total:", 3 + 4);
+console.warn("Aviso");
+console.error("Error");</code></pre>
+					<p class="propiedad">Variantes: <code>log</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>table</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="comentarios // /* */ documentar notas código">
+					<h3>Comentarios</h3>
+					<p>Los comentarios de una línea empiezan con <code>//</code>; los de varias líneas van entre
+					<code>/*</code> y <code>*/</code>. El navegador los ignora.</p>
+					<pre><code>// Comentario de una línea
+
+/* Comentario
+   de varias líneas */</code></pre>
+					<p class="propiedad">Comenta el porqué de una decisión, no lo que ya dice el código.</p>
+				</article>
+				<article class="concepto-css" data-palabras="node nodejs terminal ejecutar servidor npm consola">
+					<h3>Ejecutar JavaScript fuera del navegador: Node.js</h3>
+					<p>Node.js permite ejecutar JavaScript en tu ordenador, sin navegador. Es la base de muchas
+					herramientas de desarrollo y de servidores.</p>
+					<pre><code>node --version
+node programa.js</code></pre>
+					<p class="propiedad">Con Node no existen <code>document</code> ni <code>window</code>: son del navegador.</p>
+				</article>
+				<article class="concepto-css" data-palabras="sintaxis punto y coma mayúsculas minúsculas camelCase instrucciones identificadores">
+					<h3>Sintaxis básica</h3>
+					<p>JavaScript distingue mayúsculas de minúsculas (<code>nombre</code> y <code>Nombre</code> son
+					distintos). El punto y coma al final de cada instrucción es opcional pero recomendable. Los
+					nombres se escriben en camelCase.</p>
+					<pre><code>let precioFinal = 10;
+let PrecioFinal = 20;   // otra variable distinta</code></pre>
+					<p class="propiedad">Los nombres no pueden empezar por un número ni ser palabras reservadas.</p>
+				</article>
+				<article class="concepto-css" data-palabras="use strict estricto modo errores silenciosos módulos">
+					<h3>Modo estricto</h3>
+					<p>El modo estricto convierte errores silenciosos en errores visibles (por ejemplo, usar una
+					variable sin declarar). Los módulos y las clases ya lo usan por defecto.</p>
+					<pre><code>"use strict";
+nombre = "Ana";   // ReferenceError: no se ha declarado</code></pre>
+					<p class="propiedad">Se activa con la cadena <code>"use strict"</code> al inicio del archivo o función.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="variables" data-categoria>
+			<div class="cabecera-categoria"><span>01</span>
+				<div>
+					<p>Guardar y convertir datos</p>
+					<h2>Variables y tipos</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="let const variable constante declarar reasignar bloque">
+					<h3>Declarar con let y const</h3>
+					<p><code>let</code> declara una variable cuyo valor puede cambiar; <code>const</code> una que
+					no se puede reasignar. Usa <code>const</code> por defecto y <code>let</code> solo cuando
+					necesites cambiar el valor.</p>
+					<pre><code>let contador = 0;
+contador = contador + 1;
+
+const IVA = 0.21;
+// IVA = 0.1;   // TypeError</code></pre>
+					<p class="propiedad">Un objeto <code>const</code> no se puede reasignar, pero sí modificar por dentro.</p>
+				</article>
+				<article class="concepto-css" data-palabras="var hoisting elevación ámbito función let diferencia antiguo">
+					<h3>Por qué evitar var</h3>
+					<p><code>var</code> es la forma antigua: tiene ámbito de función (no de bloque) y se «eleva» al
+					inicio, lo que causa errores difíciles de ver. En código moderno se usa <code>let</code> y
+					<code>const</code>.</p>
+					<pre><code>if (true) {
+  var a = 1;
+  let b = 2;
+}
+console.log(a);   // 1  (se ve fuera del bloque)
+// console.log(b); // ReferenceError</code></pre>
+					<p class="propiedad">Preferir: <code>const</code> y <code>let</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="tipos string number boolean undefined null bigint symbol object primitivos">
+					<h3>Tipos de datos</h3>
+					<p>Los tipos primitivos son <code>string</code>, <code>number</code>, <code>boolean</code>,
+					<code>undefined</code>, <code>null</code>, <code>bigint</code> y <code>symbol</code>. Todo
+					lo demás (arrays, funciones, objetos) es un objeto.</p>
+					<pre><code>const texto = "Hola";
+const numero = 42;
+const decimal = 3.14;
+const activo = true;
+let sinValor;          // undefined
+const vacio = null;</code></pre>
+					<p class="propiedad">JavaScript tiene un único tipo numérico para enteros y decimales.</p>
+				</article>
+				<article class="concepto-css" data-palabras="typeof tipo comprobar array isArray null object">
+					<h3>Comprobar el tipo: typeof</h3>
+					<p><code>typeof</code> devuelve el tipo de un valor como texto. Tiene dos rarezas: <code>typeof
+					null</code> es <code>"object"</code> y los arrays también son <code>"object"</code>; para
+					ellos usa <code>Array.isArray</code>.</p>
+					<pre><code>typeof "hola";          // "string"
+typeof 5;               // "number"
+typeof undefined;       // "undefined"
+typeof null;            // "object"  (rareza histórica)
+Array.isArray([1, 2]);  // true</code></pre>
+					<p class="propiedad">Operador: <code>typeof</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="template literal comillas invertidas interpolación ${} multilínea string">
+					<h3>Plantillas de texto</h3>
+					<p>Entre comillas invertidas puedes insertar valores con <code>${...}</code> y escribir varias
+					líneas sin símbolos de concatenación.</p>
+					<pre><code>const nombre = "Ana";
+const edad = 30;
+console.log(`Hola, ${nombre}. El año que viene tendrás ${edad + 1}.`);
+
+const html = `
+  &lt;p&gt;${nombre}&lt;/p&gt;
+`;</code></pre>
+					<p class="propiedad">Se escriben con el acento grave (`), no con comillas simples.</p>
+				</article>
+				<article class="concepto-css" data-palabras="undefined null ausencia valor vacío diferencia sin valor">
+					<h3>undefined y null</h3>
+					<p><code>undefined</code> significa «aún no tiene valor» (variable sin inicializar, propiedad
+					inexistente). <code>null</code> es un valor que se asigna a propósito para indicar «vacío».</p>
+					<pre><code>let a;
+console.log(a);          // undefined
+const b = null;
+const persona = {};
+console.log(persona.edad); // undefined</code></pre>
+					<p class="propiedad">Comprobar ambos a la vez: <code>valor == null</code>, o mejor <code>valor ?? defecto</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="convertir number string parseInt parseFloat conversión texto número boolean">
+					<h3>Convertir tipos</h3>
+					<p><code>Number()</code> convierte un texto completo en número (o <code>NaN</code>);
+					<code>parseInt</code> y <code>parseFloat</code> leen el principio del texto;
+					<code>String()</code> y <code>.toString()</code> convierten a texto.</p>
+					<pre><code>Number("42");        // 42
+Number("42px");      // NaN
+parseInt("42px");    // 42
+parseFloat("3.5kg"); // 3.5
+String(123);         // "123"
+Boolean("");         // false</code></pre>
+					<p class="propiedad">Un campo de formulario siempre devuelve texto, aunque sea un número.</p>
+				</article>
+				<article class="concepto-css" data-palabras="nan infinity isnan number.isnan isfinite error número">
+					<h3>NaN y números especiales</h3>
+					<p><code>NaN</code> («no es un número») es el resultado de una operación numérica inválida y no
+					es igual ni a sí mismo. Se comprueba con <code>Number.isNaN</code>. También existen
+					<code>Infinity</code> y <code>-Infinity</code>.</p>
+					<pre><code>const x = Number("hola");
+console.log(x === NaN);        // false
+console.log(Number.isNaN(x));  // true
+console.log(1 / 0);            // Infinity</code></pre>
+					<p class="propiedad">Funciones: <code>Number.isNaN</code>, <code>Number.isFinite</code>, <code>Number.isInteger</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="decimales precisión 0.1 + 0.2 coma flotante toFixed redondeo dinero epsilon">
+					<h3>Decimales y precisión</h3>
+					<p>Los números usan coma flotante, así que algunos decimales no son exactos. Para mostrar dos
+					decimales usa <code>toFixed</code> (devuelve texto). Para dinero, trabaja con céntimos
+					enteros.</p>
+					<pre><code>console.log(0.1 + 0.2);        // 0.30000000000000004
+console.log((0.1 + 0.2).toFixed(2));   // "0.30"
+const centimos = 1999;         // 19,99 €</code></pre>
+					<p class="propiedad"><code>toFixed</code> devuelve un texto, no un número.</p>
+				</article>
+				<article class="concepto-css" data-palabras="truthy falsy booleano verdadero falso conversión condición 0 vacío">
+					<h3>Valores verdaderos y falsos</h3>
+					<p>En una condición, estos valores cuentan como falsos: <code>false</code>, <code>0</code>,
+					<code>""</code>, <code>null</code>, <code>undefined</code> y <code>NaN</code>. Todo lo demás
+					es verdadero, incluso <code>[]</code> y <code>{}</code>.</p>
+					<pre><code>if ("") { }          // no entra
+if ("hola") { }      // entra
+if ([]) { }          // entra (un array vacío es verdadero)
+Boolean(0);          // false</code></pre>
+					<p class="propiedad">Cuidado: <code>0</code> es falso aunque a veces sea un valor válido.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="operadores" data-categoria>
+			<div class="cabecera-categoria"><span>02</span>
+				<div>
+					<p>Calcular, comparar y decidir valores</p>
+					<h2>Operadores</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="suma resta multiplicación división resto módulo potencia ** incremento aritméticos">
+					<h3>Operadores aritméticos</h3>
+					<p>Los operadores básicos son <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> y
+					<code>%</code> (resto). <code>**</code> eleva a una potencia. <code>++</code> y
+					<code>--</code> suman o restan uno.</p>
+					<pre><code>7 + 2;    // 9
+7 / 2;    // 3.5  (no es división entera)
+7 % 2;    // 1
+2 ** 3;   // 8
+let i = 0;
+i++;      // 1</code></pre>
+					<p class="propiedad">Para quedarte con la parte entera: <code>Math.trunc(7 / 2)</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="asignación += -= *= /= ??= ||= &amp;&amp;= compuesta">
+					<h3>Operadores de asignación</h3>
+					<p>Las asignaciones compuestas combinan una operación con la asignación. <code>??=</code>,
+					<code>||=</code> y <code>&amp;&amp;=</code> asignan solo según el estado del valor actual.</p>
+					<pre><code>let total = 10;
+total += 5;       // 15
+total *= 2;       // 30
+
+let nombre;
+nombre ??= "Anónimo";   // asigna solo si es null o undefined</code></pre>
+					<p class="propiedad">Operadores: <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>, <code>**=</code>, <code>??=</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="=== == igualdad estricta comparar coerción tipos diferente !==">
+					<h3>Igualdad estricta: === y ==</h3>
+					<p><code>===</code> compara valor y tipo; <code>==</code> convierte los tipos antes de comparar
+					y da resultados sorprendentes. Usa siempre <code>===</code> y <code>!==</code>.</p>
+					<pre><code>5 === "5";         // false
+5 == "5";          // true  (convierte)
+0 == "";           // true  (sorprendente)
+null == undefined; // true
+null === undefined; // false</code></pre>
+					<p class="propiedad">Regla práctica: usa <code>===</code> y <code>!==</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="comparar mayor menor &gt;= &lt;= comparación textos orden">
+					<h3>Operadores de comparación</h3>
+					<p><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code> y <code>&lt;=</code> comparan
+					números y también textos (por orden alfabético de los códigos de carácter). No mezcles
+					tipos.</p>
+					<pre><code>5 &gt; 3;           // true
+"a" &lt; "b";       // true
+"10" &lt; "9";      // true  (se comparan como texto)
+10 &lt; 9;          // false</code></pre>
+					<p class="propiedad">Convierte a número antes de comparar valores que vienen de formularios.</p>
+				</article>
+				<article class="concepto-css" data-palabras="and or not &amp;&amp; || ! lógicos cortocircuito condiciones valor por defecto">
+					<h3>Operadores lógicos</h3>
+					<p><code>&amp;&amp;</code> (y), <code>||</code> (o) y <code>!</code> (no). Devuelven uno de los
+					operandos, no necesariamente un booleano, y se evalúan en cortocircuito: se detienen en
+					cuanto se conoce el resultado.</p>
+					<pre><code>const edad = 20;
+edad &gt;= 18 &amp;&amp; edad &lt; 65;      // true
+!edad;                        // false
+
+const usuario = null;
+const nombre = usuario &amp;&amp; usuario.nombre;   // null</code></pre>
+					<p class="propiedad"><code>||</code> devuelve el primer valor verdadero; <code>&amp;&amp;</code>, el primer falso.</p>
+				</article>
+				<article class="concepto-css" data-palabras="nullish coalescing ?? || valor defecto por defecto cero vacío">
+					<h3>Valor por defecto: ?? y ||</h3>
+					<p><code>??</code> usa el valor de la derecha solo si el de la izquierda es <code>null</code> o
+					<code>undefined</code>. <code>||</code> lo usa con cualquier valor falso, incluidos
+					<code>0</code> y <code>""</code>, que a veces son válidos.</p>
+					<pre><code>const cantidad = 0;
+cantidad || 10;   // 10  (descarta el 0)
+cantidad ?? 10;   // 0   (respeta el 0)</code></pre>
+					<p class="propiedad">Casi siempre es mejor <code>??</code> para valores por defecto.</p>
+				</article>
+				<article class="concepto-css" data-palabras="optional chaining ?. propiedad inexistente undefined acceso seguro objeto anidado">
+					<h3>Encadenamiento opcional: ?.</h3>
+					<p><code>?.</code> detiene la expresión y devuelve <code>undefined</code> si lo que hay a la
+					izquierda es <code>null</code> o <code>undefined</code>, en vez de lanzar un error. Sirve
+					para propiedades, métodos y posiciones de un array.</p>
+					<pre><code>const usuario = { perfil: null };
+console.log(usuario.perfil?.nombre);        // undefined
+console.log(usuario.saludar?.());           // undefined
+console.log(usuario.amigos?.[0]);           // undefined</code></pre>
+					<p class="propiedad">Combínalo con <code>??</code>: <code>usuario.perfil?.nombre ?? "Anónimo"</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="ternario condicional ? : expresión if else corto">
+					<h3>Operador ternario</h3>
+					<p><code>condición ? siVerdadero : siFalso</code> elige entre dos valores en una sola
+					expresión. Úsalo para decisiones simples.</p>
+					<pre><code>const edad = 17;
+const estado = edad &gt;= 18 ? "adulto" : "menor";
+console.log(`Eres ${estado}`);</code></pre>
+					<p class="propiedad">No anides varios ternarios: pierde legibilidad.</p>
+				</article>
+				<article class="concepto-css" data-palabras="spread rest ... tres puntos expandir copiar combinar">
+					<h3>Operador spread y rest: ...</h3>
+					<p>Los tres puntos expanden un array u objeto en sus elementos (<code>spread</code>) o agrupan
+					los que sobran en un array (<code>rest</code>). Son clave para copiar y combinar datos sin
+					modificar los originales.</p>
+					<pre><code>const a = [1, 2];
+const b = [...a, 3];            // [1, 2, 3]
+const o = { x: 1 };
+const o2 = { ...o, y: 2 };      // { x: 1, y: 2 }
+
+function sumar(...numeros) { return numeros.length; }</code></pre>
+					<p class="propiedad">Símbolo: <code>...</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="control" data-categoria>
+			<div class="cabecera-categoria"><span>03</span>
+				<div>
+					<p>Decidir y repetir</p>
+					<h2>Condiciones y bucles</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="if else condición decidir bloque else if">
+					<h3>Condicional if / else</h3>
+					<p><code>if</code> ejecuta un bloque cuando la condición es verdadera; <code>else if</code> y
+					<code>else</code> añaden alternativas. Las llaves son recomendables aunque haya una sola
+					instrucción.</p>
+					<pre><code>const nota = 7;
+if (nota &gt;= 9) {
+  console.log("Sobresaliente");
+} else if (nota &gt;= 5) {
+  console.log("Aprobado");
+} else {
+  console.log("Suspenso");
+}</code></pre>
+					<p class="propiedad">Se evalúa en orden y se ejecuta solo el primer bloque que cumple.</p>
+				</article>
+				<article class="concepto-css" data-palabras="switch case default break seleccionar opciones">
+					<h3>Varias opciones: switch</h3>
+					<p><code>switch</code> compara un valor con varios casos usando <code>===</code>. Sin
+					<code>break</code>, la ejecución continúa en el caso siguiente.</p>
+					<pre><code>const dia = 3;
+switch (dia) {
+  case 1:
+  case 7:
+    console.log("Fin de semana");
+    break;
+  case 3:
+    console.log("Miércoles");
+    break;
+  default:
+    console.log("Otro día");
+}</code></pre>
+					<p class="propiedad">Palabras clave: <code>case</code>, <code>default</code>, <code>break</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="for bucle contador repetir iteración índice">
+					<h3>Bucle for</h3>
+					<p><code>for</code> tiene tres partes: inicio, condición y avance. Es ideal cuando sabes
+					cuántas veces repetir.</p>
+					<pre><code>for (let i = 0; i &lt; 3; i++) {
+  console.log("Vuelta", i);
+}</code></pre>
+					<p class="propiedad">Sintaxis: <code>for (inicio; condición; avance)</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="while do while bucle condición repetir mientras">
+					<h3>Bucle while y do...while</h3>
+					<p><code>while</code> repite mientras se cumpla la condición; <code>do...while</code> ejecuta
+					el cuerpo al menos una vez antes de comprobarla.</p>
+					<pre><code>let n = 3;
+while (n &gt; 0) {
+  console.log(n);
+  n--;
+}
+
+do {
+  console.log("Se ejecuta una vez");
+} while (false);</code></pre>
+					<p class="propiedad">Asegúrate de que algo cambia dentro del bucle para que termine.</p>
+				</article>
+				<article class="concepto-css" data-palabras="for of recorrer array elementos iterable cadena map set">
+					<h3>Recorrer valores: for...of</h3>
+					<p><code>for...of</code> recorre los valores de un array, una cadena, un <code>Map</code> o un
+					<code>Set</code>. Es la forma más clara de recorrer una colección.</p>
+					<pre><code>const frutas = ["pera", "uva", "kiwi"];
+for (const fruta of frutas) {
+  console.log(fruta);
+}
+
+for (const [i, fruta] of frutas.entries()) {
+  console.log(i, fruta);
+}</code></pre>
+					<p class="propiedad">Para índice y valor: <code>array.entries()</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="for in propiedades claves objeto recorrer enumerables">
+					<h3>Recorrer propiedades: for...in</h3>
+					<p><code>for...in</code> recorre las claves de un objeto. No lo uses con arrays: usa
+					<code>for...of</code>. Para objetos suele ser más claro <code>Object.entries</code>.</p>
+					<pre><code>const persona = { nombre: "Ana", edad: 30 };
+for (const clave in persona) {
+  console.log(clave, persona[clave]);
+}</code></pre>
+					<p class="propiedad">Alternativa: <code>for (const [k, v] of Object.entries(obj))</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="break continue salir saltar bucle iteración etiqueta">
+					<h3>break y continue</h3>
+					<p><code>break</code> termina el bucle; <code>continue</code> salta a la siguiente vuelta.</p>
+					<pre><code>for (let i = 1; i &lt;= 10; i++) {
+  if (i % 2 === 0) continue;   // salta los pares
+  if (i &gt; 7) break;            // termina el bucle
+  console.log(i);              // 1, 3, 5, 7
+}</code></pre>
+					<p class="propiedad">Palabras clave: <code>break</code>, <code>continue</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="funciones" data-categoria>
+			<div class="cabecera-categoria"><span>04</span>
+				<div>
+					<p>Agrupar y reutilizar código</p>
+					<h2>Funciones</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="function declaración funcion llamar invocar parámetros return">
+					<h3>Declarar una función</h3>
+					<p>Una función agrupa instrucciones reutilizables. Recibe parámetros y devuelve un valor con
+					<code>return</code>. Las declaraciones con <code>function</code> se pueden usar antes de
+					definirse en el archivo.</p>
+					<pre><code>function sumar(a, b) {
+  return a + b;
+}
+console.log(sumar(2, 3));   // 5</code></pre>
+					<p class="propiedad">Una función sin <code>return</code> devuelve <code>undefined</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="arrow function flecha =&gt; anónima expresión corta this">
+					<h3>Funciones flecha</h3>
+					<p>Las funciones flecha son una forma breve de escribir funciones. Si el cuerpo es una sola
+					expresión, el <code>return</code> es implícito. No tienen su propio <code>this</code>.</p>
+					<pre><code>const doble = (n) =&gt; n * 2;
+const saludar = nombre =&gt; `Hola, ${nombre}`;
+const sumar = (a, b) =&gt; {
+  const total = a + b;
+  return total;
+};</code></pre>
+					<p class="propiedad">Sintaxis: <code>(parámetros) =&gt; expresión</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="function expression expresión anónima asignar variable hoisting">
+					<h3>Expresiones de función</h3>
+					<p>Una función puede guardarse en una variable. A diferencia de la declaración, no se puede
+					usar antes de la línea donde se define.</p>
+					<pre><code>const multiplicar = function (a, b) {
+  return a * b;
+};</code></pre>
+					<p class="propiedad">Prefiere <code>const</code> para no reasignarla por accidente.</p>
+				</article>
+				<article class="concepto-css" data-palabras="parámetros por defecto default valor argumento omitido">
+					<h3>Parámetros por defecto</h3>
+					<p>Si un argumento no se pasa (o es <code>undefined</code>), se usa el valor por defecto
+					indicado.</p>
+					<pre><code>function saludar(nombre = "invitado") {
+  return `Hola, ${nombre}`;
+}
+saludar();         // "Hola, invitado"
+saludar("Ana");    // "Hola, Ana"</code></pre>
+					<p class="propiedad">Sintaxis: <code>parametro = valor</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="rest parameters ...args arguments argumentos variables">
+					<h3>Número variable de argumentos: rest</h3>
+					<p>El parámetro <code>...nombre</code> recoge todos los argumentos restantes en un array real.
+					Debe ser el último.</p>
+					<pre><code>function sumar(...numeros) {
+  return numeros.reduce((acc, n) =&gt; acc + n, 0);
+}
+sumar(1, 2, 3, 4);   // 10</code></pre>
+					<p class="propiedad">Sustituye al antiguo objeto <code>arguments</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="desestructuración parámetros objeto opciones nombrados destructuring argumentos">
+					<h3>Objeto como parámetro</h3>
+					<p>Cuando una función recibe muchos datos, es más claro pasar un objeto y desestructurarlo en
+					los parámetros, con valores por defecto.</p>
+					<pre><code>function crearUsuario({ nombre, edad = 18, activo = true }) {
+  return { nombre, edad, activo };
+}
+crearUsuario({ nombre: "Ana" });</code></pre>
+					<p class="propiedad">Evita recordar el orden de muchos argumentos.</p>
+				</article>
+				<article class="concepto-css" data-palabras="callback función argumento pasar función orden superior">
+					<h3>Funciones como valores: callbacks</h3>
+					<p>Las funciones son valores: se pueden guardar en variables, pasar como argumento y devolver
+					desde otras funciones. Una función que se pasa para que otra la llame se llama callback.</p>
+					<pre><code>function repetir(veces, accion) {
+  for (let i = 0; i &lt; veces; i++) accion(i);
+}
+repetir(3, (n) =&gt; console.log("Vuelta", n));</code></pre>
+					<p class="propiedad">Los métodos <code>map</code>, <code>filter</code> o <code>addEventListener</code> reciben callbacks.</p>
+				</article>
+				<article class="concepto-css" data-palabras="closure clausura ámbito léxico contador privado función interna">
+					<h3>Clausuras (closures)</h3>
+					<p>Una función recuerda las variables del lugar donde se creó, incluso después de que ese lugar
+					haya terminado. Permite crear datos privados.</p>
+					<pre><code>function crearContador() {
+  let cuenta = 0;
+  return () =&gt; ++cuenta;
+}
+const contador = crearContador();
+contador();   // 1
+contador();   // 2</code></pre>
+					<p class="propiedad">La variable <code>cuenta</code> no es accesible desde fuera.</p>
+				</article>
+				<article class="concepto-css" data-palabras="scope ámbito global bloque función variable local visible">
+					<h3>Ámbito de las variables</h3>
+					<p>Las variables declaradas con <code>let</code> y <code>const</code> existen solo dentro del
+					bloque <code>{ }</code> donde se crean. Las del nivel superior son globales, y conviene
+					evitarlas.</p>
+					<pre><code>const global = "visible en todas partes";
+
+function prueba() {
+  const local = "solo aquí";
+  if (true) {
+    const bloque = "solo en este bloque";
+  }
+}</code></pre>
+					<p class="propiedad">Declara las variables en el ámbito más pequeño posible.</p>
+				</article>
+				<article class="concepto-css" data-palabras="recursión recursiva factorial caso base llamarse a sí misma">
+					<h3>Recursión</h3>
+					<p>Una función recursiva se llama a sí misma. Necesita un caso base que detenga las llamadas.</p>
+					<pre><code>function factorial(n) {
+  if (n &lt;= 1) return 1;
+  return n * factorial(n - 1);
+}
+factorial(5);   // 120</code></pre>
+					<p class="propiedad">Sin caso base, el programa lanza <code>RangeError</code> (pila desbordada).</p>
+				</article>
+				<article class="concepto-css" data-palabras="this contexto objeto método call bind apply flecha">
+					<h3>La palabra this</h3>
+					<p><code>this</code> depende de cómo se llama una función: en un método apunta al objeto, y en
+					una función suelta suele ser <code>undefined</code> (modo estricto). Las funciones flecha
+					heredan el <code>this</code> del lugar donde se definen.</p>
+					<pre><code>const persona = {
+  nombre: "Ana",
+  saludar() {
+    return `Hola, soy ${this.nombre}`;
+  }
+};
+persona.saludar();   // "Hola, soy Ana"</code></pre>
+					<p class="propiedad">Fijar <code>this</code>: <code>bind</code>, <code>call</code>, <code>apply</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="iife ejecución inmediata función anónima auto invocada ámbito privado">
+					<h3>Función de ejecución inmediata (IIFE)</h3>
+					<p>Una función que se define y se ejecuta al instante crea un ámbito propio. Hoy se usa menos,
+					porque los módulos y los bloques cumplen esa función.</p>
+					<pre><code>(() =&gt; {
+  const secreto = 42;
+  console.log("Se ejecuta ahora");
+})();</code></pre>
+					<p class="propiedad">Patrón: <code>(función)()</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="arrays" data-categoria>
+			<div class="cabecera-categoria"><span>05</span>
+				<div>
+					<p>Trabajar con listas de datos</p>
+					<h2>Arrays</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="array crear lista corchetes length índice acceder elementos">
+					<h3>Crear un array</h3>
+					<p>Un array guarda una lista ordenada de valores. Se accede por posición, empezando en 0, y
+					<code>length</code> indica cuántos elementos tiene. <code>at(-1)</code> obtiene el último.</p>
+					<pre><code>const frutas = ["pera", "uva", "kiwi"];
+frutas[0];          // "pera"
+frutas.length;      // 3
+frutas.at(-1);      // "kiwi"
+frutas[10];         // undefined</code></pre>
+					<p class="propiedad">Propiedad: <code>length</code>; método: <code>at()</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="push pop shift unshift añadir quitar final principio array">
+					<h3>Añadir y quitar elementos</h3>
+					<p><code>push</code> y <code>pop</code> trabajan al final del array; <code>unshift</code> y
+					<code>shift</code>, al principio. Todos modifican el array original.</p>
+					<pre><code>const lista = [2, 3];
+lista.push(4);        // [2, 3, 4]
+lista.unshift(1);     // [1, 2, 3, 4]
+lista.pop();          // quita 4
+lista.shift();        // quita 1</code></pre>
+					<p class="propiedad"><code>pop</code> y <code>shift</code> devuelven el elemento eliminado.</p>
+				</article>
+				<article class="concepto-css" data-palabras="foreach recorrer array callback elementos índice">
+					<h3>Recorrer con forEach</h3>
+					<p><code>forEach</code> ejecuta una función por cada elemento. No devuelve nada y no se puede
+					interrumpir con <code>break</code>.</p>
+					<pre><code>["a", "b"].forEach((letra, i) =&gt; {
+  console.log(i, letra);
+});</code></pre>
+					<p class="propiedad">Para transformar datos usa <code>map</code>; para filtrar, <code>filter</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="map transformar array nuevo callback convertir">
+					<h3>Transformar: map</h3>
+					<p><code>map</code> crea un array nuevo aplicando una función a cada elemento. El array
+					original no cambia.</p>
+					<pre><code>const numeros = [1, 2, 3];
+const dobles = numeros.map(n =&gt; n * 2);   // [2, 4, 6]
+
+const nombres = usuarios.map(u =&gt; u.nombre);</code></pre>
+					<p class="propiedad">Devuelve un array de la misma longitud.</p>
+				</article>
+				<article class="concepto-css" data-palabras="filter filtrar array condición seleccionar quitar">
+					<h3>Filtrar: filter</h3>
+					<p><code>filter</code> devuelve un array nuevo con los elementos para los que la función
+					devuelve verdadero.</p>
+					<pre><code>const numeros = [1, 2, 3, 4, 5, 6];
+const pares = numeros.filter(n =&gt; n % 2 === 0);   // [2, 4, 6]</code></pre>
+					<p class="propiedad">Si ninguno cumple, devuelve <code>[]</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="reduce acumulador sumar total agrupar array valor inicial">
+					<h3>Reducir a un valor: reduce</h3>
+					<p><code>reduce</code> recorre el array acumulando un resultado. Recibe una función con el
+					acumulador y el elemento actual, y un valor inicial.</p>
+					<pre><code>const precios = [10, 20, 5];
+const total = precios.reduce((acc, p) =&gt; acc + p, 0);   // 35</code></pre>
+					<p class="propiedad">Indica siempre el valor inicial (segundo argumento).</p>
+				</article>
+				<article class="concepto-css" data-palabras="find findIndex includes indexOf some every buscar elemento array">
+					<h3>Buscar en un array: find e includes</h3>
+					<p><code>find</code> devuelve el primer elemento que cumple una condición (o
+					<code>undefined</code>); <code>findIndex</code>, su posición; <code>includes</code>
+					comprueba si existe un valor; <code>some</code> y <code>every</code> comprueban si alguno o
+					todos cumplen.</p>
+					<pre><code>const n = [3, 8, 12];
+n.find(x =&gt; x &gt; 5);         // 8
+n.findIndex(x =&gt; x &gt; 5);    // 1
+n.includes(12);             // true
+n.some(x =&gt; x &gt; 10);        // true
+n.every(x =&gt; x &gt; 1);        // true</code></pre>
+					<p class="propiedad">Métodos: <code>find</code>, <code>findIndex</code>, <code>includes</code>, <code>some</code>, <code>every</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="sort ordenar array comparador números alfabético toSorted">
+					<h3>Ordenar: sort</h3>
+					<p>Por defecto, <code>sort</code> ordena como texto y modifica el array. Para números, pasa un
+					comparador. <code>toSorted</code> devuelve una copia ordenada sin tocar el original.</p>
+					<pre><code>const n = [10, 9, 1];
+n.sort();                  // [1, 10, 9]  (como texto)
+n.sort((a, b) =&gt; a - b);   // [1, 9, 10]
+
+const copia = n.toSorted((a, b) =&gt; b - a);</code></pre>
+					<p class="propiedad">Comparador: negativo (antes), positivo (después), 0 (igual).</p>
+				</article>
+				<article class="concepto-css" data-palabras="slice splice cortar insertar eliminar copiar parte array">
+					<h3>Extraer y modificar partes: slice y splice</h3>
+					<p><code>slice(inicio, fin)</code> devuelve una copia de una parte, sin modificar el original.
+					<code>splice</code> elimina o inserta elementos modificando el array.</p>
+					<pre><code>const l = [1, 2, 3, 4, 5];
+l.slice(1, 3);         // [2, 3]
+l.splice(1, 2);        // quita 2 y 3 -&gt; l = [1, 4, 5]
+l.splice(1, 0, "x");   // inserta "x" en la posición 1</code></pre>
+					<p class="propiedad"><code>slice</code> no modifica; <code>splice</code> sí.</p>
+				</article>
+				<article class="concepto-css" data-palabras="concat spread copiar array unir combinar duplicados set">
+					<h3>Unir y copiar arrays</h3>
+					<p>Usa el operador spread para copiar o combinar arrays. Con <code>Set</code> se eliminan
+					duplicados.</p>
+					<pre><code>const a = [1, 2];
+const b = [3, 4];
+const unido = [...a, ...b];      // [1, 2, 3, 4]
+const copia = [...a];
+const unicos = [...new Set([1, 1, 2, 3, 3])];   // [1, 2, 3]</code></pre>
+					<p class="propiedad">Una asignación <code>const b = a</code> no copia, solo apunta al mismo array.</p>
+				</article>
+				<article class="concepto-css" data-palabras="join split unir dividir cadena array separador">
+					<h3>De array a texto y viceversa: join y split</h3>
+					<p><code>join</code> une los elementos de un array en un texto; <code>split</code> divide un
+					texto en un array según un separador.</p>
+					<pre><code>["a", "b", "c"].join("-");     // "a-b-c"
+"uno,dos,tres".split(",");     // ["uno", "dos", "tres"]
+"hola".split("");              // ["h", "o", "l", "a"]</code></pre>
+					<p class="propiedad">Métodos: <code>join</code> (array → texto), <code>split</code> (texto → array)</p>
+				</article>
+				<article class="concepto-css" data-palabras="destructuring desestructuración array variables asignar intercambiar">
+					<h3>Desestructuración de arrays</h3>
+					<p>Permite extraer valores de un array en variables con una sola línea. También sirve para
+					intercambiar dos variables.</p>
+					<pre><code>const [primero, segundo, ...resto] = [10, 20, 30, 40];
+// primero = 10, segundo = 20, resto = [30, 40]
+
+let a = 1, b = 2;
+[a, b] = [b, a];   // intercambio</code></pre>
+					<p class="propiedad">Sintaxis: <code>const [a, b] = array</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="array.from flat flatMap fill length crear rango aplanar anidado">
+					<h3>Crear y aplanar arrays</h3>
+					<p><code>Array.from</code> crea arrays a partir de otros datos o con una longitud dada.
+					<code>flat</code> aplana arrays anidados y <code>flatMap</code> combina <code>map</code> y
+					<code>flat</code>.</p>
+					<pre><code>Array.from({ length: 5 }, (_, i) =&gt; i);   // [0, 1, 2, 3, 4]
+new Array(3).fill(0);                      // [0, 0, 0]
+[[1, 2], [3]].flat();                      // [1, 2, 3]</code></pre>
+					<p class="propiedad">Métodos: <code>Array.from</code>, <code>fill</code>, <code>flat</code>, <code>flatMap</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="array objetos map filter ordenar agrupar usuarios lista datos patrón">
+					<h3>Arrays de objetos: patrones habituales</h3>
+					<p>Los datos reales suelen ser listas de objetos. Se combinan <code>filter</code>,
+					<code>map</code> y <code>sort</code> encadenados para obtener justo lo que necesitas.</p>
+					<pre><code>const productos = [
+  { nombre: "Pan", precio: 1.2 },
+  { nombre: "Leche", precio: 0.9 },
+  { nombre: "Queso", precio: 4.5 },
+];
+
+const baratos = productos
+  .filter(p =&gt; p.precio &lt; 2)
+  .map(p =&gt; p.nombre);          // ["Pan", "Leche"]</code></pre>
+					<p class="propiedad">Encadenar métodos hace el código fácil de leer.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="objetos" data-categoria>
+			<div class="cabecera-categoria"><span>06</span>
+				<div>
+					<p>Organizar información con claves</p>
+					<h2>Objetos y colecciones</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="objeto literal propiedades clave valor crear llaves acceder punto corchetes">
+					<h3>Crear un objeto</h3>
+					<p>Un objeto agrupa pares clave-valor. Se accede con punto (<code>objeto.clave</code>) o con
+					corchetes (<code>objeto["clave"]</code>), que permiten usar claves dinámicas.</p>
+					<pre><code>const persona = {
+  nombre: "Ana",
+  edad: 30,
+  "codigo postal": "15001",
+};
+persona.nombre;               // "Ana"
+persona["codigo postal"];     // "15001"</code></pre>
+					<p class="propiedad">Usa corchetes cuando la clave tiene espacios o está en una variable.</p>
+				</article>
+				<article class="concepto-css" data-palabras="añadir modificar borrar delete propiedad objeto in hasOwn">
+					<h3>Añadir, modificar y borrar propiedades</h3>
+					<p>Se pueden añadir o cambiar propiedades asignándolas. <code>delete</code> elimina una y
+					<code>in</code> o <code>Object.hasOwn</code> comprueban si existe.</p>
+					<pre><code>const p = { nombre: "Ana" };
+p.edad = 30;              // añadir
+p.nombre = "Eva";         // modificar
+delete p.edad;            // borrar
+"nombre" in p;            // true
+Object.hasOwn(p, "edad"); // false</code></pre>
+					<p class="propiedad">Un <code>const</code> permite modificar el contenido, pero no reasignar la variable.</p>
+				</article>
+				<article class="concepto-css" data-palabras="Object.keys Object.values Object.entries fromEntries recorrer objeto">
+					<h3>Claves, valores y entradas</h3>
+					<p><code>Object.keys</code>, <code>Object.values</code> y <code>Object.entries</code>
+					convierten un objeto en arrays que puedes recorrer o transformar.
+					<code>Object.fromEntries</code> hace el camino contrario.</p>
+					<pre><code>const precios = { pan: 1, leche: 2 };
+Object.keys(precios);      // ["pan", "leche"]
+Object.values(precios);    // [1, 2]
+Object.entries(precios);   // [["pan", 1], ["leche", 2]]
+
+Object.fromEntries(
+  Object.entries(precios).map(([k, v]) =&gt; [k, v * 2])
+);</code></pre>
+					<p class="propiedad">Útiles junto a <code>map</code>, <code>filter</code> y <code>for...of</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="destructuring desestructuración objeto propiedades renombrar valor defecto anidado">
+					<h3>Desestructuración de objetos</h3>
+					<p>Extrae propiedades de un objeto en variables. Puedes renombrarlas y dar valores por defecto.</p>
+					<pre><code>const usuario = { nombre: "Ana", edad: 30, ciudad: "Vigo" };
+
+const { nombre, edad } = usuario;
+const { ciudad: localidad = "Sin ciudad", pais = "ES" } = usuario;</code></pre>
+					<p class="propiedad">Sintaxis: <code>const { propiedad } = objeto</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="shorthand propiedades abreviadas claves calculadas métodos objeto literal">
+					<h3>Abreviaturas en objetos</h3>
+					<p>Si la variable se llama igual que la clave, basta con escribirla una vez. Los métodos no
+					necesitan <code>function</code> y las claves pueden calcularse entre corchetes.</p>
+					<pre><code>const nombre = "Ana";
+const campo = "edad";
+
+const persona = {
+  nombre,                 // nombre: nombre
+  [campo]: 30,            // edad: 30
+  saludar() { return "Hola"; },
+};</code></pre>
+					<p class="propiedad">Sintaxis: <code>{ nombre }</code>, <code>{ [clave]: valor }</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="copiar clonar objeto spread structuredClone referencia superficial profunda">
+					<h3>Copiar objetos</h3>
+					<p>Asignar un objeto a otra variable no lo copia. El spread hace una copia superficial (los
+					objetos interiores se comparten); <code>structuredClone</code> hace una copia profunda.</p>
+					<pre><code>const original = { a: 1, interior: { b: 2 } };
+const referencia = original;                 // mismo objeto
+const superficial = { ...original };
+const profunda = structuredClone(original);</code></pre>
+					<p class="propiedad">Copia profunda: <code>structuredClone</code>; no admite funciones.</p>
+				</article>
+				<article class="concepto-css" data-palabras="freeze inmutable congelar objeto no modificar sellar">
+					<h3>Objetos inmutables: Object.freeze</h3>
+					<p><code>Object.freeze</code> impide añadir, modificar o borrar propiedades de un objeto (solo
+					en su primer nivel).</p>
+					<pre><code>const config = Object.freeze({ tema: "claro" });
+config.tema = "oscuro";   // se ignora (o lanza error en modo estricto)</code></pre>
+					<p class="propiedad">Es superficial: no congela los objetos interiores.</p>
+				</article>
+				<article class="concepto-css" data-palabras="json stringify parse serializar texto objeto datos intercambio">
+					<h3>Datos en texto: JSON</h3>
+					<p>JSON es un formato de texto para intercambiar datos. <code>JSON.stringify</code> convierte
+					un valor en texto y <code>JSON.parse</code> lo convierte de nuevo en un valor.</p>
+					<pre><code>const datos = { nombre: "Ana", edad: 30 };
+const texto = JSON.stringify(datos);       // '{"nombre":"Ana","edad":30}'
+const bonito = JSON.stringify(datos, null, 2);
+const objeto = JSON.parse(texto);</code></pre>
+					<p class="propiedad"><code>JSON.parse</code> lanza un error si el texto no es JSON válido.</p>
+				</article>
+				<article class="concepto-css" data-palabras="map clave valor estructura diccionario get set has size iterar">
+					<h3>Mapas: Map</h3>
+					<p><code>Map</code> guarda pares clave-valor y, a diferencia de un objeto, admite claves de
+					cualquier tipo y recuerda el orden de inserción.</p>
+					<pre><code>const edades = new Map();
+edades.set("Ana", 30);
+edades.set("Luis", 25);
+edades.get("Ana");     // 30
+edades.has("Eva");     // false
+edades.size;           // 2
+for (const [nombre, edad] of edades) { }</code></pre>
+					<p class="propiedad">Métodos: <code>set</code>, <code>get</code>, <code>has</code>, <code>delete</code>, <code>size</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="set conjunto único sin duplicados add has delete size">
+					<h3>Conjuntos: Set</h3>
+					<p><code>Set</code> guarda valores únicos: añadir uno repetido no tiene efecto. Es ideal para
+					eliminar duplicados o comprobar pertenencia rápidamente.</p>
+					<pre><code>const etiquetas = new Set(["a", "b", "a"]);
+etiquetas.add("c");
+etiquetas.has("a");    // true
+etiquetas.size;        // 3
+[...etiquetas];        // ["a", "b", "c"]</code></pre>
+					<p class="propiedad">Métodos: <code>add</code>, <code>has</code>, <code>delete</code>, <code>size</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="groupBy agrupar objeto.groupby reduce categoría clasificar">
+					<h3>Agrupar datos</h3>
+					<p><code>Object.groupBy</code> agrupa los elementos de una lista según un criterio y devuelve
+					un objeto de arrays. Si tu entorno no lo admite, se puede hacer con <code>reduce</code>.</p>
+					<pre><code>const palabras = ["sol", "mar", "cielo"];
+const porLongitud = Object.groupBy(palabras, p =&gt; p.length);
+// { 3: ["sol", "mar"], 5: ["cielo"] }</code></pre>
+					<p class="propiedad">Comprueba la compatibilidad de los navegadores que necesitas.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="texto" data-categoria>
+			<div class="cabecera-categoria"><span>07</span>
+				<div>
+					<p>Cadenas, matemáticas y fechas</p>
+					<h2>Texto, números y fechas</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="string length toUpperCase toLowerCase trim includes startsWith endsWith cadena">
+					<h3>Métodos de texto básicos</h3>
+					<p>Las cadenas tienen métodos para cambiar mayúsculas, limpiar espacios y comprobar su
+					contenido. Los textos son inmutables: cada método devuelve uno nuevo.</p>
+					<pre><code>const t = "  Hola Mundo ";
+t.trim();                  // "Hola Mundo"
+t.toUpperCase();
+t.length;                  // 13
+t.includes("Mundo");       // true
+t.startsWith("  H");       // true</code></pre>
+					<p class="propiedad">Métodos: <code>trim</code>, <code>toUpperCase</code>, <code>toLowerCase</code>, <code>includes</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="slice substring indexOf replace replaceAll charAt at buscar reemplazar cadena">
+					<h3>Extraer y reemplazar texto</h3>
+					<p><code>slice</code> extrae una parte, <code>indexOf</code> devuelve la posición (o -1),
+					<code>replace</code> sustituye la primera coincidencia y <code>replaceAll</code>, todas.</p>
+					<pre><code>const t = "Aprender JavaScript";
+t.slice(0, 8);                    // "Aprender"
+t.indexOf("Java");                // 9
+t.replace("Aprender", "Dominar");
+"a-b-c".replaceAll("-", "+");     // "a+b+c"</code></pre>
+					<p class="propiedad"><code>slice(inicio, fin)</code> incluye el inicio y excluye el final.</p>
+				</article>
+				<article class="concepto-css" data-palabras="padStart padEnd repeat rellenar ceros formato hora">
+					<h3>Rellenar y repetir</h3>
+					<p><code>padStart</code> y <code>padEnd</code> rellenan un texto hasta una longitud dada;
+					<code>repeat</code> lo repite. Son muy útiles para dar formato a horas y números.</p>
+					<pre><code>String(7).padStart(2, "0");    // "07"
+"=".repeat(10);                // "=========="
+
+const hora = `${String(9).padStart(2, "0")}:${String(5).padStart(2, "0")}`;</code></pre>
+					<p class="propiedad">Métodos: <code>padStart</code>, <code>padEnd</code>, <code>repeat</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="regex expresión regular test match replace patrón buscar texto">
+					<h3>Expresiones regulares básicas</h3>
+					<p>Una expresión regular describe un patrón de texto. <code>test</code> comprueba si hay
+					coincidencia; <code>match</code> devuelve las coincidencias y <code>replace</code> puede
+					usarlas.</p>
+					<pre><code>const correo = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+correo.test("ana@ejemplo.es");        // true
+
+"Tel: 600123456".match(/\d+/);        // ["600123456"]
+"a1b2".replace(/\d/g, "#");           // "a#b#"</code></pre>
+					<p class="propiedad">Banderas: <code>g</code> (global), <code>i</code> (sin distinguir mayúsculas)</p>
+				</article>
+				<article class="concepto-css" data-palabras="math max min round floor ceil random abs pow sqrt trunc redondear">
+					<h3>La clase Math</h3>
+					<p><code>Math</code> ofrece funciones matemáticas. Para obtener el mayor de un array, usa
+					spread con <code>Math.max</code>.</p>
+					<pre><code>Math.round(2.5);       // 3
+Math.floor(2.9);       // 2
+Math.ceil(2.1);        // 3
+Math.abs(-4);          // 4
+Math.max(...[3, 9, 2]); // 9
+Math.random();         // entre 0 y 1</code></pre>
+					<p class="propiedad">Métodos: <code>round</code>, <code>floor</code>, <code>ceil</code>, <code>trunc</code>, <code>max</code>, <code>min</code>, <code>random</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="aleatorio random entero rango dado dado número azar">
+					<h3>Número aleatorio entre dos valores</h3>
+					<p><code>Math.random()</code> devuelve un decimal entre 0 (incluido) y 1 (excluido). Para un
+					entero en un rango, multiplica y redondea hacia abajo.</p>
+					<pre><code>function entero(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+entero(1, 6);   // dado de seis caras</code></pre>
+					<p class="propiedad">No es válido para contraseñas ni seguridad: usa <code>crypto.getRandomValues</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="intl numberformat moneda euro formato número separador miles decimal locale">
+					<h3>Dar formato a números y moneda: Intl</h3>
+					<p><code>Intl.NumberFormat</code> presenta números según el idioma y país: separadores de
+					miles, decimales y moneda.</p>
+					<pre><code>const euros = new Intl.NumberFormat("es-ES", {
+  style: "currency",
+  currency: "EUR",
+});
+euros.format(1234.5);      // "1234,50 €"
+(0.256).toLocaleString("es-ES", { style: "percent" });  // "26 %"</code></pre>
+					<p class="propiedad">API: <code>Intl.NumberFormat</code>, <code>toLocaleString</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="date fecha hora new Date getFullYear getMonth meses cero toISOString">
+					<h3>Fechas: Date</h3>
+					<p><code>new Date()</code> crea la fecha actual o una fecha concreta. Cuidado: los meses
+					empiezan en 0 (enero = 0).</p>
+					<pre><code>const hoy = new Date();
+hoy.getFullYear();               // 2026
+hoy.getMonth();                  // 0 = enero ... 11 = diciembre
+hoy.getDate();                   // día del mes
+const navidad = new Date(2026, 11, 25);
+hoy.toISOString();               // "2026-11-05T..." (UTC)</code></pre>
+					<p class="propiedad">Los días de la semana empiezan en domingo = 0.</p>
+				</article>
+				<article class="concepto-css" data-palabras="toLocaleDateString intl datetimeformat diferencia días restar fechas milisegundos">
+					<h3>Formatear y calcular fechas</h3>
+					<p><code>toLocaleDateString</code> y <code>Intl.DateTimeFormat</code> muestran la fecha según
+					el idioma. Para calcular diferencias, resta fechas: el resultado está en milisegundos.</p>
+					<pre><code>const f = new Date(2026, 11, 25);
+f.toLocaleDateString("es-ES", {
+  weekday: "long", day: "numeric", month: "long", year: "numeric",
+});   // "viernes, 25 de diciembre de 2026"
+
+const dias = Math.round((f - new Date()) / 86_400_000);</code></pre>
+					<p class="propiedad">1 día = 86 400 000 ms</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="clases" data-categoria>
+			<div class="cabecera-categoria"><span>08</span>
+				<div>
+					<p>Plantillas para crear objetos</p>
+					<h2>Clases</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="class constructor clase new objeto instancia método">
+					<h3>Clases y objetos</h3>
+					<p>Una clase es una plantilla para crear objetos. <code>constructor</code> inicializa cada
+					objeto y <code>new</code> lo crea. Los métodos se escriben dentro de la clase.</p>
+					<pre><code>class Persona {
+  constructor(nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+  saludar() {
+    return `Hola, soy ${this.nombre}`;
+  }
+}
+const ana = new Persona("Ana", 30);
+ana.saludar();</code></pre>
+					<p class="propiedad">Las clases siempre se ejecutan en modo estricto.</p>
+				</article>
+				<article class="concepto-css" data-palabras="extends super herencia subclase clase padre sobrescribir">
+					<h3>Herencia: extends y super</h3>
+					<p><code>extends</code> crea una clase que hereda de otra. En el constructor de la subclase hay
+					que llamar a <code>super(...)</code> antes de usar <code>this</code>.</p>
+					<pre><code>class Animal {
+  constructor(nombre) { this.nombre = nombre; }
+  hablar() { return "..."; }
+}
+class Perro extends Animal {
+  hablar() { return `${this.nombre} dice guau`; }
+}
+new Perro("Toby").hablar();</code></pre>
+					<p class="propiedad"><code>super.metodo()</code> llama a la versión de la clase padre.</p>
+				</article>
+				<article class="concepto-css" data-palabras="private # campo privado encapsulación clase acceso">
+					<h3>Campos y métodos privados</h3>
+					<p>Un nombre que empieza por <code>#</code> es privado: solo puede usarse dentro de la clase.
+					Protege los datos internos.</p>
+					<pre><code>class Cuenta {
+  #saldo = 0;
+  ingresar(cantidad) { this.#saldo += cantidad; }
+  get saldo() { return this.#saldo; }
+}
+const c = new Cuenta();
+c.ingresar(50);
+// c.#saldo;   // SyntaxError</code></pre>
+					<p class="propiedad">Sintaxis: <code>#nombre</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="get set getter setter propiedad calculada validar acceso">
+					<h3>Getters y setters</h3>
+					<p>Un <code>get</code> permite leer un valor calculado como si fuera una propiedad; un
+					<code>set</code>, validar o transformar el valor antes de guardarlo.</p>
+					<pre><code>class Rectangulo {
+  constructor(ancho, alto) { this.ancho = ancho; this.alto = alto; }
+  get area() { return this.ancho * this.alto; }
+  set lado(v) { this.ancho = this.alto = v; }
+}
+const r = new Rectangulo(2, 3);
+r.area;      // 6 (sin paréntesis)</code></pre>
+					<p class="propiedad">Palabras clave: <code>get</code>, <code>set</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="static estático clase método propiedad utilidades sin instancia">
+					<h3>Miembros estáticos</h3>
+					<p>Un miembro <code>static</code> pertenece a la clase, no a cada objeto: se llama con el
+					nombre de la clase.</p>
+					<pre><code>class Utiles {
+  static duplicar(n) { return n * 2; }
+}
+Utiles.duplicar(4);   // 8</code></pre>
+					<p class="propiedad">Ejemplos del lenguaje: <code>Math.max</code>, <code>Array.isArray</code>, <code>Object.keys</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="instanceof clase tipo objeto comprobar prototipo constructor">
+					<h3>Comprobar el tipo de objeto: instanceof</h3>
+					<p><code>instanceof</code> comprueba si un objeto se ha creado con cierta clase (o una clase
+					heredada).</p>
+					<pre><code>const p = new Perro("Toby");
+p instanceof Perro;    // true
+p instanceof Animal;   // true
+p instanceof Date;     // false</code></pre>
+					<p class="propiedad">Operador: <code>instanceof</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="dom" data-categoria>
+			<div class="cabecera-categoria"><span>09</span>
+				<div>
+					<p>Controlar la página desde el código</p>
+					<h2>DOM y eventos</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="querySelector querySelectorAll getElementById seleccionar elemento dom buscar">
+					<h3>Seleccionar elementos</h3>
+					<p><code>querySelector</code> devuelve el primer elemento que coincide con un selector CSS (o
+					<code>null</code>); <code>querySelectorAll</code> devuelve todos.
+					<code>getElementById</code> busca por <code>id</code>.</p>
+					<pre><code>const titulo = document.querySelector("h1");
+const botones = document.querySelectorAll(".boton");
+const caja = document.getElementById("caja");
+
+botones.forEach(b =&gt; console.log(b.textContent));</code></pre>
+					<p class="propiedad">Comprueba que el resultado no es <code>null</code> antes de usarlo.</p>
+				</article>
+				<article class="concepto-css" data-palabras="textContent innerHTML innerText texto html insertar seguridad xss">
+					<h3>Cambiar el texto: textContent e innerHTML</h3>
+					<p><code>textContent</code> cambia el texto tal cual, sin interpretar HTML.
+					<code>innerHTML</code> interpreta etiquetas: nunca lo uses con texto escrito por usuarios,
+					porque permite inyectar código (XSS).</p>
+					<pre><code>const caja = document.querySelector("#caja");
+caja.textContent = "Hola &lt;b&gt;mundo&lt;/b&gt;";   // se muestra literal
+caja.innerHTML = "&lt;strong&gt;Hola&lt;/strong&gt;";  // solo con contenido propio</code></pre>
+					<p class="propiedad">Con datos de personas, usa siempre <code>textContent</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="createElement append prepend appendChild remove insertAdjacentHTML crear nodo dom">
+					<h3>Crear y añadir elementos</h3>
+					<p><code>createElement</code> crea un nodo; <code>append</code> y <code>prepend</code> lo
+					insertan; <code>remove</code> lo elimina.</p>
+					<pre><code>const li = document.createElement("li");
+li.textContent = "Nueva tarea";
+document.querySelector("ul").append(li);
+
+li.remove();</code></pre>
+					<p class="propiedad">Métodos: <code>append</code>, <code>prepend</code>, <code>before</code>, <code>after</code>, <code>remove</code>, <code>replaceWith</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="classList add remove toggle contains clase css cambiar estilo">
+					<h3>Clases CSS: classList</h3>
+					<p><code>classList</code> añade, quita o alterna clases CSS. Es la forma recomendada de cambiar
+					el aspecto: define el estilo en CSS y activa la clase desde JavaScript.</p>
+					<pre><code>const panel = document.querySelector(".panel");
+panel.classList.add("abierto");
+panel.classList.remove("abierto");
+panel.classList.toggle("oculto");
+panel.classList.contains("oculto");</code></pre>
+					<p class="propiedad">Métodos: <code>add</code>, <code>remove</code>, <code>toggle</code>, <code>contains</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="setAttribute getAttribute removeAttribute dataset data- atributo hidden disabled">
+					<h3>Atributos y datos personalizados</h3>
+					<p>Los atributos se leen y modifican con <code>getAttribute</code> y <code>setAttribute</code>.
+					Los atributos <code>data-*</code> están disponibles en <code>dataset</code>.</p>
+					<pre><code>const img = document.querySelector("img");
+img.setAttribute("alt", "Un faro");
+img.getAttribute("src");
+
+// &lt;button data-id="42" data-accion="borrar"&gt;
+const b = document.querySelector("button");
+b.dataset.id;        // "42"
+b.dataset.accion;    // "borrar"</code></pre>
+					<p class="propiedad">Para booleanos, usa propiedades: <code>elemento.hidden = true</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="style css propiedad inline variable setProperty getComputedStyle estilo directo">
+					<h3>Estilos desde JavaScript: style</h3>
+					<p><code>elemento.style</code> modifica estilos en línea. Las propiedades se escriben en
+					camelCase. <code>setProperty</code> sirve para variables CSS.</p>
+					<pre><code>const caja = document.querySelector(".caja");
+caja.style.backgroundColor = "teal";
+caja.style.setProperty("--tamano", "20px");
+
+getComputedStyle(caja).width;</code></pre>
+					<p class="propiedad">Mejor: cambia clases en lugar de estilos individuales.</p>
+				</article>
+				<article class="concepto-css" data-palabras="addEventListener evento click input submit keydown escuchar manejador">
+					<h3>Escuchar eventos: addEventListener</h3>
+					<p><code>addEventListener</code> asocia una función a un evento (<code>click</code>,
+					<code>input</code>, <code>submit</code>, <code>keydown</code>...). El objeto
+					<code>event</code> informa de lo ocurrido.</p>
+					<pre><code>const boton = document.querySelector("#boton");
+boton.addEventListener("click", (e) =&gt; {
+  console.log("Pulsado", e.target);
+});
+
+document.addEventListener("keydown", (e) =&gt; {
+  if (e.key === "Escape") cerrar();
+});</code></pre>
+					<p class="propiedad">Opciones: <code>{ once: true }</code> ejecuta el manejador solo una vez.</p>
+				</article>
+				<article class="concepto-css" data-palabras="delegación eventos event.target closest lista dinámica manejador padre">
+					<h3>Delegación de eventos</h3>
+					<p>En lugar de poner un manejador en cada elemento, pon uno en el contenedor y averigua qué
+					elemento lo disparó con <code>e.target.closest(...)</code>. Funciona también con elementos
+					añadidos más tarde.</p>
+					<pre><code>document.querySelector("ul").addEventListener("click", (e) =&gt; {
+  const item = e.target.closest("li");
+  if (!item) return;
+  item.classList.toggle("hecho");
+});</code></pre>
+					<p class="propiedad">Métodos clave: <code>event.target</code>, <code>closest</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="form submit preventDefault FormData formulario enviar valores input value">
+					<h3>Formularios: submit y FormData</h3>
+					<p>En el evento <code>submit</code> se llama a <code>preventDefault()</code> para evitar que la
+					página se recargue. <code>FormData</code> recoge todos los campos con <code>name</code>.</p>
+					<pre><code>const form = document.querySelector("form");
+form.addEventListener("submit", (e) =&gt; {
+  e.preventDefault();
+  const datos = new FormData(form);
+  const valores = Object.fromEntries(datos);
+  console.log(valores);   // { nombre: "Ana", correo: "..." }
+});</code></pre>
+					<p class="propiedad">Los valores de los campos siempre son texto.</p>
+				</article>
+				<article class="concepto-css" data-palabras="input value checked select valueAsNumber evento input change leer campo">
+					<h3>Leer un campo de entrada</h3>
+					<p><code>value</code> contiene el texto de un campo; <code>checked</code>, el estado de una
+					casilla. El evento <code>input</code> se dispara al escribir y <code>change</code> al
+					confirmar el cambio.</p>
+					<pre><code>const campo = document.querySelector("#edad");
+campo.addEventListener("input", () =&gt; {
+  const edad = campo.valueAsNumber;   // número, no texto
+  console.log(edad);
+});
+
+document.querySelector("#acepto").checked;</code></pre>
+					<p class="propiedad"><code>valueAsNumber</code> funciona con <code>type="number"</code> y <code>range</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="preventDefault stopPropagation evento enlace formulario burbujeo propagación">
+					<h3>Evitar el comportamiento por defecto</h3>
+					<p><code>preventDefault</code> cancela la acción habitual de un evento (seguir un enlace,
+					enviar un formulario). <code>stopPropagation</code> evita que el evento suba a los elementos
+					padre.</p>
+					<pre><code>enlace.addEventListener("click", (e) =&gt; {
+  e.preventDefault();
+  mostrarModal();
+});</code></pre>
+					<p class="propiedad">Úsalos con moderación: pueden romper el comportamiento esperado.</p>
+				</article>
+				<article class="concepto-css" data-palabras="DOMContentLoaded load defer cargar página dom listo">
+					<h3>Esperar a que cargue la página</h3>
+					<p>Si el script se carga con <code>defer</code>, el DOM ya está disponible. Si no, espera al
+					evento <code>DOMContentLoaded</code>.</p>
+					<pre><code>document.addEventListener("DOMContentLoaded", () =&gt; {
+  console.log("El DOM está listo");
+});</code></pre>
+					<p class="propiedad">Eventos: <code>DOMContentLoaded</code> (HTML listo), <code>load</code> (todo cargado)</p>
+				</article>
+				<article class="concepto-css" data-palabras="IntersectionObserver visible scroll lazy cargar aparecer observar viewport">
+					<h3>Observar si algo es visible: IntersectionObserver</h3>
+					<p><code>IntersectionObserver</code> avisa cuando un elemento entra o sale de la zona visible,
+					sin escuchar el scroll constantemente. Sirve para cargas perezosas y animaciones de entrada.</p>
+					<pre><code>const observador = new IntersectionObserver((entradas) =&gt; {
+  entradas.forEach(e =&gt; {
+    if (e.isIntersecting) e.target.classList.add("visible");
+  });
+});
+document.querySelectorAll(".aparece").forEach(el =&gt; observador.observe(el));</code></pre>
+					<p class="propiedad">Mucho más eficiente que calcular posiciones en cada <code>scroll</code>.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="asincrono" data-categoria>
+			<div class="cabecera-categoria"><span>10</span>
+				<div>
+					<p>Esperar datos sin bloquear la página</p>
+					<h2>Asincronía y red</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="setTimeout setInterval clearTimeout clearInterval retraso temporizador repetir">
+					<h3>Retrasar y repetir: setTimeout y setInterval</h3>
+					<p><code>setTimeout</code> ejecuta una función una vez tras un retraso en milisegundos;
+					<code>setInterval</code> la repite. Ambos devuelven un identificador que se usa para
+					cancelarlos.</p>
+					<pre><code>const id = setTimeout(() =&gt; console.log("Pasaron 2 s"), 2000);
+clearTimeout(id);
+
+const reloj = setInterval(() =&gt; console.log("tic"), 1000);
+clearInterval(reloj);</code></pre>
+					<p class="propiedad">Siempre cancela los intervalos que ya no necesites.</p>
+				</article>
+				<article class="concepto-css" data-palabras="promise then catch finally asincronía resolve reject promesa">
+					<h3>Promesas</h3>
+					<p>Una promesa representa un resultado que llegará en el futuro. <code>then</code> recibe el
+					valor, <code>catch</code> los errores y <code>finally</code> se ejecuta siempre.</p>
+					<pre><code>const esperar = (ms) =&gt; new Promise((resolve) =&gt; setTimeout(resolve, ms));
+
+esperar(1000)
+  .then(() =&gt; console.log("Listo"))
+  .catch(err =&gt; console.error(err))
+  .finally(() =&gt; console.log("Fin"));</code></pre>
+					<p class="propiedad">Estados: pendiente, cumplida o rechazada.</p>
+				</article>
+				<article class="concepto-css" data-palabras="async await asíncrono función esperar promesa try catch">
+					<h3>async y await</h3>
+					<p>Una función <code>async</code> siempre devuelve una promesa. Dentro de ella,
+					<code>await</code> pausa la función hasta que la promesa se resuelve, con un estilo parecido
+					al código normal.</p>
+					<pre><code>async function cargar() {
+  await esperar(1000);
+  return "datos";
+}
+
+const resultado = await cargar();   // en un módulo
+cargar().then(console.log);</code></pre>
+					<p class="propiedad"><code>await</code> solo funciona dentro de <code>async</code> o de módulos.</p>
+				</article>
+				<article class="concepto-css" data-palabras="fetch api http petición get json response ok servidor">
+					<h3>Pedir datos: fetch</h3>
+					<p><code>fetch</code> hace una petición HTTP y devuelve una promesa. No se rechaza con errores
+					como 404 o 500: hay que comprobar <code>response.ok</code>.</p>
+					<pre><code>async function cargarUsuarios() {
+  const respuesta = await fetch("https://ejemplo.test/api/usuarios");
+  if (!respuesta.ok) {
+    throw new Error(`Error ${respuesta.status}`);
+  }
+  return await respuesta.json();
+}</code></pre>
+					<p class="propiedad">Métodos de lectura: <code>json()</code>, <code>text()</code>, <code>blob()</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="fetch post enviar json headers body método petición">
+					<h3>Enviar datos con fetch (POST)</h3>
+					<p>Para enviar datos se indica el método, las cabeceras y el cuerpo (<code>body</code>). Si es
+					JSON, convierte el objeto con <code>JSON.stringify</code>.</p>
+					<pre><code>const respuesta = await fetch("/api/mensajes", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ texto: "Hola" }),
+});</code></pre>
+					<p class="propiedad">Opciones: <code>method</code>, <code>headers</code>, <code>body</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="try catch async await error red fetch fallo manejar">
+					<h3>Gestionar errores asíncronos</h3>
+					<p>Con <code>async/await</code>, los errores se capturan con <code>try/catch</code>, igual que
+					en código normal. Muestra siempre un mensaje útil a la persona.</p>
+					<pre><code>async function cargar() {
+  try {
+    const datos = await cargarUsuarios();
+    mostrar(datos);
+  } catch (error) {
+    console.error(error);
+    mostrarMensaje("No se pudieron cargar los datos.");
+  } finally {
+    ocultarCargando();
+  }
+}</code></pre>
+					<p class="propiedad"><code>finally</code> es ideal para ocultar indicadores de carga.</p>
+				</article>
+				<article class="concepto-css" data-palabras="promise.all allsettled race any paralelo varias peticiones">
+					<h3>Varias promesas a la vez: Promise.all</h3>
+					<p><code>Promise.all</code> espera a que se cumplan todas las promesas (falla si una falla).
+					<code>Promise.allSettled</code> espera a todas y devuelve el resultado de cada una.
+					<code>Promise.race</code> devuelve la primera en terminar.</p>
+					<pre><code>const [usuarios, pedidos] = await Promise.all([
+  fetch("/api/usuarios").then(r =&gt; r.json()),
+  fetch("/api/pedidos").then(r =&gt; r.json()),
+]);</code></pre>
+					<p class="propiedad">Lanzar las peticiones en paralelo es más rápido que una tras otra.</p>
+				</article>
+				<article class="concepto-css" data-palabras="AbortController abort signal cancelar fetch timeout búsqueda">
+					<h3>Cancelar una petición: AbortController</h3>
+					<p>Un <code>AbortController</code> permite cancelar un <code>fetch</code> en curso, por ejemplo
+					cuando la persona sigue escribiendo en un buscador.</p>
+					<pre><code>const control = new AbortController();
+fetch("/api/buscar?q=ana", { signal: control.signal })
+  .catch(err =&gt; {
+    if (err.name === "AbortError") console.log("Cancelada");
+  });
+
+control.abort();</code></pre>
+					<p class="propiedad">Error resultante: <code>AbortError</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="event loop bucle eventos cola microtareas asincronía orden ejecución settimeout promesa">
+					<h3>Orden de ejecución: el bucle de eventos</h3>
+					<p>JavaScript ejecuta una cosa a la vez. Las tareas diferidas esperan en colas: las promesas
+					(microtareas) se ejecutan antes que los temporizadores.</p>
+					<pre><code>console.log("1");
+setTimeout(() =&gt; console.log("3 (temporizador)"), 0);
+Promise.resolve().then(() =&gt; console.log("2 (promesa)"));
+console.log("1b");
+// Orden: 1, 1b, 2, 3</code></pre>
+					<p class="propiedad">El código síncrono siempre termina antes que el asíncrono.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="modulos" data-categoria>
+			<div class="cabecera-categoria"><span>11</span>
+				<div>
+					<p>Dividir el código y usar el navegador</p>
+					<h2>Módulos y APIs del navegador</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="import export módulo type module archivos separar default nombrado">
+					<h3>Módulos: import y export</h3>
+					<p>Los módulos dividen el código en archivos. <code>export</code> publica lo que otros archivos
+					pueden usar e <code>import</code> lo trae. Se cargan con <code>type="module"</code>.</p>
+					<pre><code>// utiles.js
+export const IVA = 0.21;
+export function sumar(a, b) { return a + b; }
+export default function saludar() { return "Hola"; }
+
+// app.js
+import saludar, { IVA, sumar } from "./utiles.js";</code></pre>
+					<p class="propiedad">Los módulos necesitan un servidor local; no funcionan abriendo el archivo directamente.</p>
+				</article>
+				<article class="concepto-css" data-palabras="import dinámico lazy módulo carga bajo demanda promesa">
+					<h3>Cargar un módulo bajo demanda</h3>
+					<p><code>import()</code> carga un módulo solo cuando hace falta y devuelve una promesa. Reduce
+					lo que se descarga al abrir la página.</p>
+					<pre><code>boton.addEventListener("click", async () =&gt; {
+  const { abrirEditor } = await import("./editor.js");
+  abrirEditor();
+});</code></pre>
+					<p class="propiedad">Función: <code>import("ruta")</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="localStorage sessionStorage guardar datos navegador persistir getItem setItem json">
+					<h3>Guardar datos en el navegador: localStorage</h3>
+					<p><code>localStorage</code> guarda pares de texto que se conservan al cerrar el navegador;
+					<code>sessionStorage</code>, solo mientras dura la pestaña. Solo almacenan texto: usa JSON
+					para objetos.</p>
+					<pre><code>localStorage.setItem("tema", "oscuro");
+localStorage.getItem("tema");         // "oscuro"
+localStorage.removeItem("tema");
+
+const tareas = [{ id: 1, texto: "Estudiar" }];
+localStorage.setItem("tareas", JSON.stringify(tareas));
+const guardadas = JSON.parse(localStorage.getItem("tareas") ?? "[]");</code></pre>
+					<p class="propiedad">No guardes contraseñas ni datos sensibles.</p>
+				</article>
+				<article class="concepto-css" data-palabras="URLSearchParams URL query string parámetros location search hash">
+					<h3>Leer parámetros de la URL</h3>
+					<p><code>URL</code> y <code>URLSearchParams</code> leen y construyen direcciones.
+					<code>location</code> contiene la dirección actual de la página.</p>
+					<pre><code>const params = new URLSearchParams(location.search);
+params.get("pagina");        // "2" si la URL es ?pagina=2
+
+const url = new URL("https://ejemplo.test/buscar");
+url.searchParams.set("q", "javascript");
+url.toString();</code></pre>
+					<p class="propiedad">Propiedades de <code>location</code>: <code>href</code>, <code>pathname</code>, <code>search</code>, <code>hash</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="clipboard writeText copiar portapapeles navigator botón copiar">
+					<h3>Copiar al portapapeles</h3>
+					<p><code>navigator.clipboard.writeText</code> copia un texto al portapapeles. Devuelve una
+					promesa y solo funciona en páginas seguras (HTTPS) y tras una acción de la persona, como un
+					clic.</p>
+					<pre><code>boton.addEventListener("click", async () =&gt; {
+  try {
+    await navigator.clipboard.writeText("Texto copiado");
+    boton.textContent = "¡Copiado!";
+  } catch {
+    boton.textContent = "No se pudo copiar";
+  }
+});</code></pre>
+					<p class="propiedad">API: <code>navigator.clipboard</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="crypto randomUUID getRandomValues uuid identificador seguro aleatorio">
+					<h3>Identificadores únicos y cifrado</h3>
+					<p><code>crypto.randomUUID()</code> genera un identificador único;
+					<code>crypto.getRandomValues</code> produce números aleatorios aptos para seguridad.
+					<code>Math.random</code> no lo es.</p>
+					<pre><code>const id = crypto.randomUUID();
+const bytes = crypto.getRandomValues(new Uint8Array(8));</code></pre>
+					<p class="propiedad">Requiere un contexto seguro (HTTPS o <code>localhost</code>).</p>
+				</article>
+				<article class="concepto-css" data-palabras="matchMedia prefers-color-scheme modo oscuro preferencia tema sistema">
+					<h3>Preferencias del sistema: matchMedia</h3>
+					<p><code>matchMedia</code> evalúa en JavaScript una media query de CSS. Sirve, por ejemplo,
+					para detectar si el sistema está en modo oscuro.</p>
+					<pre><code>const oscuro = matchMedia("(prefers-color-scheme: dark)");
+document.documentElement.dataset.tema = oscuro.matches ? "oscuro" : "claro";
+
+oscuro.addEventListener("change", (e) =&gt; {
+  console.log("Cambió el tema:", e.matches);
+});</code></pre>
+					<p class="propiedad">Función: <code>matchMedia()</code>; propiedad: <code>matches</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="errores" data-categoria>
+			<div class="cabecera-categoria"><span>12</span>
+				<div>
+					<p>Anticipar y encontrar problemas</p>
+					<h2>Errores y depuración</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="try catch finally error excepción capturar manejar">
+					<h3>Capturar errores: try, catch y finally</h3>
+					<p>El código de <code>try</code> se ejecuta y, si falla, el control pasa a <code>catch</code>
+					con el error. <code>finally</code> se ejecuta siempre. En <code>catch</code> puedes omitir
+					la variable si no la usas.</p>
+					<pre><code>try {
+  const datos = JSON.parse("{ mal }");
+} catch (error) {
+  console.error("JSON no válido:", error.message);
+} finally {
+  console.log("Siempre se ejecuta");
+}</code></pre>
+					<p class="propiedad">Propiedades del error: <code>name</code>, <code>message</code>, <code>stack</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="throw new Error lanzar error validar excepción mensaje">
+					<h3>Lanzar errores: throw</h3>
+					<p><code>throw</code> lanza un error cuando algo no es válido. Lanza siempre un objeto
+					<code>Error</code>, con un mensaje que explique el problema.</p>
+					<pre><code>function dividir(a, b) {
+  if (b === 0) {
+    throw new Error("No se puede dividir entre cero");
+  }
+  return a / b;
+}</code></pre>
+					<p class="propiedad">Tipos: <code>Error</code>, <code>TypeError</code>, <code>RangeError</code>, <code>SyntaxError</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="ReferenceError TypeError SyntaxError RangeError undefined is not a function cannot read properties errores comunes">
+					<h3>Errores más frecuentes</h3>
+					<p><code>ReferenceError</code>: usas algo que no existe. <code>TypeError</code>: usas un valor
+					de forma inválida (por ejemplo, leer una propiedad de <code>undefined</code>).
+					<code>SyntaxError</code>: el código está mal escrito. <code>RangeError</code>: valor fuera
+					de rango.</p>
+					<pre><code>console.log(noExiste);        // ReferenceError
+const x = undefined;
+x.nombre;                     // TypeError
+null();                       // TypeError: no es una función</code></pre>
+					<p class="propiedad">Lee el mensaje y la línea: suelen indicar el problema.</p>
+				</article>
+				<article class="concepto-css" data-palabras="error personalizado extends Error clase propia custom name">
+					<h3>Crear errores propios</h3>
+					<p>Puedes crear tus propias clases de error heredando de <code>Error</code>. Facilitan
+					distinguir qué ha fallado en un <code>catch</code>.</p>
+					<pre><code>class ValidacionError extends Error {
+  constructor(mensaje, campo) {
+    super(mensaje);
+    this.name = "ValidacionError";
+    this.campo = campo;
+  }
+}
+try { throw new ValidacionError("Falta el correo", "correo"); }
+catch (e) { if (e instanceof ValidacionError) console.log(e.campo); }</code></pre>
+					<p class="propiedad">No olvides <code>super(mensaje)</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="console.table console.group console.time debugger depurar herramientas">
+					<h3>Depurar con la consola</h3>
+					<p>Además de <code>log</code>, la consola ofrece <code>table</code> (datos tabulares),
+					<code>group</code> (agrupar mensajes), <code>time</code> (medir duración) y
+					<code>assert</code>. La instrucción <code>debugger</code> detiene la ejecución si las
+					herramientas están abiertas.</p>
+					<pre><code>console.table([{ a: 1, b: 2 }, { a: 3, b: 4 }]);
+
+console.time("bucle");
+for (let i = 0; i &lt; 1e6; i++) {}
+console.timeEnd("bucle");
+
+debugger;</code></pre>
+					<p class="propiedad">Atajo: F12 abre las herramientas del navegador.</p>
+				</article>
+				<article class="concepto-css" data-palabras="window onerror unhandledrejection error global promesa rechazada">
+					<h3>Errores no capturados</h3>
+					<p>Los errores que nadie captura llegan al evento global <code>error</code>; las promesas
+					rechazadas sin <code>catch</code>, a <code>unhandledrejection</code>. Sirven para registrar
+					fallos.</p>
+					<pre><code>window.addEventListener("error", (e) =&gt; {
+  console.log("Error global:", e.message);
+});
+window.addEventListener("unhandledrejection", (e) =&gt; {
+  console.log("Promesa rechazada:", e.reason);
+});</code></pre>
+					<p class="propiedad">Eventos: <code>error</code>, <code>unhandledrejection</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="ejemplos" data-categoria>
+			<div class="cabecera-categoria"><span>13</span>
+				<div>
+					<p>Pequeños programas que aparecen a menudo</p>
+					<h2>Ejemplos de uso frecuente</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" data-palabras="contador clics botón ejemplo evento texto actualizar">
+					<h3>Contador de clics</h3>
+					<p>El ejemplo más sencillo de interactividad: una variable que cambia y un texto que se
+					actualiza.</p>
+					<pre><code>let cuenta = 0;
+const boton = document.querySelector("#sumar");
+const salida = document.querySelector("#total");
+
+boton.addEventListener("click", () =&gt; {
+  cuenta++;
+  salida.textContent = cuenta;
+});</code></pre>
+					<p class="propiedad">HTML necesario: un <code>button</code> y un elemento para mostrar el total.</p>
+				</article>
+				<article class="concepto-css" data-palabras="lista tareas todo ejemplo añadir borrar formulario delegación localStorage">
+					<h3>Lista de tareas</h3>
+					<p>Combina formulario, creación de elementos y delegación de eventos.</p>
+					<pre><code>const form = document.querySelector("#form");
+const lista = document.querySelector("#lista");
+
+form.addEventListener("submit", (e) =&gt; {
+  e.preventDefault();
+  const texto = form.elements.tarea.value.trim();
+  if (!texto) return;
+  const li = document.createElement("li");
+  li.textContent = texto;
+  lista.append(li);
+  form.reset();
+});
+
+lista.addEventListener("click", (e) =&gt; {
+  e.target.closest("li")?.classList.toggle("hecha");
+});</code></pre>
+					<p class="propiedad">Añade <code>localStorage</code> para conservar las tareas.</p>
+				</article>
+				<article class="concepto-css" data-palabras="modo oscuro claro tema toggle dataset localStorage ejemplo botón">
+					<h3>Alternar modo claro y oscuro</h3>
+					<p>Guarda la preferencia y aplícala con un atributo en <code>html</code>; el aspecto se define
+					en CSS.</p>
+					<pre><code>const raiz = document.documentElement;
+raiz.dataset.tema = localStorage.getItem("tema") ?? "claro";
+
+document.querySelector("#tema").addEventListener("click", () =&gt; {
+  const nuevo = raiz.dataset.tema === "claro" ? "oscuro" : "claro";
+  raiz.dataset.tema = nuevo;
+  localStorage.setItem("tema", nuevo);
+});</code></pre>
+					<p class="propiedad">En CSS: <code>[data-tema="oscuro"] { ... }</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="validar formulario correo errores mensaje aria-invalid campo ejemplo">
+					<h3>Validar un formulario</h3>
+					<p>Comprueba los campos, muestra un mensaje junto al que falla y marca el campo como inválido
+					para las tecnologías de apoyo.</p>
+					<pre><code>form.addEventListener("submit", (e) =&gt; {
+  const correo = form.elements.correo;
+  const error = document.querySelector("#error-correo");
+  if (!correo.validity.valid) {
+    e.preventDefault();
+    error.textContent = "Escribe un correo válido";
+    correo.setAttribute("aria-invalid", "true");
+  } else {
+    error.textContent = "";
+    correo.removeAttribute("aria-invalid");
+  }
+});</code></pre>
+					<p class="propiedad">API de validación: <code>validity</code>, <code>checkValidity()</code>, <code>setCustomValidity()</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="filtrar buscar lista filtro input texto normalizar acentos ejemplo">
+					<h3>Buscador con filtro</h3>
+					<p>Filtra una lista mientras se escribe. Normalizar el texto permite ignorar mayúsculas y
+					tildes.</p>
+					<pre><code>const normalizar = (t) =&gt;
+  t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+campo.addEventListener("input", () =&gt; {
+  const consulta = normalizar(campo.value);
+  document.querySelectorAll("#lista li").forEach((li) =&gt; {
+    li.hidden = !normalizar(li.textContent).includes(consulta);
+  });
+});</code></pre>
+					<p class="propiedad">Es el mismo patrón que usan estas guías para buscar.</p>
+				</article>
+				<article class="concepto-css" data-palabras="debounce retrasar búsqueda escribir teclear rendimiento función utilidad">
+					<h3>Retrasar una acción: debounce</h3>
+					<p>Un debounce espera a que la persona deje de escribir antes de ejecutar una acción, evitando
+					lanzar una petición con cada tecla.</p>
+					<pre><code>function debounce(funcion, espera = 300) {
+  let id;
+  return (...args) =&gt; {
+    clearTimeout(id);
+    id = setTimeout(() =&gt; funcion(...args), espera);
+  };
+}
+campo.addEventListener("input", debounce(buscar, 400));</code></pre>
+					<p class="propiedad">Combina closure, <code>setTimeout</code> y parámetros rest.</p>
+				</article>
+				<article class="concepto-css" data-palabras="barajar mezclar shuffle fisher yates aleatorio array">
+					<h3>Barajar un array</h3>
+					<p>El algoritmo de Fisher-Yates mezcla un array de forma uniforme. Trabaja sobre una copia para
+					no modificar el original.</p>
+					<pre><code>function barajar(lista) {
+  const a = [...lista];
+  for (let i = a.length - 1; i &gt; 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}</code></pre>
+					<p class="propiedad">Evita <code>sort(() =&gt; Math.random() - 0.5)</code>: no es uniforme.</p>
+				</article>
+				<article class="concepto-css" data-palabras="cuenta atrás temporizador setInterval reloj segundos ejemplo">
+					<h3>Cuenta atrás</h3>
+					<p>Un temporizador que cuenta segundos y se detiene al llegar a cero.</p>
+					<pre><code>let restante = 10;
+const pantalla = document.querySelector("#cuenta");
+
+const id = setInterval(() =&gt; {
+  pantalla.textContent = restante;
+  if (restante === 0) clearInterval(id);
+  restante--;
+}, 1000);</code></pre>
+					<p class="propiedad">No olvides <code>clearInterval</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="api fetch mostrar lista cargando error ejemplo datos json plantilla">
+					<h3>Mostrar datos de una API</h3>
+					<p>Un patrón completo: estado de carga, petición, gestión de errores y pintado de los datos.</p>
+					<pre><code>async function cargar() {
+  estado.textContent = "Cargando...";
+  try {
+    const r = await fetch("/api/rutas");
+    if (!r.ok) throw new Error(r.status);
+    const rutas = await r.json();
+    lista.replaceChildren(...rutas.map((ruta) =&gt; {
+      const li = document.createElement("li");
+      li.textContent = ruta.nombre;
+      return li;
+    }));
+    estado.textContent = "";
+  } catch {
+    estado.textContent = "No se pudieron cargar las rutas.";
+  }
+}
+cargar();</code></pre>
+					<p class="propiedad"><code>replaceChildren</code> sustituye todo el contenido de una vez.</p>
+				</article>
+				<article class="concepto-css" data-palabras="contar palabras frecuencia texto split map reduce ejemplo">
+					<h3>Contar palabras de un texto</h3>
+					<p>Convierte un texto en una tabla de frecuencias usando <code>split</code>,
+					<code>reduce</code> y un objeto.</p>
+					<pre><code>const texto = "sol mar sol cielo mar sol";
+const frecuencias = texto.split(" ").reduce((acc, p) =&gt; {
+  acc[p] = (acc[p] ?? 0) + 1;
+  return acc;
+}, {});
+// { sol: 3, mar: 2, cielo: 1 }</code></pre>
+					<p class="propiedad">Resultado: <code>{ sol: 3, mar: 2, cielo: 1 }</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="sin-resultados-css" id="sin-resultados-js" hidden>
+			<h2>No encuentro ese término</h2>
+			<p>Prueba con otra palabra, por ejemplo: variable, función, array, objeto, evento, fetch o promesa.</p>
+		</section>
+
+		<section class="regla-practica">
+			<h2>Una última pista</h2>
+			<p>Empieza con programas pequeños y pruébalos en la consola del navegador (F12). Usa <code>const</code>
+				por defecto, escribe funciones cortas con un solo propósito y comprueba siempre qué tipo de dato
+				tienes entre manos. Cuando algo falle, lee el mensaje de error completo: indica el archivo y la línea
+				que debes revisar.</p>
+		</section>
+	</main>
+
+	<footer class="pie-guia">
+		<p>Guía de apoyo para aprender los fundamentos de JavaScript.</p>
+		<a href="index.html">HTML</a>
+		<a href="css.html">CSS</a>
+		<a href="java.html">Java</a>
+	</footer>
+
+	<script>
+		const campoBusquedaJs = document.querySelector("#buscar-js");
+		const limpiarBusquedaJs = document.querySelector("#limpiar-js");
+		const conceptosJs = [...document.querySelectorAll(".concepto-css")];
+		const categoriasJs = [...document.querySelectorAll("[data-categoria]")];
+		const contadorJs = document.querySelector("#resultado-js");
+		const sinResultadosJs = document.querySelector("#sin-resultados-js");
+
+		function normalizarJs(texto) {
+			return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
+		}
+
+		function filtrarConceptosJs() {
+			const consulta = normalizarJs(campoBusquedaJs.value.trim());
+			let cantidad = 0;
+
+			conceptosJs.forEach((concepto) => {
+				const texto = normalizarJs(`${concepto.textContent} ${concepto.dataset.palabras}`);
+				const coincide = consulta.split(/\s+/).filter(Boolean).every((palabra) => texto.includes(palabra));
+				concepto.hidden = !coincide;
+				if (coincide) cantidad += 1;
+			});
+
+			categoriasJs.forEach((categoria) => {
+				categoria.hidden = !categoria.querySelector(".concepto-css:not([hidden])");
+			});
+
+			sinResultadosJs.hidden = cantidad > 0 || consulta === "";
+			contadorJs.textContent = consulta
+				? `${cantidad} ${cantidad === 1 ? "resultado" : "resultados"}`
+				: `${conceptosJs.length} conceptos en ${categoriasJs.length} categorías`;
+		}
+
+		campoBusquedaJs.addEventListener("input", filtrarConceptosJs);
+		limpiarBusquedaJs.addEventListener("click", () => {
+			campoBusquedaJs.value = "";
+			filtrarConceptosJs();
+			campoBusquedaJs.focus();
+		});
+
+		filtrarConceptosJs();
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+/*
+Estilos de la guía de JavaScript.
+Se carga después de css.css y sustituye su paleta azul por una amarilla y carbón.
+Autor: apesfer
+Fecha: 05/11/2026
+*/
+
+.guia-css.guia-js {
+    --guia-tinta: #2a2718;
+    --guia-papel: #f8f6ea;
+    --guia-blanco: #fffdf4;
+    --guia-verde: #5a4a00;
+    --guia-linea: #ddd8bd;
+    --guia-suave: #655f45;
+    background: var(--guia-papel);
+    color: var(--guia-tinta);
+}
+
+.guia-css.guia-js a:hover {
+    color: #b4451f;
+}
+
+.guia-css.guia-js :focus-visible {
+    outline-color: #b4451f;
+}
+
+.guia-css.guia-js .guia-portada {
+    background: linear-gradient(115deg, #1f1d14, #3a3411 70%, #5a4f12);
+}
+
+.guia-css.guia-js .mini-nav-guias {
+    background: #1f1d14;
+}
+
+.guia-css.guia-js .mini-nav-guias a[aria-current="page"] {
+    background: #f7df1e;
+    color: #1f1d14;
+}
+
+.guia-css.guia-js .mini-nav-guias a[aria-current="page"]:hover {
+    background: #fbe95a;
+    color: #1f1d14;
+}
+
+.guia-css.guia-js .guia-etiqueta,
+.guia-css.guia-js .pie-guia a {
+    color: #f7df1e;
+}
+
+.guia-css.guia-js .guia-portada h1 em {
+    color: #f3e98c;
+}
+
+.guia-css.guia-js .campo-busqueda > span,
+.guia-css.guia-js .atajos-css a {
+    color: #5a4a00;
+}
+
+.guia-css.guia-js .atajos-css a {
+    background: #efe9c4;
+}
+
+.guia-css.guia-js .atajos-css a:hover {
+    border-color: #cfc58a;
+    background: #e6dea6;
+}
+
+.guia-css.guia-js #resultado-js {
+    margin: 7px 0 0;
+    color: #ece6bd;
+    font-size: .82rem;
+}
+
+.guia-css.guia-js .nota-css {
+    border-left-color: #b4451f;
+    background: #efe9c4;
+}
+
+.guia-css.guia-js .nota-css code,
+.guia-css.guia-js .regla-practica code {
+    background: #e6dea6;
+    color: #2a2410;
+}
+
+.guia-css.guia-js .cabecera-categoria > span {
+    color: #b4451f;
+}
+
+.guia-css.guia-js .cabecera-categoria h2,
+.guia-css.guia-js .regla-practica h2,
+.guia-css.guia-js .sin-resultados-css h2,
+.guia-css.guia-js .concepto-css h3 {
+    color: #5a4a00;
+}
+
+.guia-css.guia-js .concepto-css pre {
+    background: #24221b;
+}
+
+.guia-css.guia-js .concepto-css .propiedad code {
+    color: #8e3417;
+}
+
+.guia-css.guia-js .regla-practica {
+    background: #efecd6;
+}
+
+.guia-css.guia-js .pie-guia {
+    background: #1f1d14;
+}
