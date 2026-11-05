@@ -234,6 +234,21 @@ a { color: var(--acento, navy); }</code></pre>
 }</code></pre>
 					<p class="propiedad">Propiedad: <code>all</code>; no afecta a <code>direction</code> ni a <code>unicode-bidi</code>.</p>
 				</article>
+				<article class="concepto-css" data-palabras="prefijo prefijos -webkit- -moz- -ms- -o- experimental propiedad navegador compatibilidad vendor">
+					<h3>Prefijos de navegador</h3>
+					<p>Los prefijos (<code>-webkit-</code>, <code>-moz-</code>, <code>-ms-</code>,
+					<code>-o-</code>) se usaban con propiedades todavía experimentales. El navegador aplica las
+					líneas que entiende e ignora las demás, así que se escribían primero las versiones con
+					prefijo y, al final, la estándar. Hoy casi ninguna propiedad los necesita: consulta
+					caniuse.com y, si trabajas con herramientas de compilación, usa Autoprefixer para que los
+					añada solo cuando hagan falta.</p>
+					<pre><code>.columnas {
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;      /* la estándar, siempre la última */
+}</code></pre>
+					<p class="propiedad">Prefijos: <code>-webkit-</code> (Chrome, Safari), <code>-moz-</code> (Firefox), <code>-ms-</code> (IE antiguo), <code>-o-</code> (Opera antiguo)</p>
+				</article>
 			</div>
 		</section>
 
@@ -517,6 +532,64 @@ p { text-wrap: pretty; }</code></pre>
 }</code></pre>
 					<p class="propiedad">Propiedad: <code>tab-size</code></p>
 				</article>
+				<article class="concepto-css" data-palabras="font-variant-position sub super subíndice superíndice vertical-align sup soporte">
+					<h3>Subíndices y superíndices con CSS</h3>
+					<p><code>font-variant-position</code> pide al navegador las variantes tipográficas de subíndice
+					(<code>sub</code>) o superíndice (<code>super</code>) de la fuente, pero su compatibilidad
+					es limitada. Para el caso habitual es más fiable usar las etiquetas <code>sub</code> y
+					<code>sup</code>, o <code>vertical-align</code> con un tamaño menor.</p>
+					<pre><code>.quimica { font-variant-position: sub; }   /* soporte limitado */
+
+.indice {
+  vertical-align: sub;       /* o: super */
+  font-size: .75em;
+}</code></pre>
+					<p class="propiedad">Propiedades: <code>font-variant-position</code> (<code>normal</code>, <code>sub</code>, <code>super</code>), <code>vertical-align</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="text-overflow cadena personalizada clip texto recortado y más string">
+					<h3>Texto de recorte personalizado</h3>
+					<p>Además de <code>clip</code> y <code>ellipsis</code>, <code>text-overflow</code> admite una
+					cadena propia como marca de recorte, pero solo algunos navegadores la entienden, así que
+					debes tener un valor de respaldo.</p>
+					<pre><code>.nota {
+  width: 12rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;       /* respaldo */
+  text-overflow: " [y más..]";   /* solo donde se admite */
+}</code></pre>
+					<p class="propiedad">Valores: <code>clip</code>, <code>ellipsis</code>, <code>"cadena"</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="word-wrap break-word overflow-wrap partir palabra larga alias">
+					<h3>word-wrap: el nombre antiguo</h3>
+					<p><code>word-wrap</code> es el nombre antiguo de <code>overflow-wrap</code>. Con el valor
+					<code>break-word</code>, una palabra demasiado larga para su caja se parte en lugar de
+					desbordarla. Los dos nombres funcionan, pero conviene usar el nuevo.</p>
+					<pre><code>.comentario {
+  word-wrap: break-word;       /* nombre antiguo */
+  overflow-wrap: break-word;   /* nombre actual */
+}</code></pre>
+					<p class="propiedad">Propiedades: <code>word-wrap</code>, <code>overflow-wrap</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="text-shadow varias sombras efecto fuego neón brillo coma texto resplandor">
+					<h3>Varias sombras en un texto: efectos</h3>
+					<p>Separando sombras con comas se logran efectos como un resplandor de neón o llamas. Las
+					sombras se apilan: la primera queda arriba. Mejor sobre fondo oscuro y cuidando la
+					legibilidad. Usar texto con sombras en lugar de imágenes ahorra descargas, mejora la
+					accesibilidad y permite ampliar sin pixelar.</p>
+					<pre><code>.fuego {
+  background: #000;
+  color: #fff;
+  text-shadow:
+    0 0 4px #fff,
+    0 -5px 4px #ff3,
+    2px -10px 6px #fd3,
+    -2px -15px 11px #f80,
+    2px -25px 18px #f20;
+}
+.neon { text-shadow: 0 0 6px #0ff, 0 0 18px #0ff; }</code></pre>
+					<p class="propiedad">Cada sombra: <code>desplazamientoX desplazamientoY desenfoque color</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -688,6 +761,50 @@ svg { fill: currentColor; }</code></pre>
   background-blend-mode: multiply;
 }</code></pre>
 					<p class="propiedad">Propiedades: <code>mix-blend-mode</code>, <code>background-blend-mode</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="background-clip border-box padding-box content-box text borde transparente semitransparente rgba">
+					<h3>background-clip: hasta dónde llega el fondo</h3>
+					<p>Por defecto el fondo se extiende hasta el borde exterior (<code>border-box</code>), por lo
+					que se ve debajo de un borde semitransparente. Con <code>padding-box</code> el fondo llega
+					solo hasta el relleno y con <code>content-box</code>, solo al contenido, de modo que el
+					borde transparente deja ver lo que hay detrás.</p>
+					<pre><code>.transparente {
+  background: #fff;
+  border: 20px solid rgb(0 190 0 / 50%);
+  padding: 10px;
+  background-clip: padding-box;
+}</code></pre>
+					<p class="propiedad">Valores: <code>border-box</code>, <code>padding-box</code>, <code>content-box</code> (y <code>text</code>, con prefijo en algunos navegadores)</p>
+				</article>
+				<article class="concepto-css" data-palabras="background varias imágenes capas coma orden posición tamaño no-repeat fallback respaldo">
+					<h3>Varias imágenes de fondo</h3>
+					<p>En una misma propiedad se pueden poner varias imágenes separadas por comas. La primera queda
+					encima y la última, al fondo. Cada capa puede tener su propia posición, repetición y tamaño.
+					Para navegadores que no admiten varias imágenes, se puede escribir antes una declaración con
+					una sola.</p>
+					<pre><code>.escena {
+  background: url("azulejo.png");     /* respaldo para navegadores antiguos */
+  background:
+    url("principe.png") 0% 5px no-repeat,
+    url("rana.png") 100% 5px no-repeat,
+    url("azulejo.png");
+  background-size: auto, auto, 50% 100%;   /* un tamaño por capa */
+}</code></pre>
+					<p class="propiedad">Propiedades por capa: <code>background-position</code>, <code>background-repeat</code>, <code>background-size</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="background-size mosaico azulejo auto porcentaje repetir imagen proporción cortada">
+					<h3>Fondo en mosaico sin cortar la imagen</h3>
+					<p>Una imagen de fondo que se repite puede quedar cortada si su tamaño no divide el de la caja.
+					Con <code>background-size</code> se ajusta: un valor y <code>auto</code> mantienen la
+					proporción; los porcentajes se calculan sobre la caja, no sobre la imagen.</p>
+					<pre><code>.mosaico {
+  width: 600px;
+  height: 350px;
+  background-image: url("azulejo.png");   /* 125 x 125 px */
+  background-size: 50px auto;             /* 50 px de ancho, alto proporcional */
+}
+.dos-mitades { background-size: 50% 100%; }   /* dos columnas de imagen */</code></pre>
+					<p class="propiedad">Propiedad: <code>background-size</code>; <code>auto</code> conserva las proporciones.</p>
 				</article>
 			</div>
 		</section>
@@ -1341,6 +1458,235 @@ inset: 0;</code></pre>
 }</code></pre>
 					<p class="propiedad">Soporte limitado: úsalo como mejora progresiva.</p>
 				</article>
+				<article class="concepto-css" data-palabras="posicionamiento normal flotante absoluto flujo esquema cajas bloque línea">
+					<h3>Esquemas de posicionamiento</h3>
+					<p>Los elementos son cajas rectangulares y su colocación depende del esquema de
+					posicionamiento. En el normal (por defecto) siguen el orden del código: los de bloque ocupan
+					todo el ancho y los de línea fluyen dentro del texto. En el flotante (<code>float</code>) se
+					desplazan a un lado y el texto los rodea. En el absoluto (<code>position</code>) se sacan
+					del flujo y se colocan con coordenadas.</p>
+					<pre><code>.normal   { }                 /* flujo normal */
+.flotante { float: left; }    /* esquema flotante */
+.absoluto { position: absolute; top: 10px; left: 10px; }</code></pre>
+					<p class="propiedad">Propiedades: <code>float</code>, <code>position</code>; hoy se maqueta sobre todo con Flex y Grid.</p>
+				</article>
+				<article class="concepto-css" data-palabras="bloque línea block inline elementos lista div p span a em strong img display por defecto">
+					<h3>Elementos de bloque y de línea</h3>
+					<p>Un elemento de bloque ocupa todo el ancho de su contenedor y empieza en una línea nueva; uno
+					en línea ocupa solo lo que necesita y fluye con el texto. Cada etiqueta tiene un valor de
+					<code>display</code> por defecto, que puedes cambiar con CSS.</p>
+					<pre><code>/* Bloque: main, header, footer, aside, section, article, div, p,
+           h1…h6, ul, ol, li */
+/* Línea:  em, strong, time, a, img, span, input, button, select */
+
+span.caja { display: block; }
+li.menu   { display: inline-block; }</code></pre>
+					<p class="propiedad">Propiedad: <code>display</code>; valores habituales: <code>block</code>, <code>inline</code>, <code>inline-block</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="float varias cajas flotantes izquierda derecha ancho width línea siguiente fila">
+					<h3>Varias cajas flotantes</h3>
+					<p>Las cajas flotantes tienen en cuenta a las anteriores: se colocan a continuación una de otra
+					y, si no caben en la línea, pasan a la siguiente. Para que varias cajas floten en fila hay
+					que darles un ancho. Cuando un contenedor solo tiene hijos flotantes, no abarca su altura
+					salvo que lo contengas.</p>
+					<pre><code>.caja { float: left; width: 30%; margin-right: 3%; }
+
+.contenedor { display: flow-root; }   /* contiene los flotantes */</code></pre>
+					<p class="propiedad">Valores de <code>float</code>: <code>left</code>, <code>right</code>, <code>none</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="position relative top bottom left right desplazar desplazamiento solapar hueco">
+					<h3>Position relative en detalle</h3>
+					<p>Con <code>position: relative</code> la caja se desplaza desde su posición original, pero
+					conserva su hueco y no mueve a las demás, así que puede solaparlas. Un valor positivo en
+					<code>top</code> la baja, en <code>bottom</code> la sube, en <code>left</code> la mueve a la
+					derecha y en <code>right</code>, a la izquierda; los valores negativos hacen lo contrario.</p>
+					<pre><code>.caja2 {
+  position: relative;
+  top: 20px;      /* baja 20px */
+  left: 30px;     /* se mueve 30px a la derecha */
+}</code></pre>
+					<p class="propiedad">Propiedades: <code>position: relative</code>, <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="position absolute relative contenedor ancestro posicionado insignia esquina badge">
+					<h3>Position absolute dentro de un contenedor</h3>
+					<p>Una caja absoluta sale del flujo: los demás elementos la ignoran y ocupan su hueco. Se
+					coloca respecto al ancestro posicionado más cercano (uno con <code>position</code> distinto
+					de <code>static</code>). Para colocarla dentro de un contenedor concreto, basta con darle a
+					ese contenedor <code>position: relative</code>.</p>
+					<pre><code>.tarjeta { position: relative; }
+.etiqueta {
+  position: absolute;
+  top: 8px;
+  right: 8px;     /* esquina superior derecha de .tarjeta */
+}</code></pre>
+					<p class="propiedad">Si no hay ancestro posicionado, se coloca respecto al bloque inicial de la página.</p>
+				</article>
+				<article class="concepto-css" data-palabras="position fixed fijo ventana scroll barra botón subir menú fijo">
+					<h3>Position fixed: elementos fijos en la ventana</h3>
+					<p>Un elemento <code>fixed</code> se coloca respecto a la ventana y permanece en su sitio
+					aunque se desplace la página. No deja hueco donde estaría normalmente. Es típico en
+					cabeceras y botones flotantes; cuida que no tape contenido.</p>
+					<pre><code>.subir {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+}</code></pre>
+					<p class="propiedad">Propiedades: <code>position: fixed</code>, <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>, <code>z-index</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="flexbox flex contenedor items ejes principal transversal main axis cross axis propiedades">
+					<h3>Flexbox: contenedor, elementos y ejes</h3>
+					<p>Flexbox organiza los hijos directos de un contenedor flexible (<code>display: flex</code>) a
+					lo largo de un eje principal, con un eje transversal perpendicular. Con <code>row</code> el
+					principal es horizontal; con <code>column</code>, vertical. Unas propiedades van en el
+					contenedor y otras en los elementos hijos.</p>
+					<pre><code>/* Contenedor */
+display, flex-direction, flex-wrap, flex-flow,
+justify-content, align-items, align-content, gap
+
+/* Elementos */
+align-self, flex-grow, flex-shrink, flex-basis, flex, order</code></pre>
+					<p class="propiedad"><code>justify-*</code> trabaja en el eje principal y <code>align-*</code>, en el transversal.</p>
+				</article>
+				<article class="concepto-css" data-palabras="justify-content flex-start flex-end center space-between space-around space-evenly eje principal repartir">
+					<h3>justify-content en detalle</h3>
+					<p>Reparte los elementos a lo largo del eje principal: <code>flex-start</code> (valor por
+					defecto), <code>flex-end</code>, <code>center</code>, <code>space-between</code> (primero y
+					último pegados a los bordes), <code>space-around</code> (espacio igual alrededor de cada
+					uno) y <code>space-evenly</code> (mismo espacio entre todos y en los extremos).</p>
+					<pre><code>.fila {
+  display: flex;
+  justify-content: space-between;
+}
+/* otras opciones: flex-start | flex-end | center | space-around | space-evenly */</code></pre>
+					<p class="propiedad">Propiedad del contenedor: <code>justify-content</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="align-items stretch flex-start flex-end center baseline eje transversal alinear verticalmente centrar">
+					<h3>align-items en detalle</h3>
+					<p>Alinea los elementos en el eje transversal: <code>stretch</code> (por defecto, los estira),
+					<code>flex-start</code>, <code>flex-end</code>, <code>center</code> y <code>baseline</code>
+					(alinea las líneas base de sus textos). Con <code>justify-content: center</code> y
+					<code>align-items: center</code> se centra un elemento en ambos ejes.</p>
+					<pre><code>.centrar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}</code></pre>
+					<p class="propiedad">Propiedad del contenedor: <code>align-items</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="align-content flex-wrap varias líneas wrap stretch space-between center repartir filas">
+					<h3>align-content: varias líneas en Flex</h3>
+					<p>Cuando los elementos ocupan varias líneas (<code>flex-wrap: wrap</code>),
+					<code>align-content</code> reparte esas líneas en el eje transversal. No tiene efecto con
+					una sola línea ni si el contenedor no tiene altura sobrante. Sus valores son
+					<code>stretch</code> (por defecto), <code>flex-start</code>, <code>flex-end</code>,
+					<code>center</code>, <code>space-between</code>, <code>space-around</code> y
+					<code>space-evenly</code>.</p>
+					<pre><code>.cajas {
+  display: flex;
+  flex-wrap: wrap;
+  height: 300px;
+  align-content: space-between;
+}</code></pre>
+					<p class="propiedad">Propiedad del contenedor: <code>align-content</code>; <code>align-items</code> alinea dentro de cada línea.</p>
+				</article>
+				<article class="concepto-css" data-palabras="align-self auto stretch flex-start flex-end center baseline elemento individual alinear uno">
+					<h3>align-self: un elemento distinto</h3>
+					<p>Permite que un solo elemento se alinee de forma diferente a los demás en el eje transversal,
+					sobrescribiendo el <code>align-items</code> del contenedor. Acepta <code>auto</code> (por
+					defecto), <code>stretch</code>, <code>flex-start</code>, <code>flex-end</code>,
+					<code>center</code> y <code>baseline</code>.</p>
+					<pre><code>.contenedor { display: flex; align-items: center; }
+.desplazado { align-self: flex-start; }</code></pre>
+					<p class="propiedad">Propiedad del elemento: <code>align-self</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="flex-grow crecer espacio sobrante proporción elemento flex ocupar">
+					<h3>flex-grow: repartir el espacio sobrante</h3>
+					<p><code>flex-grow</code> indica cuánto crece un elemento para ocupar el espacio libre del
+					contenedor. El valor por defecto es 0 (no crece). Se reparte en proporción: con valores 1 y
+					3, uno recibe una parte del espacio sobrante y el otro tres.</p>
+					<pre><code>.crece  { flex-grow: 1; }
+.crece3 { flex-grow: 3; }   /* recibe el triple del espacio libre */</code></pre>
+					<p class="propiedad">Propiedad del elemento: <code>flex-grow</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="flex-shrink encoger reducir desbordar elemento flex no encoger 0">
+					<h3>flex-shrink: quién se encoge</h3>
+					<p><code>flex-shrink</code> indica cuánto se encoge un elemento cuando no caben todos. Por
+					defecto vale 1 (todos se reducen). Con <code>0</code> no se encoge nunca; con valores
+					mayores se encoge más que los demás.</p>
+					<pre><code>.caja  { width: 30%; }            /* 5 cajas = 150%: no caben */
+.fija  { flex-shrink: 0; }        /* no se reduce */
+.cede  { flex-shrink: 3; }        /* se reduce más que el resto */</code></pre>
+					<p class="propiedad">Propiedad del elemento: <code>flex-shrink</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="flex-basis tamaño base inicial ancho altura auto content elemento flex">
+					<h3>flex-basis: tamaño inicial</h3>
+					<p><code>flex-basis</code> fija el tamaño inicial de un elemento en el eje principal, antes de
+					repartir espacio con <code>flex-grow</code> o <code>flex-shrink</code>. Es el ancho en una
+					fila y el alto en una columna. Su valor por defecto es <code>auto</code>, que usa
+					<code>width</code> o <code>height</code>.</p>
+					<pre><code>.fila { display: flex; }
+.item { flex-basis: 25%; }       /* parte de un 25% */
+.texto { flex-basis: content; }  /* según su contenido */</code></pre>
+					<p class="propiedad">Propiedad del elemento: <code>flex-basis</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="flex atajo shorthand 1 0 auto none 1 1 0 grow shrink basis valores habituales">
+					<h3>flex: el atajo</h3>
+					<p><code>flex</code> reúne <code>flex-grow</code>, <code>flex-shrink</code> y
+					<code>flex-basis</code>. El valor por defecto es <code>0 1 auto</code>. Los atajos más
+					usados son <code>flex: 1</code> (equivale a <code>1 1 0%</code>, repartir por igual),
+					<code>flex: auto</code> (<code>1 1 auto</code>) y <code>flex: none</code> (<code>0 0
+					auto</code>, tamaño fijo).</p>
+					<pre><code>.item     { flex: 0 1 auto; }    /* valor por defecto */
+.reparte  { flex: 1; }           /* todos el mismo ancho */
+.rigido   { flex: none; }        /* no crece ni se encoge */
+.flexible { flex: 1 1 12rem; }</code></pre>
+					<p class="propiedad">Propiedad del elemento: <code>flex</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="grid líneas numeradas grid-column grid-row start end span posicionar celdas">
+					<h3>Grid: líneas y posición con grid-column y grid-row</h3>
+					<p>Una cuadrícula de 3 columnas tiene 4 líneas, numeradas desde 1. Cada hijo se coloca
+					indicando la línea donde empieza y donde acaba. <code>grid-column: 1 / 3</code> equivale a
+					<code>grid-column-start: 1; grid-column-end: 3</code>. Con <code>span</code> se indica
+					cuántas pistas ocupa y <code>-1</code> es la última línea.</p>
+					<pre><code>.cabecera { grid-column: 1 / 4; }       /* de la línea 1 a la 4 */
+.lateral  { grid-row: 1 / 4; }
+.ancho    { grid-column: span 2; }      /* ocupa dos columnas */
+.todo     { grid-column: 1 / -1; }      /* hasta la última línea */</code></pre>
+					<p class="propiedad">Propiedades: <code>grid-column</code>, <code>grid-row</code>, <code>grid-column-start|end</code>, <code>grid-row-start|end</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="grid ejemplo tablero maquetación columnas filas colocar cajas azul amarillo rojo verde">
+					<h3>Grid: ejemplo de maquetación por líneas</h3>
+					<p>Un contenedor define el número y tamaño de columnas y filas; cada hijo indica qué celdas
+					ocupa, y el HTML no cambia. Este ejemplo coloca cuatro cajas en una cuadrícula de 2 columnas
+					y 3 filas.</p>
+					<pre><code>#tablero {
+  display: grid;
+  grid-template-columns: 300px 500px;
+  grid-template-rows: 200px 100px 500px;
+}
+#amarillo { grid-column: 1 / 2; grid-row: 1 / 4; }  /* toda la primera columna */
+#rojo     { grid-column: 2 / 3; grid-row: 1 / 2; }
+#azul     { grid-column: 2 / 3; grid-row: 2 / 3; }
+#verde    { grid-column: 2 / 3; grid-row: 3 / 4; }</code></pre>
+					<p class="propiedad">Contenedor: <code>display: grid</code>; hijos: <code>grid-column</code> y <code>grid-row</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="grid fr fracción gap row-gap column-gap grid-gap espacio columnas filas">
+					<h3>Grid: unidad fr y huecos</h3>
+					<p><code>fr</code> reparte el espacio libre de la cuadrícula en fracciones: <code>1fr 2fr
+					1fr</code> hace la columna central el doble de ancha. Se puede mezclar con medidas fijas.
+					<code>gap</code> separa filas y columnas; también existen <code>row-gap</code> y
+					<code>column-gap</code> (los nombres antiguos <code>grid-gap</code>,
+					<code>grid-row-gap</code> y <code>grid-column-gap</code> siguen funcionando).</p>
+					<pre><code>.rejilla {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 1rem 2rem;          /* filas y columnas */
+}
+.con-lateral { grid-template-columns: 240px 1fr; }</code></pre>
+					<p class="propiedad">Propiedades: <code>gap</code>, <code>row-gap</code>, <code>column-gap</code>; unidad: <code>fr</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -1541,6 +1887,120 @@ input:checked + label { font-weight: 700; }</code></pre>
 }</code></pre>
 					<p class="propiedad"><code>&amp;</code> equivale al selector exterior.</p>
 				</article>
+				<article class="concepto-css" data-palabras="link visited hover active focus enlace pseudoclase orden lvha clase combinar a.rojo">
+					<h3>Pseudoclases de enlace y orden LVHA</h3>
+					<p>Los enlaces tienen cuatro estados clásicos: <code>:link</code> (sin visitar),
+					<code>:visited</code> (visitado), <code>:hover</code> (puntero encima) y
+					<code>:active</code> (mientras se pulsa). Si se escriben en ese orden, y con
+					<code>:focus</code> antes de <code>:hover</code>, las reglas posteriores no se anulan entre
+					sí. Una pseudoclase se puede combinar con una clase.</p>
+					<pre><code>a:link    { color: #c00; }
+a:visited { color: #609; }
+a:focus   { outline: 3px solid gold; }
+a:hover   { color: #f0f; }
+a:active  { color: #00f; }
+
+a.rojo:visited { color: red; }   /* solo enlaces con class="rojo" ya visitados */</code></pre>
+					<p class="propiedad">Regla mnemotécnica: LoVe-HAte (<code>link</code>, <code>visited</code>, <code>hover</code>, <code>active</code>)</p>
+				</article>
+				<article class="concepto-css" data-palabras="nth-child par impar even odd fórmula an+b 3n 3n+1 posición hijo múltiplos">
+					<h3>Posición con :nth-child y fórmulas</h3>
+					<p><code>:nth-child()</code> selecciona hijos por su posición, contando desde 1. Acepta un
+					número, las palabras <code>even</code> (pares) y <code>odd</code> (impares), o una fórmula
+					<code>an+b</code> donde <code>n</code> es un contador que empieza en 0.</p>
+					<pre><code>p:nth-child(2)    { }   /* el segundo hijo, si es un p */
+p:nth-child(even) { color: blue; }   /* 2, 4, 6... */
+p:nth-child(odd)  { color: teal; }   /* 1, 3, 5... */
+p:nth-child(3n)   { }   /* 3, 6, 9... */
+p:nth-child(3n+1) { }   /* 1, 4, 7... */
+p:nth-child(n+3)  { }   /* del tercero en adelante */
+p:nth-child(-n+3) { }   /* solo los tres primeros */</code></pre>
+					<p class="propiedad">Pseudoclase: <code>:nth-child(an+b)</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="nth-last-child último contar final desde atrás penúltimo hijos">
+					<h3>Contar desde el final: :nth-last-child</h3>
+					<p><code>:nth-last-child(n)</code> funciona como <code>:nth-child</code> pero cuenta desde el
+					último hijo hacia atrás. <code>:nth-last-child(1)</code> equivale a
+					<code>:last-child</code>.</p>
+					<pre><code>li:nth-last-child(2) { font-weight: 700; }   /* el penúltimo */
+li:nth-last-child(-n+3) { }                  /* los tres últimos */</code></pre>
+					<p class="propiedad">Pseudoclases: <code>:nth-last-child()</code>, <code>:last-child</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="nth-of-type first-of-type last-of-type only-of-type nth-last-of-type tipo etiqueta párrafo">
+					<h3>Posición dentro de su tipo: of-type</h3>
+					<p>Las variantes <code>of-type</code> cuentan solo los hermanos que tienen la misma etiqueta.
+					Son útiles cuando mezclas distintos elementos dentro de un mismo contenedor, por ejemplo un
+					título y varios párrafos.</p>
+					<pre><code>/* &lt;div&gt;&lt;h2&gt;…&lt;/h2&gt;&lt;p&gt;1&lt;/p&gt;&lt;p&gt;2&lt;/p&gt;&lt;p&gt;3&lt;/p&gt;&lt;/div&gt; */
+p:nth-of-type(2)  { color: blue; }   /* el segundo párrafo */
+p:first-of-type   { font-weight: 700; }
+p:last-of-type    { margin-bottom: 0; }
+img:only-of-type  { float: none; }   /* único img entre sus hermanos */</code></pre>
+					<p class="propiedad">Pseudoclases: <code>:nth-of-type()</code>, <code>:nth-last-of-type()</code>, <code>:first-of-type</code>, <code>:last-of-type</code>, <code>:only-of-type</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="first-child div &gt; p:first-child hijo directo descendiente em combinar">
+					<h3>Primer hijo de un contenedor concreto</h3>
+					<p><code>:first-child</code> se combina con otros selectores para precisar qué primer hijo
+					quieres. El combinador <code>&gt;</code> limita la regla a hijos directos; sin él, se aplica
+					a cualquier descendiente.</p>
+					<pre><code>p:first-child { color: blue; }            /* cualquier p que sea primer hijo */
+div &gt; p:first-child { color: blue; }      /* solo si su padre es un div */
+p:first-child em { color: blue; }         /* em dentro de un p que es primer hijo */
+a:only-child { text-decoration: none; }   /* enlace que es hijo único */</code></pre>
+					<p class="propiedad">Combinadores: espacio (descendiente) y <code>&gt;</code> (hijo directo)</p>
+				</article>
+				<article class="concepto-css" data-palabras="enabled disabled checked read-only read-write required optional formulario control estado">
+					<h3>Controles activados y desactivados</h3>
+					<p><code>:enabled</code> y <code>:disabled</code> seleccionan controles de formulario según
+					estén disponibles o no; <code>:checked</code> los marcados. Con <code>:read-only</code> y
+					<code>:read-write</code> se distinguen los campos editables.</p>
+					<pre><code>input:enabled  { background: #fff; }
+input:disabled { background: #eee; cursor: not-allowed; }
+input:checked + label { font-weight: 700; }
+input:read-only { border-style: dashed; }</code></pre>
+					<p class="propiedad">Pseudoclases: <code>:enabled</code>, <code>:disabled</code>, <code>:checked</code>, <code>:read-only</code>, <code>:read-write</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="lang idioma pseudoclase atributo lang|= es selector diferencia">
+					<h3>Selección por idioma: :lang() y [lang|=]</h3>
+					<p><code>:lang(es)</code> selecciona los elementos cuyo idioma es el español, incluso si lo
+					heredan de un elemento superior (por ejemplo, <code>&lt;body lang="es"&gt;</code>).
+					<code>[lang|="es"]</code> solo selecciona los elementos que tienen ellos mismos ese atributo
+					con el valor <code>es</code> o que empiezan por <code>es-</code>.</p>
+					<pre><code>p:lang(es) { color: red; }          /* body y p dentro de lang="es" */
+*[lang|="es"] { }                   /* solo el elemento que tiene el atributo */
+
+/* &lt;body lang="es"&gt;&lt;p&gt;Hola&lt;/p&gt;&lt;/body&gt;
+   :lang(es)  -&gt; body y p
+   [lang|=es] -&gt; solo body */</code></pre>
+					<p class="propiedad">Pseudoclase: <code>:lang()</code>; selector de atributo: <code>[lang|=valor]</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="first-letter first-line letra capital capitular párrafo pseudoelemento inicial">
+					<h3>Primera letra y primera línea</h3>
+					<p><code>::first-letter</code> da estilo a la primera letra de un bloque de texto y
+					<code>::first-line</code> a su primera línea (la que quepa en cada momento). Solo admiten
+					algunas propiedades de texto, fuente, color y fondo, entre otras.</p>
+					<pre><code>p::first-letter {
+  float: left;
+  font-size: 3em;
+  line-height: 1;
+  color: crimson;
+  margin-right: .1em;
+}
+p::first-line { font-variant: small-caps; }</code></pre>
+					<p class="propiedad">Pseudoelementos: <code>::first-letter</code>, <code>::first-line</code> (en CSS3 se escriben con dos puntos)</p>
+				</article>
+				<article class="concepto-css" data-palabras="content before after capítulo punto final url attr imagen insertar texto generado">
+					<h3>Insertar texto o imagen con content</h3>
+					<p>Con <code>::before</code> y <code>::after</code> puedes insertar una cadena, una imagen
+					(<code>url()</code>) o el valor de un atributo (<code>attr()</code>) antes o después del
+					contenido de un elemento. No es contenido real: no se puede seleccionar bien ni lo leen
+					todos los lectores de pantalla, así que no pongas ahí información importante.</p>
+					<pre><code>h2::before { content: "Capítulo - "; }
+p::after   { content: "."; }
+h1::before { content: url("logo.svg"); }
+a[href^="http"]::after { content: " (" attr(href) ")"; }</code></pre>
+					<p class="propiedad">Propiedad: <code>content</code>; pseudoelementos: <code>::before</code>, <code>::after</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -1720,6 +2180,50 @@ dialog { opacity: 0; }</code></pre>
 					<pre><code>.menu { will-change: transform; }</code></pre>
 					<p class="propiedad">Propiedad: <code>will-change</code></p>
 				</article>
+				<article class="concepto-css" data-palabras="transition-property none all lista propiedades animables numérico color tamaño valores">
+					<h3>transition-property: qué propiedades animar</h3>
+					<p><code>transition-property</code> indica qué propiedades se animan: <code>none</code>
+					(ninguna), <code>all</code> (todas las animables) o una lista separada por comas. Solo se
+					pueden animar propiedades con valores intermedios, como números, medidas, colores o tiempos;
+					<code>display</code> no suele poder animarse. Además, hace falta un cambio de valor (con
+					<code>:hover</code>, una clase o JavaScript).</p>
+					<pre><code>.boton {
+  background: teal;
+  width: 80px;
+  transition-property: background-color, width;
+  transition-duration: .3s;
+}
+.boton:hover { background: tomato; width: 240px; }</code></pre>
+					<p class="propiedad">Propiedad: <code>transition-property</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="transition-delay retraso espera segundos milisegundos retardo transición">
+					<h3>transition-delay: retrasar el inicio</h3>
+					<p><code>transition-delay</code> espera el tiempo indicado antes de empezar la transición, en
+					segundos (<code>s</code>) o milisegundos (<code>ms</code>). Un valor negativo la empieza ya
+					avanzada.</p>
+					<pre><code>.tarjeta {
+  transition: opacity .4s ease 1s;   /* empieza 1 s después */
+}
+.tarjeta:hover { opacity: .3; }</code></pre>
+					<p class="propiedad">Propiedad: <code>transition-delay</code>; es el segundo valor de tiempo en el atajo <code>transition</code>.</p>
+				</article>
+				<article class="concepto-css" data-palabras="transition atajo varias propiedades coma duración timing delay orden ejemplo">
+					<h3>transition con varias propiedades</h3>
+					<p>El atajo <code>transition</code> admite una transición por propiedad, separadas por comas.
+					Cada una sigue el orden: propiedad, duración, curva de velocidad y retraso. Solo la
+					propiedad y la duración son imprescindibles.</p>
+					<pre><code>#capa2 {
+  width: 80px;
+  background-color: fuchsia;
+  opacity: 1;
+  transition:
+    width 2s,
+    background-color 3s linear,
+    opacity 3s ease-out 3s;
+}
+#capa2:hover { width: 240px; background-color: green; opacity: .2; }</code></pre>
+					<p class="propiedad">Orden: <code>propiedad duración curva retraso</code></p>
+				</article>
 			</div>
 		</section>
 
@@ -1884,6 +2388,109 @@ dialog { opacity: 0; }</code></pre>
   .boton { border: 1px solid ButtonText; }
 }</code></pre>
 					<p class="propiedad">Características: <code>prefers-contrast</code>, <code>forced-colors</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="responsive adaptativo adaptable diseño web dispositivo diferencia fluido">
+					<h3>Diseño responsive y diseño adaptativo</h3>
+					<p>Ambos buscan que la web se vea bien en cualquier dispositivo, pero de forma distinta. El
+					diseño responsive se ajusta de forma continua al ancho disponible (medidas flexibles,
+					imágenes fluidas y media queries). El diseño adaptativo prepara varios diseños fijos (móvil,
+					tableta, escritorio) y elige el que corresponde.</p>
+					<pre><code>/* Responsive: la rejilla se adapta sola */
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}</code></pre>
+					<p class="propiedad">La base del diseño responsive son las media queries y las unidades flexibles.</p>
+				</article>
+				<article class="concepto-css" data-palabras="breakpoint punto ruptura discontinuidad 480 768 1024 1224 móvil tablet escritorio anchos">
+					<h3>Puntos de ruptura (breakpoints)</h3>
+					<p>Un breakpoint es el ancho en el que la estructura de la página cambia. Como referencia se
+					usan unos 320-480 px (móvil), 600-800 px (tableta pequeña), 768-1024 px (tableta) y más de
+					1224 px (escritorio), aunque a menudo basta un único punto en 768 px. Lo ideal es ponerlos
+					donde el contenido empieza a verse mal, no según un dispositivo concreto.</p>
+					<pre><code>/* Referencia habitual */
+/*  móvil          320 – 480 px
+    tableta peq.   600 – 800 px
+    tableta        768 – 1024 px
+    escritorio     &gt; 1224 px
+    pantallas grandes &gt; 1824 px  */
+
+@media (min-width: 768px) { /* a partir de tableta */ }</code></pre>
+					<p class="propiedad">Cambia el diseño cuando el contenido lo pida.</p>
+				</article>
+				<article class="concepto-css" data-palabras="link media atributo hoja estilos pantalla impresión max-width html condicional">
+					<h3>Hoja de estilos según el medio: link media</h3>
+					<p>El atributo <code>media</code> de la etiqueta <code>link</code> carga una hoja de estilos
+					solo cuando se cumple una condición. La hoja se descarga siempre, pero únicamente se aplica
+					cuando coincide.</p>
+					<pre><code>&lt;link rel="stylesheet" href="base.css"&gt;
+&lt;link rel="stylesheet" href="movil.css" media="screen and (max-width: 640px)"&gt;
+&lt;link rel="stylesheet" href="imprimir.css" media="print"&gt;</code></pre>
+					<p class="propiedad">Se aplica la hoja <code>movil.css</code> en ventanas de hasta 640 px de ancho.</p>
+				</article>
+				<article class="concepto-css" data-palabras="media type all screen print speech braille embossed tipo medio dispositivo">
+					<h3>Tipos de medio</h3>
+					<p>El tipo de medio indica en qué soporte se muestra el documento: <code>all</code> (por
+					defecto, todos), <code>screen</code> (pantallas), <code>print</code> (impresión y vista
+					previa) y <code>speech</code> (sintetizadores de voz). Otros tipos antiguos, como
+					<code>braille</code>, <code>embossed</code>, <code>handheld</code> o <code>tv</code>, están
+					obsoletos.</p>
+					<pre><code>@media all    { }
+@media screen { body { font-size: 1rem; } }
+@media print  { nav { display: none; } }
+@media speech { .decorativo { speak: never; } }</code></pre>
+					<p class="propiedad">Tipos vigentes: <code>all</code>, <code>screen</code>, <code>print</code>, <code>speech</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="width height min-width max-width orientation portrait landscape aspect-ratio media query ventana">
+					<h3>Media queries: tamaño, orientación y proporción</h3>
+					<p>Las condiciones de tamaño se refieren a la ventana: <code>width</code> y
+					<code>height</code>, con sus variantes <code>min-</code> y <code>max-</code>.
+					<code>orientation</code> vale <code>portrait</code> (vertical) o <code>landscape</code>
+					(apaisado) y <code>aspect-ratio</code> compara la proporción, como <code>16/9</code>.</p>
+					<pre><code>@media (max-width: 480px) { }
+@media (min-height: 800px) { }
+@media (orientation: landscape) { }
+@media (min-aspect-ratio: 16/9) { }
+@media (min-width: 600px) and (max-width: 900px) { }</code></pre>
+					<p class="propiedad">Características: <code>width</code>, <code>height</code>, <code>orientation</code>, <code>aspect-ratio</code> (y sus <code>min-</code>/<code>max-</code>)</p>
+				</article>
+				<article class="concepto-css" data-palabras="resolution min-resolution dpi dppx color monochrome scan grid hover pointer device-width media query pantalla">
+					<h3>Media queries: resolución, color y dispositivo</h3>
+					<p>Otras condiciones útiles: <code>resolution</code> (densidad de píxeles, en <code>dpi</code>
+					o <code>dppx</code>), <code>color</code> (bits por color), <code>monochrome</code>,
+					<code>scan</code> (<code>progressive</code> o <code>interlace</code>), <code>hover</code> y
+					<code>pointer</code> (capacidades del dispositivo). Las variantes <code>device-width</code>
+					y <code>device-height</code> están obsoletas: usa <code>width</code> y <code>height</code>.</p>
+					<pre><code>@media (min-resolution: 2dppx) { }   /* pantallas de alta densidad */
+@media print and (color) { }         /* impresión a color */
+@media (monochrome) { }
+@media (hover: none) and (pointer: coarse) { }   /* táctil */</code></pre>
+					<p class="propiedad">Características: <code>resolution</code>, <code>color</code>, <code>monochrome</code>, <code>scan</code>, <code>hover</code>, <code>pointer</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="and not only coma or operador lógico media query combinar condiciones">
+					<h3>Operadores de media queries: and, coma, not y only</h3>
+					<p><code>and</code> exige que se cumplan todas las condiciones; una coma equivale a «o»;
+					<code>not</code> niega toda la consulta; <code>only</code> oculta la regla a navegadores muy
+					antiguos que no entienden las media queries, aunque hoy rara vez hace falta.</p>
+					<pre><code>@media screen and (min-width: 600px) and (orientation: landscape) { }
+@media (max-width: 480px), print { }          /* móvil O impresión */
+@media not print { }
+@media only screen and (max-width: 768px) { }</code></pre>
+					<p class="propiedad">Operadores: <code>and</code>, <code>,</code> (o), <code>not</code>, <code>only</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="rangos móvil tablet 480 481 768 max-width min-width solapar mobile first desktop first">
+					<h3>Dos rangos sin solaparse</h3>
+					<p>Si defines rangos con <code>max-width</code> y <code>min-width</code>, deja un píxel de
+					diferencia para que no se solapen. Otra estrategia es «mobile first»: se escribe primero el
+					diseño del móvil y se añaden mejoras con <code>min-width</code> para pantallas mayores.</p>
+					<pre><code>@media only screen and (max-width: 480px) { /* móvil */ }
+@media only screen and (min-width: 481px) and (max-width: 768px) { /* tableta */ }
+
+/* Mobile first */
+.menu { display: block; }
+@media (min-width: 768px) { .menu { display: flex; } }</code></pre>
+					<p class="propiedad">Con <code>mobile first</code>, el CSS base ya es el del móvil y es más sencillo de mantener.</p>
 				</article>
 			</div>
 		</section>
@@ -2068,6 +2675,72 @@ animation-fill-mode: both;</code></pre>
   contain-intrinsic-size: auto 600px;
 }</code></pre>
 					<p class="propiedad">Propiedades: <code>content-visibility</code>, <code>contain-intrinsic-size</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="translate translateX translateY mover desplazar transform trasladar px porcentaje">
+					<h3>translate: mover un elemento</h3>
+					<p><code>translate(x, y)</code> desplaza el elemento en horizontal (x, hacia la derecha) y
+					vertical (y, hacia abajo) respecto a su posición original. Los valores negativos lo mueven
+					al lado contrario. <code>translateX()</code> y <code>translateY()</code> mueven en un solo
+					eje. Los porcentajes se calculan sobre el propio tamaño del elemento.</p>
+					<pre><code>.capa1 { transform: translate(150px, 20px); }
+.sube  { transform: translateY(-10px); }
+.centro { transform: translate(-50%, -50%); }</code></pre>
+					<p class="propiedad">Funciones: <code>translate()</code>, <code>translateX()</code>, <code>translateY()</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="rotate girar rotación grados deg rad turn sentido agujas reloj transform">
+					<h3>rotate: girar un elemento</h3>
+					<p><code>rotate()</code> gira el elemento alrededor de su punto de giro (por defecto, el
+					centro). El ángulo puede darse en grados (<code>deg</code>), radianes (<code>rad</code>),
+					gradianes (<code>grad</code>) o vueltas (<code>turn</code>). Un valor positivo gira en el
+					sentido de las agujas del reloj y uno negativo, al contrario.</p>
+					<pre><code>.capa2 { transform: rotate(30deg); }
+.inverso { transform: rotate(-15deg); }
+.vuelta { transform: rotate(.25turn); }   /* 90° */</code></pre>
+					<p class="propiedad">Función: <code>rotate(ángulo)</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="scale scaleX scaleY escalar ampliar reducir tamaño proporción transform voltear">
+					<h3>scale: ampliar y reducir</h3>
+					<p><code>scale(x, y)</code> cambia el tamaño en cada eje: 1 es el tamaño original, más de 1
+					amplía y menos de 1 reduce. Con un solo valor escala ambos ejes. <code>scaleX()</code> y
+					<code>scaleY()</code> actúan en un eje, y un valor negativo voltea el elemento.</p>
+					<pre><code>.capa3 { transform: scale(1.2, 0.8); }
+.zoom  { transform: scale(1.1); }
+.espejo { transform: scaleX(-1); }</code></pre>
+					<p class="propiedad">Funciones: <code>scale()</code>, <code>scaleX()</code>, <code>scaleY()</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="skew skewX skewY inclinar sesgar romboide transform ángulo">
+					<h3>skew: inclinar un elemento</h3>
+					<p><code>skew(x, y)</code> inclina el elemento según dos ángulos: el primero en horizontal y el
+					segundo en vertical, hasta convertirlo en un romboide. <code>skewX()</code> y
+					<code>skewY()</code> lo inclinan solo en un eje.</p>
+					<pre><code>.capa4 { transform: skew(10deg, 15deg); }
+.cinta { transform: skewX(-12deg); }</code></pre>
+					<p class="propiedad">Funciones: <code>skew()</code>, <code>skewX()</code>, <code>skewY()</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="transform combinar varias funciones orden scale rotate translate espacio separar">
+					<h3>Combinar transformaciones: el orden importa</h3>
+					<p>Después de <code>transform</code> puedes poner varias funciones separadas por espacios. Se
+					aplican de derecha a izquierda sobre el sistema de coordenadas del elemento, así que el
+					orden cambia el resultado: girar y luego mover no es lo mismo que mover y luego girar.</p>
+					<pre><code>.capa6 { transform: scale(1.5, 0.5) rotate(45deg); }
+
+.a { transform: rotate(45deg) translateX(100px); }
+.b { transform: translateX(100px) rotate(45deg); }   /* otro resultado */</code></pre>
+					<p class="propiedad">Propiedad: <code>transform</code></p>
+				</article>
+				<article class="concepto-css" data-palabras="transform hover dinámico animar rotar pseudoclase transition efecto">
+					<h3>Transformar al pasar el ratón</h3>
+					<p>Combinando <code>transform</code> con <code>:hover</code> (o <code>:focus</code>) un
+					elemento reacciona a la interacción. Sin <code>transition</code>, el cambio es instantáneo;
+					con ella, se anima de forma suave y vuelve a su estado al retirar el puntero.</p>
+					<pre><code>#principal {
+  transition: transform .3s ease;
+}
+#principal:hover,
+#principal:focus-visible {
+  transform: rotate(5deg);
+}</code></pre>
+					<p class="propiedad">Pseudoclases: <code>:hover</code>, <code>:focus-visible</code>; propiedad: <code>transition</code></p>
 				</article>
 			</div>
 		</section>
