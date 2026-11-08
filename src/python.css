@@ -1,0 +1,43 @@
+/*
+Estilos de la guía de Python.
+Se carga después de css.css y sustituye su paleta por la propia de esta guía.
+Autor: apesfer
+*/
+
+.guia-css.guia-python {
+    --guia-tinta: #1f2933;
+    --guia-papel: #f1f6fa;
+    --guia-blanco: #ffffff;
+    --guia-verde: #2b5b84;
+    --guia-linea: #cfdbe6;
+    --guia-suave: #52606d;
+    background: var(--guia-papel);
+    color: var(--guia-tinta);
+}
+
+.guia-css.guia-python a:hover { color: #b45309; }
+.guia-css.guia-python :focus-visible { outline-color: #b45309; }
+.guia-css.guia-python .guia-portada { background: linear-gradient(115deg, #1b3a57, #306998 70%, #4b7ea8); }
+.guia-css.guia-python .mini-nav-guias { background: #1b3a57; }
+.guia-css.guia-python .mini-nav-guias a[aria-current="page"] { background: #ffd43b; color: #1b3a57; }
+.guia-css.guia-python .mini-nav-guias a[aria-current="page"]:hover { background: #ffe27a; color: #1b3a57; }
+.guia-css.guia-python .guia-etiqueta,
+.guia-css.guia-python .pie-guia a { color: #ffd43b; }
+.guia-css.guia-python .guia-portada h1 em { color: #cfe3f5; }
+.guia-css.guia-python .campo-busqueda > span,
+.guia-css.guia-python .atajos-css a { color: #2b5b84; }
+.guia-css.guia-python .atajos-css a { background: #dce8f2; }
+.guia-css.guia-python .atajos-css a:hover { border-color: #b7cde0; background: #cadcec; }
+.guia-css.guia-python #resultado-python { margin: 7px 0 0; color: #d6e6f4; font-size: .82rem; }
+.guia-css.guia-python .nota-css { border-left-color: #b45309; background: #e3edf5; }
+.guia-css.guia-python .nota-css code,
+.guia-css.guia-python .regla-practica code { background: #d2e2ef; color: #1b3a57; }
+.guia-css.guia-python .cabecera-categoria > span { color: #b45309; }
+.guia-css.guia-python .cabecera-categoria h2,
+.guia-css.guia-python .regla-practica h2,
+.guia-css.guia-python .sin-resultados-css h2,
+.guia-css.guia-python .concepto-css h3 { color: #2b5b84; }
+.guia-css.guia-python .concepto-css pre { background: #1b2733; }
+.guia-css.guia-python .concepto-css .propiedad code { color: #9a3412; }
+.guia-css.guia-python .regla-practica { background: #e3edf5; }
+.guia-css.guia-python .pie-guia { background: #1b3a57; }

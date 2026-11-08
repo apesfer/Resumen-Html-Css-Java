@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!--
+Guía fácil de expresiones regulares
+Guía de expresiones regulares: fundamentos, patrones listos (correo, teléfono, DNI, NIE, IBAN, fechas), reemplazos, uso en cada lenguaje y buenas prácticas, con probador interactivo.
+Autor: apesfer
+-->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Guía de expresiones regulares: fundamentos, patrones listos (correo, teléfono, DNI, NIE, IBAN, fechas), reemplazos, uso en cada lenguaje y buenas prácticas, con probador interactivo.">
+	<title>Guía fácil de expresiones regulares</title>
+	<link rel="stylesheet" href="src/css.css">
+	<link rel="stylesheet" href="src/regex.css">
+	<link rel="stylesheet" href="src/comun.css">
+</head>
+
+<body id="inicio-pagina" class="guia-css guia-regex">
+	<header class="guia-portada">
+		<nav class="mini-nav-guias" aria-label="Cambiar entre guías">
+			<a href="inicio.html">Inicio</a>
+			<a href="index.html">HTML</a>
+			<a href="css.html">CSS</a>
+			<a href="js.html">JavaScript</a>
+			<a href="java.html">Java</a>
+			<a href="python.html">Python</a>
+			<a href="regex.html" aria-current="page">Regex</a>
+			<a href="errores.html">Errores</a>
+			<a class="subir-inicio" href="#inicio-pagina" aria-label="Volver al principio" title="Volver al principio">↑</a>
+		</nav>
+		<p class="guia-etiqueta">Guía de consulta / Expresiones regulares</p>
+		<h1>Expresiones regulares, <em>sin misterio.</em></h1>
+		<p class="guia-bajada">Patrones listos para copiar (correo, teléfono, DNI, IBAN, fechas…), explicaciones paso a paso y un probador para ver las coincidencias al instante.</p>
+		<form class="buscador-css" role="search" onsubmit="return false">
+			<label for="buscar">¿Qué quieres aprender o encontrar?</label>
+			<div class="campo-busqueda">
+				<span aria-hidden="true">⌕</span>
+				<input id="buscar" type="search" placeholder="Prueba: correo, DNI, fecha, lookahead, grupo, Python..." autocomplete="off">
+				<button id="limpiar" type="button" aria-label="Limpiar búsqueda" title="Limpiar búsqueda">×</button>
+			</div>
+			<p id="resultado-regex" aria-live="polite">Cargando conceptos...</p>
+		</form>
+	</header>
+
+	<main class="guia-contenido">
+		<section class="probador" aria-labelledby="probador-titulo">
+			<h2 id="probador-titulo">Probador de expresiones regulares</h2>
+			<p class="probador-ayuda">Escribe un patrón (sin barras) y un texto: las coincidencias se resaltan al instante. Usa la lista para cargar un ejemplo.</p>
+			<div class="probador-fila">
+				<div class="grande">
+					<label for="rx-patron">Patrón</label>
+					<input id="rx-patron" type="text" spellcheck="false" autocomplete="off" autocapitalize="none" value="\b\d{2}/\d{2}/\d{4}\b">
+				</div>
+				<div class="pequeno">
+					<label for="rx-flags">Banderas</label>
+					<input id="rx-flags" type="text" spellcheck="false" autocomplete="off" maxlength="8" value="g">
+				</div>
+				<div class="medio">
+					<label for="rx-ejemplo">Ejemplos</label>
+					<select id="rx-ejemplo"></select>
+				</div>
+			</div>
+			<label for="rx-texto">Texto de prueba</label>
+			<textarea id="rx-texto" rows="5" spellcheck="false">Hoy es 25/12/2026 y mañana 26/12/2026.
+Fecha incorrecta: 5/12/26</textarea>
+			<p id="rx-estado" role="status"></p>
+			<pre id="rx-salida" class="probador-salida" aria-label="Texto con las coincidencias resaltadas"></pre>
+			<ol id="rx-grupos" class="probador-grupos" aria-label="Detalle de las coincidencias"></ol>
+		</section>
+
+		<nav class="atajos-css" aria-label="Categorías">
+			<a href="#basico">Fundamentos</a>
+			<a href="#patrones">Patrones listos para usar</a>
+			<a href="#reemplazos">Buscar, extraer y reemplazar</a>
+			<a href="#lenguajes">Regex en cada lenguaje y herramienta</a>
+			<a href="#consejos">Buenas prácticas</a>
+		</nav>
+
+		<aside class="nota-css"><strong>La idea básica:</strong> una expresión regular describe un tipo de texto. Se compone de caracteres normales, <code>clases</code> como <code>[a-z]</code> o <code>\d</code>, <code>cuantificadores</code> como <code>+</code> o <code>{2,4}</code>, <code>anclas</code> como <code>^</code> y <code>$</code> y <code>grupos</code> entre paréntesis. Los patrones de esta guía no llevan delimitadores: añade <code>/…/</code> en JavaScript o las comillas de tu lenguaje.</aside>
+
+		<section class="categoria-css" id="basico" data-categoria>
+			<div class="cabecera-categoria"><span>00</span>
+				<div>
+					<p>Los bloques de construcción</p>
+					<h2>Fundamentos</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="que-es-una-expresion-regular" data-palabras="regex expresión regular patrón buscar texto coincidencia introducción qué es regexp">
+					<h3>Qué es una expresión regular</h3>
+					<p>Una expresión regular (regex) es un patrón que describe un conjunto de textos. Sirve para
+					buscar, validar, extraer y reemplazar. Se escribe con caracteres normales y símbolos
+					especiales (metacaracteres).</p>
+					<pre><code>Patrón:  \d{3}-\d{4}
+Texto:   Llama al 600-1234 mañana
+Coincide: 600-1234</code></pre>
+					<p class="propiedad">Se puede probar en el probador de esta página.</p>
+				</article>
+				<article class="concepto-css" id="caracteres-literales" data-palabras="literal carácter exacto texto buscar palabra coincide letras">
+					<h3>Caracteres literales</h3>
+					<p>Los caracteres normales coinciden consigo mismos. El patrón <code>gato</code> encuentra
+					«gato» dentro de cualquier texto.</p>
+					<pre><code>Patrón:  gato
+Coincide con: gato · el gato negro · gatos
+No coincide:  Gato (por defecto distingue mayúsculas)</code></pre>
+					<p class="propiedad">Distingue mayúsculas, salvo con la bandera <code>i</code>.</p>
+				</article>
+				<article class="concepto-css" id="metacaracteres-y-como-escaparlos" data-palabras="metacaracteres escape barra invertida \ . * + ? ^ $ ( ) [ ] { } | caracteres especiales">
+					<h3>Metacaracteres y cómo escaparlos</h3>
+					<p>Doce caracteres tienen significado especial: <code>. ^ $ * + ? ( ) [ ] { } | \</code>. Para
+					buscarlos literalmente se escapan con una barra invertida.</p>
+					<pre><code>Patrón:  3\.14        coincide con "3.14" (no con "3x14")
+Patrón:  \(oferta\)   coincide con "(oferta)"
+Patrón:  a\+b         coincide con "a+b"</code></pre>
+					<p class="propiedad">Escape: <code>\</code></p>
+				</article>
+				<article class="concepto-css" id="el-punto-cualquier-caracter" data-palabras="punto . cualquier carácter comodín salto línea dotall s">
+					<h3>El punto: cualquier carácter</h3>
+					<p>El punto representa un carácter cualquiera, salvo el salto de línea (con la bandera
+					<code>s</code> también lo incluye).</p>
+					<pre><code>Patrón:  c.sa
+Coincide: casa · cosa · c9sa
+No coincide: csa · c\nsa</code></pre>
+					<p class="propiedad">Símbolo: <code>.</code></p>
+				</article>
+				<article class="concepto-css" id="clases-de-caracteres-abc" data-palabras="clase caracteres corchetes [] conjunto opciones rango [a-z] [0-9]">
+					<h3>Clases de caracteres: [abc]</h3>
+					<p>Los corchetes definen un conjunto: coincide con uno solo de los caracteres indicados. Se
+					admiten rangos con un guion.</p>
+					<pre><code>[aeiou]         una vocal minúscula
+[a-z]           una letra minúscula
+[A-Za-z0-9]     letra o dígito
+[0-9a-fA-F]     dígito hexadecimal</code></pre>
+					<p class="propiedad">Dentro de <code>[]</code>, casi todos los símbolos pierden su significado especial.</p>
+				</article>
+				<article class="concepto-css" id="clases-negadas-abc" data-palabras="negar clase [^ ] excluir caracteres cualquiera menos negación">
+					<h3>Clases negadas: [^abc]</h3>
+					<p>Un <code>^</code> justo después del corchete de apertura niega el conjunto: cualquier
+					carácter menos esos.</p>
+					<pre><code>[^0-9]      cualquier carácter que no sea un dígito
+[^\s]       cualquier carácter que no sea un espacio
+"[^"]*"     texto entre comillas dobles</code></pre>
+					<p class="propiedad">No confundir con <code>^</code> como ancla al inicio.</p>
+				</article>
+				<article class="concepto-css" id="clases-abreviadas-d-w-s" data-palabras="\d \w \s \D \W \S dígito palabra espacio abreviadas clases predefinidas">
+					<h3>Clases abreviadas: \d, \w, \s</h3>
+					<p>Atajos habituales: <code>\d</code> (dígito), <code>\w</code> (letra, dígito o
+					<code>_</code>), <code>\s</code> (espacio, tabulador, salto). Las mayúsculas son la
+					negación.</p>
+					<pre><code>\d  = [0-9]              \D  = no dígito
+\w  = [A-Za-z0-9_]       \W  = no palabra
+\s  = espacio, \t, \n    \S  = no espacio</code></pre>
+					<p class="propiedad"><code>\w</code> no incluye tildes ni <code>ñ</code> en algunos lenguajes.</p>
+				</article>
+				<article class="concepto-css" id="cuantificadores-y-n-m" data-palabras="cuantificadores * + ? {n} {n,m} repeticiones veces opcional uno o más">
+					<h3>Cuantificadores: *, +, ? y {n,m}</h3>
+					<p>Indican cuántas veces se repite lo anterior: <code>*</code> (0 o más), <code>+</code> (1 o
+					más), <code>?</code> (0 o 1) y <code>{n,m}</code> (entre n y m).</p>
+					<pre><code>ab*c        ac · abc · abbbc
+ab+c        abc · abbc          (no ac)
+colou?r     color · colour
+\d{4}       exactamente 4 dígitos
+\d{2,4}     de 2 a 4 dígitos
+\d{3,}      3 o más dígitos</code></pre>
+					<p class="propiedad">Cuantificadores: <code>*</code>, <code>+</code>, <code>?</code>, <code>{n}</code>, <code>{n,}</code>, <code>{n,m}</code></p>
+				</article>
+				<article class="concepto-css" id="codicioso-frente-a-perezoso" data-palabras="greedy lazy codicioso perezoso *? +? ?? mínimo máximo coincidencia más corta">
+					<h3>Codicioso frente a perezoso</h3>
+					<p>Por defecto los cuantificadores son codiciosos: toman todo lo que pueden. Añadiendo
+					<code>?</code> se vuelven perezosos y toman lo mínimo.</p>
+					<pre><code>Texto:    &lt;b&gt;uno&lt;/b&gt; y &lt;b&gt;dos&lt;/b&gt;
+&lt;.+&gt;      →  &lt;b&gt;uno&lt;/b&gt; y &lt;b&gt;dos&lt;/b&gt;   (codicioso)
+&lt;.+?&gt;     →  &lt;b&gt;   (perezoso, primera etiqueta)</code></pre>
+					<p class="propiedad">Perezosos: <code>*?</code>, <code>+?</code>, <code>??</code>, <code>{n,m}?</code></p>
+				</article>
+				<article class="concepto-css" id="anclas-y" data-palabras="ancla ^ $ inicio fin línea cadena validar completo \A \z multilínea m">
+					<h3>Anclas: ^ y $</h3>
+					<p><code>^</code> coincide con el inicio y <code>$</code> con el final del texto (o de cada
+					línea con la bandera <code>m</code>). Son imprescindibles para validar un valor completo.</p>
+					<pre><code>^\d+$       solo dígitos (todo el texto)
+\d+         dígitos en cualquier parte
+^Hola       empieza por Hola
+fin$        termina en fin</code></pre>
+					<p class="propiedad">Para validar, anclar siempre con <code>^…$</code>.</p>
+				</article>
+				<article class="concepto-css" id="limites-de-palabra-b" data-palabras="\b \B límite palabra word boundary palabra completa buscar entera">
+					<h3>Límites de palabra: \b</h3>
+					<p><code>\b</code> marca el límite entre un carácter de palabra y otro que no lo es. Sirve para
+					buscar palabras completas.</p>
+					<pre><code>\bgato\b      coincide con "gato", no con "gatos" ni "agato"
+\Bato\b       "gato" (ato dentro de una palabra)</code></pre>
+					<p class="propiedad">Símbolos: <code>\b</code>, <code>\B</code></p>
+				</article>
+				<article class="concepto-css" id="grupos-de-captura" data-palabras="grupo captura paréntesis () agrupar extraer parte $1 \1 coincidencia">
+					<h3>Grupos de captura ( )</h3>
+					<p>Los paréntesis agrupan una parte del patrón (para aplicarle un cuantificador) y capturan lo
+					que coincide, que se puede reutilizar.</p>
+					<pre><code>(\d{2})/(\d{2})/(\d{4})    fecha: grupos 1, 2 y 3
+(ab)+                      ab · abab · ababab
+Reemplazo: $3-$2-$1        25/12/2026 → 2026-12-25</code></pre>
+					<p class="propiedad">Referencias: <code>$1</code> o <code>\1</code> según el lenguaje.</p>
+				</article>
+				<article class="concepto-css" id="grupos-sin-captura-y-con-nombre" data-palabras="(?: ) (?&lt;nombre&gt;) grupo no captura nombrado named group (?P&lt;n&gt;) agrupar sin guardar">
+					<h3>Grupos sin captura y con nombre</h3>
+					<p><code>(?:…)</code> agrupa sin capturar. <code>(?&lt;nombre&gt;…)</code> (o
+					<code>(?P&lt;nombre&gt;…)</code> en Python) da nombre a un grupo.</p>
+					<pre><code>(?:ab)+                         agrupa sin capturar
+(?&lt;anio&gt;\d{4})-(?&lt;mes&gt;\d{2})    grupos con nombre</code></pre>
+					<p class="propiedad">Sintaxis: <code>(?:…)</code>, <code>(?&lt;nombre&gt;…)</code></p>
+				</article>
+				<article class="concepto-css" id="alternancia" data-palabras="alternancia | o opciones varias palabras alternativas or">
+					<h3>Alternancia: |</h3>
+					<p>La barra vertical actúa como «o» entre alternativas. Se limita con paréntesis.</p>
+					<pre><code>gato|perro            gato o perro
+^(lunes|martes)$      exactamente lunes o martes
+gr(a|e)y              gray o grey</code></pre>
+					<p class="propiedad">Símbolo: <code>|</code></p>
+				</article>
+				<article class="concepto-css" id="referencias-hacia-atras-1" data-palabras="backreference \1 \k&lt;nombre&gt; repetido palabras duplicadas mismo texto referencia atrás">
+					<h3>Referencias hacia atrás: \1</h3>
+					<p><code>\1</code> repite lo que capturó el grupo 1. Permite detectar repeticiones.</p>
+					<pre><code>\b(\w+)\s+\1\b        palabras repetidas: "el el"
+(['"]).*?\1           texto entre comillas simples o dobles
+^(\d)\1+$             todos los dígitos iguales</code></pre>
+					<p class="propiedad">Símbolos: <code>\1</code>, <code>\2</code>, <code>\k&lt;nombre&gt;</code></p>
+				</article>
+				<article class="concepto-css" id="anticipacion-y-retroceso-lookahead-y-lookbehind" data-palabras="lookahead lookbehind (?= (?! (?&lt;= (?&lt;! aserción anticipación retroceso positiva negativa">
+					<h3>Anticipación y retroceso: lookahead y lookbehind</h3>
+					<p>Las aserciones comprueban lo que hay antes o después sin consumirlo: <code>(?=…)</code> y
+					<code>(?!…)</code> miran hacia delante; <code>(?&lt;=…)</code> y <code>(?&lt;!…)</code>,
+					hacia atrás.</p>
+					<pre><code>\d+(?=€)            números seguidos de € (sin incluir €)
+(?&lt;=\$)\d+           números precedidos de $
+foo(?!bar)           foo que no va seguido de bar
+^(?=.*\d)(?=.*[A-Z]).{8,}$     contiene dígito y mayúscula</code></pre>
+					<p class="propiedad">Símbolos: <code>(?=)</code>, <code>(?!)</code>, <code>(?&lt;=)</code>, <code>(?&lt;!)</code></p>
+				</article>
+				<article class="concepto-css" id="banderas-o-modificadores" data-palabras="banderas flags g i m s u x modificadores global insensible multilínea unicode">
+					<h3>Banderas o modificadores</h3>
+					<p>Las banderas cambian el comportamiento del patrón: <code>g</code> (global, todas las
+					coincidencias), <code>i</code> (ignorar mayúsculas), <code>m</code> (multilínea),
+					<code>s</code> (punto incluye saltos), <code>u</code> (Unicode) y <code>x</code> (modo
+					extendido con comentarios, en algunos lenguajes).</p>
+					<pre><code>/gato/gi     JavaScript: todas, sin distinguir mayúsculas
+(?i)gato     Java, Python, PCRE: bandera dentro del patrón
+re.I | re.M  Python</code></pre>
+					<p class="propiedad">Banderas: <code>g i m s u x y</code></p>
+				</article>
+				<article class="concepto-css" id="propiedades-unicode-p-l" data-palabras="\p{L} unicode letras acentos ñ propiedades \p{Lu} \p{N} emoji idioma">
+					<h3>Propiedades Unicode: \p{L}</h3>
+					<p>Con el modo Unicode, <code>\p{L}</code> coincide con cualquier letra de cualquier idioma
+					(con tildes y eñes); <code>\p{Lu}</code>, mayúsculas; <code>\p{N}</code>, números.</p>
+					<pre><code>\p{L}+              palabra con tildes: ñandú, café
+\p{Lu}\p{Ll}+       Palabra con inicial mayúscula
+[\p{L}\p{M}'’ -]+   nombre propio</code></pre>
+					<p class="propiedad">En JavaScript requiere la bandera <code>u</code>.</p>
+				</article>
+				<article class="concepto-css" id="escapes-de-caracteres-especiales" data-palabras="\n \t \r \x \u escapes caracteres control salto línea tabulador unicode hexadecimal">
+					<h3>Escapes de caracteres especiales</h3>
+					<p>Se pueden escribir caracteres especiales con escapes: <code>\n</code> (salto),
+					<code>\t</code> (tabulador), <code>\r</code> (retorno), <code>\xHH</code> y
+					<code>\uHHHH</code> (códigos).</p>
+					<pre><code>\n          salto de línea
+\t          tabulador
+\r\n        salto de línea de Windows
+\u00e1      á
+\x41        A</code></pre>
+					<p class="propiedad">Escapes: <code>\n</code>, <code>\t</code>, <code>\r</code>, <code>\xHH</code>, <code>\uHHHH</code></p>
+				</article>
+				<article class="concepto-css" id="cuantificadores-posesivos-y-grupos-atomicos" data-palabras="posesivo atómico (?&gt; a*+ backtracking rendimiento redos java pcre">
+					<h3>Cuantificadores posesivos y grupos atómicos</h3>
+					<p>Los cuantificadores posesivos (<code>*+</code>, <code>++</code>) y los grupos atómicos
+					(<code>(?&gt;…)</code>) no retroceden, lo que evita el backtracking catastrófico
+					(disponibles en Java, PCRE y otros, no en JavaScript).</p>
+					<pre><code>a*+b         posesivo
+(?&gt;a+)b      grupo atómico</code></pre>
+					<p class="propiedad">Soporte según el lenguaje.</p>
+				</article>
+				<article class="concepto-css" id="orden-de-precedencia" data-palabras="precedencia regex orden operaciones paréntesis alternancia cuantificador ancla">
+					<h3>Orden de precedencia</h3>
+					<p>De mayor a menor prioridad: escapes, grupos, cuantificadores, concatenación y alternancia.
+					Por eso <code>ab|cd</code> significa «ab» o «cd», no «a, (b o c), d».</p>
+					<pre><code>ab|cd        "ab" o "cd"
+a(b|c)d      "abd" o "acd"
+ab+          a seguida de una o más b
+(ab)+        ab repetido</code></pre>
+					<p class="propiedad">Usa paréntesis para evitar dudas.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="patrones" data-categoria>
+			<div class="cabecera-categoria"><span>01</span>
+				<div>
+					<p>Validadores listos (España y general)</p>
+					<h2>Patrones listos para usar</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="correo-electronico" data-palabras="email correo electrónico validar regex @ dominio mail">
+					<h3>Correo electrónico</h3>
+					<p>Un patrón práctico para validar la forma de un correo. Validar al 100 % con regex es
+					imposible: la única prueba real es enviar un mensaje de confirmación.</p>
+					<pre><code>^[^\s@]+@[^\s@]+\.[^\s@]{2,}$
+
+Coincide:    ana@ejemplo.es   nombre.apellido+tag@dominio.com
+No coincide: ana@   @ejemplo.es   ana ejemplo@x.com</code></pre>
+					<p class="propiedad">Versión más estricta: <code>^[\w.+-]+@[\w-]+(\.[\w-]+)+$</code></p>
+				</article>
+				<article class="concepto-css" id="telefono-espanol" data-palabras="teléfono móvil fijo españa 9 dígitos +34 6 7 8 9 validar prefijo">
+					<h3>Teléfono español</h3>
+					<p>Un número español tiene 9 dígitos y empieza por 6, 7 (móviles), 8 o 9 (fijos); puede llevar
+					el prefijo <code>+34</code> y separadores.</p>
+					<pre><code>^(?:(?:\+|00)34[\s.-]?)?[6-9]\d{2}[\s.-]?\d{3}[\s.-]?\d{3}$
+
+Coincide:    600123456   600 123 456   +34 912 345 678   0034-612-345-678
+No coincide: 123456789   60012345   +44 600123456</code></pre>
+					<p class="propiedad">Para otros países, usa el formato E.164.</p>
+				</article>
+				<article class="concepto-css" id="telefono-internacional-e-164" data-palabras="teléfono internacional e.164 prefijo país + dígitos móvil validar">
+					<h3>Teléfono internacional (E.164)</h3>
+					<p>El formato E.164 es un <code>+</code>, el prefijo del país y hasta 15 dígitos en total, sin
+					espacios.</p>
+					<pre><code>^\+[1-9]\d{6,14}$
+
+Coincide:    +34600123456   +4930901820   +14155552671
+No coincide: 600123456   +0123456   +34 600 123 456</code></pre>
+					<p class="propiedad">Máximo 15 dígitos.</p>
+				</article>
+				<article class="concepto-css" id="dni-espanol" data-palabras="dni nif españa 8 números letra validar documento identidad">
+					<h3>DNI español</h3>
+					<p>Ocho dígitos y una letra. El patrón comprueba la forma; la letra correcta se calcula con el
+					resto de dividir el número entre 23.</p>
+					<pre><code>^\d{8}[TRWAGMYFPDXBNJZSQVHLCKE]$
+
+Coincide:    12345678Z   00000000T
+No coincide: 1234567Z   12345678U   123456789</code></pre>
+					<p class="propiedad">Letras válidas: <code>TRWAGMYFPDXBNJZSQVHLCKE</code></p>
+				</article>
+				<article class="concepto-css" id="comprobar-la-letra-del-dni" data-palabras="letra dni algoritmo módulo 23 calcular validar código función">
+					<h3>Comprobar la letra del DNI</h3>
+					<p>El patrón no basta: la letra depende del número. Se calcula <code>número % 23</code> y se
+					busca en la cadena de letras.</p>
+					<pre><code>// JavaScript
+const LETRAS = "TRWAGMYFPDXBNJZSQVHLCKE";
+function dniValido(d) {
+  d = d.toUpperCase();
+  return /^\d{8}[A-Z]$/.test(d) &amp;&amp; LETRAS[+d.slice(0, 8) % 23] === d[8];
+}</code></pre>
+					<p class="propiedad">Combina regex y cálculo.</p>
+				</article>
+				<article class="concepto-css" id="nie-extranjeros-residentes" data-palabras="nie extranjero número identidad X Y Z validar españa documento">
+					<h3>NIE (extranjeros residentes)</h3>
+					<p>Empieza por X, Y o Z, siete dígitos y una letra. Para comprobar la letra se sustituye X por
+					0, Y por 1 y Z por 2 y se aplica el mismo cálculo que el DNI.</p>
+					<pre><code>^[XYZ]\d{7}[TRWAGMYFPDXBNJZSQVHLCKE]$
+
+Coincide:    X1234567L   Y0000000Z
+No coincide: A1234567L   X123456L</code></pre>
+					<p class="propiedad">Inicio: <code>X</code>, <code>Y</code> o <code>Z</code></p>
+				</article>
+				<article class="concepto-css" id="cif-de-empresas" data-palabras="cif empresa sociedad españa letra 7 dígitos control validar">
+					<h3>CIF de empresas</h3>
+					<p>Una letra de organización, siete dígitos y un carácter de control (dígito o letra de A a J).</p>
+					<pre><code>^[ABCDEFGHJNPQRSUVW]\d{7}[0-9A-J]$
+
+Coincide:    A58818501   B12345674
+No coincide: I12345678   B1234567</code></pre>
+					<p class="propiedad">El dígito de control se calcula aparte.</p>
+				</article>
+				<article class="concepto-css" id="iban-espanol" data-palabras="iban cuenta bancaria españa ES 24 dígitos banco validar espacios">
+					<h3>IBAN español</h3>
+					<p><code>ES</code> seguido de 22 dígitos (2 de control y 20 de la cuenta), con espacios
+					opcionales cada cuatro.</p>
+					<pre><code>^ES\d{2}(?:\s?\d{4}){5}$
+
+Coincide:    ES9121000418450200051332   ES91 2100 0418 4502 0005 1332
+No coincide: ES91210004184502000513   FR9121000418450200051332</code></pre>
+					<p class="propiedad">El IBAN tiene además un control módulo 97.</p>
+				</article>
+				<article class="concepto-css" id="iban-generico" data-palabras="iban internacional cuenta bancaria país 2 letras control alfanumérico">
+					<h3>IBAN genérico</h3>
+					<p>Dos letras de país, dos dígitos de control y hasta 30 caracteres alfanuméricos.</p>
+					<pre><code>^[A-Z]{2}\d{2}[A-Z0-9]{11,30}$</code></pre>
+					<p class="propiedad">Forma general, sin comprobar longitud por país.</p>
+				</article>
+				<article class="concepto-css" id="codigo-postal-espanol" data-palabras="código postal españa cp 5 dígitos provincias 01 52 validar">
+					<h3>Código postal español</h3>
+					<p>Cinco dígitos; los dos primeros son la provincia (01 a 52).</p>
+					<pre><code>^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$
+
+Coincide:    15001   28013   08001   52001
+No coincide: 00123   53000   1500   150011</code></pre>
+					<p class="propiedad">Provincias: <code>01</code>–<code>52</code></p>
+				</article>
+				<article class="concepto-css" id="matricula-de-coche-espanola" data-palabras="matrícula coche españa 4 números 3 letras consonantes antigua provincia validar">
+					<h3>Matrícula de coche española</h3>
+					<p>El formato actual son 4 dígitos y 3 consonantes (sin vocales ni Q). El anterior llevaba
+					letras de provincia.</p>
+					<pre><code>^\d{4}[BCDFGHJKLMNPRSTVWXYZ]{3}$
+
+Coincide:    1234BCD   0001ZZZ
+No coincide: 1234ABC   123BCD   1234BCQ</code></pre>
+					<p class="propiedad">Excluidas: vocales y <code>Q</code>.</p>
+				</article>
+				<article class="concepto-css" id="nombre-de-persona-con-tildes" data-palabras="nombre apellidos tildes ñ guion apóstrofo unicode letras persona validar">
+					<h3>Nombre de persona con tildes</h3>
+					<p>Letras de cualquier idioma, espacios, guiones y apóstrofos. Evita rechazar nombres reales
+					por ser «raros».</p>
+					<pre><code>^\p{L}[\p{L}'’ -]*\p{L}$      (con bandera u)
+^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ'’ -]+$   (sin soporte Unicode)
+
+Coincide:    José Núñez   Mary-Ann O'Neil   Ñusta</code></pre>
+					<p class="propiedad">No supongas que un nombre tiene solo dos palabras.</p>
+				</article>
+				<article class="concepto-css" id="fecha-dd-mm-aaaa" data-palabras="fecha dd/mm/aaaa dia mes año formato español barras validar calendario">
+					<h3>Fecha dd/mm/aaaa</h3>
+					<p>Día de 01 a 31, mes de 01 a 12 y año de 4 dígitos. El patrón no sabe de meses de 30 días ni
+					de bisiestos.</p>
+					<pre><code>^(0[1-9]|[12]\d|3[01])/(0[1-9]|1[0-2])/\d{4}$
+
+Coincide:    25/12/2026   01/01/2000   31/04/2026 (aunque abril no tiene 31)
+No coincide: 32/01/2026   25-12-2026   5/12/2026</code></pre>
+					<p class="propiedad">Valida la fecha real con código (<code>Date</code>, <code>datetime</code>).</p>
+				</article>
+				<article class="concepto-css" id="fecha-iso-aaaa-mm-dd" data-palabras="fecha iso 8601 aaaa-mm-dd año mes día guion formato estándar">
+					<h3>Fecha ISO aaaa-mm-dd</h3>
+					<p>El formato estándar ISO 8601 ordena año, mes y día.</p>
+					<pre><code>^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$
+
+Coincide:    2026-12-25   1999-01-01
+No coincide: 2026-13-01   26-12-25   2026/12/25</code></pre>
+					<p class="propiedad">Ideal para ordenar y almacenar.</p>
+				</article>
+				<article class="concepto-css" id="hora-24-horas" data-palabras="hora hh:mm 24 horas minutos segundos 00-23 validar formato">
+					<h3>Hora 24 horas</h3>
+					<p>Horas de 00 a 23 y minutos de 00 a 59, con segundos opcionales.</p>
+					<pre><code>^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$
+
+Coincide:    09:30   23:59   00:00:15
+No coincide: 24:00   9:30   12:60</code></pre>
+					<p class="propiedad">Segundos opcionales con <code>(?::…)?</code>.</p>
+				</article>
+				<article class="concepto-css" id="hora-en-formato-12-horas" data-palabras="hora 12 horas am pm formato inglés validar hh:mm">
+					<h3>Hora en formato 12 horas</h3>
+					<p>Horas de 1 a 12, minutos y AM o PM.</p>
+					<pre><code>^(?:0?[1-9]|1[0-2]):[0-5]\d\s?(?:AM|PM|am|pm)$
+
+Coincide:    9:30 AM   12:00pm   01:15 PM
+No coincide: 13:00 PM   9:75 AM</code></pre>
+					<p class="propiedad">Alternativa: bandera <code>i</code>.</p>
+				</article>
+				<article class="concepto-css" id="fecha-y-hora-iso-8601" data-palabras="fecha hora iso 8601 T Z zona horaria datetime utc timestamp">
+					<h3>Fecha y hora ISO 8601</h3>
+					<p>Fecha, una <code>T</code>, hora y una zona horaria (<code>Z</code> o desplazamiento).</p>
+					<pre><code>^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2})?$
+
+Coincide:    2026-12-25T10:30:00Z   2026-12-25T10:30:00.123+01:00</code></pre>
+					<p class="propiedad">Formato de <code>toISOString()</code>.</p>
+				</article>
+				<article class="concepto-css" id="url" data-palabras="url dirección web http https enlace validar dominio ruta parámetros">
+					<h3>URL</h3>
+					<p>Esquema <code>http</code> o <code>https</code>, dominio y resto opcional. Para validar de
+					verdad usa un analizador (<code>new URL()</code>).</p>
+					<pre><code>^https?:\/\/[^\s/$.?#][^\s]*$
+
+Coincide:    https://ejemplo.es   http://a.com/ruta?x=1#fin
+No coincide: ejemplo.es   ftp://x.com   https://</code></pre>
+					<p class="propiedad">Mejor: <code>new URL(texto)</code> en JavaScript.</p>
+				</article>
+				<article class="concepto-css" id="nombre-de-dominio" data-palabras="dominio hostname subdominio tld validar .com .es dns">
+					<h3>Nombre de dominio</h3>
+					<p>Etiquetas de letras, dígitos y guiones separadas por puntos, y una terminación de al menos
+					dos letras.</p>
+					<pre><code>^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$
+
+Coincide:    ejemplo.es   sub.dominio.co.uk
+No coincide: -ejemplo.es   ejemplo   ejemplo..es</code></pre>
+					<p class="propiedad">Usa la bandera <code>i</code>.</p>
+				</article>
+				<article class="concepto-css" id="direccion-ipv4" data-palabras="ip ipv4 dirección 4 octetos 0-255 puntos validar red">
+					<h3>Dirección IPv4</h3>
+					<p>Cuatro números de 0 a 255 separados por puntos.</p>
+					<pre><code>^(?:(?:25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|1?\d?\d)$
+
+Coincide:    192.168.1.1   8.8.8.8   255.255.255.255
+No coincide: 256.1.1.1   192.168.1   1.1.1.1.1</code></pre>
+					<p class="propiedad">Rango por octeto: 0–255</p>
+				</article>
+				<article class="concepto-css" id="direccion-ipv6-simplificada" data-palabras="ipv6 dirección hexadecimal dos puntos :: grupos validar red">
+					<h3>Dirección IPv6 (simplificada)</h3>
+					<p>Ocho grupos de hasta cuatro dígitos hexadecimales (versión sin abreviaturas con
+					<code>::</code>).</p>
+					<pre><code>^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$
+
+Coincide:    2001:0db8:85a3:0000:0000:8a2e:0370:7334</code></pre>
+					<p class="propiedad">Para IPv6 completo, usa una librería.</p>
+				</article>
+				<article class="concepto-css" id="direccion-mac" data-palabras="mac dirección física tarjeta red 6 pares hexadecimal separadores">
+					<h3>Dirección MAC</h3>
+					<p>Seis pares hexadecimales separados por <code>:</code> o <code>-</code>.</p>
+					<pre><code>^(?:[0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}$
+
+Coincide:    00:1A:2B:3C:4D:5E   00-1a-2b-3c-4d-5e</code></pre>
+					<p class="propiedad">Separador: <code>:</code> o <code>-</code></p>
+				</article>
+				<article class="concepto-css" id="color-hexadecimal" data-palabras="color hex #fff #ffffff css rgb 3 6 8 dígitos validar">
+					<h3>Color hexadecimal</h3>
+					<p>Una almohadilla y 3, 4, 6 u 8 dígitos hexadecimales.</p>
+					<pre><code>^#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$
+
+Coincide:    #fff   #1A2B3C   #12345678
+No coincide: fff   #ggg   #12345</code></pre>
+					<p class="propiedad">Con 4 u 8 dígitos incluye canal alfa.</p>
+				</article>
+				<article class="concepto-css" id="contrasena-segura" data-palabras="contraseña password segura mayúscula minúscula número símbolo longitud lookahead validar">
+					<h3>Contraseña segura</h3>
+					<p>Con anticipación se exigen varias condiciones a la vez: minúscula, mayúscula, dígito,
+					símbolo y una longitud mínima.</p>
+					<pre><code>^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{12,}$
+
+Coincide:    Clave-Segura1234   Hola_Mundo#2026
+No coincide: clave1234   CLAVESEGURA!   Ab1!</code></pre>
+					<p class="propiedad">La longitud importa más que la complejidad.</p>
+				</article>
+				<article class="concepto-css" id="nombre-de-usuario" data-palabras="usuario username nick letras números guion bajo longitud validar alias">
+					<h3>Nombre de usuario</h3>
+					<p>Entre 3 y 20 caracteres: letras, números, punto, guion y guion bajo, empezando por una
+					letra.</p>
+					<pre><code>^[A-Za-z][A-Za-z0-9._-]{2,19}$
+
+Coincide:    ana_91   luis.perez   Dev-User
+No coincide: 9ana   ab   usuario con espacios</code></pre>
+					<p class="propiedad">Ajusta la longitud a tus reglas.</p>
+				</article>
+				<article class="concepto-css" id="slug-para-urls" data-palabras="slug url amigable minúsculas guiones palabras validar friendly">
+					<h3>Slug para URLs</h3>
+					<p>Palabras en minúsculas o dígitos separadas por guiones simples.</p>
+					<pre><code>^[a-z0-9]+(?:-[a-z0-9]+)*$
+
+Coincide:    guia-de-regex   post-1   html5
+No coincide: Guia-De-Regex   guia--regex   -inicio</code></pre>
+					<p class="propiedad">Sin tildes, mayúsculas ni espacios.</p>
+				</article>
+				<article class="concepto-css" id="numero-entero-y-decimal" data-palabras="número entero decimal coma punto signo validar numérico negativo">
+					<h3>Número entero y decimal</h3>
+					<p>Con signo opcional y parte decimal con punto o coma.</p>
+					<pre><code>^-?\d+$                    entero
+^-?\d+(?:[.,]\d+)?$         decimal (punto o coma)
+
+Coincide:    42   -7   3.14   2,5
+No coincide: 1.2.3   abc   --5</code></pre>
+					<p class="propiedad">Entero: <code>^-?\d+$</code></p>
+				</article>
+				<article class="concepto-css" id="importe-en-euros" data-palabras="euros moneda importe dinero € miles coma decimal formato español">
+					<h3>Importe en euros</h3>
+					<p>Separador de miles con punto, decimales con coma y símbolo <code>€</code> opcional.</p>
+					<pre><code>^\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?\s?€?$
+
+Coincide:    1.234,56 €   999   12.500,5€
+No coincide: 1,234.56   12.34.5</code></pre>
+					<p class="propiedad">Si no hay separador de miles: <code>^\d+(?:,\d{1,2})?$</code></p>
+				</article>
+				<article class="concepto-css" id="porcentaje" data-palabras="porcentaje % tanto por ciento 0-100 decimales validar">
+					<h3>Porcentaje</h3>
+					<p>Un número entre 0 y 100 (con decimales opcionales) y el símbolo <code>%</code>.</p>
+					<pre><code>^(?:100(?:[.,]0+)?|\d{1,2}(?:[.,]\d+)?)\s?%$
+
+Coincide:    50%   99,5 %   100%   0%
+No coincide: 101%   -5%   50</code></pre>
+					<p class="propiedad">Símbolo: <code>%</code></p>
+				</article>
+				<article class="concepto-css" id="tarjeta-de-credito-formato" data-palabras="tarjeta crédito visa mastercard 16 dígitos espacios luhn validar formato">
+					<h3>Tarjeta de crédito (formato)</h3>
+					<p>Comprueba la forma de 16 dígitos (con separadores opcionales). La validez real exige el
+					algoritmo de Luhn.</p>
+					<pre><code>^(?:\d{4}[\s-]?){3}\d{4}$
+
+Coincide:    4111111111111111   4111 1111 1111 1111   4111-1111-1111-1111</code></pre>
+					<p class="propiedad">Además: algoritmo de Luhn.</p>
+				</article>
+				<article class="concepto-css" id="codigo-de-seguridad-cvv" data-palabras="cvv cvc código seguridad tarjeta 3 4 dígitos validar">
+					<h3>Código de seguridad CVV</h3>
+					<p>Tres o cuatro dígitos (American Express usa cuatro).</p>
+					<pre><code>^\d{3,4}$</code></pre>
+					<p class="propiedad">No lo almacenes nunca.</p>
+				</article>
+				<article class="concepto-css" id="isbn" data-palabras="isbn libro 10 13 dígitos guiones validar código">
+					<h3>ISBN</h3>
+					<p>ISBN-10 (con dígito de control que puede ser X) e ISBN-13, con guiones opcionales.</p>
+					<pre><code>^(?:97[89][- ]?)?\d{1,5}[- ]?\d{1,7}[- ]?\d{1,7}[- ]?[\dX]$
+
+Coincide:    978-84-376-0494-7   0-306-40615-2</code></pre>
+					<p class="propiedad">Forma general; el control se calcula aparte.</p>
+				</article>
+				<article class="concepto-css" id="uuid" data-palabras="uuid guid identificador único versión 4 hexadecimal 8-4-4-4-12">
+					<h3>UUID</h3>
+					<p>Cinco grupos hexadecimales de 8-4-4-4-12 caracteres.</p>
+					<pre><code>^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$     (bandera i)
+
+Coincide:    3f2504e0-4f89-41d3-9a0c-0305e82c3301</code></pre>
+					<p class="propiedad">Bandera: <code>i</code></p>
+				</article>
+				<article class="concepto-css" id="hashtag-y-mencion" data-palabras="hashtag mención @usuario #etiqueta redes sociales twitter instagram">
+					<h3>Hashtag y mención</h3>
+					<p>Una almohadilla o arroba seguida de letras, números o guion bajo.</p>
+					<pre><code>#[\p{L}\p{N}_]+          (bandera u)
+@[A-Za-z0-9_]{1,15}
+
+Texto: Hola @ana_91, mira #JavaScript y #regex</code></pre>
+					<p class="propiedad">Extraer: bandera <code>g</code>.</p>
+				</article>
+				<article class="concepto-css" id="version-semantica-semver" data-palabras="semver versión mayor menor parche 1.2.3 prerelease validar">
+					<h3>Versión semántica (semver)</h3>
+					<p>Tres números separados por puntos, con sufijos opcionales.</p>
+					<pre><code>^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$
+
+Coincide:    1.0.0   2.14.3-beta.1   1.0.0+build.5
+No coincide: 1.0   01.0.0   v1.0.0</code></pre>
+					<p class="propiedad">Estándar: semver.org</p>
+				</article>
+				<article class="concepto-css" id="token-jwt-formato" data-palabras="jwt token json web token tres partes base64url validar">
+					<h3>Token JWT (formato)</h3>
+					<p>Tres bloques en Base64URL separados por puntos.</p>
+					<pre><code>^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]*$</code></pre>
+					<p class="propiedad">El formato no valida la firma.</p>
+				</article>
+				<article class="concepto-css" id="base64" data-palabras="base64 codificación cadena relleno = validar texto binario">
+					<h3>Base64</h3>
+					<p>Caracteres Base64 en bloques de cuatro, con relleno <code>=</code> al final.</p>
+					<pre><code>^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+
+Coincide:    SG9sYQ==   TWFu</code></pre>
+					<p class="propiedad">Variante URL: <code>-</code> y <code>_</code>.</p>
+				</article>
+				<article class="concepto-css" id="coordenadas-geograficas" data-palabras="coordenadas latitud longitud gps decimal grados validar -90 90 -180 180">
+					<h3>Coordenadas geográficas</h3>
+					<p>Latitud entre -90 y 90 y longitud entre -180 y 180, con decimales.</p>
+					<pre><code>^[-+]?(?:[1-8]?\d(?:\.\d+)?|90(?:\.0+)?),\s*[-+]?(?:1[0-7]\d(?:\.\d+)?|180(?:\.0+)?|\d{1,2}(?:\.\d+)?)$
+
+Coincide:    43.3623, -8.4115   -33.86, 151.21</code></pre>
+					<p class="propiedad">Formato: <code>lat, lon</code></p>
+				</article>
+				<article class="concepto-css" id="solo-letras-solo-numeros-alfanumerico" data-palabras="solo letras solo números alfanumérico validar texto dígitos simple">
+					<h3>Solo letras, solo números, alfanumérico</h3>
+					<p>Los validadores más sencillos.</p>
+					<pre><code>^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+$     solo letras
+^\d+$                          solo dígitos
+^[A-Za-z0-9]+$                 letras y números
+^\S+$                          sin espacios</code></pre>
+					<p class="propiedad">Siempre con anclas.</p>
+				</article>
+				<article class="concepto-css" id="lineas-vacias-y-espacios-sobrantes" data-palabras="línea vacía espacios blancos trim sobrantes inicio final detectar texto">
+					<h3>Líneas vacías y espacios sobrantes</h3>
+					<p>Para detectar o limpiar espacios y líneas en blanco.</p>
+					<pre><code>^\s*$              línea vacía o solo espacios (bandera m)
+^\s+|\s+$          espacios al inicio y al final
+\s{2,}             dos o más espacios seguidos
+[ \t]+$            espacios al final de cada línea</code></pre>
+					<p class="propiedad">Reemplaza por vacío o por un solo espacio.</p>
+				</article>
+				<article class="concepto-css" id="etiquetas-html" data-palabras="etiqueta html tag &lt;&gt; abrir cerrar atributos extraer regex html">
+					<h3>Etiquetas HTML</h3>
+					<p>Una etiqueta de apertura o cierre. Sirve para limpiar texto sencillo, pero no para analizar
+					HTML en serio.</p>
+					<pre><code>&lt;\/?[a-zA-Z][^&gt;]*&gt;
+
+Coincide:    &lt;p&gt;   &lt;/div&gt;   &lt;a href="x"&gt;   &lt;br/&gt;</code></pre>
+					<p class="propiedad">No analices HTML con regex: usa un parser.</p>
+				</article>
+				<article class="concepto-css" id="numero-romano" data-palabras="número romano M D C L X V I validar romanos 1 3999">
+					<h3>Número romano</h3>
+					<p>Números romanos del 1 al 3999.</p>
+					<pre><code>^(?=[MDCLXVI])M{0,3}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})$
+
+Coincide:    XIV   MCMXCIV   MMXXVI</code></pre>
+					<p class="propiedad">Bandera <code>i</code> para minúsculas.</p>
+				</article>
+				<article class="concepto-css" id="numero-de-la-seguridad-social-y-referencias" data-palabras="seguridad social número afiliación referencia sku código producto formato">
+					<h3>Número de la Seguridad Social y referencias</h3>
+					<p>Para códigos con estructura fija se escribe un patrón a medida. Ejemplos: número de
+					afiliación (12 dígitos) y referencia de producto.</p>
+					<pre><code>^\d{2}[\s/-]?\d{8}[\s/-]?\d{2}$      afiliación (12 dígitos)
+^[A-Z]{3}-\d{4}-[A-Z0-9]{2}$          referencia ABC-1234-X7</code></pre>
+					<p class="propiedad">Adapta el patrón a tu formato.</p>
+				</article>
+				<article class="concepto-css" id="emojis" data-palabras="emoji unicode \p{Emoji} \p{Extended_Pictographic} detectar símbolos caracteres">
+					<h3>Emojis</h3>
+					<p>Con Unicode se detectan emojis con propiedades.</p>
+					<pre><code>\p{Extended_Pictographic}      (bandera u)
+\p{Emoji_Presentation}</code></pre>
+					<p class="propiedad">Los emojis compuestos usan varios códigos.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="reemplazos" data-categoria>
+			<div class="cabecera-categoria"><span>02</span>
+				<div>
+					<p>Cambiar y extraer texto</p>
+					<h2>Buscar, extraer y reemplazar</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="quitar-espacios-duplicados" data-palabras="espacios duplicados reemplazar un solo espacio limpiar texto trim múltiples">
+					<h3>Quitar espacios duplicados</h3>
+					<p>Sustituye cualquier secuencia de espacios por uno solo.</p>
+					<pre><code>Buscar:      \s{2,}
+Reemplazar:  (un espacio)
+
+"hola    mundo" → "hola mundo"</code></pre>
+					<p class="propiedad">Con <code>.trim()</code> limpias los extremos.</p>
+				</article>
+				<article class="concepto-css" id="cambiar-el-formato-de-una-fecha" data-palabras="fecha reemplazar formato dd/mm/aaaa aaaa-mm-dd grupos $1 $2 $3 reordenar">
+					<h3>Cambiar el formato de una fecha</h3>
+					<p>Con grupos de captura se reordenan las partes.</p>
+					<pre><code>Buscar:      (\d{2})/(\d{2})/(\d{4})
+Reemplazar:  $3-$2-$1          (en Python: \3-\2-\1)
+
+"25/12/2026" → "2026-12-25"</code></pre>
+					<p class="propiedad">Referencias: <code>$1</code> o <code>\1</code>.</p>
+				</article>
+				<article class="concepto-css" id="camelcase-a-snake-case-y-al-reves" data-palabras="camelCase snake_case kebab-case convertir nombres variables reemplazar mayúsculas minúsculas">
+					<h3>camelCase a snake_case y al revés</h3>
+					<p>Convertir estilos de nombres.</p>
+					<pre><code>camelCase → snake_case
+Buscar:      ([a-z0-9])([A-Z])
+Reemplazar:  $1_$2   y luego a minúsculas
+
+snake_case → camelCase
+Buscar:      _([a-z])
+Reemplazar:  (mayúscula de $1)</code></pre>
+					<p class="propiedad">En VS Code: <code>\U$1</code> pone en mayúsculas.</p>
+				</article>
+				<article class="concepto-css" id="quitar-etiquetas-html-de-un-texto" data-palabras="quitar etiquetas html limpiar texto plano strip tags reemplazar">
+					<h3>Quitar etiquetas HTML de un texto</h3>
+					<p>Para limpiar texto sencillo se eliminan las etiquetas.</p>
+					<pre><code>Buscar:      &lt;[^&gt;]+&gt;
+Reemplazar:  (vacío)
+
+"&lt;p&gt;Hola &lt;b&gt;mundo&lt;/b&gt;&lt;/p&gt;" → "Hola mundo"</code></pre>
+					<p class="propiedad">No es seguro para sanear HTML de usuarios.</p>
+				</article>
+				<article class="concepto-css" id="extraer-numeros-correos-o-urls-de-un-texto" data-palabras="extraer números correos urls findall match global texto buscar todas">
+					<h3>Extraer números, correos o URLs de un texto</h3>
+					<p>Con la bandera global se obtienen todas las coincidencias.</p>
+					<pre><code>números:   \d+(?:[.,]\d+)?
+correos:   [\w.+-]+@[\w-]+(?:\.[\w-]+)+
+URLs:      https?:\/\/[^\s]+
+
+// JS
+texto.match(/\d+/g)</code></pre>
+					<p class="propiedad">JavaScript: <code>match</code> con <code>g</code>, o <code>matchAll</code>.</p>
+				</article>
+				<article class="concepto-css" id="encontrar-palabras-repetidas" data-palabras="palabras repetidas duplicadas consecutivas el el backreference revisar texto">
+					<h3>Encontrar palabras repetidas</h3>
+					<p>Una referencia hacia atrás detecta palabras seguidas iguales.</p>
+					<pre><code>\b(\w+)\s+\1\b       (bandera i)
+Reemplazar por: $1
+
+"el el perro" → "el perro"</code></pre>
+					<p class="propiedad">Útil para revisar textos.</p>
+				</article>
+				<article class="concepto-css" id="eliminar-comentarios-de-codigo" data-palabras="comentarios código // /* */ # eliminar buscar reemplazar línea bloque">
+					<h3>Eliminar comentarios de código</h3>
+					<p>Patrones para quitar comentarios (con cuidado con las cadenas de texto).</p>
+					<pre><code>//.*$                    comentario de línea (bandera m)
+/\*[\s\S]*?\*/           comentario de bloque
+#.*$                     comentario de Python o shell</code></pre>
+					<p class="propiedad">No es perfecto con cadenas que contienen <code>//</code>.</p>
+				</article>
+				<article class="concepto-css" id="separar-miles-en-un-numero" data-palabras="separador miles punto número formato lookahead 1.000.000 reemplazar">
+					<h3>Separar miles en un número</h3>
+					<p>Con anticipación se inserta un separador cada tres dígitos.</p>
+					<pre><code>Buscar:      \B(?=(\d{3})+(?!\d))
+Reemplazar:  .
+
+"1234567" → "1.234.567"</code></pre>
+					<p class="propiedad">Mejor: <code>toLocaleString()</code> o <code>format</code>.</p>
+				</article>
+				<article class="concepto-css" id="dividir-texto-con-varios-separadores" data-palabras="split dividir separadores coma punto y coma espacio múltiples regex">
+					<h3>Dividir texto con varios separadores</h3>
+					<p>Dividir con una expresión regular permite varios separadores a la vez.</p>
+					<pre><code>// JS
+"a, b;c  d".split(/[,;\s]+/)       // ["a", "b", "c", "d"]
+# Python
+re.split(r"[,;\s]+", "a, b;c  d")</code></pre>
+					<p class="propiedad">Separadores: <code>[,;\s]+</code></p>
+				</article>
+				<article class="concepto-css" id="capitalizar-la-primera-letra-de-cada-palabra" data-palabras="capitalizar mayúscula inicial palabra \b\w reemplazar función title case">
+					<h3>Capitalizar la primera letra de cada palabra</h3>
+					<p>Con una función de reemplazo se pone en mayúscula la inicial de cada palabra.</p>
+					<pre><code>// JavaScript
+"hola mundo".replace(/\b\p{L}/gu, c =&gt; c.toUpperCase());
+# Python
+re.sub(r"\b\w", lambda m: m.group().upper(), "hola mundo")</code></pre>
+					<p class="propiedad">Resultado: <code>Hola Mundo</code></p>
+				</article>
+				<article class="concepto-css" id="enmascarar-datos-sensibles" data-palabras="enmascarar ocultar tarjeta email teléfono privacidad asteriscos reemplazar">
+					<h3>Enmascarar datos sensibles</h3>
+					<p>Reemplazos para mostrar solo una parte de un dato.</p>
+					<pre><code>// Tarjeta: dejar los 4 últimos
+"4111111111111111".replace(/\d(?=\d{4})/g, "*")     // ************1111
+// Correo
+"ana@ejemplo.es".replace(/(?&lt;=.).(?=[^@]*@)/g, "*")   // a**@ejemplo.es</code></pre>
+					<p class="propiedad">Útil en registros y pantallas.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="lenguajes" data-categoria>
+			<div class="cabecera-categoria"><span>03</span>
+				<div>
+					<p>Dónde y cómo se usan</p>
+					<h2>Regex en cada lenguaje y herramienta</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="expresiones-regulares-en-javascript" data-palabras="javascript regex test exec match matchAll replace replaceAll split literal RegExp new">
+					<h3>Expresiones regulares en JavaScript</h3>
+					<p>En JavaScript se escriben entre barras (<code>/…/flags</code>) o con <code>new
+					RegExp()</code>. Métodos: <code>test</code>, <code>exec</code>, <code>match</code>,
+					<code>matchAll</code>, <code>replace</code>, <code>replaceAll</code>, <code>split</code>,
+					<code>search</code>.</p>
+					<pre><code>const re = /(\d{2})\/(\d{2})\/(\d{4})/;
+re.test("25/12/2026");                       // true
+"25/12/2026".match(re);                      // ["25/12/2026", "25", "12", "2026"]
+"a1b22".replace(/\d+/g, "#");                // "a#b#"
+const dinamica = new RegExp(`^${prefijo}\\d+$`, "i");</code></pre>
+					<p class="propiedad">Escapa las barras al usar <code>new RegExp</code>.</p>
+				</article>
+				<article class="concepto-css" id="expresiones-regulares-en-python" data-palabras="python re search match fullmatch findall finditer sub compile flags raw string">
+					<h3>Expresiones regulares en Python</h3>
+					<p>El módulo <code>re</code> ofrece <code>search</code>, <code>match</code>,
+					<code>fullmatch</code>, <code>findall</code>, <code>finditer</code>, <code>sub</code> y
+					<code>compile</code>. Usa cadenas crudas <code>r"…"</code>.</p>
+					<pre><code>import re
+re.search(r"\d+", "Tel 600123")
+re.fullmatch(r"[A-Z]{3}\d{4}", "ABC1234")
+re.findall(r"\w+@\w+\.\w+", texto)
+re.sub(r"\s+", " ", "a   b", flags=re.I)
+patron = re.compile(r"(?P&lt;dia&gt;\d{2})/(?P&lt;mes&gt;\d{2})")</code></pre>
+					<p class="propiedad"><code>match</code> solo busca al inicio; <code>fullmatch</code> exige todo el texto.</p>
+				</article>
+				<article class="concepto-css" id="expresiones-regulares-en-java" data-palabras="java pattern matcher matches find group replaceAll compile string.matches doble barra">
+					<h3>Expresiones regulares en Java</h3>
+					<p>Se usan <code>Pattern</code> y <code>Matcher</code>. En las cadenas, las barras se escriben
+					dobles (<code>\\d</code>).</p>
+					<pre><code>boolean ok = "600123456".matches("[6-9]\\d{8}");
+
+Pattern p = Pattern.compile("(\\d{2})/(\\d{2})/(\\d{4})");
+Matcher m = p.matcher("25/12/2026");
+if (m.matches()) System.out.println(m.group(3));    // 2026
+"a1b22".replaceAll("\\d+", "#");</code></pre>
+					<p class="propiedad">Recuerda: <code>\\d</code> en el código es <code>\d</code> en el patrón.</p>
+				</article>
+				<article class="concepto-css" id="expresiones-regulares-en-php" data-palabras="php preg_match preg_match_all preg_replace preg_split pcre delimitadores">
+					<h3>Expresiones regulares en PHP</h3>
+					<p>PHP usa funciones <code>preg_*</code> y el patrón va entre delimitadores.</p>
+					<pre><code>preg_match('/^\d{8}[A-Z]$/', $dni);
+preg_match_all('/\d+/', $texto, $m);
+preg_replace('/\s+/', ' ', $texto);
+preg_split('/[,;]/', $lista);</code></pre>
+					<p class="propiedad">Funciones: <code>preg_match</code>, <code>preg_replace</code>, <code>preg_split</code></p>
+				</article>
+				<article class="concepto-css" id="expresiones-regulares-en-sql-regexp-y-like" data-palabras="sql regexp rlike like mysql postgresql ~ similar to oracle regexp_like consulta">
+					<h3>Expresiones regulares en SQL: REGEXP y LIKE</h3>
+					<p><code>LIKE</code> solo admite <code>%</code> y <code>_</code>. Con expresiones regulares:
+					<code>REGEXP</code> (MySQL), <code>~</code> (PostgreSQL) o <code>REGEXP_LIKE</code>
+					(Oracle).</p>
+					<pre><code>-- MySQL
+SELECT * FROM clientes WHERE correo REGEXP '^[^@]+@[^@]+\\.es$';
+-- PostgreSQL
+SELECT * FROM clientes WHERE telefono ~ '^[6-9][0-9]{8}$';
+-- LIKE
+SELECT * FROM clientes WHERE nombre LIKE 'An%';</code></pre>
+					<p class="propiedad">La sintaxis varía según el motor.</p>
+				</article>
+				<article class="concepto-css" id="grep-sed-y-awk-en-la-terminal" data-palabras="grep sed awk terminal linux regex -E -P -o buscar línea comando">
+					<h3>grep, sed y awk en la terminal</h3>
+					<p>En la línea de comandos: <code>grep -E</code> (expresiones extendidas), <code>grep -P</code>
+					(PCRE), <code>sed</code> para reemplazar.</p>
+					<pre><code>grep -E "^[0-9]{8}[A-Z]$" dnis.txt
+grep -oP "\d+(?=€)" precios.txt
+sed -E 's/([0-9]{2})\/([0-9]{2})\/([0-9]{4})/\3-\2-\1/' fechas.txt
+grep -rn "TODO" src/</code></pre>
+					<p class="propiedad">Opciones: <code>-E</code>, <code>-P</code>, <code>-o</code>, <code>-i</code>, <code>-r</code></p>
+				</article>
+				<article class="concepto-css" id="buscar-y-reemplazar-con-regex-en-vs-code" data-palabras="vscode editor buscar reemplazar regex alt+r ctrl+h $1 \U atajo">
+					<h3>Buscar y reemplazar con regex en VS Code</h3>
+					<p>En VS Code se activa el modo regex con el botón <code>.*</code> (Alt+R) en Buscar y
+					Reemplazar (Ctrl+H). En el reemplazo se usan <code>$1</code>, <code>$2</code>, y
+					<code>\U</code>, <code>\L</code> para cambiar mayúsculas.</p>
+					<pre><code>Buscar:      (\w+)@(\w+)\.com
+Reemplazar:  $2: $1
+
+Buscar:      \b(\w)
+Reemplazar:  \U$1</code></pre>
+					<p class="propiedad">Atajos: <code>Ctrl+H</code>, <code>Alt+R</code></p>
+				</article>
+				<article class="concepto-css" id="el-atributo-pattern-en-formularios-html" data-palabras="pattern html input validar formulario title regex navegador atributo">
+					<h3>El atributo pattern en formularios HTML</h3>
+					<p>El atributo <code>pattern</code> valida el campo con una expresión regular (sin barras ni
+					anclas: se aplica al valor completo).</p>
+					<pre><code>&lt;input name="dni" pattern="\d{8}[A-Za-z]" title="8 números y una letra" required&gt;
+&lt;input name="cp" pattern="(0[1-9]|[1-4]\d|5[0-2])\d{3}" inputmode="numeric"&gt;</code></pre>
+					<p class="propiedad">Se aplica al valor completo automáticamente.</p>
+				</article>
+				<article class="concepto-css" id="expresiones-regulares-en-otros-lenguajes" data-palabras="c# .net go ruby perl powershell rust regex bibliotecas sintaxis diferencias sabores">
+					<h3>Expresiones regulares en otros lenguajes</h3>
+					<p>Casi todos los lenguajes incluyen regex con ligeras diferencias («sabores»): PCRE (PHP,
+					Perl), .NET, Java, Python, JavaScript, Go (RE2, sin lookaround) y Rust.</p>
+					<pre><code>C#:         Regex.IsMatch(texto, @"^\d+$")
+Go:         regexp.MustCompile(`^\d+$`).MatchString(texto)
+Ruby:       texto =~ /^\d+$/
+PowerShell: "123" -match '^\d+$' </code></pre>
+					<p class="propiedad">Consulta las diferencias del lenguaje que uses.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="consejos" data-categoria>
+			<div class="cabecera-categoria"><span>04</span>
+				<div>
+					<p>Evitar errores y escribir mejor</p>
+					<h2>Buenas prácticas</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="backtracking-catastrofico-redos" data-palabras="redos backtracking catastrófico rendimiento cuelga (a+)+ cuantificadores anidados seguridad">
+					<h3>Backtracking catastrófico (ReDoS)</h3>
+					<p>Patrones con cuantificadores anidados pueden tardar tiempo exponencial con ciertos textos y
+					bloquear un programa (ataque ReDoS). Evita <code>(a+)+</code> y alternativas que se solapan.</p>
+					<pre><code>Peligroso:  ^(a+)+$      con "aaaaaaaaaaaaaaaaaaaaaaaaaaa!"
+Mejor:      ^a+$</code></pre>
+					<p class="propiedad">Usa límites de longitud y motores sin backtracking si procesas datos externos.</p>
+				</article>
+				<article class="concepto-css" id="validar-frente-a-extraer" data-palabras="validar extraer anclas ^ $ global diferencia buscar comprobar">
+					<h3>Validar frente a extraer</h3>
+					<p>Para validar un valor completo, ancla el patrón (<code>^…$</code>). Para extraer partes de
+					un texto, no pongas anclas y usa la bandera global.</p>
+					<pre><code>Validar:   ^\d{4}$          el texto entero es un año
+Extraer:   \b\d{4}\b        todos los años dentro del texto</code></pre>
+					<p class="propiedad">Sin anclas, un patrón puede coincidir con una parte.</p>
+				</article>
+				<article class="concepto-css" id="no-analices-html-con-regex" data-palabras="html regex parser dom no usar etiquetas anidadas beautifulsoup domparser">
+					<h3>No analices HTML con regex</h3>
+					<p>HTML es anidado y flexible: las expresiones regulares no pueden analizarlo de forma fiable.
+					Usa un parser (<code>DOMParser</code>, BeautifulSoup, Jsoup).</p>
+					<pre><code>// JavaScript
+const doc = new DOMParser().parseFromString(html, "text/html");
+doc.querySelectorAll("a[href]");</code></pre>
+					<p class="propiedad">Regex solo para fragmentos muy sencillos.</p>
+				</article>
+				<article class="concepto-css" id="legibilidad-modo-extendido-y-comentarios" data-palabras="modo extendido x comentarios legibilidad espacios patrón largo (?x) documentar">
+					<h3>Legibilidad: modo extendido y comentarios</h3>
+					<p>En muchos lenguajes la bandera <code>x</code> permite añadir espacios y comentarios al
+					patrón. En JavaScript se puede construir con partes.</p>
+					<pre><code># Python
+re.compile(r"""
+    ^(\d{2})   # día
+    /(\d{2})   # mes
+    /(\d{4})$  # año
+""", re.X)
+
+// JavaScript
+const dia = "\\d{2}", anio = "\\d{4}";
+new RegExp(`^${dia}/${dia}/${anio}$`);</code></pre>
+					<p class="propiedad">Divide los patrones largos.</p>
+				</article>
+				<article class="concepto-css" id="validacion-completa-regex-mas-codigo" data-palabras="validar regex código luhn letra dni fecha real iban módulo 97 comprobar combinar">
+					<h3>Validación completa: regex más código</h3>
+					<p>La regex comprueba la forma; las reglas de negocio se comprueban con código: la letra del
+					DNI, el algoritmo de Luhn en tarjetas, el módulo 97 del IBAN o que una fecha exista.</p>
+					<pre><code>// ¿Existe el 31/04/2026?
+const [d, m, a] = "31/04/2026".split("/").map(Number);
+const f = new Date(a, m - 1, d);
+const existe = f.getDate() === d &amp;&amp; f.getMonth() === m - 1;   // false</code></pre>
+					<p class="propiedad">Regex + lógica = validación real.</p>
+				</article>
+				<article class="concepto-css" id="saltos-de-linea-y-crlf" data-palabras="salto línea crlf \r\n lf windows linux unix multilínea m $ punto">
+					<h3>Saltos de línea y CRLF</h3>
+					<p>Windows usa <code>\r\n</code> y Linux <code>\n</code>. Para cubrir ambos, usa
+					<code>\r?\n</code>. Con la bandera <code>m</code>, <code>^</code> y <code>$</code> actúan en
+					cada línea.</p>
+					<pre><code>\r?\n          salto de línea de cualquier sistema
+^.+$           (bandera m) cada línea no vacía</code></pre>
+					<p class="propiedad">Cuidado con <code>$</code> y <code>\r</code>.</p>
+				</article>
+				<article class="concepto-css" id="acentos-enes-y-mayusculas" data-palabras="acentos tildes ñ unicode \w normalizar mayúsculas insensible a tildes regex idioma">
+					<h3>Acentos, eñes y mayúsculas</h3>
+					<p><code>\w</code> no incluye tildes en todos los lenguajes. Usa <code>\p{L}</code> con Unicode
+					o normaliza el texto antes (quitando las tildes).</p>
+					<pre><code>/[\p{L}]+/u
+"canción".normalize("NFD").replace(/[\u0300-\u036f]/g, "")    // "cancion"</code></pre>
+					<p class="propiedad">Piensa en nombres y direcciones reales.</p>
+				</article>
+				<article class="concepto-css" id="herramientas-para-probar-regex" data-palabras="regex101 regexr debuggex probador herramientas online explicar patrón probar">
+					<h3>Herramientas para probar regex</h3>
+					<p>Probar un patrón con ejemplos evita errores. Herramientas en línea: regex101 (explica cada
+					parte), RegExr y Debuggex (diagramas). Elige el «sabor» correcto (JavaScript, Python,
+					PCRE…).</p>
+					<pre><code>https://regex101.com
+https://regexr.com</code></pre>
+					<p class="propiedad">Guarda los casos que deben y no deben coincidir.</p>
+				</article>
+				<article class="concepto-css" id="pruebas-de-un-patron-casos-que-si-y-casos-que-no" data-palabras="probar patrón casos pruebas test regex coincide no coincide tabla ejemplos">
+					<h3>Pruebas de un patrón: casos que sí y casos que no</h3>
+					<p>Al escribir un patrón, prepara una lista de textos que deben coincidir y otra de textos que
+					no, incluidos los extremos (vacío, muy largo, caracteres raros).</p>
+					<pre><code>Debe coincidir:   600123456, 912345678, +34 600 123 456
+No debe:          12345, 6001234567, abc, (vacío)
+Extremos:         espacios al inicio, saltos de línea</code></pre>
+					<p class="propiedad">Un patrón sin pruebas falla tarde.</p>
+				</article>
+				<article class="concepto-css" id="cuando-no-usar-expresiones-regulares" data-palabras="cuándo no usar regex alternativas split startswith parser json csv xml">
+					<h3>Cuándo no usar expresiones regulares</h3>
+					<p>Para tareas sencillas bastan los métodos de cadena (<code>startsWith</code>,
+					<code>includes</code>, <code>split</code>). Para formatos estructurados (JSON, XML, CSV,
+					HTML) usa su analizador.</p>
+					<pre><code>"hola".startsWith("ho")       en vez de /^ho/.test()
+JSON.parse(texto)             en vez de regex para JSON
+new URL(texto)                en vez de regex para URLs</code></pre>
+					<p class="propiedad">La herramienta más simple que funcione.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="sin-resultados-css" id="sin-resultados" hidden>
+			<h2>No encuentro ese término</h2>
+			<p>Prueba con otra palabra o busca en la <a href="inicio.html">página de inicio</a>, que reúne todas las guías.</p>
+		</section>
+
+		<section class="regla-practica">
+			<h2>Una última pista</h2>
+			<p>Una regex valida la <em>forma</em> de un dato, no si es real: la letra del DNI, el control del IBAN o que el 31 de abril no exista se comprueban con código. Ancla siempre los patrones de validación (<code>^…$</code>), prepara casos que deben y que no deben coincidir, y evita cuantificadores anidados. Si algo falla, mira también las <a href="errores.html">errores típicos</a>.</p>
+		</section>
+	</main>
+
+	<footer class="pie-guia">
+		<p>Guía de apoyo para aprender y consultar expresiones regulares.</p>
+		<a href="inicio.html">Inicio</a>
+		<a href="index.html">HTML</a>
+		<a href="css.html">CSS</a>
+		<a href="js.html">JavaScript</a>
+		<a href="java.html">Java</a>
+		<a href="python.html">Python</a>
+		<a href="errores.html">Errores</a>
+	</footer>
+
+	<script>
+		const campoBusqueda = document.querySelector("#buscar");
+		const limpiarBusqueda = document.querySelector("#limpiar");
+		const conceptos = [...document.querySelectorAll(".concepto-css")];
+		const categorias = [...document.querySelectorAll("[data-categoria]")];
+		const contador = document.querySelector("#resultado-regex");
+		const sinResultados = document.querySelector("#sin-resultados");
+
+		function normalizar(texto) {
+			return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
+		}
+
+		function filtrarConceptos() {
+			const consulta = normalizar(campoBusqueda.value.trim());
+			let cantidad = 0;
+
+			conceptos.forEach((concepto) => {
+				const texto = normalizar(`${concepto.textContent} ${concepto.dataset.palabras}`);
+				const coincide = consulta.split(/\s+/).filter(Boolean).every((palabra) => texto.includes(palabra));
+				concepto.hidden = !coincide;
+				if (coincide) cantidad += 1;
+			});
+
+			categorias.forEach((categoria) => {
+				categoria.hidden = !categoria.querySelector(".concepto-css:not([hidden])");
+			});
+
+			sinResultados.hidden = cantidad > 0 || consulta === "";
+			contador.textContent = consulta
+				? `${cantidad} ${cantidad === 1 ? "resultado" : "resultados"}`
+				: `${conceptos.length} conceptos en ${categorias.length} categorías`;
+		}
+
+		campoBusqueda.addEventListener("input", filtrarConceptos);
+		limpiarBusqueda.addEventListener("click", () => {
+			campoBusqueda.value = "";
+			filtrarConceptos();
+			campoBusqueda.focus();
+		});
+
+		filtrarConceptos();
+	</script>
+
+	<script>
+		(function () {
+			const ejemplos = [
+				{ n: "Fecha dd/mm/aaaa", p: String.raw`\b\d{2}/\d{2}/\d{4}\b`, f: "g", t: "Hoy es 25/12/2026 y mañana 26/12/2026.\nFecha incorrecta: 5/12/26" },
+				{ n: "Correo electrónico", p: String.raw`^[^\s@]+@[^\s@]+\.[^\s@]{2,}$`, f: "gm", t: "ana@ejemplo.es\nnombre.apellido+tag@dominio.com\nana@\n@ejemplo.es" },
+				{ n: "Teléfono español", p: String.raw`^(?:(?:\+|00)34[\s.-]?)?[6-9]\d{2}[\s.-]?\d{3}[\s.-]?\d{3}$`, f: "gm", t: "600123456\n600 123 456\n+34 912 345 678\n123456789" },
+				{ n: "DNI", p: String.raw`^\d{8}[TRWAGMYFPDXBNJZSQVHLCKE]$`, f: "gm", t: "12345678Z\n00000000T\n12345678U\n1234567Z" },
+				{ n: "NIE", p: String.raw`^[XYZ]\d{7}[A-Z]$`, f: "gm", t: "X1234567L\nY0000000Z\nA1234567L" },
+				{ n: "Código postal", p: String.raw`^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$`, f: "gm", t: "15001\n28013\n53000\n00123" },
+				{ n: "Matrícula", p: String.raw`^\d{4}[BCDFGHJKLMNPRSTVWXYZ]{3}$`, f: "gm", t: "1234BCD\n0001ZZZ\n1234ABC" },
+				{ n: "IPv4", p: String.raw`^(?:(?:25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|1?\d?\d)$`, f: "gm", t: "192.168.1.1\n8.8.8.8\n256.1.1.1\n1.1.1" },
+				{ n: "Color hexadecimal", p: String.raw`#(?:[0-9a-fA-F]{3}){1,2}\b`, f: "g", t: "Colores: #fff, #1A2B3C y #12345 (no válido)" },
+				{ n: "Contraseña segura", p: String.raw`^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{12,}$`, f: "gm", t: "Clave-Segura1234\nclave1234\nHola_Mundo#2026" },
+				{ n: "Palabras repetidas", p: String.raw`\b(\w+)\s+\1\b`, f: "gi", t: "El el perro corre corre mucho." },
+				{ n: "Etiquetas HTML", p: String.raw`<\/?[a-zA-Z][^>]*>`, f: "g", t: '<p>Hola <b>mundo</b></p> <a href="x">enlace</a>' }
+			];
+			const $ = (s) => document.querySelector(s);
+			const sel = $("#rx-ejemplo");
+			sel.append(new Option("— elegir —", ""));
+			ejemplos.forEach((e, i) => sel.append(new Option(e.n, String(i))));
+
+			let espera;
+			function ejecutar() {
+				const salida = $("#rx-salida"), estado = $("#rx-estado"), lista = $("#rx-grupos");
+				salida.replaceChildren(); lista.replaceChildren();
+				const patron = $("#rx-patron").value;
+				let flags = [...new Set($("#rx-flags").value.replace(/[^dgimsuvy]/g, ""))].join("");
+				if (!flags.includes("g")) flags += "g";
+				const texto = $("#rx-texto").value.slice(0, 5000);
+				if (!patron) { estado.textContent = "Escribe un patrón."; salida.textContent = texto; return; }
+				let re;
+				try { re = new RegExp(patron, flags); }
+				catch (e) { estado.textContent = "Patrón no válido: " + e.message; salida.textContent = texto; return; }
+				let ultimo = 0, n = 0;
+				const frag = document.createDocumentFragment();
+				for (const m of texto.matchAll(re)) {
+					if (m[0] === "") continue;
+					if (n >= 500) break;
+					n++;
+					frag.append(document.createTextNode(texto.slice(ultimo, m.index)));
+					const marca = document.createElement("mark");
+					marca.textContent = m[0];
+					frag.append(marca);
+					ultimo = m.index + m[0].length;
+					if (n <= 30) {
+						const li = document.createElement("li");
+						let t = "«" + m[0] + "» (posición " + m.index + ")";
+						for (let g = 1; g < m.length; g++) t += " · grupo " + g + ": " + (m[g] === undefined ? "—" : "«" + m[g] + "»");
+						if (m.groups) for (const [k, v] of Object.entries(m.groups)) t += " · " + k + ": " + (v ?? "—");
+						li.textContent = t;
+						lista.append(li);
+					}
+				}
+				frag.append(document.createTextNode(texto.slice(ultimo)));
+				salida.append(frag);
+				estado.textContent = n === 0 ? "Sin coincidencias." : n + (n === 1 ? " coincidencia" : " coincidencias") + (n >= 500 ? " (mostrando las primeras 500)" : "");
+			}
+			const programar = () => { clearTimeout(espera); espera = setTimeout(ejecutar, 120); };
+			["#rx-patron", "#rx-flags", "#rx-texto"].forEach((s) => $(s).addEventListener("input", programar));
+			sel.addEventListener("change", () => {
+				const e = ejemplos[Number(sel.value)];
+				if (!e) return;
+				$("#rx-patron").value = e.p; $("#rx-flags").value = e.f; $("#rx-texto").value = e.t;
+				ejecutar();
+			});
+			ejecutar();
+		})();
+	</script>
+</body>
+
+</html>

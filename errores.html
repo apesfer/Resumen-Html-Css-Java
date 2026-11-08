@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!--
+Guía de errores típicos
+Errores típicos de HTML, CSS, JavaScript, Java, Python, npm y Git: el mensaje tal cual aparece, qué significa y cómo solucionarlo.
+Autor: apesfer
+-->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Errores típicos de HTML, CSS, JavaScript, Java, Python, npm y Git: el mensaje tal cual aparece, qué significa y cómo solucionarlo.">
+	<title>Guía de errores típicos</title>
+	<link rel="stylesheet" href="src/css.css">
+	<link rel="stylesheet" href="src/errores.css">
+	<link rel="stylesheet" href="src/comun.css">
+</head>
+
+<body id="inicio" class="guia-css guia-errores">
+	<header class="guia-portada">
+		<nav class="mini-nav-guias" aria-label="Cambiar entre guías">
+			<a href="inicio.html">Inicio</a>
+			<a href="index.html">HTML</a>
+			<a href="css.html">CSS</a>
+			<a href="js.html">JavaScript</a>
+			<a href="java.html">Java</a>
+			<a href="python.html">Python</a>
+			<a href="regex.html">Regex</a>
+			<a href="errores.html" aria-current="page">Errores</a>
+			<a class="subir-inicio" href="#inicio" aria-label="Volver al principio" title="Volver al principio">↑</a>
+		</nav>
+		<p class="guia-etiqueta">Guía de consulta / Errores típicos</p>
+		<h1>Pega el error y <em>encuentra la solución.</em></h1>
+		<p class="guia-bajada">El mensaje de error exacto, qué significa y cómo arreglarlo, en HTML, CSS, JavaScript, Java, Python y la terminal.</p>
+		<form class="buscador-css" role="search" onsubmit="return false">
+			<label for="buscar">¿Qué quieres aprender o encontrar?</label>
+			<div class="campo-busqueda">
+				<span aria-hidden="true">⌕</span>
+				<input id="buscar" type="search" placeholder="Pega un error: cannot find symbol, NullPointerException, is not defined..." autocomplete="off">
+				<button id="limpiar" type="button" aria-label="Limpiar búsqueda" title="Limpiar búsqueda">×</button>
+			</div>
+			<p id="resultado-errores" aria-live="polite">Cargando conceptos...</p>
+		</form>
+	</header>
+
+	<main class="guia-contenido">
+		<nav class="atajos-css" aria-label="Categorías">
+			<a href="#html">Errores de HTML</a>
+			<a href="#css">Errores de CSS</a>
+			<a href="#js">Errores de JavaScript</a>
+			<a href="#java">Errores de Java</a>
+			<a href="#python">Errores de Python</a>
+			<a href="#terminal">Terminal, npm y Git</a>
+			<a href="#general">Depuración en general</a>
+		</nav>
+
+		<aside class="nota-css"><strong>Cómo usar esta guía:</strong> copia el mensaje de error y pégalo en el buscador (o parte de él, como <code>is not a function</code>). Cada ficha explica qué significa, un ejemplo que lo provoca y cómo corregirlo. Los errores de compilación y de ejecución suelen indicar el <code>archivo</code> y la <code>línea</code>: empieza siempre por ahí.</aside>
+
+		<section class="categoria-css" id="html" data-categoria>
+			<div class="cabecera-categoria"><span>00</span>
+				<div>
+					<p>HTML</p>
+					<h2>Errores de HTML</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="etiqueta-sin-cerrar-o-mal-anidada" data-palabras="html etiqueta sin cerrar mal anidada &lt;/div&gt; estructura se descoloca página rota cierre">
+					<h3>Etiqueta sin cerrar o mal anidada</h3>
+					<p>Si olvidas cerrar una etiqueta o las cruzas, el navegador intenta «arreglarlo» y el diseño
+					se descuadra. Cada etiqueta que se abre debe cerrarse en el orden inverso.</p>
+					<pre><code>&lt;!-- Mal --&gt;
+&lt;p&gt;Texto &lt;b&gt;importante&lt;/p&gt;&lt;/b&gt;
+&lt;div&gt;&lt;p&gt;Hola&lt;/div&gt;
+
+&lt;!-- Bien --&gt;
+&lt;p&gt;Texto &lt;b&gt;importante&lt;/b&gt;&lt;/p&gt;
+&lt;div&gt;&lt;p&gt;Hola&lt;/p&gt;&lt;/div&gt;</code></pre>
+					<p class="propiedad">Solución: validar en validator.w3.org o usar un editor que sangre automáticamente.</p>
+				</article>
+				<article class="concepto-css" id="la-imagen-no-se-ve-icono-de-imagen-rota" data-palabras="html imagen no se ve rota img src ruta mayúsculas nombre archivo 404 no carga alt">
+					<h3>La imagen no se ve (icono de imagen rota)</h3>
+					<p>Casi siempre es la ruta: carpeta o nombre mal escritos, mayúsculas (<code>Foto.JPG</code> ≠
+					<code>foto.jpg</code> en servidores Linux), extensión incorrecta o archivo que no se subió.</p>
+					<pre><code>&lt;!-- Mal --&gt;
+&lt;img src="/img/Foto.JPG"&gt;      &lt;!-- el archivo se llama foto.jpg --&gt;
+
+&lt;!-- Bien --&gt;
+&lt;img src="img/foto.jpg" alt="Descripción"&gt;</code></pre>
+					<p class="propiedad">Solución: abre la pestaña Red (F12) y busca el 404.</p>
+				</article>
+				<article class="concepto-css" id="el-enlace-no-lleva-a-ningun-sitio-o-da-404" data-palabras="html enlace 404 href ruta relativa absoluta no encontrado página no existe ../ carpeta enlace roto">
+					<h3>El enlace no lleva a ningún sitio o da 404</h3>
+					<p>La ruta del <code>href</code> es incorrecta respecto a la ubicación del archivo. Las rutas
+					relativas dependen de dónde esté la página que enlaza.</p>
+					<pre><code>&lt;!-- Estás en /guias/html.html --&gt;
+&lt;a href="css.html"&gt;          &lt;!-- busca /guias/css.html --&gt;
+&lt;a href="../css.html"&gt;       &lt;!-- sube una carpeta --&gt;
+&lt;a href="/css.html"&gt;         &lt;!-- desde la raíz del sitio --&gt;</code></pre>
+					<p class="propiedad">Solución: <code>../</code> sube un nivel; <code>/</code> parte de la raíz.</p>
+				</article>
+				<article class="concepto-css" id="aparecen-simbolos-raros-a-a" data-palabras="html caracteres raros acentos tildes ñ codificación charset utf-8 mojibake símbolos">
+					<h3>Aparecen símbolos raros: Ã¡, Ã±, �</h3>
+					<p>El archivo y el navegador usan codificaciones distintas. Guarda el archivo como UTF-8 y
+					declara <code>charset</code> al principio del <code>head</code>.</p>
+					<pre><code>&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;     &lt;!-- primera línea del head --&gt;
+&lt;/head&gt;</code></pre>
+					<p class="propiedad">Solución: guardar en UTF-8 y añadir <code>&lt;meta charset="utf-8"&gt;</code>.</p>
+				</article>
+				<article class="concepto-css" id="el-estilo-css-o-el-script-no-se-cargan" data-palabras="html css no se aplica script no carga link rel stylesheet ruta href src 404 orden archivo externo">
+					<h3>El estilo CSS o el script no se cargan</h3>
+					<p>La ruta del <code>link</code> o del <code>script</code> es incorrecta, o se enlazó mal. Un
+					<code>link</code> de hoja de estilos necesita <code>rel="stylesheet"</code>.</p>
+					<pre><code>&lt;!-- Mal --&gt;
+&lt;link href="estilos.css"&gt;
+&lt;script src="js/app.js"&gt;&lt;/script&gt;      &lt;!-- ¿existe esa carpeta? --&gt;
+
+&lt;!-- Bien --&gt;
+&lt;link rel="stylesheet" href="css/estilos.css"&gt;
+&lt;script src="js/app.js" defer&gt;&lt;/script&gt;</code></pre>
+					<p class="propiedad">Solución: pestaña Red (F12) y busca el archivo en rojo.</p>
+				</article>
+				<article class="concepto-css" id="el-formulario-no-envia-los-datos-o-llegan-vacios" data-palabras="html formulario no envía datos vacíos name atributo method action input sin name submit botón dentro de form">
+					<h3>El formulario no envía los datos (o llegan vacíos)</h3>
+					<p>Solo se envían los campos que tienen atributo <code>name</code>. Además, el botón debe estar
+					dentro del <code>form</code> y ser de tipo <code>submit</code>.</p>
+					<pre><code>&lt;!-- Mal: sin name, no se envía --&gt;
+&lt;input type="text" id="correo"&gt;
+
+&lt;!-- Bien --&gt;
+&lt;form action="/enviar" method="post"&gt;
+  &lt;input type="text" id="correo" name="correo"&gt;
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+					<p class="propiedad">Solución: <code>name</code> en cada campo, <code>action</code> y <code>method</code> en el form.</p>
+				</article>
+				<article class="concepto-css" id="al-pulsar-la-etiqueta-no-se-activa-el-campo" data-palabras="html label for id no funciona asociar etiqueta campo clic casilla radio accesibilidad">
+					<h3>Al pulsar la etiqueta no se activa el campo</h3>
+					<p>El <code>for</code> de la etiqueta debe coincidir con el <code>id</code> del campo (no con
+					el <code>name</code>).</p>
+					<pre><code>&lt;!-- Mal --&gt;
+&lt;label for="correo"&gt;Correo&lt;/label&gt;
+&lt;input name="correo"&gt;
+
+&lt;!-- Bien --&gt;
+&lt;label for="correo"&gt;Correo&lt;/label&gt;
+&lt;input id="correo" name="correo"&gt;</code></pre>
+					<p class="propiedad">Solución: <code>for</code> = <code>id</code>.</p>
+				</article>
+				<article class="concepto-css" id="el-mismo-id-repetido-en-la-pagina" data-palabras="html id duplicado repetido único getElementById enlace ancla css js error validador">
+					<h3>El mismo id repetido en la página</h3>
+					<p>Un <code>id</code> debe ser único en toda la página. Si se repite,
+					<code>getElementById</code>, los enlaces con <code>#</code> y las etiquetas fallan de forma
+					impredecible.</p>
+					<pre><code>&lt;!-- Mal --&gt;
+&lt;div id="caja"&gt;…&lt;/div&gt;
+&lt;div id="caja"&gt;…&lt;/div&gt;
+
+&lt;!-- Bien: usa class para repetir --&gt;
+&lt;div class="caja"&gt;…&lt;/div&gt;
+&lt;div class="caja"&gt;…&lt;/div&gt;</code></pre>
+					<p class="propiedad">Solución: <code>id</code> único; <code>class</code> para elementos repetidos.</p>
+				</article>
+				<article class="concepto-css" id="el-parrafo-se-parte-solo-un-bloque-dentro-de-p" data-palabras="html p dentro de p div dentro de p párrafo se cierra solo anidar bloque no permitido">
+					<h3>El párrafo se parte solo: un bloque dentro de &lt;p&gt;</h3>
+					<p>Un <code>p</code> no puede contener bloques (<code>div</code>, <code>ul</code>, otro
+					<code>p</code>…): el navegador lo cierra antes y el resultado no es el esperado.</p>
+					<pre><code>&lt;!-- Mal --&gt;
+&lt;p&gt;Texto &lt;div&gt;caja&lt;/div&gt;&lt;/p&gt;
+
+&lt;!-- Bien --&gt;
+&lt;div&gt;&lt;p&gt;Texto&lt;/p&gt;&lt;div&gt;caja&lt;/div&gt;&lt;/div&gt;</code></pre>
+					<p class="propiedad">Solución: usa <code>span</code> dentro de <code>p</code> o reorganiza.</p>
+				</article>
+				<article class="concepto-css" id="la-pagina-se-ve-enorme-en-el-movil-falta-viewport" data-palabras="html móvil viewport meta zoom pequeña escritorio responsive no adapta media queries no funcionan">
+					<h3>La página se ve enorme en el móvil (falta viewport)</h3>
+					<p>Sin la etiqueta viewport, los móviles muestran la página como si fuera de escritorio y las
+					media queries no funcionan como esperas.</p>
+					<pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></pre>
+					<p class="propiedad">Solución: añadirla en el <code>head</code>.</p>
+				</article>
+				<article class="concepto-css" id="el-navegador-entra-en-modo-quirks-falta-el-doctype" data-palabras="html doctype quirks mode falta primera línea diseño distinto cajas html5">
+					<h3>El navegador entra en «modo quirks» (falta el doctype)</h3>
+					<p>Sin <code>&lt;!DOCTYPE html&gt;</code> en la primera línea, el navegador usa reglas antiguas
+					y el diseño puede cambiar (tamaños de caja, alineaciones).</p>
+					<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;</code></pre>
+					<p class="propiedad">Solución: doctype siempre en la primera línea.</p>
+				</article>
+				<article class="concepto-css" id="el-enlace-con-no-salta-a-la-seccion" data-palabras="html ancla # id sección enlace interno no salta fragmento mismo documento">
+					<h3>El enlace con # no salta a la sección</h3>
+					<p>El destino debe tener un <code>id</code> que coincida exactamente (mayúsculas incluidas),
+					sin espacios.</p>
+					<pre><code>&lt;a href="#contacto"&gt;Contacto&lt;/a&gt;
+&lt;section id="contacto"&gt;…&lt;/section&gt;</code></pre>
+					<p class="propiedad">Solución: <code>href="#id"</code> y un único <code>id="id"</code>.</p>
+				</article>
+				<article class="concepto-css" id="los-atributos-con-espacios-se-cortan" data-palabras="html atributo sin comillas espacios value class valor cortado comillas faltan">
+					<h3>Los atributos con espacios se cortan</h3>
+					<p>Si un valor tiene espacios y no va entre comillas, solo se toma la primera palabra.</p>
+					<pre><code>&lt;!-- Mal --&gt;
+&lt;input value=Hola mundo&gt;
+
+&lt;!-- Bien --&gt;
+&lt;input value="Hola mundo"&gt;</code></pre>
+					<p class="propiedad">Solución: comillas siempre.</p>
+				</article>
+				<article class="concepto-css" id="espacios-o-saltos-de-linea-que-no-se-ven" data-palabras="html espacios saltos línea varios espacios no se muestran br nbsp pre formato blanco colapsa">
+					<h3>Espacios o saltos de línea que no se ven</h3>
+					<p>HTML junta cualquier cantidad de espacios y saltos de línea en uno solo. Para separar usa
+					párrafos, <code>br</code> o CSS; para respetar el formato, <code>pre</code>.</p>
+					<pre><code>&lt;p&gt;Hola          mundo&lt;/p&gt;      &lt;!-- se ve: Hola mundo --&gt;
+&lt;pre&gt;Hola          mundo&lt;/pre&gt;    &lt;!-- respeta los espacios --&gt;</code></pre>
+					<p class="propiedad">Solución: márgenes con CSS en lugar de espacios.</p>
+				</article>
+				<article class="concepto-css" id="enlaces-externos-con-target-blank-sin-rel" data-palabras="html target _blank noopener noreferrer seguridad nueva pestaña rel enlace externo">
+					<h3>Enlaces externos con target="_blank" sin rel</h3>
+					<p>Abrir una pestaña nueva sin <code>rel="noopener"</code> permite que la página abierta
+					controle la original (navegadores modernos ya lo mitigan, pero conviene indicarlo).</p>
+					<pre><code>&lt;a href="https://externo.test" target="_blank" rel="noopener noreferrer"&gt;Sitio externo&lt;/a&gt;</code></pre>
+					<p class="propiedad">Solución: añadir <code>rel="noopener noreferrer"</code>.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="css" data-categoria>
+			<div class="cabecera-categoria"><span>01</span>
+				<div>
+					<p>CSS</p>
+					<h2>Errores de CSS</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="mi-estilo-css-no-se-aplica" data-palabras="css no se aplica estilo no funciona hoja no cargada selector especificidad cascada orden inspector">
+					<h3>Mi estilo CSS no se aplica</h3>
+					<p>Causas habituales: la hoja no está enlazada, el selector no coincide (clase vs id, errata),
+					otra regla con más especificidad lo pisa, o hay un error de sintaxis antes.</p>
+					<pre><code>/* Pasos */
+1. F12 → selecciona el elemento → panel Estilos
+2. ¿Aparece tu regla? Si está tachada, otra la anula
+3. ¿Está enlazado el CSS? (pestaña Red)</code></pre>
+					<p class="propiedad">Solución: inspeccionar el elemento y revisar la especificidad.</p>
+				</article>
+				<article class="concepto-css" id="selector-mal-escrito-falta-el-punto-o-la-almohadilla" data-palabras="css selector clase id punto almohadilla . # no funciona error escribir nombre">
+					<h3>Selector mal escrito: falta el punto o la almohadilla</h3>
+					<p>Las clases llevan punto (<code>.caja</code>) y los identificadores, almohadilla
+					(<code>#caja</code>). Sin ellos el selector busca una etiqueta con ese nombre.</p>
+					<pre><code>caja { color: red; }      /* busca &lt;caja&gt; */
+.caja { color: red; }     /* class="caja" */
+#caja { color: red; }     /* id="caja" */</code></pre>
+					<p class="propiedad">Solución: <code>.clase</code>, <code>#id</code>.</p>
+				</article>
+				<article class="concepto-css" id="una-propiedad-se-ignora-falta-la-unidad" data-palabras="css unidad px falta width:100 no funciona número sin unidad valor inválido ignorado">
+					<h3>Una propiedad se ignora: falta la unidad</h3>
+					<p>Casi todas las longitudes necesitan unidad (<code>px</code>, <code>rem</code>,
+					<code>%</code>…). Solo el 0 y algunas propiedades (<code>line-height</code>,
+					<code>opacity</code>, <code>z-index</code>) pueden ir sin ella.</p>
+					<pre><code>width: 100;        /* inválido: se ignora */
+width: 100px;      /* correcto */
+margin: 0;         /* 0 no necesita unidad */</code></pre>
+					<p class="propiedad">Solución: añadir la unidad.</p>
+				</article>
+				<article class="concepto-css" id="falta-un-punto-y-coma-y-se-rompen-las-reglas-siguientes" data-palabras="css punto y coma falta ; regla se rompe siguiente declaración error sintaxis llaves">
+					<h3>Falta un punto y coma y se rompen las reglas siguientes</h3>
+					<p>Una declaración sin <code>;</code> se une con la siguiente y ambas se invalidan.</p>
+					<pre><code>/* Mal */
+.caja {
+  color: red
+  margin: 10px;      /* no se aplica ninguna de las dos */
+}
+/* Bien */
+.caja { color: red; margin: 10px; }</code></pre>
+					<p class="propiedad">Solución: <code>;</code> tras cada declaración.</p>
+				</article>
+				<article class="concepto-css" id="z-index-no-funciona" data-palabras="css z-index no funciona capa encima debajo position static contexto apilamiento">
+					<h3>z-index no funciona</h3>
+					<p><code>z-index</code> solo afecta a elementos posicionados (<code>position</code> distinto de
+					<code>static</code>) y solo compara dentro del mismo contexto de apilamiento.</p>
+					<pre><code>.menu { z-index: 10; }                      /* sin efecto */
+.menu { position: relative; z-index: 10; }  /* funciona */</code></pre>
+					<p class="propiedad">Solución: añadir <code>position</code> y revisar el contexto.</p>
+				</article>
+				<article class="concepto-css" id="un-elemento-absolute-se-sale-de-su-contenedor" data-palabras="css position absolute se sale contenedor padre relative posicionado esquina página top left">
+					<h3>Un elemento absolute se sale de su contenedor</h3>
+					<p>Un elemento <code>absolute</code> se coloca respecto a su ancestro posicionado más cercano;
+					si no hay ninguno, respecto a la página.</p>
+					<pre><code>.tarjeta { position: relative; }          /* ← falta esto */
+.etiqueta { position: absolute; top: 8px; right: 8px; }</code></pre>
+					<p class="propiedad">Solución: <code>position: relative</code> en el contenedor.</p>
+				</article>
+				<article class="concepto-css" id="no-consigo-centrar-verticalmente" data-palabras="css centrar vertical flex align-items height min-height 100vh auto margin no centra">
+					<h3>No consigo centrar verticalmente</h3>
+					<p>El contenedor necesita altura para que haya espacio donde centrar. Con Flex o Grid basta una
+					altura mínima.</p>
+					<pre><code>.contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}</code></pre>
+					<p class="propiedad">Solución: <code>display: flex/grid</code> + altura definida.</p>
+				</article>
+				<article class="concepto-css" id="height-100-no-hace-nada" data-palabras="css height 100% no funciona altura padre porcentaje html body 100vh min-height">
+					<h3>height: 100% no hace nada</h3>
+					<p>Un porcentaje de altura necesita que el padre tenga altura definida. Para ocupar la ventana
+					usa <code>vh</code> o la cadena <code>html, body { height: 100% }</code>.</p>
+					<pre><code>html, body { height: 100%; }
+.pagina { min-height: 100vh; }
+.pagina { min-height: 100dvh; }     /* mejor en móvil */</code></pre>
+					<p class="propiedad">Solución: <code>min-height: 100vh</code> o <code>dvh</code>.</p>
+				</article>
+				<article class="concepto-css" id="aparece-una-barra-de-desplazamiento-horizontal" data-palabras="css scroll horizontal desborde overflow-x ancho 100vw padding border-box imagen exceso barra">
+					<h3>Aparece una barra de desplazamiento horizontal</h3>
+					<p>Algo es más ancho que la pantalla: un <code>width: 100vw</code> con barra vertical, un
+					<code>padding</code> sin <code>box-sizing: border-box</code>, una imagen o tabla grandes.</p>
+					<pre><code>*, *::before, *::after { box-sizing: border-box; }
+img { max-width: 100%; height: auto; }
+/* depurar */
+* { outline: 1px solid red; }</code></pre>
+					<p class="propiedad">Solución: <code>box-sizing</code>, <code>max-width: 100%</code>, depurar con outline.</p>
+				</article>
+				<article class="concepto-css" id="el-padding-o-el-borde-hacen-la-caja-mas-grande-de-lo-que-ind" data-palabras="css box-sizing border-box padding borde ancho suma tamaño caja content-box">
+					<h3>El padding o el borde hacen la caja más grande de lo que indico</h3>
+					<p>Por defecto el ancho no incluye relleno ni borde: <code>width: 200px</code> + <code>padding:
+					20px</code> ocupa 240px.</p>
+					<pre><code>*, *::before, *::after { box-sizing: border-box; }</code></pre>
+					<p class="propiedad">Solución: <code>box-sizing: border-box</code> global.</p>
+				</article>
+				<article class="concepto-css" id="flex-el-hijo-no-encoge-y-se-sale-texto-largo" data-palabras="css flex hijo no encoge min-width 0 overflow texto largo truncar ellipsis flex item desborda">
+					<h3>Flex: el hijo no encoge y se sale (texto largo)</h3>
+					<p>Un elemento flex tiene <code>min-width: auto</code>, así que no se encoge por debajo de su
+					contenido. Pon <code>min-width: 0</code> para permitirlo.</p>
+					<pre><code>.fila { display: flex; }
+.texto { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }</code></pre>
+					<p class="propiedad">Solución: <code>min-width: 0</code>.</p>
+				</article>
+				<article class="concepto-css" id="position-sticky-no-se-queda-pegado" data-palabras="css sticky no funciona top overflow padre altura pegajoso cabecera">
+					<h3>position: sticky no se queda pegado</h3>
+					<p><code>sticky</code> necesita un valor <code>top</code> (u otro lado) y falla si algún
+					ancestro tiene <code>overflow</code> distinto de <code>visible</code> o si el contenedor no
+					es más alto.</p>
+					<pre><code>header { position: sticky; top: 0; }
+/* revisa: ningún padre con overflow: hidden/auto */</code></pre>
+					<p class="propiedad">Solución: definir <code>top</code> y revisar <code>overflow</code> de los padres.</p>
+				</article>
+				<article class="concepto-css" id="la-transicion-no-se-anima" data-palabras="css transition no anima display none height auto cambio abrupto propiedad no animable">
+					<h3>La transición no se anima</h3>
+					<p>No se pueden animar <code>display</code> ni la altura <code>auto</code>. Anima
+					<code>opacity</code>, <code>transform</code> o una altura/<code>max-height</code> concreta.</p>
+					<pre><code>.panel { opacity: 0; transition: opacity .3s; }
+.panel.abierto { opacity: 1; }
+/* o con grid: 0fr → 1fr */</code></pre>
+					<p class="propiedad">Solución: animar <code>opacity</code> y <code>transform</code>.</p>
+				</article>
+				<article class="concepto-css" id="var-x-no-tiene-efecto" data-palabras="css variable var custom property no definida --nombre scope root fallback valor invalid at computed value">
+					<h3>var(--x) no tiene efecto</h3>
+					<p>La variable no está definida en un ancestro del elemento, tiene una errata o está en otro
+					ámbito. Puedes dar un valor de respaldo.</p>
+					<pre><code>:root { --marca: #245b78; }
+.boton { background: var(--marca, teal); }</code></pre>
+					<p class="propiedad">Solución: definir en <code>:root</code> y dar respaldo.</p>
+				</article>
+				<article class="concepto-css" id="la-fuente-propia-no-se-carga" data-palabras="css fuente @font-face no carga font-family woff2 ruta formato cors url tipografía no aparece">
+					<h3>La fuente propia no se carga</h3>
+					<p>Ruta o formato incorrectos en <code>@font-face</code>, o la fuente en otro dominio sin
+					permisos CORS. Declara siempre una fuente de respaldo.</p>
+					<pre><code>@font-face {
+  font-family: "Mi fuente";
+  src: url("fuentes/mi-fuente.woff2") format("woff2");
+  font-display: swap;
+}
+body { font-family: "Mi fuente", system-ui, sans-serif; }</code></pre>
+					<p class="propiedad">Solución: revisar la ruta en la pestaña Red.</p>
+				</article>
+				<article class="concepto-css" id="el-hover-no-funciona-o-se-queda-pegado-en-el-movil" data-palabras="css hover móvil táctil pegado media hover none pointer coarse efecto">
+					<h3>El hover no funciona o se queda «pegado» en el móvil</h3>
+					<p>En pantallas táctiles el estado <code>:hover</code> se queda activo tras tocar. Limita los
+					efectos a dispositivos con puntero.</p>
+					<pre><code>@media (hover: hover) {
+  .tarjeta:hover { transform: translateY(-4px); }
+}</code></pre>
+					<p class="propiedad">Solución: <code>@media (hover: hover)</code>.</p>
+				</article>
+				<article class="concepto-css" id="100vh-es-demasiado-alto-en-movil" data-palabras="css 100vh móvil barra navegador dvh svh scroll altura ventana recorta">
+					<h3>100vh es demasiado alto en móvil</h3>
+					<p>En móviles la barra del navegador hace que <code>100vh</code> supere la zona visible. Usa
+					<code>dvh</code> (o <code>svh</code>) con <code>100vh</code> de respaldo.</p>
+					<pre><code>.portada { min-height: 100vh; min-height: 100dvh; }</code></pre>
+					<p class="propiedad">Solución: <code>dvh</code>.</p>
+				</article>
+				<article class="concepto-css" id="los-margenes-verticales-se-fusionan" data-palabras="css margin collapse colapso margen se fusionan no suman 20px padre hijo">
+					<h3>Los márgenes verticales se «fusionan»</h3>
+					<p>Los márgenes verticales de bloques adyacentes se fusionan: gana el mayor, no se suman. No
+					ocurre en Flex ni Grid.</p>
+					<pre><code>p { margin: 20px 0; }            /* entre dos p hay 20px, no 40 */
+.padre { display: flow-root; }   /* evita la fusión con el hijo */</code></pre>
+					<p class="propiedad">Solución: <code>display: flow-root</code>, padding o Flex/Grid.</p>
+				</article>
+				<article class="concepto-css" id="los-elementos-flotantes-se-salen-del-contenedor" data-palabras="css float contenedor altura cero clearfix flow-root flotantes colapsa">
+					<h3>Los elementos flotantes se salen del contenedor</h3>
+					<p>Un contenedor con hijos flotantes colapsa a altura cero. Contenlos con <code>display:
+					flow-root</code>.</p>
+					<pre><code>.contenedor { display: flow-root; }
+.hijo { float: left; }</code></pre>
+					<p class="propiedad">Solución: <code>flow-root</code> o Flex/Grid.</p>
+				</article>
+				<article class="concepto-css" id="el-color-o-el-texto-parece-sin-contraste" data-palabras="css contraste color texto fondo ilegible accesibilidad wcag gris claro">
+					<h3>El color o el texto parece «sin contraste»</h3>
+					<p>Un texto gris claro sobre blanco puede ser ilegible. Se recomienda una relación de contraste
+					de al menos 4,5:1.</p>
+					<pre><code>color: #aaa; background: #fff;     /* contraste bajo */
+color: #595959; background: #fff;  /* 7:1 */</code></pre>
+					<p class="propiedad">Solución: comprobar con un medidor de contraste.</p>
+				</article>
+				<article class="concepto-css" id="grid-las-columnas-no-se-adaptan-al-ancho" data-palabras="css grid columnas no adaptan responsive repeat auto-fit minmax 1fr overflow ancho fijo">
+					<h3>Grid: las columnas no se adaptan al ancho</h3>
+					<p>Con anchos fijos las columnas no se reorganizan. Usa <code>auto-fit</code> con
+					<code>minmax</code> y <code>fr</code>.</p>
+					<pre><code>.rejilla {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}</code></pre>
+					<p class="propiedad">Solución: <code>repeat(auto-fit, minmax(…, 1fr))</code>.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="js" data-categoria>
+			<div class="cabecera-categoria"><span>02</span>
+				<div>
+					<p>JavaScript</p>
+					<h2>Errores de JavaScript</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="uncaught-referenceerror-x-is-not-defined" data-palabras="javascript referenceerror is not defined variable no definida errata ámbito let const antes de declarar">
+					<h3>Uncaught ReferenceError: x is not defined</h3>
+					<p>Usas una variable que no existe en ese ámbito: errata, está declarada dentro de otro bloque
+					o función, o se carga después.</p>
+					<pre><code>console.log(nombre);       // ReferenceError si no se declaró
+let nombre = "Ana";
+
+function f() { let x = 1; }
+console.log(x);           // x solo existe dentro de f</code></pre>
+					<p class="propiedad">Solución: declararla, revisar mayúsculas y el ámbito.</p>
+				</article>
+				<article class="concepto-css" id="uncaught-typeerror-cannot-read-properties-of-undefined-readi" data-palabras="javascript typeerror cannot read properties of undefined reading undefined propiedad objeto no existe optional chaining">
+					<h3>Uncaught TypeError: Cannot read properties of undefined (reading 'x')</h3>
+					<p>Intentas leer una propiedad de algo que vale <code>undefined</code> (dato que aún no llegó,
+					propiedad mal escrita, índice inexistente).</p>
+					<pre><code>const usuario = {};
+usuario.perfil.nombre;           // TypeError
+usuario.perfil?.nombre ?? "—";   // seguro
+
+lista[5].nombre                  // ¿existe lista[5]?</code></pre>
+					<p class="propiedad">Solución: encadenamiento opcional <code>?.</code> y comprobar el dato.</p>
+				</article>
+				<article class="concepto-css" id="uncaught-typeerror-cannot-read-properties-of-null-reading-x" data-palabras="javascript typeerror null reading querySelector getElementById elemento no existe dom script antes defer null">
+					<h3>Uncaught TypeError: Cannot read properties of null (reading 'x')</h3>
+					<p>El elemento no existe en el DOM cuando se ejecuta el script (selector mal escrito o script
+					cargado antes que el HTML).</p>
+					<pre><code>const boton = document.querySelector("#boton");   // null
+boton.addEventListener("click", f);               // TypeError
+
+&lt;script src="app.js" defer&gt;&lt;/script&gt;              // espera al HTML</code></pre>
+					<p class="propiedad">Solución: <code>defer</code>, revisar el selector y el <code>id</code>.</p>
+				</article>
+				<article class="concepto-css" id="uncaught-typeerror-cannot-set-properties-of-null-setting-tex" data-palabras="javascript typeerror set properties null textContent innerHTML elemento no encontrado dom asignar">
+					<h3>Uncaught TypeError: Cannot set properties of null (setting 'textContent')</h3>
+					<p>Asignas un valor a un elemento que no se encontró (<code>null</code>).</p>
+					<pre><code>document.querySelector("#total").textContent = 5;   // #total no existe</code></pre>
+					<p class="propiedad">Solución: comprueba que el selector coincide y que el DOM está listo.</p>
+				</article>
+				<article class="concepto-css" id="uncaught-typeerror-x-is-not-a-function" data-palabras="javascript typeerror is not a function llamar método no existe errata paréntesis array map objeto propiedad">
+					<h3>Uncaught TypeError: x is not a function</h3>
+					<p>Llamas con <code>()</code> algo que no es una función: nombre mal escrito, propiedad con
+					otro tipo o un método que no existe en ese tipo.</p>
+					<pre><code>const n = 5;
+n();                      // TypeError
+
+const cosa = "texto";
+cosa.map(x =&gt; x);         // "map" no existe en strings
+[..."texto"].map(x =&gt; x); // sí en arrays</code></pre>
+					<p class="propiedad">Solución: comprobar el tipo con <code>typeof</code> o <code>console.log</code>.</p>
+				</article>
+				<article class="concepto-css" id="typeerror-x-map-is-not-a-function" data-palabras="javascript map is not a function array objeto undefined respuesta api no es array filter forEach">
+					<h3>TypeError: x.map is not a function</h3>
+					<p>El valor no es un array (suele ser un objeto de la API, <code>undefined</code> o
+					<code>null</code>).</p>
+					<pre><code>const datos = await respuesta.json();
+console.log(Array.isArray(datos), datos);   // ¿es array?
+datos.items.map(...)                        // quizá está en .items</code></pre>
+					<p class="propiedad">Solución: <code>console.log</code> del dato y <code>Array.isArray</code>.</p>
+				</article>
+				<article class="concepto-css" id="uncaught-typeerror-assignment-to-constant-variable" data-palabras="javascript assignment to constant variable const reasignar let error">
+					<h3>Uncaught TypeError: Assignment to constant variable.</h3>
+					<p>Intentas reasignar una variable declarada con <code>const</code>.</p>
+					<pre><code>const total = 0;
+total = total + 1;       // TypeError
+let suma = 0;            // usa let si va a cambiar
+suma += 1;</code></pre>
+					<p class="propiedad">Nota: un objeto <code>const</code> sí se puede modificar por dentro.</p>
+				</article>
+				<article class="concepto-css" id="uncaught-syntaxerror-unexpected-token" data-palabras="javascript syntaxerror unexpected token paréntesis llave coma error sintaxis línea">
+					<h3>Uncaught SyntaxError: Unexpected token</h3>
+					<p>Hay un símbolo donde no debe: coma o paréntesis de más o de menos, llave sin cerrar,
+					comillas desparejadas.</p>
+					<pre><code>const o = { a: 1, b: 2, };        // correcto
+const p = { a: 1 b: 2 };          // SyntaxError (falta la coma)
+if (x &gt; 1 { }                     // falta )</code></pre>
+					<p class="propiedad">Solución: revisa la línea indicada y la anterior.</p>
+				</article>
+				<article class="concepto-css" id="uncaught-syntaxerror-unexpected-end-of-input" data-palabras="javascript syntaxerror unexpected end of input llave sin cerrar } paréntesis fin archivo">
+					<h3>Uncaught SyntaxError: Unexpected end of input</h3>
+					<p>Falta cerrar una llave <code>}</code>, un paréntesis o una cadena: el archivo termina antes
+					de lo esperado.</p>
+					<pre><code>function f() {
+  if (x) {
+    return 1;
+  // falta una }</code></pre>
+					<p class="propiedad">Solución: un editor con resaltado de pares ayuda.</p>
+				</article>
+				<article class="concepto-css" id="uncaught-syntaxerror-missing-after-argument-list" data-palabras="javascript syntaxerror missing ) after argument list comillas coma falta paréntesis llamada función concatenar">
+					<h3>Uncaught SyntaxError: missing ) after argument list</h3>
+					<p>Suele deberse a comillas sin escapar dentro de un texto o a una coma que falta entre
+					argumentos.</p>
+					<pre><code>console.log("Dijo "hola"");        // comillas sin escapar
+console.log("Dijo \"hola\"");      // bien
+console.log('Dijo "hola"');        // bien</code></pre>
+					<p class="propiedad">Solución: escapar comillas o alternar tipos.</p>
+				</article>
+				<article class="concepto-css" id="uncaught-referenceerror-cannot-access-x-before-initializatio" data-palabras="javascript referenceerror cannot access before initialization let const zona muerta temporal tdz usar antes declarar">
+					<h3>Uncaught ReferenceError: Cannot access 'x' before initialization</h3>
+					<p>Usas una variable <code>let</code> o <code>const</code> antes de la línea en la que se
+					declara.</p>
+					<pre><code>console.log(a);      // ReferenceError
+let a = 1;</code></pre>
+					<p class="propiedad">Solución: declarar antes de usar.</p>
+				</article>
+				<article class="concepto-css" id="uncaught-syntaxerror-identifier-x-has-already-been-declared" data-palabras="javascript syntaxerror identifier already been declared let const duplicada variable repetida">
+					<h3>Uncaught SyntaxError: Identifier 'x' has already been declared</h3>
+					<p>Declaras dos veces la misma variable con <code>let</code> o <code>const</code> en el mismo
+					ámbito (o chocan scripts que comparten ámbito global).</p>
+					<pre><code>let n = 1;
+let n = 2;           // SyntaxError
+n = 2;               // reasignar, sin let</code></pre>
+					<p class="propiedad">Solución: reasignar o renombrar.</p>
+				</article>
+				<article class="concepto-css" id="failed-to-fetch-blocked-by-cors-policy" data-palabras="javascript fetch failed to fetch cors policy blocked access-control-allow-origin servidor origen red error petición">
+					<h3>Failed to fetch / blocked by CORS policy</h3>
+					<p>El navegador bloquea leer una respuesta de otro origen si el servidor no lo autoriza con
+					cabeceras CORS. También aparece si el servidor no responde o la URL es incorrecta. Se
+					arregla en el servidor.</p>
+					<pre><code>Access to fetch at 'https://api.test' from origin 'http://localhost:5500'
+has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header
+
+// Servidor: Access-Control-Allow-Origin: http://localhost:5500</code></pre>
+					<p class="propiedad">Solución: configurar CORS en el servidor o usar un proxy; no en el cliente.</p>
+				</article>
+				<article class="concepto-css" id="unexpected-token-doctype-is-not-valid-json" data-palabras="javascript json parse unexpected token &lt; doctype html respuesta no json fetch error 404 servidor devuelve html">
+					<h3>Unexpected token '&lt;', "&lt;!DOCTYPE "... is not valid JSON</h3>
+					<p>Esperabas JSON, pero el servidor devolvió una página HTML (casi siempre un error 404 o 500 o
+					una URL incorrecta).</p>
+					<pre><code>const r = await fetch("/api/datos");
+console.log(r.status, r.headers.get("content-type"));
+if (!r.ok) throw new Error(r.status);
+const datos = await r.json();</code></pre>
+					<p class="propiedad">Solución: revisar la URL y <code>response.ok</code> antes de <code>.json()</code>.</p>
+				</article>
+				<article class="concepto-css" id="syntaxerror-json-parse-unexpected-character-unexpected-token" data-palabras="javascript json parse unexpected token comillas simples coma final undefined texto no válido sintaxis json">
+					<h3>SyntaxError: JSON.parse: unexpected character / Unexpected token in JSON</h3>
+					<p>El texto no es JSON válido: comillas simples, coma final, claves sin comillas o
+					<code>undefined</code>.</p>
+					<pre><code>JSON.parse("{'a': 1}");        // comillas simples: error
+JSON.parse('{"a": 1}');        // correcto</code></pre>
+					<p class="propiedad">Solución: JSON siempre con comillas dobles.</p>
+				</article>
+				<article class="concepto-css" id="rangeerror-maximum-call-stack-size-exceeded" data-palabras="javascript rangeerror maximum call stack size exceeded recursión infinita función se llama a sí misma caso base">
+					<h3>RangeError: Maximum call stack size exceeded</h3>
+					<p>Una función se llama a sí misma sin parar (recursión sin caso base) o dos funciones se
+					llaman mutuamente.</p>
+					<pre><code>function f() { return f(); }       // sin caso base
+
+function cuenta(n) {
+  if (n === 0) return;             // caso base
+  cuenta(n - 1);
+}</code></pre>
+					<p class="propiedad">Solución: añadir caso base o usar un bucle.</p>
+				</article>
+				<article class="concepto-css" id="rangeerror-invalid-array-length" data-palabras="javascript rangeerror invalid array length new Array negativo decimal longitud">
+					<h3>RangeError: Invalid array length</h3>
+					<p>Intentas crear un array con una longitud negativa, decimal o enorme.</p>
+					<pre><code>new Array(-1);       // RangeError
+new Array(2.5);      // RangeError
+new Array(3);        // [ &lt;3 empty items&gt; ]</code></pre>
+					<p class="propiedad">Solución: validar la longitud.</p>
+				</article>
+				<article class="concepto-css" id="uncaught-in-promise" data-palabras="javascript uncaught in promise rechazada catch async await error no capturado unhandled rejection">
+					<h3>Uncaught (in promise) …</h3>
+					<p>Una promesa falló y nadie capturó el error.</p>
+					<pre><code>fetch("/api").then(r =&gt; r.json());            // sin catch
+try { await peticion(); } catch (e) { console.error(e); }
+peticion().catch(console.error);</code></pre>
+					<p class="propiedad">Solución: <code>try/catch</code> con <code>await</code> o <code>.catch()</code>.</p>
+				</article>
+				<article class="concepto-css" id="cannot-use-import-statement-outside-a-module" data-palabras="javascript import export outside module type module node package.json esm commonjs script">
+					<h3>Cannot use import statement outside a module</h3>
+					<p>Usas <code>import</code> en un script normal. Necesitas indicar que es un módulo.</p>
+					<pre><code>&lt;script type="module" src="app.js"&gt;&lt;/script&gt;
+
+// Node: en package.json
+{ "type": "module" }</code></pre>
+					<p class="propiedad">Solución: <code>type="module"</code> o <code>"type": "module"</code>.</p>
+				</article>
+				<article class="concepto-css" id="require-is-not-defined-exports-is-not-defined" data-palabras="javascript require is not defined module exports commonjs navegador node esm import">
+					<h3>require is not defined / exports is not defined</h3>
+					<p><code>require</code> y <code>module.exports</code> son de CommonJS (Node clásico) y no
+					existen en el navegador ni en módulos ES.</p>
+					<pre><code>// Navegador y módulos ES
+import { f } from "./util.js";
+export function g() {}</code></pre>
+					<p class="propiedad">Solución: usa <code>import</code>/<code>export</code>.</p>
+				</article>
+				<article class="concepto-css" id="syntaxerror-await-is-only-valid-in-async-functions-and-the-t" data-palabras="javascript await only valid async functions modules error función async falta">
+					<h3>SyntaxError: await is only valid in async functions and the top level bodies of modules</h3>
+					<p><code>await</code> solo puede usarse dentro de una función <code>async</code> o en el nivel
+					superior de un módulo.</p>
+					<pre><code>async function cargar() {
+  const r = await fetch("/api");
+}</code></pre>
+					<p class="propiedad">Solución: marcar la función como <code>async</code>.</p>
+				</article>
+				<article class="concepto-css" id="los-botones-o-eventos-no-responden" data-palabras="javascript evento no responde click addEventListener no funciona selector null script defer función ejecuta paréntesis">
+					<h3>Los botones o eventos no responden</h3>
+					<p>Causas: el elemento no existe cuando se ejecuta el script, el selector es incorrecto, se
+					ejecuta la función en vez de pasarla, o algo la tapa.</p>
+					<pre><code>boton.addEventListener("click", saludar());   // la ejecuta ya
+boton.addEventListener("click", saludar);     // la pasa</code></pre>
+					<p class="propiedad">Solución: <code>defer</code>, selector correcto y pasar la función sin <code>()</code>.</p>
+				</article>
+				<article class="concepto-css" id="la-pagina-se-recarga-al-enviar-el-formulario" data-palabras="javascript formulario recarga página submit preventDefault evento enviar botón type button">
+					<h3>La página se recarga al enviar el formulario</h3>
+					<p>El envío por defecto recarga la página. Cancélalo con <code>preventDefault()</code> si
+					gestionas los datos con JavaScript.</p>
+					<pre><code>form.addEventListener("submit", (e) =&gt; {
+  e.preventDefault();
+  // …
+});</code></pre>
+					<p class="propiedad">Solución: <code>event.preventDefault()</code>.</p>
+				</article>
+				<article class="concepto-css" id="el-resultado-es-nan" data-palabras="javascript nan not a number resultado número texto conversión parseInt undefined operación">
+					<h3>El resultado es NaN</h3>
+					<p>Una operación numérica con algo que no es un número (texto no convertible,
+					<code>undefined</code>).</p>
+					<pre><code>Number("abc");         // NaN
+undefined + 1;         // NaN
+const n = Number(input.value);
+if (Number.isNaN(n)) { /* avisar */ }</code></pre>
+					<p class="propiedad">Solución: convertir y validar; <code>Number.isNaN</code>.</p>
+				</article>
+				<article class="concepto-css" id="5-5-da-55-y-no-10" data-palabras="javascript suma texto concatena string number input value convertir + operador">
+					<h3>5 + "5" da "55" y no 10</h3>
+					<p>El valor de un campo de formulario siempre es texto, y <code>+</code> concatena si algún
+					operando es texto.</p>
+					<pre><code>"5" + 5;               // "55"
+Number("5") + 5;       // 10
++input.value + 5;</code></pre>
+					<p class="propiedad">Solución: convertir con <code>Number()</code>.</p>
+				</article>
+				<article class="concepto-css" id="da-resultados-inesperados" data-palabras="javascript == === igualdad estricta coerción 0 &#x27;&#x27; null undefined comparar false">
+					<h3>== da resultados inesperados</h3>
+					<p><code>==</code> convierte tipos antes de comparar. Usa siempre <code>===</code> y
+					<code>!==</code>.</p>
+					<pre><code>0 == "";              // true
+"1" == 1;             // true
+null == undefined;    // true
+0 === "";             // false</code></pre>
+					<p class="propiedad">Solución: <code>===</code>.</p>
+				</article>
+				<article class="concepto-css" id="setinterval-se-acumula-y-todo-va-mas-rapido" data-palabras="javascript setInterval clearInterval duplicado acumula temporizador varios eventos ejecuta varias veces">
+					<h3>setInterval se acumula y todo va más rápido</h3>
+					<p>Cada vez que se ejecuta el código se crea un nuevo intervalo sin cancelar el anterior.</p>
+					<pre><code>let id;
+function iniciar() {
+  clearInterval(id);
+  id = setInterval(tic, 1000);
+}</code></pre>
+					<p class="propiedad">Solución: guardar el id y llamar a <code>clearInterval</code>.</p>
+				</article>
+				<article class="concepto-css" id="mixed-content-la-pagina-https-carga-recursos-http" data-palabras="javascript mixed content https http bloqueado recurso inseguro imagen script fetch contenido mixto">
+					<h3>Mixed Content: la página HTTPS carga recursos HTTP</h3>
+					<p>Una página segura (HTTPS) no puede cargar recursos por HTTP: el navegador los bloquea.</p>
+					<pre><code>&lt;img src="http://ejemplo.test/a.png"&gt;    &lt;!-- bloqueado --&gt;
+&lt;img src="https://ejemplo.test/a.png"&gt;</code></pre>
+					<p class="propiedad">Solución: usar siempre HTTPS.</p>
+				</article>
+				<article class="concepto-css" id="failed-to-load-resource-404-not-found" data-palabras="javascript failed to load resource 404 not found ruta archivo script css imagen consola red">
+					<h3>Failed to load resource: 404 (Not Found)</h3>
+					<p>El navegador no encuentra un archivo: ruta, nombre o mayúsculas incorrectos.</p>
+					<pre><code>GET http://localhost/js/app.js 404 (Not Found)
+
+// Revisa la ruta relativa desde la página que lo carga</code></pre>
+					<p class="propiedad">Solución: pestaña Red (F12).</p>
+				</article>
+				<article class="concepto-css" id="refused-to-execute-script-mime-type" data-palabras="javascript refused to execute script mime type text/html ruta incorrecta servidor devuelve html">
+					<h3>Refused to execute script … MIME type</h3>
+					<p>El servidor devolvió HTML (normalmente una página 404) en lugar del archivo JavaScript: la
+					ruta es incorrecta.</p>
+					<pre><code>&lt;script src="/js/app.js"&gt;&lt;/script&gt;     &lt;!-- ¿existe esa ruta en el servidor? --&gt;</code></pre>
+					<p class="propiedad">Solución: corregir la ruta del script.</p>
+				</article>
+				<article class="concepto-css" id="localstorage-json-parse-null-y-datos-como-texto" data-palabras="javascript localstorage null parse json texto guardar objeto [object object] getItem stringify">
+					<h3>localStorage: JSON.parse(null) y datos como texto</h3>
+					<p><code>localStorage</code> solo guarda texto: los objetos se guardan con
+					<code>JSON.stringify</code> y se leen con <code>JSON.parse</code>. Si la clave no existe,
+					<code>getItem</code> devuelve <code>null</code>.</p>
+					<pre><code>localStorage.setItem("u", { a: 1 });           // guarda "[object Object]"
+localStorage.setItem("u", JSON.stringify({ a: 1 }));
+const u = JSON.parse(localStorage.getItem("u") ?? "{}");</code></pre>
+					<p class="propiedad">Solución: <code>stringify</code> al guardar y valor por defecto al leer.</p>
+				</article>
+				<article class="concepto-css" id="this-es-undefined-o-no-es-lo-que-espero" data-palabras="javascript this undefined método callback evento flecha bind contexto objeto perdido">
+					<h3>this es undefined o no es lo que espero</h3>
+					<p>Al pasar un método como callback pierde su objeto. Usa funciones flecha o <code>bind</code>.</p>
+					<pre><code>class C {
+  nombre = "x";
+  mostrar() { console.log(this.nombre); }
+}
+const c = new C();
+setTimeout(c.mostrar, 0);                  // this perdido
+setTimeout(() =&gt; c.mostrar(), 0);          // correcto</code></pre>
+					<p class="propiedad">Solución: flecha, <code>bind</code> o método de clase con flecha.</p>
+				</article>
+				<article class="concepto-css" id="uncaught-syntaxerror-illegal-return-statement" data-palabras="javascript illegal return statement fuera función return script nivel superior">
+					<h3>Uncaught SyntaxError: Illegal return statement</h3>
+					<p>Escribiste <code>return</code> fuera de una función.</p>
+					<pre><code>if (!ok) return;             // fuera de función → error
+function f() { if (!ok) return; }</code></pre>
+					<p class="propiedad">Solución: dentro de una función.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="java" data-categoria>
+			<div class="cabecera-categoria"><span>03</span>
+				<div>
+					<p>Java</p>
+					<h2>Errores de Java</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="error-cannot-find-symbol" data-palabras="java cannot find symbol error compilación variable no declarada import errata método clase mayúsculas">
+					<h3>error: cannot find symbol</h3>
+					<p>El compilador no reconoce un nombre: errata, mayúsculas, variable fuera de ámbito, método
+					que no existe o falta un <code>import</code>.</p>
+					<pre><code>Scanner in = new Scanner(System.in);     // falta: import java.util.Scanner;
+int total = suma;                        // ¿está declarada «suma»?
+String s = "x"; s.lenght();              // errata: length()</code></pre>
+					<p class="propiedad">Solución: revisa mayúsculas, ámbito e importaciones.</p>
+				</article>
+				<article class="concepto-css" id="error-incompatible-types-string-cannot-be-converted-to-int" data-palabras="java incompatible types string int converted tipos asignar conversión parseInt error compilación">
+					<h3>error: incompatible types: String cannot be converted to int</h3>
+					<p>Asignas un valor de un tipo a una variable de otro tipo sin conversión.</p>
+					<pre><code>int n = "5";                     // error
+int n = Integer.parseInt("5");   // correcto
+String s = 5;                    // error
+String s = String.valueOf(5);</code></pre>
+					<p class="propiedad">Solución: convertir con <code>parseInt</code>, <code>valueOf</code>…</p>
+				</article>
+				<article class="concepto-css" id="error-incompatible-types-possible-lossy-conversion-from-doub" data-palabras="java lossy conversion double int pérdida precisión casting decimal long float">
+					<h3>error: incompatible types: possible lossy conversion from double to int</h3>
+					<p>Intentas guardar un tipo mayor (como <code>double</code>) en uno menor (<code>int</code>) y
+					Java no lo hace sin que lo indiques.</p>
+					<pre><code>int n = 3.7;                  // error
+int n = (int) 3.7;            // 3 (trunca)
+int r = (int) Math.round(3.7);// 4</code></pre>
+					<p class="propiedad">Solución: casting explícito o <code>Math.round</code>.</p>
+				</article>
+				<article class="concepto-css" id="error-missing-return-statement" data-palabras="java missing return statement método falta return todas las ramas if else">
+					<h3>error: missing return statement</h3>
+					<p>Un método que declara un tipo de retorno debe devolver un valor en todos los caminos
+					posibles.</p>
+					<pre><code>int signo(int n) {
+    if (n &gt; 0) return 1;
+    else if (n &lt; 0) return -1;
+    // ¿y si n == 0?  → error
+    return 0;
+}</code></pre>
+					<p class="propiedad">Solución: añade <code>return</code> al final o en cada rama.</p>
+				</article>
+				<article class="concepto-css" id="error-expected" data-palabras="java ; expected falta punto y coma error compilación línea anterior sintaxis">
+					<h3>error: ';' expected</h3>
+					<p>Falta un punto y coma. El error suele señalar la línea siguiente a la que falta.</p>
+					<pre><code>int a = 5          // falta ;
+System.out.println(a);</code></pre>
+					<p class="propiedad">Solución: revisa la línea anterior.</p>
+				</article>
+				<article class="concepto-css" id="error-reached-end-of-file-while-parsing" data-palabras="java reached end of file while parsing llave sin cerrar } falta cerrar clase método">
+					<h3>error: reached end of file while parsing</h3>
+					<p>Falta cerrar una llave <code>}</code> de una clase, método o bloque.</p>
+					<pre><code>public class A {
+    void f() {
+        if (x) {
+            // …
+        }
+    // falta cerrar f() y la clase</code></pre>
+					<p class="propiedad">Solución: un IDE que sangre automáticamente lo evita.</p>
+				</article>
+				<article class="concepto-css" id="error-class-x-is-public-should-be-declared-in-a-file-named-x" data-palabras="java class is public should be declared in a file named nombre archivo clase pública .java">
+					<h3>error: class X is public, should be declared in a file named X.java</h3>
+					<p>El nombre del archivo debe coincidir exactamente con el de la clase pública (mayúsculas
+					incluidas).</p>
+					<pre><code>// Archivo Hola.java
+public class Hola { }        // correcto
+// Archivo hola.java con public class Hola → error</code></pre>
+					<p class="propiedad">Solución: renombrar archivo o clase.</p>
+				</article>
+				<article class="concepto-css" id="error-non-static-method-m-cannot-be-referenced-from-a-static" data-palabras="java non-static method cannot be referenced from static context main static llamar método instancia">
+					<h3>error: non-static method m() cannot be referenced from a static context</h3>
+					<p>Llamas desde <code>main</code> (static) a un método de instancia sin crear un objeto.</p>
+					<pre><code>public class App {
+    void saludar() { }
+    public static void main(String[] args) {
+        saludar();                 // error
+        new App().saludar();       // correcto
+    }
+}</code></pre>
+					<p class="propiedad">Solución: crear el objeto o hacer el método <code>static</code>.</p>
+				</article>
+				<article class="concepto-css" id="error-variable-x-might-not-have-been-initialized" data-palabras="java variable might not have been initialized sin inicializar local valor inicial if">
+					<h3>error: variable x might not have been initialized</h3>
+					<p>Usas una variable local antes de asignarle un valor en todos los caminos posibles.</p>
+					<pre><code>int x;
+if (cond) x = 1;
+System.out.println(x);      // error: ¿y si cond es falso?
+int x = 0;                  // inicializar</code></pre>
+					<p class="propiedad">Solución: inicializar al declarar.</p>
+				</article>
+				<article class="concepto-css" id="error-unreported-exception-x-must-be-caught-or-declared-to-b" data-palabras="java unreported exception must be caught or declared to be thrown ioexception throws try catch comprobada">
+					<h3>error: unreported exception X; must be caught or declared to be thrown</h3>
+					<p>Llamas a código que puede lanzar una excepción comprobada (<code>IOException</code>,
+					<code>InterruptedException</code>…) y no la capturas ni la declaras.</p>
+					<pre><code>String t = Files.readString(Path.of("a.txt"));      // error
+
+try { String t = Files.readString(Path.of("a.txt")); }
+catch (IOException e) { e.printStackTrace(); }
+// o: void f() throws IOException { … }</code></pre>
+					<p class="propiedad">Solución: <code>try/catch</code> o <code>throws</code>.</p>
+				</article>
+				<article class="concepto-css" id="error-unreachable-statement" data-palabras="java unreachable statement código inalcanzable return break después bucle infinito">
+					<h3>error: unreachable statement</h3>
+					<p>Hay código que nunca se ejecutará (por ejemplo, tras un <code>return</code> o
+					<code>break</code>).</p>
+					<pre><code>return x;
+System.out.println("nunca");     // error</code></pre>
+					<p class="propiedad">Solución: elimina o reordena el código.</p>
+				</article>
+				<article class="concepto-css" id="error-cannot-assign-a-value-to-final-variable-x" data-palabras="java cannot assign a value to final variable constante reasignar final error">
+					<h3>error: cannot assign a value to final variable x</h3>
+					<p>Intentas cambiar una variable <code>final</code>.</p>
+					<pre><code>final int MAX = 10;
+MAX = 20;                       // error</code></pre>
+					<p class="propiedad">Solución: quita <code>final</code> si debe cambiar.</p>
+				</article>
+				<article class="concepto-css" id="error-else-without-if" data-palabras="java else without if llave punto y coma if mal cerrado error sintaxis">
+					<h3>error: 'else' without 'if'</h3>
+					<p>Suele deberse a un <code>;</code> justo después del <code>if</code> o a llaves mal
+					colocadas.</p>
+					<pre><code>if (x &gt; 0);          // el ; termina el if
+{ … }
+else { … }               // error</code></pre>
+					<p class="propiedad">Solución: eliminar el <code>;</code> y revisar llaves.</p>
+				</article>
+				<article class="concepto-css" id="error-package-x-does-not-exist" data-palabras="java package does not exist import librería classpath dependencia maven jar error">
+					<h3>error: package x does not exist</h3>
+					<p>Falta la librería en el classpath (o la dependencia en Maven/Gradle), o el nombre del
+					paquete tiene una errata.</p>
+					<pre><code>import com.google.gson.Gson;      // package com.google.gson does not exist
+// Añade la dependencia en pom.xml o el JAR al proyecto</code></pre>
+					<p class="propiedad">Solución: añadir la dependencia.</p>
+				</article>
+				<article class="concepto-css" id="error-method-m-in-class-x-cannot-be-applied-to-given-types" data-palabras="java method cannot be applied to given types argumentos número tipo parámetros llamada incorrecta">
+					<h3>error: method m in class X cannot be applied to given types</h3>
+					<p>Llamas a un método con argumentos de número o tipo incorrectos.</p>
+					<pre><code>static int suma(int a, int b) { … }
+suma(1);                  // faltan argumentos
+suma(1, "2");             // tipo incorrecto</code></pre>
+					<p class="propiedad">Solución: revisa la firma del método.</p>
+				</article>
+				<article class="concepto-css" id="error-bad-operand-types-for-binary-operator" data-palabras="java bad operand types for binary operator comparar string == operador tipos incompatibles">
+					<h3>error: bad operand types for binary operator</h3>
+					<p>Aplicas un operador a tipos incompatibles (por ejemplo, <code>&amp;&amp;</code> con números
+					o <code>-</code> con cadenas).</p>
+					<pre><code>if (edad = 18) { }          // asignación en vez de ==
+if ("a" - 1 &gt; 0) { }        // resta con String</code></pre>
+					<p class="propiedad">Solución: comprobar tipos y operadores.</p>
+				</article>
+				<article class="concepto-css" id="exception-in-thread-main-java-lang-nullpointerexception" data-palabras="java nullpointerexception npe null objeto sin crear referencia método invocar variable no inicializada">
+					<h3>Exception in thread "main" java.lang.NullPointerException</h3>
+					<p>Usas un objeto que vale <code>null</code>. La traza indica la clase y la línea exacta del
+					problema.</p>
+					<pre><code>String s = null;
+s.length();                         // NullPointerException
+
+if (s != null &amp;&amp; s.length() &gt; 3) { }
+Objects.requireNonNull(valor, "valor es obligatorio");</code></pre>
+					<p class="propiedad">Solución: inicializar, comprobar <code>null</code> o usar <code>Optional</code>.</p>
+				</article>
+				<article class="concepto-css" id="arrayindexoutofboundsexception-index-5-out-of-bounds-for-len" data-palabras="java arrayindexoutofbounds index out of bounds for length array índice fuera rango límite for &lt;=">
+					<h3>ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 3</h3>
+					<p>Accedes a una posición que no existe. Los índices van de 0 a <code>length - 1</code>.</p>
+					<pre><code>int[] a = new int[3];
+a[3] = 1;                            // error
+for (int i = 0; i &lt;= a.length; i++)  // &lt;= provoca el error
+for (int i = 0; i &lt; a.length; i++)   // correcto</code></pre>
+					<p class="propiedad">Solución: usar <code>&lt;</code> en el bucle.</p>
+				</article>
+				<article class="concepto-css" id="stringindexoutofboundsexception" data-palabras="java stringindexoutofbounds charAt substring índice cadena fuera rango begin end length">
+					<h3>StringIndexOutOfBoundsException</h3>
+					<p>Un índice de <code>charAt</code> o <code>substring</code> está fuera de la longitud del
+					texto.</p>
+					<pre><code>"hola".charAt(4);            // error (válidos: 0-3)
+"hola".substring(2, 10);     // error</code></pre>
+					<p class="propiedad">Solución: comprobar <code>length()</code> antes.</p>
+				</article>
+				<article class="concepto-css" id="arithmeticexception-by-zero" data-palabras="java arithmeticexception by zero división entre cero entero double infinity">
+					<h3>ArithmeticException: / by zero</h3>
+					<p>Dividiste un entero entre cero. Con <code>double</code> el resultado sería
+					<code>Infinity</code> en lugar de error.</p>
+					<pre><code>int r = 10 / 0;                    // ArithmeticException
+if (b != 0) r = a / b;</code></pre>
+					<p class="propiedad">Solución: comprobar el divisor.</p>
+				</article>
+				<article class="concepto-css" id="numberformatexception-for-input-string-abc" data-palabras="java numberformatexception for input string parseInt valueOf texto no número convertir scanner">
+					<h3>NumberFormatException: For input string: "abc"</h3>
+					<p>Intentas convertir en número un texto que no lo es (o que tiene espacios, comas o está
+					vacío).</p>
+					<pre><code>Integer.parseInt("abc");        // NumberFormatException
+Integer.parseInt(" 5");         // también (espacio)
+Integer.parseInt(t.trim());</code></pre>
+					<p class="propiedad">Solución: validar o capturar la excepción.</p>
+				</article>
+				<article class="concepto-css" id="classcastexception" data-palabras="java classcastexception cannot be cast to casting objeto tipo incorrecto instanceof herencia">
+					<h3>ClassCastException</h3>
+					<p>Conviertes un objeto a una clase que no es la suya.</p>
+					<pre><code>Object o = "texto";
+Integer n = (Integer) o;           // ClassCastException
+if (o instanceof String s) { }</code></pre>
+					<p class="propiedad">Solución: comprobar con <code>instanceof</code>.</p>
+				</article>
+				<article class="concepto-css" id="inputmismatchexception" data-palabras="java inputmismatchexception scanner nextInt texto en vez de número entrada teclado">
+					<h3>InputMismatchException</h3>
+					<p><code>Scanner</code> esperaba un número y recibió otro tipo de dato (por ejemplo, letras).</p>
+					<pre><code>Scanner in = new Scanner(System.in);
+int n = in.nextInt();              // si escribes "abc": error
+int n2 = Integer.parseInt(in.nextLine().trim());</code></pre>
+					<p class="propiedad">Solución: <code>hasNextInt()</code> o leer línea y convertir.</p>
+				</article>
+				<article class="concepto-css" id="scanner-nextline-devuelve-vacio-tras-nextint" data-palabras="java scanner nextline vacío salta después nextint buffer salto de línea problema clásico leer cadena">
+					<h3>Scanner: nextLine() devuelve vacío tras nextInt()</h3>
+					<p><code>nextInt()</code> no consume el salto de línea final, así que el siguiente
+					<code>nextLine()</code> lee una línea vacía.</p>
+					<pre><code>int edad = in.nextInt();
+in.nextLine();                    // consumir el salto pendiente
+String nombre = in.nextLine();</code></pre>
+					<p class="propiedad">Solución: leer todo con <code>nextLine()</code> y convertir.</p>
+				</article>
+				<article class="concepto-css" id="nosuchelementexception-no-line-found" data-palabras="java nosuchelementexception no line found scanner fin entrada iterator vacío lista">
+					<h3>NoSuchElementException: No line found</h3>
+					<p>Lees más datos de los que hay (entrada terminada, iterador sin elementos).</p>
+					<pre><code>if (in.hasNextLine()) linea = in.nextLine();
+if (it.hasNext()) x = it.next();</code></pre>
+					<p class="propiedad">Solución: comprobar <code>hasNext…()</code>.</p>
+				</article>
+				<article class="concepto-css" id="concurrentmodificationexception" data-palabras="java concurrentmodificationexception modificar lista mientras recorre for each remove iterator removeIf">
+					<h3>ConcurrentModificationException</h3>
+					<p>Modificas una colección mientras la recorres con un <code>for-each</code>.</p>
+					<pre><code>for (String s : lista) if (s.isEmpty()) lista.remove(s);   // error
+lista.removeIf(String::isEmpty);                           // correcto</code></pre>
+					<p class="propiedad">Solución: <code>removeIf</code> o <code>Iterator.remove()</code>.</p>
+				</article>
+				<article class="concepto-css" id="unsupportedoperationexception" data-palabras="java unsupportedoperationexception list.of arrays.aslist inmutable add remove modificar">
+					<h3>UnsupportedOperationException</h3>
+					<p>Intentas modificar una colección inmutable (<code>List.of</code>,
+					<code>Collections.unmodifiableList</code>, <code>toList()</code>).</p>
+					<pre><code>List&lt;Integer&gt; l = List.of(1, 2);
+l.add(3);                              // error
+List&lt;Integer&gt; m = new ArrayList&lt;&gt;(l);
+m.add(3);</code></pre>
+					<p class="propiedad">Solución: copiar a un <code>ArrayList</code>.</p>
+				</article>
+				<article class="concepto-css" id="stackoverflowerror" data-palabras="java stackoverflowerror recursión infinita sin caso base pila llamadas métodos se llaman">
+					<h3>StackOverflowError</h3>
+					<p>La recursión no termina (falta el caso base) o es demasiado profunda.</p>
+					<pre><code>int f(int n) { return f(n - 1); }          // sin caso base
+int f(int n) { return n == 0 ? 0 : f(n - 1); }</code></pre>
+					<p class="propiedad">Solución: caso base o bucle.</p>
+				</article>
+				<article class="concepto-css" id="outofmemoryerror-java-heap-space" data-palabras="java outofmemoryerror heap space memoria insuficiente lista enorme fuga memoria xmx">
+					<h3>OutOfMemoryError: Java heap space</h3>
+					<p>El programa necesita más memoria de la disponible: estructuras demasiado grandes o
+					referencias que nunca se liberan.</p>
+					<pre><code>java -Xmx2g MiPrograma         // ampliar el heap
+// Revisa colecciones que crecen sin límite</code></pre>
+					<p class="propiedad">Solución: procesar por partes o ampliar <code>-Xmx</code>.</p>
+				</article>
+				<article class="concepto-css" id="error-could-not-find-or-load-main-class-x" data-palabras="java could not find or load main class classpath nombre paquete ejecutar java class no encuentra main">
+					<h3>Error: Could not find or load main class X</h3>
+					<p>Java no encuentra la clase principal: nombre mal escrito, falta el paquete o el classpath es
+					incorrecto.</p>
+					<pre><code>javac Hola.java
+java Hola                       // sin .class
+java com.ejemplo.Hola           // con paquete, desde la carpeta raíz</code></pre>
+					<p class="propiedad">Solución: ejecutar desde la raíz con el nombre completo.</p>
+				</article>
+				<article class="concepto-css" id="classnotfoundexception-noclassdeffounderror" data-palabras="java classnotfoundexception noclassdeffounderror librería jar classpath falta dependencia ejecución">
+					<h3>ClassNotFoundException / NoClassDefFoundError</h3>
+					<p>Falta una clase en tiempo de ejecución: el JAR de una librería no está en el classpath.</p>
+					<pre><code>java -cp "bin;lib/*" com.ejemplo.App          // Windows
+java -cp "bin:lib/*" com.ejemplo.App          // Linux/macOS</code></pre>
+					<p class="propiedad">Solución: incluir las dependencias en el classpath.</p>
+				</article>
+				<article class="concepto-css" id="unsupportedclassversionerror-class-file-version-65-0" data-palabras="java unsupportedclassversionerror major.minor version versión java compilado ejecutar jdk antiguo">
+					<h3>UnsupportedClassVersionError: class file version 65.0</h3>
+					<p>Compilaste con una versión de Java más nueva que la que usas para ejecutar.</p>
+					<pre><code>java -version
+javac -version          // deben ser compatibles
+javac --release 17 Hola.java</code></pre>
+					<p class="propiedad">Solución: usar la misma versión o <code>--release</code>.</p>
+				</article>
+				<article class="concepto-css" id="filenotfoundexception-archivo-el-sistema-no-puede-encontrar-" data-palabras="java filenotfoundexception archivo no encuentra ruta relativa directorio de trabajo user.dir path">
+					<h3>FileNotFoundException: archivo (El sistema no puede encontrar el archivo)</h3>
+					<p>La ruta es incorrecta respecto al directorio de trabajo desde el que se ejecuta el programa.</p>
+					<pre><code>System.out.println(new File(".").getAbsolutePath());   // dónde estás
+new File("datos/a.txt");</code></pre>
+					<p class="propiedad">Solución: usar rutas absolutas o ajustar el directorio de trabajo.</p>
+				</article>
+				<article class="concepto-css" id="illegalargumentexception-illegalstateexception" data-palabras="java illegalargumentexception illegalstateexception argumento inválido estado método llamado incorrecto valor">
+					<h3>IllegalArgumentException / IllegalStateException</h3>
+					<p>Un método recibió un argumento no válido (<code>IllegalArgumentException</code>) o se llamó
+					en un estado inadecuado (<code>IllegalStateException</code>).</p>
+					<pre><code>throw new IllegalArgumentException("La edad no puede ser negativa");</code></pre>
+					<p class="propiedad">Solución: leer el mensaje y validar antes.</p>
+				</article>
+				<article class="concepto-css" id="comparar-cadenas-con-da-resultados-erroneos" data-palabras="java comparar strings == equals error lógica referencia contenido igualdad cadena">
+					<h3>Comparar cadenas con == da resultados erróneos</h3>
+					<p><code>==</code> compara referencias, no el contenido. Con textos usa <code>equals</code>.</p>
+					<pre><code>String a = new String("hola");
+a == "hola";                  // false
+a.equals("hola");             // true</code></pre>
+					<p class="propiedad">Solución: <code>equals</code>.</p>
+				</article>
+				<article class="concepto-css" id="negativearraysizeexception" data-palabras="java negativearraysizeexception tamaño negativo array new int[-1]">
+					<h3>NegativeArraySizeException</h3>
+					<p>Creas un array con un tamaño negativo.</p>
+					<pre><code>int[] a = new int[n];       // n &lt; 0 → excepción
+if (n &gt;= 0) a = new int[n];</code></pre>
+					<p class="propiedad">Solución: validar el tamaño.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="python" data-categoria>
+			<div class="cabecera-categoria"><span>04</span>
+				<div>
+					<p>Python</p>
+					<h2>Errores de Python</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="syntaxerror-invalid-syntax" data-palabras="python syntaxerror invalid syntax sintaxis dos puntos paréntesis falta error línea anterior">
+					<h3>SyntaxError: invalid syntax</h3>
+					<p>Python no entiende la línea: faltan los dos puntos, un paréntesis sin cerrar, <code>=</code>
+					en lugar de <code>==</code>…</p>
+					<pre><code>if x &gt; 3          # falta :
+print("hola"      # falta )
+if x = 3:         # = en vez de ==</code></pre>
+					<p class="propiedad">Solución: revisa también la línea anterior.</p>
+				</article>
+				<article class="concepto-css" id="syntaxerror-unterminated-string-literal" data-palabras="python syntaxerror unterminated string literal comillas sin cerrar cadena">
+					<h3>SyntaxError: unterminated string literal</h3>
+					<p>Una cadena empieza con comillas y no se cierran en esa línea.</p>
+					<pre><code>print("Hola)            # falta la comilla final
+texto = """varias
+líneas"""</code></pre>
+					<p class="propiedad">Solución: cerrar las comillas o usar triples.</p>
+				</article>
+				<article class="concepto-css" id="indentationerror-expected-an-indented-block-after-if-stateme" data-palabras="python indentationerror expected an indented block after if for def sangría falta bloque vacío pass">
+					<h3>IndentationError: expected an indented block after 'if' statement</h3>
+					<p>Después de los dos puntos debe haber un bloque con sangría.</p>
+					<pre><code>if x &gt; 0:
+print("positivo")          # error: falta sangría
+
+if x &gt; 0:
+    pass                   # bloque vacío</code></pre>
+					<p class="propiedad">Solución: 4 espacios o <code>pass</code>.</p>
+				</article>
+				<article class="concepto-css" id="indentationerror-unexpected-indent-unindent-does-not-match" data-palabras="python indentationerror unexpected indent unindent does not match sangría espacios inconsistente">
+					<h3>IndentationError: unexpected indent / unindent does not match</h3>
+					<p>Hay una sangría donde no corresponde o los niveles no coinciden.</p>
+					<pre><code>x = 1
+    y = 2              # unexpected indent</code></pre>
+					<p class="propiedad">Solución: usar siempre el mismo número de espacios.</p>
+				</article>
+				<article class="concepto-css" id="taberror-inconsistent-use-of-tabs-and-spaces-in-indentation" data-palabras="python taberror tabuladores espacios mezclados sangría inconsistente editor">
+					<h3>TabError: inconsistent use of tabs and spaces in indentation</h3>
+					<p>Mezclaste tabuladores y espacios.</p>
+					<pre><code># Configura tu editor: «insertar espacios» y 4 por nivel</code></pre>
+					<p class="propiedad">Solución: convertir tabuladores en espacios.</p>
+				</article>
+				<article class="concepto-css" id="nameerror-name-x-is-not-defined" data-palabras="python nameerror name is not defined variable no definida errata función import orden">
+					<h3>NameError: name 'x' is not defined</h3>
+					<p>Usas un nombre que aún no existe: errata, mayúsculas, falta un <code>import</code> o la usas
+					antes de definirla.</p>
+					<pre><code>print(total)                 # NameError
+total = 5
+
+import math
+math.sqrt(9)               # falta import math → NameError</code></pre>
+					<p class="propiedad">Solución: definir antes de usar e importar.</p>
+				</article>
+				<article class="concepto-css" id="typeerror-can-only-concatenate-str-not-int-to-str" data-palabras="python typeerror can only concatenate str not int sumar texto número str() f-string">
+					<h3>TypeError: can only concatenate str (not "int") to str</h3>
+					<p>Intentas unir texto y número con <code>+</code>.</p>
+					<pre><code>"Edad: " + 30              # TypeError
+"Edad: " + str(30)
+f"Edad: {30}"</code></pre>
+					<p class="propiedad">Solución: <code>str()</code> o f-strings.</p>
+				</article>
+				<article class="concepto-css" id="typeerror-unsupported-operand-type-s-for-int-and-str" data-palabras="python typeerror unsupported operand types int str input convertir suma texto número operación">
+					<h3>TypeError: unsupported operand type(s) for +: 'int' and 'str'</h3>
+					<p>Operas con tipos incompatibles. Es muy habitual con <code>input()</code>, que siempre
+					devuelve texto.</p>
+					<pre><code>edad = input("Edad: ")
+edad + 1                           # TypeError
+int(edad) + 1</code></pre>
+					<p class="propiedad">Solución: convertir con <code>int()</code> o <code>float()</code>.</p>
+				</article>
+				<article class="concepto-css" id="typeerror-nonetype-object-is-not-subscriptable" data-palabras="python typeerror nonetype is not subscriptable none función no devuelve return sort append">
+					<h3>TypeError: 'NoneType' object is not subscriptable</h3>
+					<p>Intentas indexar <code>None</code>: una función no devolvió nada (falta <code>return</code>)
+					o usaste el resultado de un método que modifica la lista.</p>
+					<pre><code>lista = [3, 1, 2].sort()        # sort devuelve None
+lista[0]                        # TypeError
+lista = sorted([3, 1, 2])</code></pre>
+					<p class="propiedad">Solución: métodos como <code>sort</code> no devuelven valor.</p>
+				</article>
+				<article class="concepto-css" id="attributeerror-nonetype-object-has-no-attribute-x" data-palabras="python attributeerror nonetype has no attribute none re.match busca resultado vacío">
+					<h3>AttributeError: 'NoneType' object has no attribute 'x'</h3>
+					<p>Llamas a un método sobre <code>None</code>, normalmente porque una búsqueda no encontró
+					nada.</p>
+					<pre><code>m = re.search(r"\d+", "abc")
+m.group()                     # AttributeError (m es None)
+if m: print(m.group())</code></pre>
+					<p class="propiedad">Solución: comprobar <code>if m:</code>.</p>
+				</article>
+				<article class="concepto-css" id="attributeerror-list-object-has-no-attribute-push" data-palabras="python attributeerror list object has no attribute push length append método no existe">
+					<h3>AttributeError: 'list' object has no attribute 'push'</h3>
+					<p>Usas un método de otro lenguaje o con una errata. En Python se usa <code>append</code> y
+					<code>len()</code>.</p>
+					<pre><code>lista.push(1)          # AttributeError
+lista.append(1)
+len(lista)             # no lista.length</code></pre>
+					<p class="propiedad">Solución: <code>dir(objeto)</code> muestra los métodos.</p>
+				</article>
+				<article class="concepto-css" id="typeerror-int-object-is-not-callable" data-palabras="python typeerror object is not callable sobrescribir nombre función sum max paréntesis variable">
+					<h3>TypeError: 'int' object is not callable</h3>
+					<p>Llamas con <code>()</code> algo que no es una función, a menudo porque una variable tapó una
+					función integrada.</p>
+					<pre><code>sum = 10
+sum([1, 2, 3])               # TypeError: «sum» ya es un entero
+del sum</code></pre>
+					<p class="propiedad">Solución: no uses nombres como <code>sum</code>, <code>list</code> o <code>max</code>.</p>
+				</article>
+				<article class="concepto-css" id="typeerror-f-takes-1-positional-argument-but-2-were-given" data-palabras="python typeerror takes positional argument but were given self método clase argumentos número">
+					<h3>TypeError: f() takes 1 positional argument but 2 were given</h3>
+					<p>Pasas más argumentos de los que acepta la función. En métodos de clase suele faltar
+					<code>self</code>.</p>
+					<pre><code>class A:
+    def f(): pass              # falta self → "takes 0 positional arguments but 1 was given"
+    def g(self): pass</code></pre>
+					<p class="propiedad">Solución: revisar la firma.</p>
+				</article>
+				<article class="concepto-css" id="typeerror-str-object-does-not-support-item-assignment" data-palabras="python typeerror str does not support item assignment cadena inmutable modificar letra">
+					<h3>TypeError: 'str' object does not support item assignment</h3>
+					<p>Las cadenas son inmutables: no se puede cambiar una letra por índice.</p>
+					<pre><code>s = "hola"
+s[0] = "H"                    # TypeError
+s = "H" + s[1:]</code></pre>
+					<p class="propiedad">Solución: crear una cadena nueva.</p>
+				</article>
+				<article class="concepto-css" id="typeerror-object-of-type-int-has-no-len" data-palabras="python typeerror object of type has no len int float len número">
+					<h3>TypeError: object of type 'int' has no len()</h3>
+					<p><code>len()</code> solo funciona con secuencias y colecciones, no con números.</p>
+					<pre><code>len(12345)               # TypeError
+len(str(12345))          # 5</code></pre>
+					<p class="propiedad">Solución: convertir a <code>str</code>.</p>
+				</article>
+				<article class="concepto-css" id="valueerror-invalid-literal-for-int-with-base-10-abc" data-palabras="python valueerror invalid literal for int base 10 convertir texto número input validar try except">
+					<h3>ValueError: invalid literal for int() with base 10: 'abc'</h3>
+					<p>El texto no representa un número entero (letras, decimales, espacios o vacío).</p>
+					<pre><code>int("3.5")                 # ValueError
+int(float("3.5"))
+try: n = int(texto)
+except ValueError: print("Número no válido")</code></pre>
+					<p class="propiedad">Solución: validar con <code>try/except</code>.</p>
+				</article>
+				<article class="concepto-css" id="valueerror-too-many-values-to-unpack-expected-2" data-palabras="python valueerror too many values to unpack expected not enough desempaquetar tupla variables">
+					<h3>ValueError: too many values to unpack (expected 2)</h3>
+					<p>El número de variables no coincide con el de elementos.</p>
+					<pre><code>a, b = [1, 2, 3]          # ValueError
+a, b, c = [1, 2, 3]
+a, *resto = [1, 2, 3]</code></pre>
+					<p class="propiedad">Solución: igualar cantidades o usar <code>*</code>.</p>
+				</article>
+				<article class="concepto-css" id="keyerror-x" data-palabras="python keyerror clave diccionario no existe get in setdefault defaultdict">
+					<h3>KeyError: 'x'</h3>
+					<p>Accedes a una clave que no existe en el diccionario.</p>
+					<pre><code>d = {"a": 1}
+d["b"]                       # KeyError
+d.get("b", 0)                # 0
+"b" in d</code></pre>
+					<p class="propiedad">Solución: <code>get()</code> o comprobar con <code>in</code>.</p>
+				</article>
+				<article class="concepto-css" id="indexerror-list-index-out-of-range" data-palabras="python indexerror list index out of range índice fuera rango lista vacía len for range">
+					<h3>IndexError: list index out of range</h3>
+					<p>Pides una posición que no existe (las posiciones van de 0 a <code>len - 1</code>).</p>
+					<pre><code>l = [1, 2, 3]
+l[3]                         # IndexError
+l[-1]                        # último elemento
+for i in range(len(l)):      # no len(l) + 1</code></pre>
+					<p class="propiedad">Solución: comprobar la longitud.</p>
+				</article>
+				<article class="concepto-css" id="zerodivisionerror-division-by-zero" data-palabras="python zerodivisionerror division by zero dividir entre cero float modulo">
+					<h3>ZeroDivisionError: division by zero</h3>
+					<p>Divides (o calculas el resto) entre cero.</p>
+					<pre><code>if b != 0: r = a / b
+try: r = a / b
+except ZeroDivisionError: r = None</code></pre>
+					<p class="propiedad">Solución: comprobar el divisor.</p>
+				</article>
+				<article class="concepto-css" id="modulenotfounderror-no-module-named-x" data-palabras="python modulenotfounderror no module named instalar pip entorno virtual venv paquete import">
+					<h3>ModuleNotFoundError: No module named 'x'</h3>
+					<p>El módulo no está instalado en el Python que ejecuta el programa (o el entorno virtual no
+					está activado).</p>
+					<pre><code>pip install requests
+python -m pip install requests        # asegura el mismo Python
+# ¿tu archivo se llama requests.py? Renómbralo</code></pre>
+					<p class="propiedad">Solución: <code>pip install</code> en el entorno correcto.</p>
+				</article>
+				<article class="concepto-css" id="importerror-cannot-import-name-x-from-y" data-palabras="python importerror cannot import name from importación circular nombre no existe módulo archivo">
+					<h3>ImportError: cannot import name 'x' from 'y'</h3>
+					<p>El módulo existe pero no contiene ese nombre (errata, versión antigua o importación circular
+					entre dos archivos).</p>
+					<pre><code>from math import raiz        # no existe
+from math import sqrt</code></pre>
+					<p class="propiedad">Solución: revisar el nombre y las importaciones circulares.</p>
+				</article>
+				<article class="concepto-css" id="filenotfounderror-errno-2-no-such-file-or-directory" data-palabras="python filenotfounderror errno 2 no such file or directory ruta archivo directorio trabajo open pathlib">
+					<h3>FileNotFoundError: [Errno 2] No such file or directory</h3>
+					<p>El archivo no está donde Python lo busca: la ruta se interpreta desde el directorio de
+					trabajo, no desde el archivo <code>.py</code>.</p>
+					<pre><code>import os
+os.getcwd()                                  # dónde estoy
+from pathlib import Path
+Path(__file__).parent / "datos.txt"</code></pre>
+					<p class="propiedad">Solución: ruta absoluta o relativa al script.</p>
+				</article>
+				<article class="concepto-css" id="permissionerror-errno-13-permission-denied" data-palabras="python permissionerror errno 13 permission denied permisos archivo abierto carpeta escribir">
+					<h3>PermissionError: [Errno 13] Permission denied</h3>
+					<p>No tienes permiso, el archivo está abierto en otro programa o intentas abrir una carpeta
+					como si fuera un archivo.</p>
+					<pre><code>open("carpeta")            # es una carpeta → PermissionError/IsADirectoryError</code></pre>
+					<p class="propiedad">Solución: cerrar el archivo o cambiar los permisos.</p>
+				</article>
+				<article class="concepto-css" id="unicodedecodeerror-utf-8-codec-can-t-decode-byte" data-palabras="python unicodedecodeerror utf-8 codec can&#x27;t decode byte codificación archivo latin-1 cp1252 encoding">
+					<h3>UnicodeDecodeError: 'utf-8' codec can't decode byte</h3>
+					<p>El archivo no está en UTF-8 (a menudo Windows-1252/Latin-1).</p>
+					<pre><code>open("a.txt", encoding="utf-8")
+open("a.txt", encoding="cp1252")
+open("a.txt", encoding="utf-8", errors="replace")</code></pre>
+					<p class="propiedad">Solución: indicar la codificación correcta.</p>
+				</article>
+				<article class="concepto-css" id="unboundlocalerror-local-variable-x-referenced-before-assignm" data-palabras="python unboundlocalerror local variable referenced before assignment global función variable fuera">
+					<h3>UnboundLocalError: local variable 'x' referenced before assignment</h3>
+					<p>Dentro de una función asignas una variable que también existe fuera, así que Python la trata
+					como local y la lees antes de darle valor.</p>
+					<pre><code>contador = 0
+def sumar():
+    contador += 1            # UnboundLocalError
+def sumar():
+    global contador
+    contador += 1</code></pre>
+					<p class="propiedad">Solución: <code>global</code>, o mejor, pasar y devolver valores.</p>
+				</article>
+				<article class="concepto-css" id="recursionerror-maximum-recursion-depth-exceeded" data-palabras="python recursionerror maximum recursion depth exceeded recursión infinita caso base límite">
+					<h3>RecursionError: maximum recursion depth exceeded</h3>
+					<p>La recursión no termina o es demasiado profunda (límite ≈ 1000).</p>
+					<pre><code>def f(n): return f(n - 1)                        # sin caso base
+def f(n): return 0 if n == 0 else f(n - 1)</code></pre>
+					<p class="propiedad">Solución: caso base o bucle.</p>
+				</article>
+				<article class="concepto-css" id="runtimeerror-dictionary-changed-size-during-iteration" data-palabras="python runtimeerror dictionary changed size during iteration modificar diccionario recorrer lista copia">
+					<h3>RuntimeError: dictionary changed size during iteration</h3>
+					<p>Cambias un diccionario (o conjunto) mientras lo recorres.</p>
+					<pre><code>for k in list(d):          # recorre una copia
+    if d[k] is None: del d[k]</code></pre>
+					<p class="propiedad">Solución: recorrer una copia.</p>
+				</article>
+				<article class="concepto-css" id="eoferror-eof-when-reading-a-line" data-palabras="python eoferror eof when reading a line input entrada vacía pipe terminal fin archivo">
+					<h3>EOFError: EOF when reading a line</h3>
+					<p><code>input()</code> no encontró datos: el programa se ejecuta sin teclado (un editor en
+					línea, un pipe o entrada vacía).</p>
+					<pre><code>try: n = input()
+except EOFError: n = ""</code></pre>
+					<p class="propiedad">Solución: ejecutar en una terminal interactiva.</p>
+				</article>
+				<article class="concepto-css" id="error-externally-managed-environment-pip" data-palabras="python pip externally-managed-environment error instalar paquetes linux debian venv pipx sistema">
+					<h3>error: externally-managed-environment (pip)</h3>
+					<p>Los sistemas modernos (Debian, Ubuntu, macOS con Homebrew) protegen el Python del sistema.
+					Instala en un entorno virtual.</p>
+					<pre><code>python3 -m venv .venv
+source .venv/bin/activate
+pip install requests
+# herramientas de línea de comandos:  pipx install black</code></pre>
+					<p class="propiedad">Solución: <code>venv</code> o <code>pipx</code>.</p>
+				</article>
+				<article class="concepto-css" id="python-is-not-recognized-as-an-internal-or-external-command" data-palabras="python no se reconoce comando windows path instalar añadir variable entorno python3 py launcher">
+					<h3>'python' is not recognized as an internal or external command</h3>
+					<p>Python no está en el PATH. Reinstálalo marcando «Add Python to PATH» o usa el lanzador
+					<code>py</code>.</p>
+					<pre><code>py --version
+py archivo.py
+py -m pip install requests</code></pre>
+					<p class="propiedad">Solución: añadir al PATH o usar <code>py</code>.</p>
+				</article>
+				<article class="concepto-css" id="los-cambios-en-una-lista-se-contagian-a-otra" data-palabras="python lista copia referencia mutable asignar b = a copy deepcopy modificar original">
+					<h3>Los cambios en una lista se «contagian» a otra</h3>
+					<p>Asignar una lista no la copia: ambas variables apuntan al mismo objeto.</p>
+					<pre><code>a = [1, 2]
+b = a
+b.append(3)
+print(a)                  # [1, 2, 3]
+b = a.copy()              # copia independiente</code></pre>
+					<p class="propiedad">Solución: <code>copy()</code>, <code>list()</code> o <code>deepcopy</code>.</p>
+				</article>
+				<article class="concepto-css" id="argumento-por-defecto-mutable-que-recuerda-valores" data-palabras="python argumento por defecto mutable lista compartida def f(x=[]) none trampa recuerda">
+					<h3>Argumento por defecto mutable que «recuerda» valores</h3>
+					<p>Un valor por defecto mutable se crea una sola vez y se comparte entre llamadas.</p>
+					<pre><code>def mal(x, l=[]): l.append(x); return l
+def bien(x, l=None):
+    l = [] if l is None else l
+    l.append(x); return l</code></pre>
+					<p class="propiedad">Solución: usar <code>None</code> y crear dentro.</p>
+				</article>
+				<article class="concepto-css" id="input-devuelve-texto-las-comparaciones-fallan" data-palabras="python input texto str número comparar int float comparación falla validar if edad">
+					<h3>input() devuelve texto: las comparaciones fallan</h3>
+					<p><code>input()</code> siempre devuelve <code>str</code>. Comparar <code>"5" == 5</code> es
+					falso y ordenar textos da resultados distintos a los de números.</p>
+					<pre><code>edad = input("Edad: ")
+edad &gt; 18                    # TypeError
+int(edad) &gt; 18</code></pre>
+					<p class="propiedad">Solución: convertir al tipo adecuado.</p>
+				</article>
+				<article class="concepto-css" id="en-lugar-de-y-is-en-lugar-de" data-palabras="python asignación igualdad == = is comparar error condición if cadena número">
+					<h3>= en lugar de == (y is en lugar de ==)</h3>
+					<p><code>=</code> asigna; <code>==</code> compara. <code>is</code> comprueba identidad, no
+					igualdad, y puede dar resultados engañosos con números y cadenas.</p>
+					<pre><code>if x = 5:        # SyntaxError
+if x == 5:
+if texto is "a": # ¡usa ==! (aviso SyntaxWarning)</code></pre>
+					<p class="propiedad">Solución: <code>==</code> para comparar.</p>
+				</article>
+				<article class="concepto-css" id="se-imprime-none" data-palabras="python imprime none función no devuelve return print resultado vacío">
+					<h3>Se imprime None</h3>
+					<p>Imprimes el resultado de una función que no devuelve nada (usa <code>print</code> dentro en
+					lugar de <code>return</code>).</p>
+					<pre><code>def sumar(a, b):
+    print(a + b)          # no devuelve
+print(sumar(1, 2))        # 3 y luego None
+
+def sumar(a, b): return a + b</code></pre>
+					<p class="propiedad">Solución: usar <code>return</code>.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="terminal" data-categoria>
+			<div class="cabecera-categoria"><span>05</span>
+				<div>
+					<p>Node, npm, Git y terminal</p>
+					<h2>Terminal, npm y Git</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="npm-err-code-enoent-no-such-file-or-directory-open-package-j" data-palabras="npm enoent package.json no such file directory carpeta equivocada npm init install">
+					<h3>npm ERR! code ENOENT: no such file or directory, open 'package.json'</h3>
+					<p>Ejecutas <code>npm</code> en una carpeta sin <code>package.json</code>.</p>
+					<pre><code>cd mi-proyecto          # carpeta correcta
+npm init -y             # crear package.json</code></pre>
+					<p class="propiedad">Solución: situarte en la carpeta del proyecto.</p>
+				</article>
+				<article class="concepto-css" id="error-cannot-find-module-x" data-palabras="node cannot find module x npm install falta dependencia require import ruta relativa ./">
+					<h3>Error: Cannot find module 'x'</h3>
+					<p>Node no encuentra el módulo: no está instalado o la ruta relativa es incorrecta.</p>
+					<pre><code>npm install express
+require("./utiles")         // con ./ para archivos propios</code></pre>
+					<p class="propiedad">Solución: <code>npm install</code> o corregir la ruta.</p>
+				</article>
+				<article class="concepto-css" id="error-listen-eaddrinuse-address-already-in-use-3000" data-palabras="node eaddrinuse address already in use puerto 3000 ocupado servidor proceso kill">
+					<h3>Error: listen EADDRINUSE: address already in use :::3000</h3>
+					<p>El puerto ya lo usa otro programa (a menudo, una instancia anterior de tu servidor).</p>
+					<pre><code># Linux / macOS
+lsof -i :3000
+kill -9 &lt;PID&gt;
+# Windows
+netstat -ano | findstr :3000
+taskkill /PID &lt;PID&gt; /F</code></pre>
+					<p class="propiedad">Solución: cerrar el proceso o cambiar de puerto.</p>
+				</article>
+				<article class="concepto-css" id="npm-err-eresolve-unable-to-resolve-dependency-tree" data-palabras="npm eresolve unable to resolve dependency tree peer dependencies conflicto versiones legacy-peer-deps">
+					<h3>npm ERR! ERESOLVE unable to resolve dependency tree</h3>
+					<p>Hay dependencias con versiones incompatibles.</p>
+					<pre><code>npm install --legacy-peer-deps
+# o actualizar / ajustar la versión que entra en conflicto</code></pre>
+					<p class="propiedad">Solución: revisar versiones o usar <code>--legacy-peer-deps</code>.</p>
+				</article>
+				<article class="concepto-css" id="command-not-found-no-se-reconoce-como-un-comando" data-palabras="terminal command not found no se reconoce comando path instalar programa bash powershell">
+					<h3>command not found / no se reconoce como un comando</h3>
+					<p>El programa no está instalado o su carpeta no está en el <code>PATH</code>.</p>
+					<pre><code>which node            # Linux y macOS
+where node            # Windows
+echo $PATH</code></pre>
+					<p class="propiedad">Solución: instalar o añadir al PATH.</p>
+				</article>
+				<article class="concepto-css" id="permission-denied" data-palabras="terminal permission denied permiso denegado chmod sudo ejecutar script archivo linux">
+					<h3>Permission denied</h3>
+					<p>No tienes permiso para leer, escribir o ejecutar ese archivo.</p>
+					<pre><code>chmod +x script.sh
+./script.sh
+ls -l archivo</code></pre>
+					<p class="propiedad">Solución: <code>chmod</code> o ejecutar con los permisos adecuados.</p>
+				</article>
+				<article class="concepto-css" id="fatal-not-a-git-repository-or-any-of-the-parent-directories-" data-palabras="git fatal not a git repository .git init clone carpeta equivocada">
+					<h3>fatal: not a git repository (or any of the parent directories): .git</h3>
+					<p>Ejecutas un comando de Git fuera de un repositorio.</p>
+					<pre><code>cd mi-proyecto
+git init</code></pre>
+					<p class="propiedad">Solución: <code>git init</code> o entrar en el repositorio.</p>
+				</article>
+				<article class="concepto-css" id="rejected-main-main-non-fast-forward" data-palabras="git rejected non-fast-forward push rechazado pull rebase remoto cambios locales">
+					<h3>! [rejected] main -&gt; main (non-fast-forward)</h3>
+					<p>El repositorio remoto tiene cambios que no tienes en local.</p>
+					<pre><code>git pull --rebase
+git push</code></pre>
+					<p class="propiedad">Solución: traer los cambios antes (<code>pull</code>).</p>
+				</article>
+				<article class="concepto-css" id="error-your-local-changes-to-the-following-files-would-be-ove" data-palabras="git local changes overwritten by merge checkout pull stash commit cambios sin guardar">
+					<h3>error: Your local changes to the following files would be overwritten by merge</h3>
+					<p>Tienes cambios sin confirmar que chocan con lo que traes.</p>
+					<pre><code>git stash
+git pull
+git stash pop        # recuperar tus cambios</code></pre>
+					<p class="propiedad">Solución: <code>commit</code> o <code>stash</code>.</p>
+				</article>
+				<article class="concepto-css" id="fatal-refusing-to-merge-unrelated-histories" data-palabras="git refusing to merge unrelated histories pull allow-unrelated-histories repositorio nuevo remoto">
+					<h3>fatal: refusing to merge unrelated histories</h3>
+					<p>Intentas unir dos repositorios que no comparten historial (típico al crear un repo en GitHub
+					con README y otro local).</p>
+					<pre><code>git pull origin main --allow-unrelated-histories</code></pre>
+					<p class="propiedad">Solución: <code>--allow-unrelated-histories</code>.</p>
+				</article>
+				<article class="concepto-css" id="conflict-content-merge-conflict-in-archivo" data-palabras="git merge conflict conflicto &lt;&lt;&lt;&lt;&lt;&lt;&lt; ======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; resolver marcas fusión">
+					<h3>CONFLICT (content): Merge conflict in archivo</h3>
+					<p>Dos ramas cambiaron las mismas líneas. Git deja marcas en el archivo para que elijas.</p>
+					<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+tu versión
+=======
+versión de la otra rama
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; rama
+# edita, deja una versión, y:
+git add archivo
+git commit</code></pre>
+					<p class="propiedad">Solución: editar el archivo, quitar las marcas y confirmar.</p>
+				</article>
+				<article class="concepto-css" id="git-se-subio-un-archivo-que-no-debia-node-modules-env" data-palabras="git gitignore node_modules .env subido secreto contraseña rm --cached ignorar">
+					<h3>Git: se subió un archivo que no debía (node_modules, .env)</h3>
+					<p>Añade el archivo a <code>.gitignore</code> y quítalo del seguimiento. Si contiene secretos,
+					cambia las claves: ya quedan en el historial.</p>
+					<pre><code>echo "node_modules/" &gt;&gt; .gitignore
+echo ".env" &gt;&gt; .gitignore
+git rm -r --cached node_modules .env
+git commit -m "Dejar de seguir archivos ignorados"</code></pre>
+					<p class="propiedad">Solución: <code>.gitignore</code> y <code>git rm --cached</code>.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="general" data-categoria>
+			<div class="cabecera-categoria"><span>06</span>
+				<div>
+					<p>Cómo enfrentarse a cualquier error</p>
+					<h2>Depuración en general</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="como-leer-un-mensaje-de-error" data-palabras="leer error mensaje traza pila stack trace línea archivo tipo error aprender depurar">
+					<h3>Cómo leer un mensaje de error</h3>
+					<p>Un error tiene tres partes útiles: el tipo (<code>TypeError</code>,
+					<code>NullPointerException</code>), el mensaje y el lugar (archivo y línea). Empieza por el
+					final de la traza en Python y por el principio en Java y JavaScript.</p>
+					<pre><code>Traceback (most recent call last):
+  File "app.py", line 12, in &lt;module&gt;      ← dónde
+    total = suma + "5"
+TypeError: unsupported operand type(s) …   ← qué</code></pre>
+					<p class="propiedad">Lee el mensaje completo, no solo el título.</p>
+				</article>
+				<article class="concepto-css" id="metodo-para-depurar-reproducir-aislar-probar" data-palabras="depurar método debug aislar reproducir hipótesis dividir problema pasos buscar bug sistemático">
+					<h3>Método para depurar: reproducir, aislar, probar</h3>
+					<p>1) Reproduce el fallo de forma fiable. 2) Reduce el código hasta lo mínimo que lo provoca.
+					3) Formula una hipótesis y compruébala (<code>print</code>, depurador). 4) Cambia una sola
+					cosa cada vez.</p>
+					<pre><code>1. ¿Qué esperaba?  ¿Qué ocurre?
+2. ¿Dónde empieza a ser distinto?  (print / depurador)
+3. Cambio mínimo → probar → repetir</code></pre>
+					<p class="propiedad">No cambies cinco cosas a la vez.</p>
+				</article>
+				<article class="concepto-css" id="buscar-el-error-en-internet" data-palabras="buscar error google stack overflow copiar mensaje comillas lenguaje versión documentación">
+					<h3>Buscar el error en internet</h3>
+					<p>Copia el mensaje de error (sin rutas ni nombres propios), añade el lenguaje y la versión y
+					busca. Prioriza la documentación oficial y respuestas con explicación.</p>
+					<pre><code>"TypeError: Cannot read properties of undefined (reading 'map')" javascript
+python "ModuleNotFoundError: No module named 'requests'"</code></pre>
+					<p class="propiedad">Entiende la solución antes de copiarla.</p>
+				</article>
+				<article class="concepto-css" id="preguntar-bien-una-duda-de-programacion" data-palabras="preguntar duda stack overflow foro ejemplo mínimo reproducible mensaje error versión código formato">
+					<h3>Preguntar bien una duda de programación</h3>
+					<p>Una buena pregunta incluye: qué quieres conseguir, el código mínimo que falla, el mensaje de
+					error completo, la versión y lo que ya has probado.</p>
+					<pre><code>Objetivo:  …
+Código mínimo:  (20 líneas, no 500)
+Error:  (mensaje completo)
+Entorno:  Python 3.12, Windows 11
+Ya probé:  …</code></pre>
+					<p class="propiedad">Un ejemplo mínimo reproducible multiplica las respuestas.</p>
+				</article>
+				<article class="concepto-css" id="depurar-con-print-y-con-el-depurador" data-palabras="depurar print depurador breakpoint paso a paso variables console.log debugger pdb ide">
+					<h3>Depurar con print y con el depurador</h3>
+					<p><code>print</code> (o <code>console.log</code>) es rápido para ver valores; el depurador del
+					IDE permite detener el programa, avanzar paso a paso y ver todas las variables.</p>
+					<pre><code>print(f"{x=}, {y=}")                 # Python
+console.log({ x, y });               // JavaScript
+breakpoint()                          # depurador de Python</code></pre>
+					<p class="propiedad">Atajos habituales: F9 breakpoint, F10 paso, F11 entrar.</p>
+				</article>
+				<article class="concepto-css" id="errores-de-logica-el-programa-corre-pero-el-resultado-es-inc" data-palabras="error lógica resultado incorrecto bug off by one condición bucle límites pruebas casos extremos">
+					<h3>Errores de lógica: el programa corre pero el resultado es incorrecto</h3>
+					<p>No hay mensaje de error, pero el resultado no es el esperado. Causas típicas: límites de
+					bucle (<code>&lt;</code> frente a <code>&lt;=</code>), condiciones invertidas, variables sin
+					reiniciar y casos extremos (vacío, cero, negativo).</p>
+					<pre><code>for (let i = 0; i &lt;= lista.length; i++)     // ¿hasta length - 1?
+if (edad &gt; 18)                              // ¿&gt;= 18?</code></pre>
+					<p class="propiedad">Prueba con valores límite.</p>
+				</article>
+				<article class="concepto-css" id="problemas-de-cache-lo-cambie-y-no-se-ve" data-palabras="caché navegador no se ve cambio css js recargar ctrl f5 versión forzar recarga servidor">
+					<h3>Problemas de caché: «lo cambié y no se ve»</h3>
+					<p>El navegador puede seguir usando archivos antiguos. Recarga forzada y desactiva la caché
+					mientras desarrollas.</p>
+					<pre><code>Ctrl + F5  (o Ctrl + Mayús + R)         recarga forzada
+F12 → Red → «Desactivar caché»
+app.js?v=3                                    cambiar la URL</code></pre>
+					<p class="propiedad">Atajo: <code>Ctrl + F5</code>.</p>
+				</article>
+				<article class="concepto-css" id="antes-de-pedir-ayuda-lista-de-comprobacion" data-palabras="checklist antes pedir ayuda comprobar guardar archivo ruta versión consola reiniciar errata">
+					<h3>Antes de pedir ayuda: lista de comprobación</h3>
+					<p>Guarda el archivo, revisa la consola, comprueba la ruta y las mayúsculas, lee el error
+					completo, reinicia el servidor y prueba con un ejemplo más pequeño.</p>
+					<pre><code>[ ] ¿Guardé el archivo?        [ ] ¿Recargué (Ctrl+F5)?
+[ ] ¿Miré la consola?          [ ] ¿Ruta y mayúsculas correctas?
+[ ] ¿Leí el error entero?      [ ] ¿Probé un ejemplo mínimo?</code></pre>
+					<p class="propiedad">El 80 % de los fallos están aquí.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="sin-resultados-css" id="sin-resultados" hidden>
+			<h2>No encuentro ese término</h2>
+			<p>Prueba con otra palabra o busca en la <a href="inicio.html">página de inicio</a>, que reúne todas las guías.</p>
+		</section>
+
+		<section class="regla-practica">
+			<h2>Una última pista</h2>
+			<p>Un error no es un fracaso: es información. Lee el mensaje completo, localiza la línea, reproduce el fallo con el ejemplo más pequeño posible y cambia una sola cosa cada vez. Si necesitas repasar la sintaxis, consulta la guía del lenguaje desde la <a href="inicio.html">página de inicio</a>.</p>
+		</section>
+	</main>
+
+	<footer class="pie-guia">
+		<p>Guía de apoyo para resolver los errores más habituales.</p>
+		<a href="inicio.html">Inicio</a>
+		<a href="index.html">HTML</a>
+		<a href="css.html">CSS</a>
+		<a href="js.html">JavaScript</a>
+		<a href="java.html">Java</a>
+		<a href="python.html">Python</a>
+		<a href="regex.html">Regex</a>
+	</footer>
+
+	<script>
+		const campoBusqueda = document.querySelector("#buscar");
+		const limpiarBusqueda = document.querySelector("#limpiar");
+		const conceptos = [...document.querySelectorAll(".concepto-css")];
+		const categorias = [...document.querySelectorAll("[data-categoria]")];
+		const contador = document.querySelector("#resultado-errores");
+		const sinResultados = document.querySelector("#sin-resultados");
+
+		function normalizar(texto) {
+			return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
+		}
+
+		function filtrarConceptos() {
+			const consulta = normalizar(campoBusqueda.value.trim());
+			let cantidad = 0;
+
+			conceptos.forEach((concepto) => {
+				const texto = normalizar(`${concepto.textContent} ${concepto.dataset.palabras}`);
+				const coincide = consulta.split(/\s+/).filter(Boolean).every((palabra) => texto.includes(palabra));
+				concepto.hidden = !coincide;
+				if (coincide) cantidad += 1;
+			});
+
+			categorias.forEach((categoria) => {
+				categoria.hidden = !categoria.querySelector(".concepto-css:not([hidden])");
+			});
+
+			sinResultados.hidden = cantidad > 0 || consulta === "";
+			contador.textContent = consulta
+				? `${cantidad} ${cantidad === 1 ? "resultado" : "resultados"}`
+				: `${conceptos.length} conceptos en ${categorias.length} categorías`;
+		}
+
+		campoBusqueda.addEventListener("input", filtrarConceptos);
+		limpiarBusqueda.addEventListener("click", () => {
+			campoBusqueda.value = "";
+			filtrarConceptos();
+			campoBusqueda.focus();
+		});
+
+		filtrarConceptos();
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,2336 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!--
+Guía fácil de Python
+Guía de Python para principiantes: sintaxis, tipos, funciones, listas, diccionarios, clases, archivos, módulos, biblioteca estándar, web, datos y ejercicios.
+Autor: apesfer
+-->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Guía de Python para principiantes: sintaxis, tipos, funciones, listas, diccionarios, clases, archivos, módulos, biblioteca estándar, web, datos y ejercicios.">
+	<title>Guía fácil de Python</title>
+	<link rel="stylesheet" href="src/css.css">
+	<link rel="stylesheet" href="src/python.css">
+	<link rel="stylesheet" href="src/comun.css">
+</head>
+
+<body id="inicio-pagina" class="guia-css guia-python">
+	<header class="guia-portada">
+		<nav class="mini-nav-guias" aria-label="Cambiar entre guías">
+			<a href="inicio.html">Inicio</a>
+			<a href="index.html">HTML</a>
+			<a href="css.html">CSS</a>
+			<a href="js.html">JavaScript</a>
+			<a href="java.html">Java</a>
+			<a href="python.html" aria-current="page">Python</a>
+			<a href="regex.html">Regex</a>
+			<a href="errores.html">Errores</a>
+			<a class="subir-inicio" href="#inicio-pagina" aria-label="Volver al principio" title="Volver al principio">↑</a>
+		</nav>
+		<p class="guia-etiqueta">Guía de consulta / Python para principiantes</p>
+		<h1>Python, claro y <em>directo al grano.</em></h1>
+		<p class="guia-bajada">Desde la primera línea hasta clases, archivos, librerías y ejercicios clásicos. Busca por concepto, función o fragmento de código.</p>
+		<form class="buscador-css" role="search" onsubmit="return false">
+			<label for="buscar">¿Qué quieres aprender o encontrar?</label>
+			<div class="campo-busqueda">
+				<span aria-hidden="true">⌕</span>
+				<input id="buscar" type="search" placeholder="Prueba: lista, for, diccionario, clase, try, pip, pandas..." autocomplete="off">
+				<button id="limpiar" type="button" aria-label="Limpiar búsqueda" title="Limpiar búsqueda">×</button>
+			</div>
+			<p id="resultado-python" aria-live="polite">Cargando conceptos...</p>
+		</form>
+	</header>
+
+	<main class="guia-contenido">
+		<nav class="atajos-css" aria-label="Categorías">
+			<a href="#fundamentos">Fundamentos</a>
+			<a href="#variables">Variables y tipos</a>
+			<a href="#operadores">Operadores</a>
+			<a href="#cadenas">Cadenas de texto</a>
+			<a href="#control">Condiciones y bucles</a>
+			<a href="#funciones">Funciones</a>
+			<a href="#listas">Listas y tuplas</a>
+			<a href="#diccionarios">Diccionarios y conjuntos</a>
+			<a href="#poo">Programación orientada a objetos</a>
+			<a href="#excepciones">Excepciones</a>
+			<a href="#archivos">Archivos y rutas</a>
+			<a href="#modulos">Módulos, paquetes y entornos</a>
+			<a href="#stdlib">Biblioteca estándar</a>
+			<a href="#avanzado">Decoradores, generadores y asincronía</a>
+			<a href="#web">Librerías y aplicaciones</a>
+			<a href="#ejemplos">Ejercicios y ejemplos</a>
+		</nav>
+
+		<aside class="nota-css"><strong>La idea básica:</strong> en Python los bloques se marcan con la <code>sangría</code>, las variables no necesitan declarar su tipo y casi todo es un objeto. Con pocas líneas se leen archivos, se consumen APIs o se analizan datos. La filosofía es la legibilidad: <code>import this</code>.</aside>
+
+		<section class="categoria-css" id="fundamentos" data-categoria>
+			<div class="cabecera-categoria"><span>00</span>
+				<div>
+					<p>Empezar con el lenguaje</p>
+					<h2>Fundamentos</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="que-es-python-y-para-que-sirve" data-palabras="python lenguaje interpretado tipado dinámico sirve web datos automatización ia scripts introducción">
+					<h3>Qué es Python y para qué sirve</h3>
+					<p>Python es un lenguaje interpretado, de sintaxis clara y tipado dinámico. Se usa en
+					automatización, web, análisis de datos, inteligencia artificial y enseñanza.</p>
+					<pre><code>print("Hola, mundo")</code></pre>
+					<p class="propiedad">Creado por Guido van Rossum; extensión de archivo: <code>.py</code></p>
+				</article>
+				<article class="concepto-css" id="instalar-python-y-comprobar-la-version" data-palabras="instalar python versión python3 pip windows linux mac terminal descargar">
+					<h3>Instalar Python y comprobar la versión</h3>
+					<p>Descarga Python desde python.org o usa el gestor de tu sistema. Comprueba la instalación
+					desde la terminal.</p>
+					<pre><code>python --version      # o python3 --version
+pip --version</code></pre>
+					<p class="propiedad">En Linux y macOS suele ser <code>python3</code>.</p>
+				</article>
+				<article class="concepto-css" id="ejecutar-un-programa-y-el-interprete-interactivo" data-palabras="ejecutar python script repl intérprete interactivo consola &gt;&gt;&gt; python archivo.py">
+					<h3>Ejecutar un programa y el intérprete interactivo</h3>
+					<p>Un archivo se ejecuta con <code>python archivo.py</code>. Sin argumentos,
+					<code>python</code> abre el intérprete interactivo (REPL).</p>
+					<pre><code>python hola.py
+python
+&gt;&gt;&gt; 2 + 3
+5</code></pre>
+					<p class="propiedad">Salir del REPL: <code>exit()</code> o Ctrl+D</p>
+				</article>
+				<article class="concepto-css" id="comentarios-y-docstrings" data-palabras="comentarios # docstring &quot;&quot;&quot; documentación ayuda help función">
+					<h3>Comentarios y docstrings</h3>
+					<p>Los comentarios empiezan con <code>#</code>. Un texto entre triples comillas al inicio de
+					una función o clase es un docstring, que <code>help()</code> muestra.</p>
+					<pre><code># Esto es un comentario
+def area(r):
+    """Devuelve el área de un círculo de radio r."""
+    return 3.14159 * r ** 2
+
+help(area)</code></pre>
+					<p class="propiedad">Estilo de docstring: PEP 257</p>
+				</article>
+				<article class="concepto-css" id="indentacion-los-bloques-se-marcan-con-espacios" data-palabras="indentación sangría bloques espacios cuatro identation error pep8 dos puntos">
+					<h3>Indentación: los bloques se marcan con espacios</h3>
+					<p>Python no usa llaves: los bloques se definen con la sangría (4 espacios por convención) tras
+					los dos puntos. Mezclar tabuladores y espacios provoca errores.</p>
+					<pre><code>if True:
+    print("dentro del if")
+    if False:
+        print("más anidado")
+print("fuera")</code></pre>
+					<p class="propiedad">Error típico: <code>IndentationError</code></p>
+				</article>
+				<article class="concepto-css" id="mostrar-datos-print" data-palabras="print sep end file formato imprimir consola salida f-string">
+					<h3>Mostrar datos: print</h3>
+					<p><code>print</code> muestra valores separados por espacios. Los parámetros <code>sep</code> y
+					<code>end</code> cambian el separador y el final de línea.</p>
+					<pre><code>print("a", "b", "c")                  # a b c
+print("a", "b", sep="-")              # a-b
+print("sin salto", end="")
+print("Total:", 5 + 3)</code></pre>
+					<p class="propiedad">Parámetros: <code>sep</code>, <code>end</code>, <code>file</code></p>
+				</article>
+				<article class="concepto-css" id="leer-datos-del-teclado-input" data-palabras="input teclado leer datos usuario str convertir int float entrada">
+					<h3>Leer datos del teclado: input</h3>
+					<p><code>input()</code> devuelve siempre texto (<code>str</code>): si esperas un número,
+					conviértelo.</p>
+					<pre><code>nombre = input("¿Cómo te llamas? ")
+edad = int(input("Edad: "))
+print(f"Hola, {nombre}. Tienes {edad} años.")</code></pre>
+					<p class="propiedad">Conversión: <code>int()</code>, <code>float()</code></p>
+				</article>
+				<article class="concepto-css" id="el-estilo-pep-8" data-palabras="pep8 estilo convenciones nombres snake_case líneas 79 flake8 black formato">
+					<h3>El estilo PEP 8</h3>
+					<p>PEP 8 es la guía de estilo oficial: nombres en <code>snake_case</code>, clases en
+					<code>PascalCase</code>, constantes en <code>MAYÚSCULAS</code>, 4 espacios de sangría y
+					líneas de unos 79 caracteres. Herramientas: <code>black</code>, <code>ruff</code>,
+					<code>flake8</code>.</p>
+					<pre><code>nombre_usuario = "ana"          # variable
+MAX_INTENTOS = 3                # constante
+class CuentaBancaria: ...       # clase
+def calcular_total(): ...       # función</code></pre>
+					<p class="propiedad">Formateador automático: <code>black</code></p>
+				</article>
+				<article class="concepto-css" id="el-zen-de-python" data-palabras="zen python import this filosofía principios tim peters">
+					<h3>El Zen de Python</h3>
+					<p>Los principios del lenguaje se muestran con una instrucción: «Simple es mejor que complejo»,
+					«La legibilidad cuenta»...</p>
+					<pre><code>import this</code></pre>
+					<p class="propiedad">Curiosidad: PEP 20</p>
+				</article>
+				<article class="concepto-css" id="palabras-reservadas" data-palabras="keywords palabras reservadas def class if else for while import lambda None True False keyword">
+					<h3>Palabras reservadas</h3>
+					<p>No se pueden usar como nombres: <code>if</code>, <code>else</code>, <code>for</code>,
+					<code>while</code>, <code>def</code>, <code>class</code>, <code>import</code>,
+					<code>return</code>, <code>None</code>, <code>True</code>, <code>False</code>,
+					<code>lambda</code>, <code>try</code>, <code>with</code>... La lista completa está en el
+					módulo <code>keyword</code>.</p>
+					<pre><code>import keyword
+print(keyword.kwlist)</code></pre>
+					<p class="propiedad">Módulo: <code>keyword</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="variables" data-categoria>
+			<div class="cabecera-categoria"><span>01</span>
+				<div>
+					<p>Guardar y convertir datos</p>
+					<h2>Variables y tipos</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="variables-y-asignacion" data-palabras="variable asignación = nombre valor tipo dinámico reasignar múltiple">
+					<h3>Variables y asignación</h3>
+					<p>Una variable se crea al asignarle un valor y no necesita declarar el tipo. Se pueden asignar
+					varias a la vez.</p>
+					<pre><code>edad = 30
+nombre = "Ana"
+a, b = 1, 2
+x = y = 0
+a, b = b, a          # intercambio</code></pre>
+					<p class="propiedad">Python distingue mayúsculas de minúsculas.</p>
+				</article>
+				<article class="concepto-css" id="tipos-basicos-int-float-str-bool-y-none" data-palabras="tipos int float str bool NoneType complex type isinstance números texto booleano">
+					<h3>Tipos básicos: int, float, str, bool y None</h3>
+					<p>Los tipos básicos son <code>int</code> (enteros de tamaño ilimitado), <code>float</code>
+					(decimales), <code>str</code> (texto), <code>bool</code>
+					(<code>True</code>/<code>False</code>) y <code>NoneType</code> (<code>None</code>, ausencia
+					de valor).</p>
+					<pre><code>type(5)            # &lt;class 'int'&gt;
+type(3.14)         # &lt;class 'float'&gt;
+type("hola")       # &lt;class 'str'&gt;
+type(True)         # &lt;class 'bool'&gt;
+isinstance(5, int) # True</code></pre>
+					<p class="propiedad">Funciones: <code>type()</code>, <code>isinstance()</code></p>
+				</article>
+				<article class="concepto-css" id="conversion-de-tipos" data-palabras="int float str bool list tuple set conversión cast parse ValueError">
+					<h3>Conversión de tipos</h3>
+					<p>Las funciones con el nombre del tipo convierten valores. Si el texto no es válido, se lanza
+					<code>ValueError</code>.</p>
+					<pre><code>int("42")          # 42
+float("3.5")       # 3.5
+str(100)           # "100"
+bool(0)            # False
+list("abc")        # ['a', 'b', 'c']
+int("hola")        # ValueError</code></pre>
+					<p class="propiedad">Valores falsos: <code>0</code>, <code>""</code>, <code>[]</code>, <code>{}</code>, <code>None</code></p>
+				</article>
+				<article class="concepto-css" id="numeros-operaciones-y-funciones" data-palabras="abs round pow divmod sum min max números enteros decimales redondeo funciones integradas">
+					<h3>Números: operaciones y funciones</h3>
+					<p>Funciones integradas para trabajar con números: <code>abs</code>, <code>round</code>,
+					<code>pow</code>, <code>divmod</code>, <code>sum</code>, <code>min</code> y
+					<code>max</code>.</p>
+					<pre><code>abs(-5)            # 5
+round(3.14159, 2)  # 3.14
+pow(2, 10)         # 1024
+divmod(17, 5)      # (3, 2)
+sum([1, 2, 3])     # 6
+max(4, 9, 2)       # 9</code></pre>
+					<p class="propiedad"><code>round</code> usa redondeo bancario (2.5 → 2).</p>
+				</article>
+				<article class="concepto-css" id="precision-de-decimales-decimal-y-fraction" data-palabras="decimal fraction precisión dinero float 0.1 0.2 módulo decimal fracciones">
+					<h3>Precisión de decimales: Decimal y Fraction</h3>
+					<p>Los <code>float</code> tienen errores de representación. Para dinero se usa
+					<code>Decimal</code>; para fracciones exactas, <code>Fraction</code>.</p>
+					<pre><code>0.1 + 0.2                          # 0.30000000000000004
+from decimal import Decimal
+Decimal("0.1") + Decimal("0.2")    # Decimal('0.3')
+from fractions import Fraction
+Fraction(1, 3) + Fraction(1, 6)    # Fraction(1, 2)</code></pre>
+					<p class="propiedad">Módulos: <code>decimal</code>, <code>fractions</code></p>
+				</article>
+				<article class="concepto-css" id="numeros-grandes-y-notacion" data-palabras="números grandes guiones bajos 1_000_000 hex binario octal 0x 0b 0o notación científica">
+					<h3>Números grandes y notación</h3>
+					<p>Se pueden separar cifras con <code>_</code> y escribir en otras bases con prefijos.</p>
+					<pre><code>1_000_000          # un millón
+0xFF               # 255
+0b1010             # 10
+0o17               # 15
+1.5e3              # 1500.0
+bin(10), hex(255)  # ('0b1010', '0xff')</code></pre>
+					<p class="propiedad">Prefijos: <code>0x</code>, <code>0b</code>, <code>0o</code></p>
+				</article>
+				<article class="concepto-css" id="booleanos-y-valores-verdaderos-o-falsos" data-palabras="bool truthy falsy booleano verdadero falso condición vacío None 0">
+					<h3>Booleanos y valores verdaderos o falsos</h3>
+					<p>En una condición, se consideran falsos <code>False</code>, <code>None</code>,
+					<code>0</code>, <code>0.0</code>, las cadenas y colecciones vacías. Todo lo demás es
+					verdadero.</p>
+					<pre><code>if []:      print("no entra")
+if "hola":  print("entra")
+bool("")    # False
+bool(" ")   # True</code></pre>
+					<p class="propiedad">Función: <code>bool()</code></p>
+				</article>
+				<article class="concepto-css" id="none-ausencia-de-valor" data-palabras="none nulo ausencia valor is none comparar identidad retorno función">
+					<h3>None: ausencia de valor</h3>
+					<p><code>None</code> representa «sin valor». Se compara con <code>is</code>, no con
+					<code>==</code>. Una función sin <code>return</code> devuelve <code>None</code>.</p>
+					<pre><code>resultado = None
+if resultado is None:
+    print("sin resultado")
+def f(): pass
+print(f())       # None</code></pre>
+					<p class="propiedad">Usa <code>is None</code> / <code>is not None</code>.</p>
+				</article>
+				<article class="concepto-css" id="identidad-frente-a-igualdad-is-y" data-palabras="is == identidad igualdad objeto id mismo comparar enteros pequeños">
+					<h3>Identidad frente a igualdad: is y ==</h3>
+					<p><code>==</code> compara el valor; <code>is</code> comprueba si son el mismo objeto en
+					memoria. Para comparar valores usa <code>==</code>.</p>
+					<pre><code>a = [1, 2]
+b = [1, 2]
+a == b      # True
+a is b      # False
+id(a), id(b)</code></pre>
+					<p class="propiedad"><code>is</code> se reserva para <code>None</code>, <code>True</code> y <code>False</code>.</p>
+				</article>
+				<article class="concepto-css" id="mutables-e-inmutables" data-palabras="mutable inmutable tupla lista str int dict set copia referencia objeto">
+					<h3>Mutables e inmutables</h3>
+					<p>Los tipos inmutables (<code>int</code>, <code>str</code>, <code>tuple</code>,
+					<code>frozenset</code>) no cambian; los mutables (<code>list</code>, <code>dict</code>,
+					<code>set</code>) sí. Asignar una lista no la copia: ambas variables apuntan al mismo
+					objeto.</p>
+					<pre><code>a = [1, 2]
+b = a
+b.append(3)
+print(a)             # [1, 2, 3]
+c = a.copy()         # copia independiente</code></pre>
+					<p class="propiedad">Copia profunda: <code>copy.deepcopy()</code></p>
+				</article>
+				<article class="concepto-css" id="constantes-y-nombres-especiales" data-palabras="constantes mayúsculas __name__ __main__ nombres guiones bajos convención _privado">
+					<h3>Constantes y nombres especiales</h3>
+					<p>Python no tiene constantes reales; por convención se escriben en mayúsculas. Un guion bajo
+					inicial (<code>_x</code>) indica uso interno.</p>
+					<pre><code>PI = 3.14159
+_cache = {}
+if __name__ == "__main__":
+    print("Se ejecuta como programa principal")</code></pre>
+					<p class="propiedad">Idioma habitual: <code>if __name__ == "__main__":</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="operadores" data-categoria>
+			<div class="cabecera-categoria"><span>02</span>
+				<div>
+					<p>Calcular, comparar y decidir</p>
+					<h2>Operadores</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="operadores-aritmeticos" data-palabras="suma resta multiplicación división // % ** aritméticos entera potencia resto">
+					<h3>Operadores aritméticos</h3>
+					<p>Además de <code>+ - * /</code> hay división entera (<code>//</code>), resto (<code>%</code>)
+					y potencia (<code>**</code>). La división <code>/</code> siempre devuelve
+					<code>float</code>.</p>
+					<pre><code>7 / 2        # 3.5
+7 // 2       # 3
+7 % 2        # 1
+2 ** 10      # 1024
+-7 // 2      # -4 (hacia abajo)</code></pre>
+					<p class="propiedad">Operadores: <code>+ - * / // % **</code></p>
+				</article>
+				<article class="concepto-css" id="operadores-de-asignacion" data-palabras="+= -= *= /= //= %= **= asignación compuesta incrementar walrus :=">
+					<h3>Operadores de asignación</h3>
+					<p>Las asignaciones compuestas combinan una operación con la asignación. El operador morsa
+					<code>:=</code> asigna dentro de una expresión.</p>
+					<pre><code>n = 10
+n += 5          # 15
+n *= 2          # 30
+if (m := len("hola")) &gt; 3:
+    print(m)</code></pre>
+					<p class="propiedad">No existen <code>++</code> ni <code>--</code> en Python.</p>
+				</article>
+				<article class="concepto-css" id="operadores-de-comparacion-y-encadenados" data-palabras="== != &lt; &gt; &lt;= &gt;= encadenar comparación rango 1 &lt; x &lt; 10 comparar">
+					<h3>Operadores de comparación y encadenados</h3>
+					<p>Python permite encadenar comparaciones de forma natural.</p>
+					<pre><code>x = 5
+1 &lt; x &lt; 10          # True
+x == 5 and x != 3
+"a" &lt; "b"           # True (orden alfabético)</code></pre>
+					<p class="propiedad">Operadores: <code>== != &lt; &gt; &lt;= &gt;=</code></p>
+				</article>
+				<article class="concepto-css" id="operadores-logicos-and-or-y-not" data-palabras="and or not lógicos cortocircuito condición booleano valor por defecto">
+					<h3>Operadores lógicos: and, or y not</h3>
+					<p><code>and</code>, <code>or</code> y <code>not</code> se escriben en inglés y funcionan en
+					cortocircuito. Devuelven uno de los operandos, no necesariamente un booleano.</p>
+					<pre><code>edad = 20
+edad &gt;= 18 and edad &lt; 65
+not edad
+nombre = "" or "Anónimo"       # "Anónimo"
+usuario and usuario.nombre</code></pre>
+					<p class="propiedad"><code>or</code> se usa para valores por defecto.</p>
+				</article>
+				<article class="concepto-css" id="pertenencia-in-y-not-in" data-palabras="in not in pertenencia contiene lista cadena diccionario conjunto operador">
+					<h3>Pertenencia: in y not in</h3>
+					<p><code>in</code> comprueba si un elemento está en una colección o una subcadena en un texto.</p>
+					<pre><code>3 in [1, 2, 3]            # True
+"ho" in "hola"            # True
+"a" in {"a": 1}           # True (busca claves)
+5 not in (1, 2, 3)        # True</code></pre>
+					<p class="propiedad">Es muy rápido en <code>set</code> y <code>dict</code>.</p>
+				</article>
+				<article class="concepto-css" id="operadores-de-bits" data-palabras="bits &amp; | ^ ~ &lt;&lt; &gt;&gt; binario operadores bitwise máscara desplazamiento">
+					<h3>Operadores de bits</h3>
+					<p>Operan sobre los bits de los enteros: AND <code>&amp;</code>, OR <code>|</code>, XOR
+					<code>^</code>, NOT <code>~</code> y desplazamientos <code>&lt;&lt;</code> y
+					<code>&gt;&gt;</code>.</p>
+					<pre><code>0b1100 &amp; 0b1010     # 8
+0b1100 | 0b1010     # 14
+5 ^ 3               # 6
+1 &lt;&lt; 4              # 16
+~5                  # -6</code></pre>
+					<p class="propiedad">Útiles para banderas y máscaras.</p>
+				</article>
+				<article class="concepto-css" id="operador-ternario" data-palabras="ternario condicional expresión if else una línea valor condición">
+					<h3>Operador ternario</h3>
+					<p>Una expresión condicional elige entre dos valores en una línea.</p>
+					<pre><code>edad = 20
+estado = "adulto" if edad &gt;= 18 else "menor"</code></pre>
+					<p class="propiedad">Sintaxis: <code>valor_si if condición else valor_no</code></p>
+				</article>
+				<article class="concepto-css" id="precedencia-de-operadores" data-palabras="precedencia orden operaciones paréntesis ** * + not and or prioridad">
+					<h3>Precedencia de operadores</h3>
+					<p>De mayor a menor prioridad: paréntesis, <code>**</code>, signos unarios, <code>* / //
+					%</code>, <code>+ -</code>, comparaciones, <code>not</code>, <code>and</code>,
+					<code>or</code>.</p>
+					<pre><code>2 + 3 * 4        # 14
+(2 + 3) * 4      # 20
+-2 ** 2          # -4
+not True or True # True</code></pre>
+					<p class="propiedad">Ante la duda, usa paréntesis.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="cadenas" data-categoria>
+			<div class="cabecera-categoria"><span>03</span>
+				<div>
+					<p>Trabajar con texto</p>
+					<h2>Cadenas de texto</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="cadenas-crear-y-comillas" data-palabras="str cadenas comillas simples dobles triples multilínea raw r&#x27;&#x27; escape \n texto">
+					<h3>Cadenas: crear y comillas</h3>
+					<p>Las cadenas pueden ir entre comillas simples, dobles o triples (varias líneas). Un prefijo
+					<code>r</code> desactiva las secuencias de escape.</p>
+					<pre><code>a = 'hola'
+b = "Dijo: \"hola\""
+c = """Línea 1
+Línea 2"""
+ruta = r"C:\nuevo\carpeta"</code></pre>
+					<p class="propiedad">Escapes: <code>\n</code>, <code>\t</code>, <code>\\</code>, <code>\"</code></p>
+				</article>
+				<article class="concepto-css" id="f-strings-formatear-texto" data-palabras="f-string formato interpolar {} decimales :.2f alineación fstring formatear">
+					<h3>f-strings: formatear texto</h3>
+					<p>Los f-strings insertan expresiones dentro de la cadena y admiten formato.</p>
+					<pre><code>nombre, nota = "Ana", 8.456
+f"Hola, {nombre}"
+f"Nota: {nota:.1f}"              # 8.5
+f"{1234567:,}"                   # 1,234,567
+f"{'x':&gt;5}|{'x':&lt;5}|{'x':^5}"
+f"{nombre=}"                     # nombre='Ana' </code></pre>
+					<p class="propiedad">Formatos: <code>:.2f</code>, <code>:,</code>, <code>:&gt;10</code>, <code>:05d</code>, <code>:%</code></p>
+				</article>
+				<article class="concepto-css" id="indexar-y-trocear-cadenas-slicing" data-palabras="slicing índice negativo [::] trozo cadena [inicio:fin:paso] invertir [::-1]">
+					<h3>Indexar y trocear cadenas (slicing)</h3>
+					<p>Los índices empiezan en 0 y los negativos cuentan desde el final.
+					<code>[inicio:fin:paso]</code> extrae trozos (el final es exclusivo).</p>
+					<pre><code>s = "Python"
+s[0]          # 'P'
+s[-1]         # 'n'
+s[1:4]        # 'yth'
+s[:2]         # 'Py'
+s[::-1]       # 'nohtyP'
+s[::2]        # 'Pto' </code></pre>
+					<p class="propiedad">Funciona igual en listas y tuplas.</p>
+				</article>
+				<article class="concepto-css" id="metodos-de-cadenas-mayusculas-espacios-y-busqueda" data-palabras="upper lower title strip split join replace find startswith endswith count métodos str">
+					<h3>Métodos de cadenas: mayúsculas, espacios y búsqueda</h3>
+					<p>Las cadenas son inmutables: los métodos devuelven una nueva.</p>
+					<pre><code>t = "  Hola Mundo  "
+t.strip()                  # 'Hola Mundo'
+t.upper(); t.lower(); t.title()
+"a,b,c".split(",")         # ['a', 'b', 'c']
+"-".join(["a", "b"])       # 'a-b'
+"hola".replace("o", "0")
+"hola".find("l")           # 2 (o -1)
+"hola".startswith("ho")</code></pre>
+					<p class="propiedad">Métodos: <code>strip</code>, <code>split</code>, <code>join</code>, <code>replace</code>, <code>find</code></p>
+				</article>
+				<article class="concepto-css" id="comprobar-el-contenido-isdigit-isalpha-y-similares" data-palabras="isdigit isalpha isalnum isspace isupper islower comprobar cadena validar caracteres">
+					<h3>Comprobar el contenido: isdigit, isalpha y similares</h3>
+					<p>Métodos que devuelven <code>True</code> o <code>False</code> según el contenido del texto.</p>
+					<pre><code>"123".isdigit()      # True
+"abc".isalpha()      # True
+"abc1".isalnum()     # True
+"   ".isspace()      # True
+"HOLA".isupper()     # True</code></pre>
+					<p class="propiedad">Útiles para validar entradas.</p>
+				</article>
+				<article class="concepto-css" id="formato-antiguo-y-str-format" data-palabras="format % formato antiguo str.format {} posiciones nombrado cadenas formato">
+					<h3>Formato antiguo y str.format</h3>
+					<p>Antes de los f-strings se usaban <code>str.format</code> y el operador <code>%</code>. Los
+					verás en código antiguo.</p>
+					<pre><code>"{} tiene {} años".format("Ana", 30)
+"{0} {1} {0}".format("a", "b")
+"{n}".format(n=5)
+"%s tiene %d años" % ("Ana", 30)</code></pre>
+					<p class="propiedad">Hoy se prefiere f-string.</p>
+				</article>
+				<article class="concepto-css" id="caracteres-y-codigos-ord-y-chr" data-palabras="ord chr unicode código carácter letra ascii convertir">
+					<h3>Caracteres y códigos: ord y chr</h3>
+					<p><code>ord</code> devuelve el código de un carácter y <code>chr</code> el carácter de un
+					código.</p>
+					<pre><code>ord("A")      # 65
+chr(66)       # 'B'
+chr(ord("a") + 1)   # 'b' </code></pre>
+					<p class="propiedad">Funciones: <code>ord</code>, <code>chr</code></p>
+				</article>
+				<article class="concepto-css" id="texto-con-varias-lineas-splitlines-y-textwrap" data-palabras="splitlines textwrap wrap fill dedent líneas texto largo ajustar ancho">
+					<h3>Texto con varias líneas: splitlines y textwrap</h3>
+					<p><code>splitlines</code> divide por saltos de línea; <code>textwrap</code> ajusta textos
+					largos a un ancho.</p>
+					<pre><code>texto = "uno\ndos\ntres"
+texto.splitlines()           # ['uno', 'dos', 'tres']
+import textwrap
+textwrap.fill("Una frase muy larga…", width=20)</code></pre>
+					<p class="propiedad">Módulo: <code>textwrap</code></p>
+				</article>
+				<article class="concepto-css" id="codificacion-bytes-y-utf-8" data-palabras="bytes encode decode utf-8 bytearray codificación str archivo caracteres unicode">
+					<h3>Codificación: bytes y UTF-8</h3>
+					<p>Un <code>str</code> es texto Unicode; <code>bytes</code> son datos binarios. Se convierten
+					con <code>encode</code> y <code>decode</code>.</p>
+					<pre><code>b = "ñandú".encode("utf-8")      # b'\xc3\xb1and\xc3\xba'
+b.decode("utf-8")                # 'ñandú'
+len("ñ"), len("ñ".encode())     # (1, 2)</code></pre>
+					<p class="propiedad">Usa siempre UTF-8.</p>
+				</article>
+				<article class="concepto-css" id="cadenas-errores-frecuentes" data-palabras="concatenar str int typeerror cadena inmutable error unir número texto">
+					<h3>Cadenas: errores frecuentes</h3>
+					<p>Para concatenar texto y números hay que convertir el número (o usar f-strings). Las cadenas
+					no se pueden modificar por índice.</p>
+					<pre><code>"edad: " + 30          # TypeError
+"edad: " + str(30)     # correcto
+f"edad: {30}"
+s = "hola"; s[0] = "H" # TypeError</code></pre>
+					<p class="propiedad">Error: <code>TypeError: can only concatenate str</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="control" data-categoria>
+			<div class="cabecera-categoria"><span>04</span>
+				<div>
+					<p>Decidir y repetir</p>
+					<h2>Condiciones y bucles</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="condicionales-if-elif-y-else" data-palabras="if elif else condición decidir bloque rama sangría condicional">
+					<h3>Condicionales: if, elif y else</h3>
+					<p><code>if</code> ejecuta un bloque si la condición es verdadera; <code>elif</code> añade
+					alternativas y <code>else</code>, el caso final.</p>
+					<pre><code>nota = 7
+if nota &gt;= 9:
+    print("Sobresaliente")
+elif nota &gt;= 5:
+    print("Aprobado")
+else:
+    print("Suspenso")</code></pre>
+					<p class="propiedad">Los dos puntos y la sangría son obligatorios.</p>
+				</article>
+				<article class="concepto-css" id="match-coincidencia-de-patrones" data-palabras="match case switch estructural patrón python 3.10 _ comodín">
+					<h3>match: coincidencia de patrones</h3>
+					<p>Desde Python 3.10, <code>match</code> compara un valor con varios patrones (como un
+					<code>switch</code> mucho más potente).</p>
+					<pre><code>def respuesta(codigo):
+    match codigo:
+        case 200: return "OK"
+        case 404: return "No encontrado"
+        case 500 | 503: return "Error de servidor"
+        case _: return "Desconocido"</code></pre>
+					<p class="propiedad">Comodín: <code>_</code></p>
+				</article>
+				<article class="concepto-css" id="bucle-for-y-range" data-palabras="for range bucle iterar repetir contador start stop step recorrer secuencia">
+					<h3>Bucle for y range</h3>
+					<p><code>for</code> recorre cualquier iterable. <code>range(inicio, fin, paso)</code> genera
+					números (el final es exclusivo).</p>
+					<pre><code>for i in range(3):             # 0, 1, 2
+    print(i)
+for i in range(1, 10, 2):      # 1, 3, 5, 7, 9
+    print(i)
+for letra in "hola":
+    print(letra)</code></pre>
+					<p class="propiedad"><code>range</code> no incluye el valor final.</p>
+				</article>
+				<article class="concepto-css" id="bucle-while" data-palabras="while bucle condición repetir infinito break continue else mientras">
+					<h3>Bucle while</h3>
+					<p><code>while</code> repite mientras la condición sea verdadera. Asegúrate de que algo cambie
+					para terminar.</p>
+					<pre><code>n = 3
+while n &gt; 0:
+    print(n)
+    n -= 1
+
+while True:
+    r = input("Escribe 'salir': ")
+    if r == "salir":
+        break</code></pre>
+					<p class="propiedad">Palabras clave: <code>break</code>, <code>continue</code></p>
+				</article>
+				<article class="concepto-css" id="break-continue-pass-y-else-en-bucles" data-palabras="break continue pass else bucle salir saltar vacío for-else">
+					<h3>break, continue, pass y else en bucles</h3>
+					<p><code>break</code> sale del bucle; <code>continue</code> salta a la siguiente vuelta;
+					<code>pass</code> no hace nada. El <code>else</code> de un bucle se ejecuta si no hubo
+					<code>break</code>.</p>
+					<pre><code>for n in range(2, 10):
+    for d in range(2, n):
+        if n % d == 0:
+            break
+    else:
+        print(n, "es primo")
+
+def pendiente(): pass</code></pre>
+					<p class="propiedad"><code>else</code> en bucles: se ejecuta si no hay <code>break</code>.</p>
+				</article>
+				<article class="concepto-css" id="enumerate-y-zip" data-palabras="enumerate zip índice recorrer varias listas paralelo pares for desempaquetar">
+					<h3>enumerate y zip</h3>
+					<p><code>enumerate</code> da el índice junto al valor; <code>zip</code> recorre varias
+					secuencias a la vez.</p>
+					<pre><code>for i, fruta in enumerate(["pera", "uva"], start=1):
+    print(i, fruta)
+
+for nombre, edad in zip(["Ana", "Luis"], [30, 25]):
+    print(nombre, edad)
+
+dict(zip(["a", "b"], [1, 2]))</code></pre>
+					<p class="propiedad"><code>zip</code> se detiene en la secuencia más corta.</p>
+				</article>
+				<article class="concepto-css" id="recorrer-al-reves-y-ordenado-reversed-y-sorted" data-palabras="reversed sorted recorrer inverso ordenado key reverse bucle iterar">
+					<h3>Recorrer al revés y ordenado: reversed y sorted</h3>
+					<p><code>reversed</code> recorre en orden inverso y <code>sorted</code> recorre una versión
+					ordenada sin modificar el original.</p>
+					<pre><code>for x in reversed([1, 2, 3]): print(x)
+for x in sorted([3, 1, 2], reverse=True): print(x)</code></pre>
+					<p class="propiedad">Funciones: <code>reversed</code>, <code>sorted</code></p>
+				</article>
+				<article class="concepto-css" id="bucles-anidados" data-palabras="bucles anidados tabla multiplicar filas columnas for dentro de for patrón">
+					<h3>Bucles anidados</h3>
+					<p>Un bucle dentro de otro repite el interior completo en cada vuelta del exterior.</p>
+					<pre><code>for i in range(1, 4):
+    for j in range(1, 4):
+        print(i * j, end="\t")
+    print()</code></pre>
+					<p class="propiedad">Útil para tablas y matrices.</p>
+				</article>
+				<article class="concepto-css" id="valores-iterables-any-all-min-max-y-sum" data-palabras="any all min max sum len iterable funciones integradas colección comprobar">
+					<h3>Valores iterables: any, all, min, max y sum</h3>
+					<p>Funciones integradas que trabajan con cualquier iterable.</p>
+					<pre><code>nums = [3, 8, 2]
+any(n &gt; 5 for n in nums)      # True
+all(n &gt; 0 for n in nums)      # True
+min(nums), max(nums), sum(nums), len(nums)</code></pre>
+					<p class="propiedad">Funciones: <code>any</code>, <code>all</code>, <code>min</code>, <code>max</code>, <code>sum</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="funciones" data-categoria>
+			<div class="cabecera-categoria"><span>05</span>
+				<div>
+					<p>Agrupar y reutilizar código</p>
+					<h2>Funciones</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="definir-una-funcion" data-palabras="def función return parámetros argumentos llamar definir reutilizar">
+					<h3>Definir una función</h3>
+					<p>Una función se define con <code>def</code>. Sin <code>return</code> devuelve
+					<code>None</code>.</p>
+					<pre><code>def sumar(a, b):
+    return a + b
+
+sumar(2, 3)         # 5</code></pre>
+					<p class="propiedad">Palabra clave: <code>def</code></p>
+				</article>
+				<article class="concepto-css" id="parametros-por-defecto-y-con-nombre" data-palabras="parámetros por defecto argumentos nombrados keyword positional función valores">
+					<h3>Parámetros por defecto y con nombre</h3>
+					<p>Un parámetro puede tener valor por defecto, y los argumentos pueden pasarse por nombre en
+					cualquier orden.</p>
+					<pre><code>def saludar(nombre, saludo="Hola"):
+    return f"{saludo}, {nombre}"
+
+saludar("Ana")
+saludar(saludo="Buenas", nombre="Luis")</code></pre>
+					<p class="propiedad">Los parámetros con defecto van al final.</p>
+				</article>
+				<article class="concepto-css" id="args-y-kwargs" data-palabras="args kwargs número variable argumentos * ** empaquetar desempaquetar función">
+					<h3>*args y **kwargs</h3>
+					<p><code>*args</code> recoge argumentos posicionales extra en una tupla; <code>**kwargs</code>,
+					los nombrados en un diccionario.</p>
+					<pre><code>def f(*args, **kwargs):
+    print(args, kwargs)
+
+f(1, 2, a=3)               # (1, 2) {'a': 3}
+numeros = [1, 2, 3]
+print(*numeros)            # desempaquetar</code></pre>
+					<p class="propiedad">Orden: posicionales, <code>*args</code>, nombrados, <code>**kwargs</code></p>
+				</article>
+				<article class="concepto-css" id="parametros-solo-posicionales-y-solo-con-nombre" data-palabras="/ * parámetros posicionales keyword-only firma función separador">
+					<h3>Parámetros solo posicionales y solo con nombre</h3>
+					<p>En la firma, <code>/</code> marca los parámetros solo posicionales y <code>*</code> los que
+					deben pasarse por nombre.</p>
+					<pre><code>def f(a, b, /, c, *, d):
+    return a + b + c + d
+
+f(1, 2, 3, d=4)
+f(1, 2, c=3, d=4)</code></pre>
+					<p class="propiedad">Separadores: <code>/</code> y <code>*</code></p>
+				</article>
+				<article class="concepto-css" id="valores-de-retorno-multiples" data-palabras="return varios valores tupla desempaquetar función devolver múltiples">
+					<h3>Valores de retorno múltiples</h3>
+					<p>Una función puede devolver varios valores: en realidad es una tupla.</p>
+					<pre><code>def limites(datos):
+    return min(datos), max(datos)
+
+menor, mayor = limites([3, 9, 1])</code></pre>
+					<p class="propiedad">Se desempaqueta al recibirlos.</p>
+				</article>
+				<article class="concepto-css" id="funciones-lambda" data-palabras="lambda función anónima expresión key sorted map filter corta">
+					<h3>Funciones lambda</h3>
+					<p>Una <code>lambda</code> es una función anónima de una sola expresión.</p>
+					<pre><code>doble = lambda x: x * 2
+doble(4)                                   # 8
+personas.sort(key=lambda p: p["edad"])
+sorted(["bb", "a", "ccc"], key=len)</code></pre>
+					<p class="propiedad">Sintaxis: <code>lambda parámetros: expresión</code></p>
+				</article>
+				<article class="concepto-css" id="map-filter-y-reduce" data-palabras="map filter reduce funcional functools aplicar filtrar acumular iterable lambda">
+					<h3>map, filter y reduce</h3>
+					<p><code>map</code> aplica una función a cada elemento y <code>filter</code> se queda con los
+					que cumplen una condición. <code>reduce</code> acumula.</p>
+					<pre><code>list(map(lambda x: x * 2, [1, 2, 3]))        # [2, 4, 6]
+list(filter(lambda x: x % 2 == 0, range(6))) # [0, 2, 4]
+from functools import reduce
+reduce(lambda a, b: a + b, [1, 2, 3, 4])     # 10</code></pre>
+					<p class="propiedad">Suelen sustituirse por comprensiones.</p>
+				</article>
+				<article class="concepto-css" id="ambito-local-global-y-nonlocal" data-palabras="ámbito scope local global nonlocal variable global función LEGB UnboundLocalError">
+					<h3>Ámbito: local, global y nonlocal</h3>
+					<p>Las variables asignadas dentro de una función son locales. Para modificar una global se
+					declara con <code>global</code>; en funciones anidadas, <code>nonlocal</code>.</p>
+					<pre><code>contador = 0
+def incrementar():
+    global contador
+    contador += 1
+
+def externa():
+    n = 0
+    def interna():
+        nonlocal n
+        n += 1
+    return interna</code></pre>
+					<p class="propiedad">Regla LEGB: Local, Enclosing, Global, Built-in</p>
+				</article>
+				<article class="concepto-css" id="funciones-anidadas-y-clausuras" data-palabras="closure clausura función anidada devolver función interna factoría contador">
+					<h3>Funciones anidadas y clausuras</h3>
+					<p>Una función interna recuerda las variables de la externa aunque esta ya haya terminado.</p>
+					<pre><code>def multiplicador(n):
+    def por(x):
+        return x * n
+    return por
+
+doble = multiplicador(2)
+doble(10)                # 20</code></pre>
+					<p class="propiedad">Base de los decoradores.</p>
+				</article>
+				<article class="concepto-css" id="recursion" data-palabras="recursión recursiva factorial caso base recursionerror límite sys.setrecursionlimit">
+					<h3>Recursión</h3>
+					<p>Una función recursiva se llama a sí misma. Necesita un caso base; Python limita la
+					profundidad (unas 1000 llamadas).</p>
+					<pre><code>def factorial(n):
+    return 1 if n &lt;= 1 else n * factorial(n - 1)
+
+import sys
+sys.getrecursionlimit()</code></pre>
+					<p class="propiedad">Error: <code>RecursionError</code></p>
+				</article>
+				<article class="concepto-css" id="argumento-mutable-por-defecto-error-clasico" data-palabras="mutable default argumento por defecto lista compartida trampa def f(x=[]) none">
+					<h3>Argumento mutable por defecto: error clásico</h3>
+					<p>Un valor por defecto mutable se crea una sola vez y se comparte entre llamadas. Usa
+					<code>None</code> y crea la lista dentro.</p>
+					<pre><code>def mal(x, lista=[]):
+    lista.append(x); return lista
+mal(1); mal(2)          # [1, 2] (¡compartida!)
+
+def bien(x, lista=None):
+    if lista is None:
+        lista = []
+    lista.append(x); return lista</code></pre>
+					<p class="propiedad">Nunca uses <code>[]</code> o <code>{}</code> como valor por defecto.</p>
+				</article>
+				<article class="concepto-css" id="anotaciones-de-tipo" data-palabras="type hints anotaciones tipos int str list dict optional typing mypy -&gt; pistas">
+					<h3>Anotaciones de tipo</h3>
+					<p>Las anotaciones indican los tipos esperados. No se comprueban al ejecutar, pero ayudan al
+					editor y a herramientas como <code>mypy</code>.</p>
+					<pre><code>def saludar(nombre: str, veces: int = 1) -&gt; str:
+    return (f"Hola, {nombre}. " * veces).strip()
+
+edades: dict[str, int] = {"Ana": 30}
+def buscar(id: int) -&gt; str | None: ...</code></pre>
+					<p class="propiedad">Módulo: <code>typing</code>; herramienta: <code>mypy</code></p>
+				</article>
+				<article class="concepto-css" id="funciones-integradas-mas-utiles" data-palabras="builtins len range type print input sorted enumerate zip isinstance abs round funciones integradas lista">
+					<h3>Funciones integradas más útiles</h3>
+					<p>Algunas funciones disponibles sin importar nada: <code>len</code>, <code>range</code>,
+					<code>sorted</code>, <code>reversed</code>, <code>enumerate</code>, <code>zip</code>,
+					<code>any</code>, <code>all</code>, <code>sum</code>, <code>min</code>, <code>max</code>,
+					<code>abs</code>, <code>round</code>, <code>isinstance</code>, <code>open</code>,
+					<code>print</code>, <code>input</code>, <code>type</code>, <code>dir</code>,
+					<code>help</code>.</p>
+					<pre><code>dir("texto")          # métodos disponibles
+help(len)
+callable(print)       # True</code></pre>
+					<p class="propiedad">Explora con <code>dir()</code> y <code>help()</code>.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="listas" data-categoria>
+			<div class="cabecera-categoria"><span>06</span>
+				<div>
+					<p>Colecciones ordenadas</p>
+					<h2>Listas y tuplas</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="listas-crear-y-acceder" data-palabras="list lista crear [] índice acceder append len elementos secuencia mutable">
+					<h3>Listas: crear y acceder</h3>
+					<p>Una lista es una secuencia ordenada y mutable que puede mezclar tipos.</p>
+					<pre><code>frutas = ["pera", "uva", "kiwi"]
+frutas[0]            # 'pera'
+frutas[-1]           # 'kiwi'
+frutas[1:]           # ['uva', 'kiwi']
+len(frutas)          # 3
+frutas[0] = "manzana"</code></pre>
+					<p class="propiedad">Se crea con <code>[]</code> o <code>list()</code>.</p>
+				</article>
+				<article class="concepto-css" id="anadir-quitar-y-buscar-en-listas" data-palabras="append insert extend remove pop del index count clear lista métodos añadir eliminar">
+					<h3>Añadir, quitar y buscar en listas</h3>
+					<p>Métodos principales para modificar listas.</p>
+					<pre><code>l = [1, 2, 3]
+l.append(4)             # [1, 2, 3, 4]
+l.insert(0, 0)          # al principio
+l.extend([5, 6])
+l.remove(3)             # por valor
+x = l.pop()             # quita y devuelve el último
+del l[0]                # por posición
+l.index(2); l.count(2)</code></pre>
+					<p class="propiedad">Métodos: <code>append</code>, <code>insert</code>, <code>extend</code>, <code>remove</code>, <code>pop</code></p>
+				</article>
+				<article class="concepto-css" id="ordenar-listas-sort-y-sorted" data-palabras="sort sorted key reverse ordenar lista criterio lambda orden">
+					<h3>Ordenar listas: sort y sorted</h3>
+					<p><code>lista.sort()</code> ordena la propia lista; <code>sorted(lista)</code> devuelve una
+					nueva. El parámetro <code>key</code> define el criterio.</p>
+					<pre><code>n = [3, 1, 2]
+n.sort()                         # modifica
+sorted(n, reverse=True)          # copia
+palabras = ["bb", "a", "ccc"]
+sorted(palabras, key=len)
+personas.sort(key=lambda p: (p["ciudad"], p["edad"]))</code></pre>
+					<p class="propiedad">Parámetros: <code>key</code>, <code>reverse</code></p>
+				</article>
+				<article class="concepto-css" id="copiar-unir-y-repetir-listas" data-palabras="copiar lista copy slicing + * concatenar repetir deepcopy superficial profunda">
+					<h3>Copiar, unir y repetir listas</h3>
+					<p>Asignar una lista no la copia. Para hacerlo: <code>copy()</code>, <code>list()</code> o un
+					trozo completo.</p>
+					<pre><code>a = [1, 2]
+b = a.copy()          # o list(a), a[:]
+c = a + [3, 4]        # [1, 2, 3, 4]
+d = [0] * 3           # [0, 0, 0]
+import copy
+copy.deepcopy([[1], [2]])</code></pre>
+					<p class="propiedad">Cuidado: <code>[[0]] * 3</code> repite la misma sublista.</p>
+				</article>
+				<article class="concepto-css" id="comprensiones-de-listas" data-palabras="comprensión lista list comprehension filtrar transformar [x for x in] condición anidada">
+					<h3>Comprensiones de listas</h3>
+					<p>Una comprensión crea una lista a partir de otra en una sola línea, con filtro opcional.</p>
+					<pre><code>cuadrados = [x ** 2 for x in range(5)]
+pares = [x for x in range(10) if x % 2 == 0]
+etiquetas = ["par" if x % 2 == 0 else "impar" for x in range(4)]
+pares_de = [(a, b) for a in range(2) for b in range(2)]</code></pre>
+					<p class="propiedad">Sintaxis: <code>[expresión for x in iterable if condición]</code></p>
+				</article>
+				<article class="concepto-css" id="listas-de-listas-matrices" data-palabras="matriz lista de listas bidimensional filas columnas anidada transponer zip">
+					<h3>Listas de listas (matrices)</h3>
+					<p>Una matriz es una lista de listas. Crea cada fila por separado para evitar compartirlas.</p>
+					<pre><code>m = [[0] * 3 for _ in range(3)]
+m[1][2] = 5
+for fila in m:
+    print(fila)
+traspuesta = [list(f) for f in zip(*m)]</code></pre>
+					<p class="propiedad">No uses <code>[[0] * 3] * 3</code>.</p>
+				</article>
+				<article class="concepto-css" id="tuplas-secuencias-inmutables" data-palabras="tuple tupla inmutable desempaquetar paréntesis coma un elemento">
+					<h3>Tuplas: secuencias inmutables</h3>
+					<p>Una tupla es como una lista que no se puede modificar. Se usa para datos fijos y como clave
+					de diccionario.</p>
+					<pre><code>punto = (3, 4)
+x, y = punto
+una = (5,)                 # coma obligatoria
+a, *resto = (1, 2, 3, 4)   # a=1, resto=[2, 3, 4]</code></pre>
+					<p class="propiedad">Se crea con <code>()</code> o <code>tuple()</code>.</p>
+				</article>
+				<article class="concepto-css" id="desempaquetado-y-operador" data-palabras="desempaquetar * extended unpacking tupla lista variables resto asignación">
+					<h3>Desempaquetado y operador *</h3>
+					<p>Se pueden asignar varios valores a la vez y capturar el «resto» con <code>*</code>.</p>
+					<pre><code>primero, *medio, ultimo = [1, 2, 3, 4, 5]
+a, b = b, a
+l1 = [1, 2]; l2 = [*l1, 3, 4]
+d = {**{"a": 1}, "b": 2}</code></pre>
+					<p class="propiedad">Operadores: <code>*</code> y <code>**</code></p>
+				</article>
+				<article class="concepto-css" id="namedtuple-y-dataclass" data-palabras="namedtuple dataclass datos registro campos nombre clase simple frozen field">
+					<h3>namedtuple y dataclass</h3>
+					<p>Para agrupar datos con nombre: <code>namedtuple</code> (inmutable) o <code>@dataclass</code>
+					(más completo).</p>
+					<pre><code>from collections import namedtuple
+Punto = namedtuple("Punto", "x y")
+p = Punto(1, 2); p.x
+
+from dataclasses import dataclass
+@dataclass
+class Persona:
+    nombre: str
+    edad: int = 0</code></pre>
+					<p class="propiedad"><code>@dataclass</code> genera <code>__init__</code>, <code>__repr__</code> y <code>__eq__</code>.</p>
+				</article>
+				<article class="concepto-css" id="pilas-y-colas-con-deque" data-palabras="deque collections pila cola append popleft appendleft maxlen rápida">
+					<h3>Pilas y colas con deque</h3>
+					<p><code>collections.deque</code> permite añadir y quitar por ambos extremos de forma
+					eficiente. Una lista es lenta para <code>pop(0)</code>.</p>
+					<pre><code>from collections import deque
+cola = deque([1, 2, 3])
+cola.append(4)
+cola.popleft()            # 1
+cola.appendleft(0)
+ultimos = deque(maxlen=3)</code></pre>
+					<p class="propiedad">Pila: <code>list.append</code> y <code>list.pop</code></p>
+				</article>
+				<article class="concepto-css" id="heap-colas-de-prioridad-con-heapq" data-palabras="heapq heap prioridad cola heappush heappop nsmallest nlargest montículo">
+					<h3>Heap: colas de prioridad con heapq</h3>
+					<p><code>heapq</code> mantiene una lista como montículo (el menor siempre sale primero).</p>
+					<pre><code>import heapq
+h = []
+heapq.heappush(h, 5); heapq.heappush(h, 1); heapq.heappush(h, 3)
+heapq.heappop(h)                      # 1
+heapq.nlargest(2, [4, 9, 1, 7])       # [9, 7]</code></pre>
+					<p class="propiedad">Módulo: <code>heapq</code></p>
+				</article>
+				<article class="concepto-css" id="busqueda-binaria-con-bisect" data-palabras="bisect bisect_left insort búsqueda binaria lista ordenada insertar ordenado">
+					<h3>Búsqueda binaria con bisect</h3>
+					<p><code>bisect</code> busca e inserta en listas ya ordenadas de forma eficiente.</p>
+					<pre><code>import bisect
+n = [1, 3, 5, 7]
+bisect.bisect_left(n, 5)       # 2
+bisect.insort(n, 4)            # [1, 3, 4, 5, 7]</code></pre>
+					<p class="propiedad">Complejidad: O(log n)</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="diccionarios" data-categoria>
+			<div class="cabecera-categoria"><span>07</span>
+				<div>
+					<p>Claves, valores y conjuntos</p>
+					<h2>Diccionarios y conjuntos</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="diccionarios-crear-y-acceder" data-palabras="dict diccionario clave valor {} get acceder crear keyerror pares">
+					<h3>Diccionarios: crear y acceder</h3>
+					<p>Un diccionario asocia claves con valores. Acceder a una clave que no existe lanza
+					<code>KeyError</code>; <code>get</code> devuelve un valor por defecto.</p>
+					<pre><code>persona = {"nombre": "Ana", "edad": 30}
+persona["nombre"]
+persona.get("ciudad", "desconocida")
+persona["ciudad"] = "Vigo"
+persona.pop("edad")
+"nombre" in persona</code></pre>
+					<p class="propiedad">Método seguro: <code>get</code></p>
+				</article>
+				<article class="concepto-css" id="recorrer-diccionarios-keys-values-e-items" data-palabras="keys values items recorrer dict for claves valores pares iterar">
+					<h3>Recorrer diccionarios: keys, values e items</h3>
+					<p>Un diccionario se recorre por claves, valores o pares.</p>
+					<pre><code>edades = {"Ana": 30, "Luis": 25}
+for nombre in edades: print(nombre)
+for edad in edades.values(): print(edad)
+for nombre, edad in edades.items(): print(nombre, edad)</code></pre>
+					<p class="propiedad">Métodos: <code>keys()</code>, <code>values()</code>, <code>items()</code></p>
+				</article>
+				<article class="concepto-css" id="metodos-de-diccionarios-update-setdefault-y-pop" data-palabras="update setdefault pop popitem clear copy fromkeys diccionario métodos fusionar">
+					<h3>Métodos de diccionarios: update, setdefault y pop</h3>
+					<p>Métodos para fusionar, completar y eliminar entradas.</p>
+					<pre><code>d = {"a": 1}
+d.update({"b": 2, "a": 10})
+d.setdefault("c", 3)
+d.pop("a")
+dict.fromkeys(["x", "y"], 0)</code></pre>
+					<p class="propiedad">Fusión moderna: <code>d1 | d2</code></p>
+				</article>
+				<article class="concepto-css" id="comprensiones-de-diccionarios-y-conjuntos" data-palabras="comprensión diccionario conjunto {k: v for} dict comprehension set comprehension invertir">
+					<h3>Comprensiones de diccionarios y conjuntos</h3>
+					<p>Como las listas, los diccionarios y conjuntos tienen comprensiones.</p>
+					<pre><code>{n: n ** 2 for n in range(4)}            # {0: 0, 1: 1, 2: 4, 3: 9}
+{c for c in "hola"}                       # conjunto de letras
+{v: k for k, v in {"a": 1, "b": 2}.items()}   # invertir</code></pre>
+					<p class="propiedad">Sintaxis: <code>{clave: valor for … in …}</code></p>
+				</article>
+				<article class="concepto-css" id="contar-y-agrupar-counter-y-defaultdict" data-palabras="counter defaultdict contar frecuencia agrupar collections most_common">
+					<h3>Contar y agrupar: Counter y defaultdict</h3>
+					<p><code>Counter</code> cuenta elementos; <code>defaultdict</code> crea valores por defecto
+					automáticamente.</p>
+					<pre><code>from collections import Counter, defaultdict
+Counter("abracadabra").most_common(2)   # [('a', 5), ('b', 2)]
+grupos = defaultdict(list)
+for p in ["sol", "mar", "cielo"]:
+    grupos[len(p)].append(p)</code></pre>
+					<p class="propiedad">Módulo: <code>collections</code></p>
+				</article>
+				<article class="concepto-css" id="conjuntos-set" data-palabras="set conjunto únicos unión intersección diferencia add remove frozenset sin duplicados">
+					<h3>Conjuntos (set)</h3>
+					<p>Un conjunto guarda elementos únicos sin orden y permite operaciones matemáticas.</p>
+					<pre><code>a = {1, 2, 3}; b = {2, 3, 4}
+a | b            # unión {1, 2, 3, 4}
+a &amp; b            # intersección {2, 3}
+a - b            # diferencia {1}
+a ^ b            # simétrica {1, 4}
+set([1, 1, 2])   # quitar duplicados
+a.add(5); a.discard(1)</code></pre>
+					<p class="propiedad">Conjunto vacío: <code>set()</code> (no <code>{}</code>)</p>
+				</article>
+				<article class="concepto-css" id="diccionarios-anidados-y-json" data-palabras="diccionario anidado json dumps loads datos estructura profunda acceder">
+					<h3>Diccionarios anidados y JSON</h3>
+					<p>Los diccionarios pueden contener otros diccionarios y listas, igual que JSON.</p>
+					<pre><code>import json
+datos = {"usuario": {"nombre": "Ana", "roles": ["admin", "dev"]}}
+datos["usuario"]["roles"][0]
+texto = json.dumps(datos, indent=2, ensure_ascii=False)
+json.loads(texto)</code></pre>
+					<p class="propiedad">Módulo: <code>json</code></p>
+				</article>
+				<article class="concepto-css" id="ordenar-diccionarios" data-palabras="ordenar diccionario sorted items key valor lambda ranking dict ordenado">
+					<h3>Ordenar diccionarios</h3>
+					<p>Un diccionario conserva el orden de inserción. Para ordenarlo se usa <code>sorted</code>
+					sobre sus pares.</p>
+					<pre><code>notas = {"Ana": 8, "Luis": 6, "Eva": 9}
+dict(sorted(notas.items(), key=lambda kv: kv[1], reverse=True))
+max(notas, key=notas.get)         # 'Eva' </code></pre>
+					<p class="propiedad">Función: <code>sorted(d.items(), key=…)</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="poo" data-categoria>
+			<div class="cabecera-categoria"><span>08</span>
+				<div>
+					<p>Clases y objetos</p>
+					<h2>Programación orientada a objetos</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="clases-y-objetos" data-palabras="class clase objeto __init__ self atributos métodos instancia constructor poo">
+					<h3>Clases y objetos</h3>
+					<p>Una clase es una plantilla; <code>__init__</code> inicializa cada objeto y <code>self</code>
+					es el propio objeto.</p>
+					<pre><code>class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+    def saludar(self):
+        return f"Hola, soy {self.nombre}"
+
+ana = Persona("Ana", 30)
+ana.saludar()</code></pre>
+					<p class="propiedad">Convención: clases en <code>PascalCase</code>.</p>
+				</article>
+				<article class="concepto-css" id="atributos-de-clase-y-de-instancia" data-palabras="atributo clase instancia compartido contador class variable self">
+					<h3>Atributos de clase y de instancia</h3>
+					<p>Un atributo definido en el cuerpo de la clase se comparte entre todas las instancias; uno
+					asignado a <code>self</code> es propio de cada objeto.</p>
+					<pre><code>class Contador:
+    total = 0                     # de clase
+    def __init__(self):
+        self.valor = 0            # de instancia
+        Contador.total += 1</code></pre>
+					<p class="propiedad">Acceso: <code>Clase.atributo</code></p>
+				</article>
+				<article class="concepto-css" id="metodos-especiales-str-repr-y-otros" data-palabras="__str__ __repr__ __len__ __eq__ __lt__ __add__ dunder métodos mágicos especiales">
+					<h3>Métodos especiales: __str__, __repr__ y otros</h3>
+					<p>Los métodos con doble guion bajo («dunder») personalizan el comportamiento de los objetos.</p>
+					<pre><code>class Punto:
+    def __init__(self, x, y): self.x, self.y = x, y
+    def __str__(self): return f"({self.x}, {self.y})"
+    def __repr__(self): return f"Punto({self.x}, {self.y})"
+    def __eq__(self, o): return (self.x, self.y) == (o.x, o.y)
+    def __add__(self, o): return Punto(self.x + o.x, self.y + o.y)
+    def __len__(self): return 2</code></pre>
+					<p class="propiedad">Métodos: <code>__str__</code>, <code>__repr__</code>, <code>__eq__</code>, <code>__lt__</code>, <code>__len__</code></p>
+				</article>
+				<article class="concepto-css" id="herencia-y-super" data-palabras="herencia super extends subclase clase padre sobrescribir override isinstance issubclass">
+					<h3>Herencia y super()</h3>
+					<p>Una clase hereda de otra indicándola entre paréntesis. <code>super()</code> accede a la
+					clase padre.</p>
+					<pre><code>class Animal:
+    def __init__(self, nombre): self.nombre = nombre
+    def hablar(self): return "..."
+
+class Perro(Animal):
+    def hablar(self): return "Guau"
+
+class Gato(Animal):
+    def __init__(self, nombre, interior):
+        super().__init__(nombre)
+        self.interior = interior</code></pre>
+					<p class="propiedad">Funciones: <code>super()</code>, <code>isinstance()</code>, <code>issubclass()</code></p>
+				</article>
+				<article class="concepto-css" id="herencia-multiple-y-mro" data-palabras="herencia múltiple mro orden resolución mixin clases varias padres __mro__">
+					<h3>Herencia múltiple y MRO</h3>
+					<p>Una clase puede heredar de varias. El orden de búsqueda de métodos (MRO) sigue el algoritmo
+					C3 y se consulta con <code>__mro__</code>.</p>
+					<pre><code>class A: pass
+class B(A): pass
+class C(A): pass
+class D(B, C): pass
+D.__mro__</code></pre>
+					<p class="propiedad">Atributo: <code>__mro__</code></p>
+				</article>
+				<article class="concepto-css" id="propiedades-property" data-palabras="property getter setter @property @x.setter encapsulación atributo calculado validar">
+					<h3>Propiedades: @property</h3>
+					<p><code>@property</code> convierte un método en un atributo de solo lectura; con
+					<code>setter</code> se puede validar la asignación.</p>
+					<pre><code>class Cuenta:
+    def __init__(self): self._saldo = 0
+    @property
+    def saldo(self): return self._saldo
+    @saldo.setter
+    def saldo(self, v):
+        if v &lt; 0: raise ValueError("Saldo negativo")
+        self._saldo = v</code></pre>
+					<p class="propiedad">Decoradores: <code>@property</code>, <code>@x.setter</code></p>
+				</article>
+				<article class="concepto-css" id="metodos-de-clase-y-estaticos" data-palabras="classmethod staticmethod @classmethod @staticmethod cls fábrica método estático">
+					<h3>Métodos de clase y estáticos</h3>
+					<p><code>@classmethod</code> recibe la clase (<code>cls</code>) y sirve de constructor
+					alternativo; <code>@staticmethod</code> no recibe ni <code>self</code> ni <code>cls</code>.</p>
+					<pre><code>class Fecha:
+    def __init__(self, d, m, a): self.d, self.m, self.a = d, m, a
+    @classmethod
+    def desde_texto(cls, t):
+        d, m, a = map(int, t.split("/"))
+        return cls(d, m, a)
+    @staticmethod
+    def bisiesto(a): return a % 4 == 0 and (a % 100 != 0 or a % 400 == 0)</code></pre>
+					<p class="propiedad">Decoradores: <code>@classmethod</code>, <code>@staticmethod</code></p>
+				</article>
+				<article class="concepto-css" id="encapsulacion-atributos-privados-por-convencion" data-palabras="privado _atributo __atributo name mangling encapsulación convención acceso">
+					<h3>Encapsulación: atributos privados por convención</h3>
+					<p>Python no tiene <code>private</code> real. Un guion bajo (<code>_x</code>) indica uso
+					interno y dos (<code>__x</code>) activa el «name mangling».</p>
+					<pre><code>class A:
+    def __init__(self):
+        self._interno = 1
+        self.__privado = 2
+a = A()
+a._interno          # accesible (por convención, no tocar)
+a._A__privado       # así se esconde, pero se puede</code></pre>
+					<p class="propiedad">Convención, no restricción.</p>
+				</article>
+				<article class="concepto-css" id="clases-abstractas-abc" data-palabras="abc abstractmethod clase abstracta interfaz ABC método abstracto polimorfismo">
+					<h3>Clases abstractas: abc</h3>
+					<p>El módulo <code>abc</code> define clases que no se pueden instanciar y obligan a las hijas a
+					implementar ciertos métodos.</p>
+					<pre><code>from abc import ABC, abstractmethod
+
+class Figura(ABC):
+    @abstractmethod
+    def area(self): ...
+
+class Cuadrado(Figura):
+    def __init__(self, l): self.l = l
+    def area(self): return self.l ** 2</code></pre>
+					<p class="propiedad">Clase base: <code>ABC</code></p>
+				</article>
+				<article class="concepto-css" id="polimorfismo-y-duck-typing" data-palabras="polimorfismo duck typing protocolo interfaz método mismo nombre objetos distintos">
+					<h3>Polimorfismo y duck typing</h3>
+					<p>Si un objeto tiene los métodos necesarios, se puede usar, sin importar su clase: «si camina
+					como un pato…».</p>
+					<pre><code>class Pato:  
+    def hablar(self): return "Cuac"
+class Robot:
+    def hablar(self): return "Bip"
+for x in (Pato(), Robot()):
+    print(x.hablar())</code></pre>
+					<p class="propiedad">No hace falta herencia común.</p>
+				</article>
+				<article class="concepto-css" id="slots-y-dataclasses-avanzadas" data-palabras="__slots__ dataclass frozen slots order field default_factory post_init memoria">
+					<h3>__slots__ y dataclasses avanzadas</h3>
+					<p><code>__slots__</code> reduce la memoria de los objetos; en una <code>dataclass</code> se
+					pueden fijar campos, orden e inmutabilidad.</p>
+					<pre><code>from dataclasses import dataclass, field
+
+@dataclass(frozen=True, order=True)
+class Producto:
+    nombre: str
+    precio: float = 0.0
+    etiquetas: list = field(default_factory=list, compare=False)</code></pre>
+					<p class="propiedad">Opciones: <code>frozen</code>, <code>order</code>, <code>slots</code></p>
+				</article>
+				<article class="concepto-css" id="enumeraciones-enum" data-palabras="enum enumeración constantes valores auto iterar miembros nombre valor módulo">
+					<h3>Enumeraciones: Enum</h3>
+					<p><code>Enum</code> define un conjunto de constantes con nombre.</p>
+					<pre><code>from enum import Enum, auto
+class Dia(Enum):
+    LUNES = auto()
+    MARTES = auto()
+
+Dia.LUNES.name, Dia.LUNES.value
+for d in Dia: print(d)
+Dia["MARTES"]</code></pre>
+					<p class="propiedad">Módulo: <code>enum</code></p>
+				</article>
+				<article class="concepto-css" id="objetos-como-funciones-call-y-contexto" data-palabras="__call__ __enter__ __exit__ with context manager objeto llamable protocolo">
+					<h3>Objetos como funciones: __call__ y contexto</h3>
+					<p><code>__call__</code> hace que un objeto sea llamable; <code>__enter__</code> y
+					<code>__exit__</code> permiten usarlo con <code>with</code>.</p>
+					<pre><code>class Cronometro:
+    def __enter__(self):
+        import time; self.t = time.perf_counter(); return self
+    def __exit__(self, *exc):
+        print(f"{time.perf_counter() - self.t:.3f}s")
+with Cronometro(): sum(range(10**6))</code></pre>
+					<p class="propiedad">Protocolo: <code>__enter__</code>, <code>__exit__</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="excepciones" data-categoria>
+			<div class="cabecera-categoria"><span>09</span>
+				<div>
+					<p>Anticipar y gestionar fallos</p>
+					<h2>Excepciones</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="try-except-else-y-finally" data-palabras="try except else finally excepciones manejar errores capturar bloque">
+					<h3>try, except, else y finally</h3>
+					<p>El bloque <code>try</code> se ejecuta; si falla, entra <code>except</code>.
+					<code>else</code> se ejecuta si no hubo error y <code>finally</code>, siempre.</p>
+					<pre><code>try:
+    n = int(input("Número: "))
+    r = 10 / n
+except ValueError:
+    print("No es un número")
+except ZeroDivisionError:
+    print("No se puede dividir entre cero")
+else:
+    print(r)
+finally:
+    print("Fin")</code></pre>
+					<p class="propiedad">Captura excepciones concretas, no <code>except:</code> a secas.</p>
+				</article>
+				<article class="concepto-css" id="excepciones-mas-frecuentes" data-palabras="ValueError TypeError KeyError IndexError AttributeError ZeroDivisionError FileNotFoundError NameError ImportError excepciones comunes">
+					<h3>Excepciones más frecuentes</h3>
+					<p><code>ValueError</code> (valor inadecuado), <code>TypeError</code> (tipo incorrecto),
+					<code>KeyError</code> (clave inexistente), <code>IndexError</code> (índice fuera de rango),
+					<code>AttributeError</code>, <code>NameError</code>, <code>ZeroDivisionError</code>,
+					<code>FileNotFoundError</code>, <code>ImportError</code>.</p>
+					<pre><code>int("x")            # ValueError
+"a" + 1             # TypeError
+{}["x"]             # KeyError
+[][0]               # IndexError
+None.x              # AttributeError
+1 / 0               # ZeroDivisionError</code></pre>
+					<p class="propiedad">Todas heredan de <code>Exception</code>.</p>
+				</article>
+				<article class="concepto-css" id="lanzar-excepciones-raise" data-palabras="raise lanzar excepción valueerror mensaje validar from relanzar">
+					<h3>Lanzar excepciones: raise</h3>
+					<p><code>raise</code> lanza una excepción. Sin argumentos, dentro de un <code>except</code>, la
+					vuelve a lanzar.</p>
+					<pre><code>def edad_valida(e):
+    if e &lt; 0:
+        raise ValueError("La edad no puede ser negativa")
+
+try:
+    int("x")
+except ValueError as e:
+    raise RuntimeError("Datos inválidos") from e</code></pre>
+					<p class="propiedad">Palabras clave: <code>raise</code>, <code>from</code></p>
+				</article>
+				<article class="concepto-css" id="excepciones-propias" data-palabras="excepción personalizada class Exception herencia error propio jerarquía">
+					<h3>Excepciones propias</h3>
+					<p>Se crean heredando de <code>Exception</code>.</p>
+					<pre><code>class SaldoInsuficiente(Exception):
+    def __init__(self, falta):
+        super().__init__(f"Faltan {falta} €")
+        self.falta = falta
+
+try:
+    raise SaldoInsuficiente(20)
+except SaldoInsuficiente as e:
+    print(e.falta)</code></pre>
+					<p class="propiedad">Convención: el nombre termina en <code>Error</code> o <code>Exception</code>.</p>
+				</article>
+				<article class="concepto-css" id="capturar-varias-excepciones-y-exceptiongroup" data-palabras="except (A, B) múltiples excepciones exceptiongroup except* tupla varias capturar">
+					<h3>Capturar varias excepciones y ExceptionGroup</h3>
+					<p>Varias excepciones se capturan juntas con una tupla. Desde Python 3.11 existen los grupos de
+					excepciones (<code>except*</code>).</p>
+					<pre><code>try:
+    ...
+except (ValueError, TypeError) as e:
+    print(type(e).__name__, e)</code></pre>
+					<p class="propiedad">Sintaxis: <code>except (A, B) as e</code></p>
+				</article>
+				<article class="concepto-css" id="trazas-y-registro-de-errores-traceback-y-logging" data-palabras="traceback logging exception print_exc registrar errores log nivel info warning error">
+					<h3>Trazas y registro de errores: traceback y logging</h3>
+					<p><code>traceback</code> muestra la pila de llamadas y <code>logging</code> registra eventos
+					con niveles en lugar de usar <code>print</code>.</p>
+					<pre><code>import logging, traceback
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+try:
+    1 / 0
+except Exception:
+    logging.exception("Fallo al dividir")
+    traceback.print_exc()</code></pre>
+					<p class="propiedad">Niveles: <code>DEBUG</code>, <code>INFO</code>, <code>WARNING</code>, <code>ERROR</code>, <code>CRITICAL</code></p>
+				</article>
+				<article class="concepto-css" id="assert-y-depuracion-con-breakpoint" data-palabras="assert breakpoint pdb depurar debug comprobar condición depurador python">
+					<h3>assert y depuración con breakpoint</h3>
+					<p><code>assert</code> comprueba una condición durante el desarrollo; <code>breakpoint()</code>
+					abre el depurador <code>pdb</code>.</p>
+					<pre><code>assert edad &gt;= 0, "La edad no puede ser negativa"
+breakpoint()      # n siguiente, s entrar, c continuar, p variable, q salir</code></pre>
+					<p class="propiedad">Comandos de <code>pdb</code>: <code>n</code>, <code>s</code>, <code>c</code>, <code>p</code>, <code>q</code></p>
+				</article>
+				<article class="concepto-css" id="validar-entradas-del-usuario" data-palabras="validar entrada bucle while try input int ValueError repetir hasta correcto">
+					<h3>Validar entradas del usuario</h3>
+					<p>Un patrón habitual: pedir el dato hasta que sea válido.</p>
+					<pre><code>def pedir_entero(mensaje):
+    while True:
+        try:
+            return int(input(mensaje))
+        except ValueError:
+            print("Escribe un número entero.")</code></pre>
+					<p class="propiedad">Patrón: <code>while True</code> + <code>try</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="archivos" data-categoria>
+			<div class="cabecera-categoria"><span>10</span>
+				<div>
+					<p>Leer y escribir datos</p>
+					<h2>Archivos y rutas</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="leer-y-escribir-archivos-con-open-y-with" data-palabras="open with leer escribir archivo r w a modo encoding utf-8 read write readlines fichero">
+					<h3>Leer y escribir archivos con open y with</h3>
+					<p><code>with open(...)</code> abre un archivo y lo cierra automáticamente. Los modos
+					principales son <code>r</code> (leer), <code>w</code> (escribir), <code>a</code> (añadir).</p>
+					<pre><code>with open("datos.txt", "w", encoding="utf-8") as f:
+    f.write("Hola\n")
+
+with open("datos.txt", encoding="utf-8") as f:
+    contenido = f.read()
+
+with open("datos.txt", encoding="utf-8") as f:
+    for linea in f:
+        print(linea.strip())</code></pre>
+					<p class="propiedad">Indica siempre <code>encoding="utf-8"</code>.</p>
+				</article>
+				<article class="concepto-css" id="rutas-con-pathlib" data-palabras="pathlib path ruta archivo carpeta exists mkdir glob read_text write_text suffix">
+					<h3>Rutas con pathlib</h3>
+					<p><code>pathlib.Path</code> representa rutas de forma portable y tiene métodos para leer,
+					escribir y listar.</p>
+					<pre><code>from pathlib import Path
+p = Path("datos") / "notas.txt"
+p.parent.mkdir(exist_ok=True)
+p.write_text("hola", encoding="utf-8")
+p.read_text(encoding="utf-8")
+p.exists(); p.suffix; p.stem
+list(Path(".").glob("*.py"))</code></pre>
+					<p class="propiedad">Módulo moderno para rutas.</p>
+				</article>
+				<article class="concepto-css" id="modulo-os-y-sys" data-palabras="os sys getcwd listdir environ argv path exit sistema operativo variables entorno">
+					<h3>Módulo os y sys</h3>
+					<p><code>os</code> interactúa con el sistema operativo y <code>sys</code> con el intérprete.</p>
+					<pre><code>import os, sys
+os.getcwd(); os.listdir("."); os.environ.get("HOME")
+os.makedirs("a/b", exist_ok=True)
+os.remove("x.txt")
+sys.argv          # argumentos de la línea de comandos
+sys.exit(1)</code></pre>
+					<p class="propiedad">Módulos: <code>os</code>, <code>sys</code>, <code>shutil</code></p>
+				</article>
+				<article class="concepto-css" id="csv-leer-y-escribir" data-palabras="csv reader writer dictreader dictwriter archivo tabla delimitador leer escribir">
+					<h3>CSV: leer y escribir</h3>
+					<p>El módulo <code>csv</code> lee y escribe archivos de valores separados por comas.</p>
+					<pre><code>import csv
+with open("alumnos.csv", newline="", encoding="utf-8") as f:
+    for fila in csv.DictReader(f):
+        print(fila["nombre"], fila["nota"])
+
+with open("salida.csv", "w", newline="", encoding="utf-8") as f:
+    w = csv.writer(f)
+    w.writerow(["nombre", "nota"]); w.writerow(["Ana", 8])</code></pre>
+					<p class="propiedad">Usa <code>newline=""</code> al abrir.</p>
+				</article>
+				<article class="concepto-css" id="json-leer-y-escribir" data-palabras="json load dump loads dumps archivo serializar diccionario ensure_ascii indent">
+					<h3>JSON: leer y escribir</h3>
+					<p>El módulo <code>json</code> convierte entre diccionarios/listas y texto JSON.</p>
+					<pre><code>import json
+datos = {"nombre": "Ana", "notas": [8, 9]}
+with open("datos.json", "w", encoding="utf-8") as f:
+    json.dump(datos, f, indent=2, ensure_ascii=False)
+with open("datos.json", encoding="utf-8") as f:
+    json.load(f)</code></pre>
+					<p class="propiedad">Funciones: <code>dump</code>, <code>load</code>, <code>dumps</code>, <code>loads</code></p>
+				</article>
+				<article class="concepto-css" id="archivos-binarios-y-pickle" data-palabras="binario rb wb pickle serializar objetos bytes copiar imagen shelve">
+					<h3>Archivos binarios y pickle</h3>
+					<p>Los modos <code>rb</code> y <code>wb</code> trabajan con bytes. <code>pickle</code>
+					serializa objetos de Python (no cargues archivos de fuentes no fiables).</p>
+					<pre><code>with open("a.png", "rb") as origen, open("copia.png", "wb") as destino:
+    destino.write(origen.read())
+
+import pickle
+with open("d.pkl", "wb") as f: pickle.dump({"a": 1}, f)</code></pre>
+					<p class="propiedad">Modos: <code>rb</code>, <code>wb</code></p>
+				</article>
+				<article class="concepto-css" id="copiar-mover-y-borrar-shutil" data-palabras="shutil copy copytree move rmtree make_archive zip copiar mover borrar carpeta">
+					<h3>Copiar, mover y borrar: shutil</h3>
+					<p><code>shutil</code> realiza operaciones de alto nivel con archivos y carpetas.</p>
+					<pre><code>import shutil
+shutil.copy("a.txt", "b.txt")
+shutil.copytree("origen", "destino")
+shutil.move("a.txt", "carpeta/")
+shutil.rmtree("temporal")
+shutil.make_archive("copia", "zip", "datos")</code></pre>
+					<p class="propiedad">Módulo: <code>shutil</code></p>
+				</article>
+				<article class="concepto-css" id="archivos-temporales-y-zip" data-palabras="tempfile zipfile temporal comprimir descomprimir zip archivo temporal">
+					<h3>Archivos temporales y zip</h3>
+					<p><code>tempfile</code> crea archivos temporales y <code>zipfile</code> lee y escribe archivos
+					ZIP.</p>
+					<pre><code>import tempfile, zipfile
+with tempfile.TemporaryDirectory() as d:
+    print(d)
+with zipfile.ZipFile("a.zip", "w") as z:
+    z.write("datos.txt")</code></pre>
+					<p class="propiedad">Módulos: <code>tempfile</code>, <code>zipfile</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="modulos" data-categoria>
+			<div class="cabecera-categoria"><span>11</span>
+				<div>
+					<p>Organizar y compartir código</p>
+					<h2>Módulos, paquetes y entornos</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="importar-modulos" data-palabras="import from as módulo importar alias math import * namespace">
+					<h3>Importar módulos</h3>
+					<p><code>import</code> carga un módulo; <code>from … import</code> trae nombres concretos;
+					<code>as</code> da un alias.</p>
+					<pre><code>import math
+from math import sqrt, pi
+import numpy as np
+math.sqrt(16)</code></pre>
+					<p class="propiedad">Evita <code>from x import *</code>.</p>
+				</article>
+				<article class="concepto-css" id="crear-tus-propios-modulos-y-paquetes" data-palabras="módulo paquete __init__.py crear importar carpeta archivo py estructura proyecto">
+					<h3>Crear tus propios módulos y paquetes</h3>
+					<p>Cada archivo <code>.py</code> es un módulo; una carpeta con <code>__init__.py</code> es un
+					paquete.</p>
+					<pre><code>proyecto/
+├─ main.py
+└─ utiles/
+   ├─ __init__.py
+   └─ texto.py
+
+# main.py
+from utiles.texto import limpiar</code></pre>
+					<p class="propiedad">Rutas de búsqueda: <code>sys.path</code></p>
+				</article>
+				<article class="concepto-css" id="pip-instalar-paquetes" data-palabras="pip install uninstall freeze requirements.txt paquetes pypi instalar librería">
+					<h3>pip: instalar paquetes</h3>
+					<p><code>pip</code> instala paquetes del repositorio PyPI.</p>
+					<pre><code>pip install requests
+pip install requests==2.32.0
+pip uninstall requests
+pip list
+pip freeze &gt; requirements.txt
+pip install -r requirements.txt</code></pre>
+					<p class="propiedad">Archivo habitual: <code>requirements.txt</code></p>
+				</article>
+				<article class="concepto-css" id="entornos-virtuales-venv" data-palabras="venv entorno virtual activate aislar dependencias proyecto python -m venv">
+					<h3>Entornos virtuales: venv</h3>
+					<p>Un entorno virtual aísla las dependencias de cada proyecto.</p>
+					<pre><code>python -m venv .venv
+.venv\Scripts\activate         # Windows
+source .venv/bin/activate      # Linux y macOS
+pip install requests
+deactivate</code></pre>
+					<p class="propiedad">No subas <code>.venv</code> a Git.</p>
+				</article>
+				<article class="concepto-css" id="pyproject-toml-y-herramientas-modernas" data-palabras="pyproject toml poetry uv hatch pipx packaging proyecto dependencias moderno">
+					<h3>pyproject.toml y herramientas modernas</h3>
+					<p><code>pyproject.toml</code> describe el proyecto y sus dependencias. Herramientas modernas:
+					<code>uv</code>, <code>poetry</code> y <code>hatch</code>.</p>
+					<pre><code>[project]
+name = "mi-app"
+version = "0.1.0"
+dependencies = ["requests&gt;=2.30"]</code></pre>
+					<p class="propiedad">Archivo: <code>pyproject.toml</code></p>
+				</article>
+				<article class="concepto-css" id="argumentos-de-linea-de-comandos-argparse" data-palabras="argparse sys.argv argumentos línea comandos opciones parser cli script">
+					<h3>Argumentos de línea de comandos: argparse</h3>
+					<p><code>argparse</code> crea programas con opciones y ayuda automática.</p>
+					<pre><code>import argparse
+p = argparse.ArgumentParser(description="Saluda")
+p.add_argument("nombre")
+p.add_argument("--veces", type=int, default=1)
+args = p.parse_args()
+for _ in range(args.veces): print(f"Hola, {args.nombre}")</code></pre>
+					<p class="propiedad">Ejecución: <code>python saludo.py Ana --veces 3</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="stdlib" data-categoria>
+			<div class="cabecera-categoria"><span>12</span>
+				<div>
+					<p>Herramientas incluidas con Python</p>
+					<h2>Biblioteca estándar</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="math-funciones-matematicas" data-palabras="math sqrt pi e sin cos log floor ceil gcd factorial isclose inf matemáticas">
+					<h3>math: funciones matemáticas</h3>
+					<p>El módulo <code>math</code> ofrece constantes y funciones matemáticas.</p>
+					<pre><code>import math
+math.sqrt(25); math.pi; math.floor(2.7); math.ceil(2.1)
+math.gcd(12, 18); math.factorial(5); math.log(100, 10)
+math.isclose(0.1 + 0.2, 0.3)</code></pre>
+					<p class="propiedad">Módulo: <code>math</code></p>
+				</article>
+				<article class="concepto-css" id="random-numeros-aleatorios" data-palabras="random randint choice shuffle sample uniform seed aleatorio azar secrets">
+					<h3>random: números aleatorios</h3>
+					<p>El módulo <code>random</code> genera números aleatorios. Para seguridad usa
+					<code>secrets</code>.</p>
+					<pre><code>import random
+random.randint(1, 6)
+random.choice(["a", "b", "c"])
+random.sample(range(1, 50), 6)
+l = [1, 2, 3]; random.shuffle(l)
+random.random()</code></pre>
+					<p class="propiedad">Seguridad: módulo <code>secrets</code></p>
+				</article>
+				<article class="concepto-css" id="statistics-estadistica-basica" data-palabras="statistics mean median mode stdev variance estadística media mediana">
+					<h3>statistics: estadística básica</h3>
+					<p>Medias, medianas y desviaciones sin librerías externas.</p>
+					<pre><code>import statistics as st
+datos = [4, 8, 15, 16, 23, 42]
+st.mean(datos); st.median(datos); st.stdev(datos)</code></pre>
+					<p class="propiedad">Módulo: <code>statistics</code></p>
+				</article>
+				<article class="concepto-css" id="datetime-fechas-y-horas" data-palabras="datetime date time timedelta strftime strptime fecha hora ahora formato zona">
+					<h3>datetime: fechas y horas</h3>
+					<p><code>datetime</code> maneja fechas, horas y diferencias entre ellas.</p>
+					<pre><code>from datetime import datetime, date, timedelta
+ahora = datetime.now()
+ahora.strftime("%d/%m/%Y %H:%M")
+datetime.strptime("25/12/2026", "%d/%m/%Y")
+date.today() + timedelta(days=7)
+(date(2026, 12, 25) - date.today()).days</code></pre>
+					<p class="propiedad">Formatos: <code>%d</code>, <code>%m</code>, <code>%Y</code>, <code>%H</code>, <code>%M</code>, <code>%S</code></p>
+				</article>
+				<article class="concepto-css" id="zonas-horarias-zoneinfo" data-palabras="zoneinfo timezone zona horaria utc aware datetime europe madrid conversión">
+					<h3>Zonas horarias: zoneinfo</h3>
+					<p><code>zoneinfo</code> aporta zonas horarias a los objetos <code>datetime</code>.</p>
+					<pre><code>from datetime import datetime
+from zoneinfo import ZoneInfo
+ahora = datetime.now(ZoneInfo("Europe/Madrid"))
+ahora.astimezone(ZoneInfo("UTC"))</code></pre>
+					<p class="propiedad">Módulo: <code>zoneinfo</code></p>
+				</article>
+				<article class="concepto-css" id="collections-counter-defaultdict-deque-ordereddict" data-palabras="collections counter defaultdict deque chainmap namedtuple estructuras especializadas">
+					<h3>collections: Counter, defaultdict, deque, OrderedDict</h3>
+					<p>Estructuras de datos especializadas en el módulo <code>collections</code>.</p>
+					<pre><code>from collections import Counter, defaultdict, deque, ChainMap
+Counter("hola").most_common(1)
+defaultdict(int)["x"] += 1
+deque(maxlen=3)</code></pre>
+					<p class="propiedad">Módulo: <code>collections</code></p>
+				</article>
+				<article class="concepto-css" id="itertools-combinaciones-y-generadores" data-palabras="itertools permutations combinations product chain groupby cycle islice accumulate iteradores">
+					<h3>itertools: combinaciones y generadores</h3>
+					<p><code>itertools</code> ofrece herramientas eficientes para combinar iterables.</p>
+					<pre><code>from itertools import permutations, combinations, product, chain, islice, groupby
+list(permutations([1, 2, 3], 2))
+list(combinations("abc", 2))
+list(product([0, 1], repeat=2))
+list(chain([1, 2], [3]))
+list(islice(range(100), 5))</code></pre>
+					<p class="propiedad">Funciones: <code>permutations</code>, <code>combinations</code>, <code>product</code>, <code>chain</code></p>
+				</article>
+				<article class="concepto-css" id="functools-reduce-partial-y-cache" data-palabras="functools lru_cache cache partial reduce wraps cmp_to_key memoización">
+					<h3>functools: reduce, partial y cache</h3>
+					<p><code>functools</code> incluye <code>lru_cache</code> (memoización), <code>partial</code>
+					(aplicación parcial) y <code>reduce</code>.</p>
+					<pre><code>from functools import lru_cache, partial, reduce
+
+@lru_cache(maxsize=None)
+def fib(n): return n if n &lt; 2 else fib(n - 1) + fib(n - 2)
+
+doble = partial(pow, 2)         # 2 ** x
+reduce(lambda a, b: a * b, [1, 2, 3, 4])</code></pre>
+					<p class="propiedad">Decorador: <code>@lru_cache</code></p>
+				</article>
+				<article class="concepto-css" id="expresiones-regulares-re" data-palabras="re regex search match findall sub compile grupos expresión regular módulo re">
+					<h3>Expresiones regulares: re</h3>
+					<p>El módulo <code>re</code> busca patrones en texto.</p>
+					<pre><code>import re
+re.search(r"\d+", "Tel 600123")            # primer resultado
+re.findall(r"\w+@\w+\.\w+", texto)
+re.sub(r"\s+", " ", "a   b")               # 'a b'
+m = re.match(r"(?P&lt;d&gt;\d{2})/(?P&lt;m&gt;\d{2})", "25/12")
+m.group("d")</code></pre>
+					<p class="propiedad">Usa cadenas <code>r"..."</code> (raw).</p>
+				</article>
+				<article class="concepto-css" id="subprocess-ejecutar-programas" data-palabras="subprocess run check_output popen comando externo shell terminal ejecutar">
+					<h3>subprocess: ejecutar programas</h3>
+					<p><code>subprocess</code> lanza programas externos y recoge su salida.</p>
+					<pre><code>import subprocess
+r = subprocess.run(["echo", "hola"], capture_output=True, text=True)
+r.stdout; r.returncode</code></pre>
+					<p class="propiedad">Evita <code>shell=True</code> con datos del usuario.</p>
+				</article>
+				<article class="concepto-css" id="urllib-y-http-peticiones-sin-librerias" data-palabras="urllib request urlopen http.server servidor simple peticiones web stdlib">
+					<h3>urllib y http: peticiones sin librerías</h3>
+					<p>La biblioteca estándar permite hacer peticiones HTTP y levantar un servidor sencillo.</p>
+					<pre><code>from urllib.request import urlopen
+with urlopen("https://example.com") as r:
+    html = r.read().decode()
+
+# python -m http.server 8000     (servidor local)</code></pre>
+					<p class="propiedad">Mejor <code>requests</code> para uso habitual.</p>
+				</article>
+				<article class="concepto-css" id="time-y-temporizadores" data-palabras="time sleep perf_counter time.time medir tiempo esperar cronómetro timeit">
+					<h3>time y temporizadores</h3>
+					<p><code>time.sleep</code> pausa el programa; <code>perf_counter</code> mide intervalos;
+					<code>timeit</code> compara rendimiento.</p>
+					<pre><code>import time, timeit
+t = time.perf_counter()
+time.sleep(0.5)
+print(time.perf_counter() - t)
+timeit.timeit("sum(range(100))", number=10000)</code></pre>
+					<p class="propiedad">Módulos: <code>time</code>, <code>timeit</code></p>
+				</article>
+				<article class="concepto-css" id="hashlib-secrets-y-uuid" data-palabras="hashlib sha256 md5 secrets token uuid hash seguridad contraseña identificador">
+					<h3>hashlib, secrets y uuid</h3>
+					<p><code>hashlib</code> calcula resúmenes, <code>secrets</code> genera valores seguros y
+					<code>uuid</code>, identificadores únicos.</p>
+					<pre><code>import hashlib, secrets, uuid
+hashlib.sha256("hola".encode()).hexdigest()
+secrets.token_hex(16)
+secrets.choice("abc")
+uuid.uuid4()</code></pre>
+					<p class="propiedad">Para contraseñas usa <code>bcrypt</code> o <code>argon2</code>.</p>
+				</article>
+				<article class="concepto-css" id="string-y-textwrap-utilidades-de-texto" data-palabras="string ascii_letters digits punctuation Template constantes texto módulo string">
+					<h3>string y textwrap: utilidades de texto</h3>
+					<p>El módulo <code>string</code> ofrece constantes (<code>ascii_letters</code>,
+					<code>digits</code>) y plantillas.</p>
+					<pre><code>import string
+string.ascii_lowercase; string.digits; string.punctuation
+string.Template("Hola $nombre").substitute(nombre="Ana")</code></pre>
+					<p class="propiedad">Módulo: <code>string</code></p>
+				</article>
+				<article class="concepto-css" id="copy-pprint-y-reprlib" data-palabras="copy deepcopy pprint pformat mostrar estructuras bonito imprimir diccionario">
+					<h3>copy, pprint y reprlib</h3>
+					<p><code>pprint</code> imprime estructuras de forma legible y <code>copy</code> hace copias.</p>
+					<pre><code>from pprint import pprint
+pprint({"a": [1, 2, 3], "b": {"c": 4}}, width=30)</code></pre>
+					<p class="propiedad">Módulos: <code>pprint</code>, <code>copy</code></p>
+				</article>
+				<article class="concepto-css" id="sqlite3-base-de-datos-incluida" data-palabras="sqlite3 base datos sql connect cursor execute commit fetchall consulta parametros">
+					<h3>sqlite3: base de datos incluida</h3>
+					<p><code>sqlite3</code> crea y consulta bases de datos SQLite sin instalar nada. Usa siempre
+					parámetros (<code>?</code>).</p>
+					<pre><code>import sqlite3
+con = sqlite3.connect("datos.db")
+con.execute("CREATE TABLE IF NOT EXISTS alumnos (id INTEGER PRIMARY KEY, nombre TEXT, nota REAL)")
+con.execute("INSERT INTO alumnos (nombre, nota) VALUES (?, ?)", ("Ana", 8.5))
+con.commit()
+for fila in con.execute("SELECT * FROM alumnos WHERE nota &gt; ?", (5,)):
+    print(fila)
+con.close()</code></pre>
+					<p class="propiedad">Módulo: <code>sqlite3</code></p>
+				</article>
+				<article class="concepto-css" id="threading-y-multiprocessing" data-palabras="threading multiprocessing hilos procesos paralelo concurrent.futures pool GIL">
+					<h3>threading y multiprocessing</h3>
+					<p>Los hilos sirven para tareas que esperan (red, disco); los procesos, para cálculo intensivo
+					(por el GIL).</p>
+					<pre><code>from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+with ThreadPoolExecutor(4) as ex:
+    resultados = list(ex.map(descargar, urls))
+with ProcessPoolExecutor() as ex:
+    list(ex.map(calcular, datos))</code></pre>
+					<p class="propiedad">Módulo moderno: <code>concurrent.futures</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="avanzado" data-categoria>
+			<div class="cabecera-categoria"><span>13</span>
+				<div>
+					<p>Técnicas para ir más lejos</p>
+					<h2>Decoradores, generadores y asincronía</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="decoradores" data-palabras="decorador @ wraps función envolver cronometrar log wrapper decoradores">
+					<h3>Decoradores</h3>
+					<p>Un decorador es una función que recibe otra función y devuelve una versión modificada. Se
+					aplica con <code>@</code>.</p>
+					<pre><code>import functools, time
+
+def cronometrar(f):
+    @functools.wraps(f)
+    def envoltura(*args, **kwargs):
+        t = time.perf_counter()
+        r = f(*args, **kwargs)
+        print(f"{f.__name__}: {time.perf_counter() - t:.3f}s")
+        return r
+    return envoltura
+
+@cronometrar
+def lento(): time.sleep(0.2)</code></pre>
+					<p class="propiedad">Usa <code>functools.wraps</code>.</p>
+				</article>
+				<article class="concepto-css" id="generadores-y-yield" data-palabras="generador yield next iterador perezoso memoria secuencia infinita yield from">
+					<h3>Generadores y yield</h3>
+					<p>Una función con <code>yield</code> produce valores uno a uno, sin guardarlos todos en
+					memoria.</p>
+					<pre><code>def contar(hasta):
+    n = 1
+    while n &lt;= hasta:
+        yield n
+        n += 1
+
+for x in contar(3): print(x)
+suma = sum(x * x for x in range(10**6))   # expresión generadora</code></pre>
+					<p class="propiedad">Palabras clave: <code>yield</code>, <code>yield from</code></p>
+				</article>
+				<article class="concepto-css" id="iteradores-propios" data-palabras="iterador __iter__ __next__ StopIteration iterable protocolo clase for">
+					<h3>Iteradores propios</h3>
+					<p>Un objeto es iterable si tiene <code>__iter__</code>; un iterador, además, tiene
+					<code>__next__</code> y lanza <code>StopIteration</code> al terminar.</p>
+					<pre><code>class Cuenta:
+    def __init__(self, n): self.n, self.i = n, 0
+    def __iter__(self): return self
+    def __next__(self):
+        if self.i &gt;= self.n: raise StopIteration
+        self.i += 1; return self.i
+list(Cuenta(3))</code></pre>
+					<p class="propiedad">Protocolo: <code>__iter__</code>, <code>__next__</code></p>
+				</article>
+				<article class="concepto-css" id="gestores-de-contexto-contextlib" data-palabras="contextlib contextmanager with suppress redirect_stdout gestor contexto recursos">
+					<h3>Gestores de contexto: contextlib</h3>
+					<p><code>@contextmanager</code> convierte una función con <code>yield</code> en un gestor para
+					usar con <code>with</code>.</p>
+					<pre><code>from contextlib import contextmanager, suppress
+
+@contextmanager
+def conexion():
+    print("abrir"); 
+    try: yield "recurso"
+    finally: print("cerrar")
+
+with conexion() as c: print(c)
+with suppress(FileNotFoundError): open("no.txt")</code></pre>
+					<p class="propiedad">Módulo: <code>contextlib</code></p>
+				</article>
+				<article class="concepto-css" id="asyncio-programacion-asincrona" data-palabras="asyncio async await corrutina gather create_task event loop run concurrencia">
+					<h3>asyncio: programación asíncrona</h3>
+					<p><code>async</code>/<code>await</code> permiten ejecutar tareas concurrentes que esperan
+					(red, ficheros) sin bloquear.</p>
+					<pre><code>import asyncio
+
+async def tarea(n):
+    await asyncio.sleep(1)
+    return n * 2
+
+async def main():
+    resultados = await asyncio.gather(tarea(1), tarea(2), tarea(3))
+    print(resultados)
+
+asyncio.run(main())</code></pre>
+					<p class="propiedad">Funciones: <code>asyncio.run</code>, <code>gather</code>, <code>create_task</code></p>
+				</article>
+				<article class="concepto-css" id="tipos-avanzados-typing-y-protocol" data-palabras="typing Optional Union List Dict Callable TypeVar Protocol Literal TypedDict genéricos anotaciones">
+					<h3>Tipos avanzados: typing y Protocol</h3>
+					<p>El módulo <code>typing</code> ofrece tipos genéricos, uniones, protocolos y diccionarios
+					tipados.</p>
+					<pre><code>from typing import Callable, TypedDict, Protocol, TypeVar
+T = TypeVar("T")
+def primero(l: list[T]) -&gt; T: return l[0]
+
+class Usuario(TypedDict):
+    nombre: str
+    edad: int
+
+class Saludador(Protocol):
+    def saludar(self) -&gt; str: ...</code></pre>
+					<p class="propiedad">Verificador estático: <code>mypy</code>, <code>pyright</code></p>
+				</article>
+				<article class="concepto-css" id="funciones-de-orden-superior-y-closures-utiles" data-palabras="orden superior callbacks funciones primera clase pasar función devolver función aplicar">
+					<h3>Funciones de orden superior y closures útiles</h3>
+					<p>Las funciones son objetos: se pasan como argumento, se guardan en estructuras y se
+					devuelven.</p>
+					<pre><code>operaciones = {"+": lambda a, b: a + b, "-": lambda a, b: a - b}
+operaciones["+"](2, 3)
+
+def aplicar(f, *args): return f(*args)</code></pre>
+					<p class="propiedad">Un diccionario de funciones sustituye a un <code>match</code>.</p>
+				</article>
+				<article class="concepto-css" id="metaclases-y-atributos-dinamicos" data-palabras="getattr setattr hasattr metaclass type dinámico atributos reflexión __getattr__">
+					<h3>Metaclases y atributos dinámicos</h3>
+					<p>Python permite leer y crear atributos en tiempo de ejecución.</p>
+					<pre><code>class A: pass
+a = A()
+setattr(a, "x", 5)
+getattr(a, "x"); hasattr(a, "y")
+vars(a); dir(a)
+Dinamica = type("Dinamica", (), {"saludo": lambda self: "hola"})</code></pre>
+					<p class="propiedad">Funciones: <code>getattr</code>, <code>setattr</code>, <code>hasattr</code>, <code>vars</code></p>
+				</article>
+				<article class="concepto-css" id="el-gil-y-rendimiento" data-palabras="gil global interpreter lock rendimiento hilos cpython numpy cython multiprocessing optimizar">
+					<h3>El GIL y rendimiento</h3>
+					<p>El GIL permite que solo un hilo ejecute código Python a la vez (en CPython clásico), por lo
+					que los hilos no aceleran cálculo intenso: usa procesos, <code>numpy</code> o extensiones.</p>
+					<pre><code>import cProfile
+cProfile.run("sum(range(10**6))")</code></pre>
+					<p class="propiedad">Perfila con <code>cProfile</code> antes de optimizar.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="web" data-categoria>
+			<div class="cabecera-categoria"><span>14</span>
+				<div>
+					<p>Web, datos y automatización</p>
+					<h2>Librerías y aplicaciones</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="requests-peticiones-http" data-palabras="requests get post json headers params status_code api http librería web">
+					<h3>requests: peticiones HTTP</h3>
+					<p><code>requests</code> es la librería estándar de facto para consumir APIs. Se instala con
+					<code>pip install requests</code>.</p>
+					<pre><code>import requests
+r = requests.get("https://api.ejemplo.test/usuarios", params={"pagina": 1}, timeout=10)
+r.raise_for_status()
+datos = r.json()
+requests.post("https://api.ejemplo.test/crear", json={"nombre": "Ana"}, timeout=10)</code></pre>
+					<p class="propiedad">Indica siempre <code>timeout</code>.</p>
+				</article>
+				<article class="concepto-css" id="web-scraping-con-beautifulsoup" data-palabras="beautifulsoup bs4 scraping html parser find select extraer datos web raspado">
+					<h3>Web scraping con BeautifulSoup</h3>
+					<p>BeautifulSoup extrae datos de páginas HTML. Respeta los términos de uso y el
+					<code>robots.txt</code> de cada sitio.</p>
+					<pre><code>import requests
+from bs4 import BeautifulSoup
+html = requests.get("https://example.com", timeout=10).text
+sopa = BeautifulSoup(html, "html.parser")
+sopa.title.text
+[a["href"] for a in sopa.select("a[href]")]</code></pre>
+					<p class="propiedad">Instalación: <code>pip install beautifulsoup4</code></p>
+				</article>
+				<article class="concepto-css" id="flask-una-web-minima" data-palabras="flask web servidor ruta app route render_template jsonify framework microframework">
+					<h3>Flask: una web mínima</h3>
+					<p>Flask es un microframework web sencillo.</p>
+					<pre><code>from flask import Flask, jsonify, request
+app = Flask(__name__)
+
+@app.get("/")
+def inicio(): return "Hola desde Flask"
+
+@app.post("/api/datos")
+def datos(): return jsonify(request.json), 201
+
+if __name__ == "__main__":
+    app.run(debug=True)</code></pre>
+					<p class="propiedad">Instalación: <code>pip install flask</code></p>
+				</article>
+				<article class="concepto-css" id="fastapi-apis-modernas" data-palabras="fastapi pydantic uvicorn api rest async tipos documentación automática swagger">
+					<h3>FastAPI: APIs modernas</h3>
+					<p>FastAPI crea APIs rápidas con validación por tipos y documentación automática en
+					<code>/docs</code>.</p>
+					<pre><code>from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+class Item(BaseModel):
+    nombre: str
+    precio: float
+
+@app.post("/items")
+def crear(item: Item): return item
+
+# uvicorn main:app --reload</code></pre>
+					<p class="propiedad">Ejecución: <code>uvicorn main:app --reload</code></p>
+				</article>
+				<article class="concepto-css" id="django-el-framework-completo" data-palabras="django framework modelos vistas plantillas orm admin startproject manage.py web">
+					<h3>Django: el framework completo</h3>
+					<p>Django incluye ORM, administración, autenticación y plantillas. Sigue el patrón MTV (modelo,
+					plantilla, vista).</p>
+					<pre><code>pip install django
+django-admin startproject sitio
+cd sitio
+python manage.py startapp blog
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver</code></pre>
+					<p class="propiedad">Comandos: <code>startproject</code>, <code>migrate</code>, <code>runserver</code></p>
+				</article>
+				<article class="concepto-css" id="numpy-arrays-numericos" data-palabras="numpy array ndarray arange linspace reshape sum mean vectorizar matriz cálculo">
+					<h3>NumPy: arrays numéricos</h3>
+					<p>NumPy ofrece arrays eficientes y operaciones vectorizadas.</p>
+					<pre><code>import numpy as np
+a = np.array([1, 2, 3, 4])
+a * 2; a.mean(); a.sum()
+np.arange(0, 10, 2); np.linspace(0, 1, 5)
+m = np.arange(6).reshape(2, 3)
+m.T; m @ m.T</code></pre>
+					<p class="propiedad">Instalación: <code>pip install numpy</code></p>
+				</article>
+				<article class="concepto-css" id="pandas-tablas-de-datos" data-palabras="pandas dataframe series read_csv groupby merge filtrar columnas análisis datos tabla">
+					<h3>pandas: tablas de datos</h3>
+					<p>pandas trabaja con tablas (<code>DataFrame</code>): leer, filtrar, agrupar y combinar datos.</p>
+					<pre><code>import pandas as pd
+df = pd.read_csv("ventas.csv")
+df.head(); df.describe()
+df[df["importe"] &gt; 100]
+df.groupby("ciudad")["importe"].sum()
+df["total"] = df["precio"] * df["cantidad"]
+df.to_csv("salida.csv", index=False)</code></pre>
+					<p class="propiedad">Instalación: <code>pip install pandas</code></p>
+				</article>
+				<article class="concepto-css" id="matplotlib-graficos" data-palabras="matplotlib pyplot gráfico plot bar hist scatter figura ejes mostrar guardar visualización">
+					<h3>matplotlib: gráficos</h3>
+					<p><code>matplotlib</code> dibuja gráficos de líneas, barras, histogramas y más.</p>
+					<pre><code>import matplotlib.pyplot as plt
+x = [1, 2, 3, 4]; y = [2, 4, 8, 16]
+plt.plot(x, y, marker="o", label="datos")
+plt.title("Ejemplo"); plt.xlabel("x"); plt.ylabel("y"); plt.legend()
+plt.savefig("grafico.png"); plt.show()</code></pre>
+					<p class="propiedad">Instalación: <code>pip install matplotlib</code></p>
+				</article>
+				<article class="concepto-css" id="tkinter-ventanas-sencillas" data-palabras="tkinter gui ventana botón label entry interfaz gráfica mainloop eventos">
+					<h3>Tkinter: ventanas sencillas</h3>
+					<p><code>tkinter</code> viene con Python y crea interfaces gráficas básicas.</p>
+					<pre><code>import tkinter as tk
+ventana = tk.Tk(); ventana.title("Hola")
+etiqueta = tk.Label(ventana, text="Nombre:"); etiqueta.pack()
+campo = tk.Entry(ventana); campo.pack()
+def saludar(): etiqueta.config(text=f"Hola, {campo.get()}")
+tk.Button(ventana, text="Saludar", command=saludar).pack()
+ventana.mainloop()</code></pre>
+					<p class="propiedad">Módulo: <code>tkinter</code></p>
+				</article>
+				<article class="concepto-css" id="pruebas-unittest-y-pytest" data-palabras="unittest pytest test assert pruebas fixtures parametrize testing unitarias">
+					<h3>Pruebas: unittest y pytest</h3>
+					<p><code>unittest</code> viene incluido; <code>pytest</code> es más cómodo y muy usado.</p>
+					<pre><code># test_calc.py
+def sumar(a, b): return a + b
+
+def test_sumar():
+    assert sumar(2, 3) == 5
+
+import pytest
+@pytest.mark.parametrize("a,b,r", [(1, 1, 2), (2, 3, 5)])
+def test_varios(a, b, r): assert sumar(a, b) == r
+
+# ejecutar: pytest</code></pre>
+					<p class="propiedad">Instalación: <code>pip install pytest</code></p>
+				</article>
+				<article class="concepto-css" id="notebooks-de-jupyter" data-palabras="jupyter notebook ipynb colab celdas análisis datos interactivo">
+					<h3>Notebooks de Jupyter</h3>
+					<p>Un notebook mezcla código, resultados y texto en celdas. Se usa mucho en datos y enseñanza
+					(Jupyter, Google Colab, VS Code).</p>
+					<pre><code>pip install jupyter
+jupyter notebook</code></pre>
+					<p class="propiedad">Extensión: <code>.ipynb</code></p>
+				</article>
+				<article class="concepto-css" id="automatizacion-renombrar-enviar-y-programar" data-palabras="automatización scripts renombrar archivos correo smtplib schedule cron tareas automatizar">
+					<h3>Automatización: renombrar, enviar y programar</h3>
+					<p>Python es muy útil para automatizar tareas repetitivas.</p>
+					<pre><code>from pathlib import Path
+for i, f in enumerate(sorted(Path("fotos").glob("*.jpg")), 1):
+    f.rename(f.with_name(f"vacaciones_{i:03}.jpg"))
+
+import smtplib
+from email.message import EmailMessage</code></pre>
+					<p class="propiedad">Para programar: <code>cron</code>, el Programador de tareas o <code>schedule</code>.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="categoria-css" id="ejemplos" data-categoria>
+			<div class="cabecera-categoria"><span>15</span>
+				<div>
+					<p>Problemas clásicos resueltos</p>
+					<h2>Ejercicios y ejemplos</h2>
+				</div>
+			</div>
+			<div class="rejilla-conceptos">
+				<article class="concepto-css" id="calcular-el-factorial" data-palabras="factorial bucle recursión math ejercicio producto números">
+					<h3>Calcular el factorial</h3>
+					<p>Con un bucle, con recursión o con <code>math.factorial</code>.</p>
+					<pre><code>import math
+def factorial(n):
+    r = 1
+    for i in range(2, n + 1): r *= i
+    return r
+factorial(5), math.factorial(5)</code></pre>
+					<p class="propiedad">Resultado: <code>120</code></p>
+				</article>
+				<article class="concepto-css" id="serie-de-fibonacci" data-palabras="fibonacci serie sucesión generador bucle ejercicio">
+					<h3>Serie de Fibonacci</h3>
+					<p>Cada término es la suma de los dos anteriores.</p>
+					<pre><code>def fib(n):
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+list(fib(10))      # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</code></pre>
+					<p class="propiedad">Usa un generador.</p>
+				</article>
+				<article class="concepto-css" id="numeros-primos" data-palabras="primo números primos criba eratóstenes comprobar divisores ejercicio">
+					<h3>Números primos</h3>
+					<p>Comprobar primos y generar una lista con la criba.</p>
+					<pre><code>def es_primo(n):
+    return n &gt; 1 and all(n % d for d in range(2, int(n ** 0.5) + 1))
+
+def criba(n):
+    marcas = [True] * (n + 1); marcas[:2] = [False, False]
+    for i in range(2, int(n ** 0.5) + 1):
+        if marcas[i]: marcas[i*i::i] = [False] * len(marcas[i*i::i])
+    return [i for i, p in enumerate(marcas) if p]</code></pre>
+					<p class="propiedad"><code>criba(30)</code> → 2, 3, 5, 7, 11…</p>
+				</article>
+				<article class="concepto-css" id="fizzbuzz" data-palabras="fizzbuzz múltiplos 3 5 ejercicio clásico entrevista">
+					<h3>FizzBuzz</h3>
+					<p>Del 1 al 100: «Fizz» en múltiplos de 3, «Buzz» en múltiplos de 5 y «FizzBuzz» en ambos.</p>
+					<pre><code>for i in range(1, 101):
+    print("Fizz" * (i % 3 == 0) + "Buzz" * (i % 5 == 0) or i)</code></pre>
+					<p class="propiedad">Truco: cadena vacía es falsa.</p>
+				</article>
+				<article class="concepto-css" id="palindromos" data-palabras="palíndromo capicúa cadena invertir normalizar espacios ejercicio">
+					<h3>Palíndromos</h3>
+					<p>Un texto es palíndromo si se lee igual al revés.</p>
+					<pre><code>def palindromo(t):
+    limpio = "".join(c.lower() for c in t if c.isalnum())
+    return limpio == limpio[::-1]
+palindromo("Anita lava la tina")    # True</code></pre>
+					<p class="propiedad">Pasos: limpiar, invertir, comparar.</p>
+				</article>
+				<article class="concepto-css" id="anagramas" data-palabras="anagrama letras ordenar sorted Counter comparar ejercicio">
+					<h3>Anagramas</h3>
+					<p>Dos palabras son anagramas si tienen las mismas letras.</p>
+					<pre><code>from collections import Counter
+def anagramas(a, b):
+    return Counter(a.lower()) == Counter(b.lower())
+anagramas("roma", "amor")       # True</code></pre>
+					<p class="propiedad">Alternativa: <code>sorted(a) == sorted(b)</code></p>
+				</article>
+				<article class="concepto-css" id="contar-palabras-y-frecuencias" data-palabras="contar palabras frecuencia Counter split texto ranking ejercicio">
+					<h3>Contar palabras y frecuencias</h3>
+					<p>Cuenta cuántas veces aparece cada palabra.</p>
+					<pre><code>from collections import Counter
+texto = "el sol y el mar y el cielo"
+Counter(texto.split()).most_common(2)      # [('el', 3), ('y', 2)]</code></pre>
+					<p class="propiedad">Método: <code>most_common</code></p>
+				</article>
+				<article class="concepto-css" id="mayor-menor-y-media-de-una-lista" data-palabras="mayor menor media promedio lista max min sum len estadística ejercicio">
+					<h3>Mayor, menor y media de una lista</h3>
+					<p>Con las funciones integradas.</p>
+					<pre><code>notas = [7, 9, 4, 8]
+max(notas), min(notas), sum(notas) / len(notas)
+sorted(notas)[len(notas) // 2]</code></pre>
+					<p class="propiedad">Resultado: <code>9</code>, <code>4</code>, <code>7.0</code></p>
+				</article>
+				<article class="concepto-css" id="tabla-de-multiplicar" data-palabras="tabla multiplicar bucle for formato f-string ejercicio">
+					<h3>Tabla de multiplicar</h3>
+					<p>Imprime la tabla de un número.</p>
+					<pre><code>n = 7
+for i in range(1, 11):
+    print(f"{n} x {i:2} = {n * i:3}")</code></pre>
+					<p class="propiedad">Formato: <code>{i:2}</code> alinea a 2 caracteres.</p>
+				</article>
+				<article class="concepto-css" id="triangulo-y-piramide-de-asteriscos" data-palabras="triángulo pirámide asteriscos patrón bucle figura consola ejercicio">
+					<h3>Triángulo y pirámide de asteriscos</h3>
+					<p>Un clásico con bucles y multiplicación de cadenas.</p>
+					<pre><code>filas = 5
+for i in range(1, filas + 1):
+    print(" " * (filas - i) + "*" * (2 * i - 1))</code></pre>
+					<p class="propiedad">Truco: <code>"*" * n</code></p>
+				</article>
+				<article class="concepto-css" id="maximo-comun-divisor-y-minimo-comun-multiplo" data-palabras="mcd mcm euclides gcd lcm math divisor múltiplo ejercicio">
+					<h3>Máximo común divisor y mínimo común múltiplo</h3>
+					<p>El algoritmo de Euclides y las funciones de <code>math</code>.</p>
+					<pre><code>def mcd(a, b):
+    while b: a, b = b, a % b
+    return a
+import math
+math.gcd(48, 18), math.lcm(4, 6)</code></pre>
+					<p class="propiedad">Funciones: <code>math.gcd</code>, <code>math.lcm</code></p>
+				</article>
+				<article class="concepto-css" id="convertir-entre-bases" data-palabras="binario hexadecimal octal bin hex oct int base conversión ejercicio">
+					<h3>Convertir entre bases</h3>
+					<p>Conversión entre sistemas de numeración.</p>
+					<pre><code>bin(13), oct(13), hex(255)       # '0b1101', '0o15', '0xff'
+int("1101", 2)                   # 13
+format(13, "b")                  # '1101' </code></pre>
+					<p class="propiedad">Función: <code>int(texto, base)</code></p>
+				</article>
+				<article class="concepto-css" id="ordenacion-de-burbuja" data-palabras="burbuja bubble sort ordenar intercambio algoritmo lista ejercicio">
+					<h3>Ordenación de burbuja</h3>
+					<p>Compara pares contiguos y los intercambia si están desordenados.</p>
+					<pre><code>def burbuja(l):
+    l = l[:]
+    for i in range(len(l) - 1):
+        for j in range(len(l) - 1 - i):
+            if l[j] &gt; l[j + 1]:
+                l[j], l[j + 1] = l[j + 1], l[j]
+    return l</code></pre>
+					<p class="propiedad">En la práctica, usa <code>sorted</code>.</p>
+				</article>
+				<article class="concepto-css" id="busqueda-binaria" data-palabras="búsqueda binaria binary search ordenada mitad algoritmo bisect ejercicio">
+					<h3>Búsqueda binaria</h3>
+					<p>En una lista ordenada se descarta la mitad en cada paso.</p>
+					<pre><code>def buscar(l, x):
+    ini, fin = 0, len(l) - 1
+    while ini &lt;= fin:
+        m = (ini + fin) // 2
+        if l[m] == x: return m
+        if l[m] &lt; x: ini = m + 1
+        else: fin = m - 1
+    return -1</code></pre>
+					<p class="propiedad">Complejidad: O(log n)</p>
+				</article>
+				<article class="concepto-css" id="merge-sort-y-quicksort" data-palabras="merge sort quicksort ordenar recursivo dividir vencerás algoritmo ejercicio">
+					<h3>Merge sort y quicksort</h3>
+					<p>Dos algoritmos eficientes de ordenación basados en dividir.</p>
+					<pre><code>def quick(l):
+    if len(l) &lt; 2: return l
+    p, *resto = l
+    return quick([x for x in resto if x &lt; p]) + [p] + quick([x for x in resto if x &gt;= p])
+
+def merge_sort(l):
+    if len(l) &lt; 2: return l
+    m = len(l) // 2
+    a, b = merge_sort(l[:m]), merge_sort(l[m:])
+    r = []
+    while a and b: r.append((a if a[0] &lt;= b[0] else b).pop(0))
+    return r + a + b</code></pre>
+					<p class="propiedad">Complejidad media: O(n log n)</p>
+				</article>
+				<article class="concepto-css" id="torres-de-hanoi" data-palabras="hanoi torres recursión discos movimientos algoritmo ejercicio">
+					<h3>Torres de Hanoi</h3>
+					<p>Mover n discos entre tres varillas.</p>
+					<pre><code>def hanoi(n, a="A", b="B", c="C"):
+    if n == 0: return []
+    return hanoi(n - 1, a, c, b) + [(a, c)] + hanoi(n - 1, b, a, c)
+len(hanoi(3))       # 7</code></pre>
+					<p class="propiedad">Movimientos: 2ⁿ − 1</p>
+				</article>
+				<article class="concepto-css" id="ahorcado" data-palabras="ahorcado juego palabra letras intentos set bucle input ejercicio">
+					<h3>Ahorcado</h3>
+					<p>Un juego sencillo con cadenas, conjuntos y bucles.</p>
+					<pre><code>palabra = "python"
+acertadas, fallos = set(), 0
+while fallos &lt; 6 and not set(palabra) &lt;= acertadas:
+    print(" ".join(c if c in acertadas else "_" for c in palabra))
+    letra = input("Letra: ").lower()
+    if letra in palabra: acertadas.add(letra)
+    else: fallos += 1</code></pre>
+					<p class="propiedad">Usa un <code>set</code> para las letras.</p>
+				</article>
+				<article class="concepto-css" id="adivina-el-numero" data-palabras="adivina número juego random input bucle pista intentos ejercicio">
+					<h3>Adivina el número</h3>
+					<p>Juego con números aleatorios y bucle.</p>
+					<pre><code>import random
+secreto = random.randint(1, 100)
+while True:
+    n = int(input("Tu número: "))
+    if n == secreto: print("¡Acertaste!"); break
+    print("Más alto" if n &lt; secreto else "Más bajo")</code></pre>
+					<p class="propiedad">Módulo: <code>random</code></p>
+				</article>
+				<article class="concepto-css" id="piedra-papel-o-tijera" data-palabras="piedra papel tijera juego random match ejercicio">
+					<h3>Piedra, papel o tijera</h3>
+					<p>Juego con números aleatorios y un diccionario de reglas.</p>
+					<pre><code>import random
+gana = {"piedra": "tijera", "tijera": "papel", "papel": "piedra"}
+yo = random.choice(list(gana))
+tu = input("piedra/papel/tijera: ")
+print("Empate" if tu == yo else "Ganas" if gana[tu] == yo else "Pierdes")</code></pre>
+					<p class="propiedad">Un diccionario sustituye muchos <code>if</code>.</p>
+				</article>
+				<article class="concepto-css" id="lista-de-la-compra-crud-en-consola" data-palabras="lista compra crud menú consola añadir borrar mostrar bucle json guardar ejercicio">
+					<h3>Lista de la compra (CRUD en consola)</h3>
+					<p>Un programa con menú que añade, muestra y borra elementos, y guarda los datos en JSON.</p>
+					<pre><code>import json, pathlib
+archivo = pathlib.Path("compra.json")
+items = json.loads(archivo.read_text()) if archivo.exists() else []
+while (op := input("1 añadir · 2 ver · 3 borrar · 0 salir: ")) != "0":
+    if op == "1": items.append(input("Producto: "))
+    elif op == "2": print(*items, sep="\n")
+    elif op == "3": items.remove(input("Producto a borrar: "))
+    archivo.write_text(json.dumps(items))</code></pre>
+					<p class="propiedad">Combina bucle, <code>input</code>, listas y JSON.</p>
+				</article>
+				<article class="concepto-css" id="conversor-de-temperatura" data-palabras="conversor temperatura celsius fahrenheit kelvin función input ejercicio fórmula">
+					<h3>Conversor de temperatura</h3>
+					<p>Funciones sencillas de conversión.</p>
+					<pre><code>def c_a_f(c): return c * 9 / 5 + 32
+def f_a_c(f): return (f - 32) * 5 / 9
+print(f"{c_a_f(25):.1f} °F")</code></pre>
+					<p class="propiedad">Fórmula: F = C × 9/5 + 32</p>
+				</article>
+				<article class="concepto-css" id="gestor-de-alumnos-con-clases" data-palabras="alumnos clase poo lista notas media dataclass ejercicio gestión sort">
+					<h3>Gestor de alumnos con clases</h3>
+					<p>Un ejemplo de clases con una lista de objetos.</p>
+					<pre><code>from dataclasses import dataclass
+@dataclass
+class Alumno:
+    nombre: str
+    nota: float
+
+clase = [Alumno("Ana", 8.5), Alumno("Luis", 6.0)]
+media = sum(a.nota for a in clase) / len(clase)
+mejor = max(clase, key=lambda a: a.nota)
+aprobados = [a.nombre for a in clase if a.nota &gt;= 5]</code></pre>
+					<p class="propiedad">Combina <code>dataclass</code>, comprensiones y <code>max</code>.</p>
+				</article>
+				<article class="concepto-css" id="generador-de-contrasenas" data-palabras="contraseña generador secrets string aleatoria seguro longitud ejercicio">
+					<h3>Generador de contraseñas</h3>
+					<p>Genera contraseñas con aleatoriedad segura.</p>
+					<pre><code>import secrets, string
+def generar(n=16):
+    letras = string.ascii_letters + string.digits + "!@#$%&amp;*"
+    return "".join(secrets.choice(letras) for _ in range(n))</code></pre>
+					<p class="propiedad">Usa <code>secrets</code>, no <code>random</code>.</p>
+				</article>
+				<article class="concepto-css" id="cifrado-cesar" data-palabras="cifrado césar criptografía desplazar letras chr ord ejercicio texto">
+					<h3>Cifrado César</h3>
+					<p>Desplaza cada letra un número fijo de posiciones.</p>
+					<pre><code>def cesar(texto, k):
+    def mover(c):
+        if not c.isalpha(): return c
+        base = ord("A") if c.isupper() else ord("a")
+        return chr((ord(c) - base + k) % 26 + base)
+    return "".join(map(mover, texto))
+cesar("Hola", 3)        # 'Krod' </code></pre>
+					<p class="propiedad">Funciones: <code>ord</code>, <code>chr</code></p>
+				</article>
+				<article class="concepto-css" id="validar-un-dni-espanol" data-palabras="dni letra validar módulo 23 nif ejercicio cadena">
+					<h3>Validar un DNI español</h3>
+					<p>La letra del DNI se calcula con el resto de dividir el número entre 23.</p>
+					<pre><code>LETRAS = "TRWAGMYFPDXBNJZSQVHLCKE"
+def dni_valido(dni):
+    dni = dni.upper().replace("-", "")
+    return len(dni) == 9 and dni[:8].isdigit() and LETRAS[int(dni[:8]) % 23] == dni[8]
+dni_valido("12345678Z")      # True</code></pre>
+					<p class="propiedad">Algoritmo: <code>número % 23</code></p>
+				</article>
+			</div>
+		</section>
+
+		<section class="sin-resultados-css" id="sin-resultados" hidden>
+			<h2>No encuentro ese término</h2>
+			<p>Prueba con otra palabra o busca en la <a href="inicio.html">página de inicio</a>, que reúne todas las guías.</p>
+		</section>
+
+		<section class="regla-practica">
+			<h2>Una última pista</h2>
+			<p>Escribe pequeños programas y pruébalos en el intérprete interactivo (<code>python</code>). Usa un entorno virtual por proyecto (<code>python -m venv .venv</code>), sigue PEP 8 y lee los mensajes de error completos: indican el tipo, el archivo y la línea. Si un mensaje no te suena, búscalo en la guía de <a href="errores.html">errores típicos</a>.</p>
+		</section>
+	</main>
+
+	<footer class="pie-guia">
+		<p>Guía de apoyo para aprender los fundamentos de Python.</p>
+		<a href="inicio.html">Inicio</a>
+		<a href="index.html">HTML</a>
+		<a href="css.html">CSS</a>
+		<a href="js.html">JavaScript</a>
+		<a href="java.html">Java</a>
+		<a href="regex.html">Regex</a>
+		<a href="errores.html">Errores</a>
+	</footer>
+
+	<script>
+		const campoBusqueda = document.querySelector("#buscar");
+		const limpiarBusqueda = document.querySelector("#limpiar");
+		const conceptos = [...document.querySelectorAll(".concepto-css")];
+		const categorias = [...document.querySelectorAll("[data-categoria]")];
+		const contador = document.querySelector("#resultado-python");
+		const sinResultados = document.querySelector("#sin-resultados");
+
+		function normalizar(texto) {
+			return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
+		}
+
+		function filtrarConceptos() {
+			const consulta = normalizar(campoBusqueda.value.trim());
+			let cantidad = 0;
+
+			conceptos.forEach((concepto) => {
+				const texto = normalizar(`${concepto.textContent} ${concepto.dataset.palabras}`);
+				const coincide = consulta.split(/\s+/).filter(Boolean).every((palabra) => texto.includes(palabra));
+				concepto.hidden = !coincide;
+				if (coincide) cantidad += 1;
+			});
+
+			categorias.forEach((categoria) => {
+				categoria.hidden = !categoria.querySelector(".concepto-css:not([hidden])");
+			});
+
+			sinResultados.hidden = cantidad > 0 || consulta === "";
+			contador.textContent = consulta
+				? `${cantidad} ${cantidad === 1 ? "resultado" : "resultados"}`
+				: `${conceptos.length} conceptos en ${categorias.length} categorías`;
+		}
+
+		campoBusqueda.addEventListener("input", filtrarConceptos);
+		limpiarBusqueda.addEventListener("click", () => {
+			campoBusqueda.value = "";
+			filtrarConceptos();
+			campoBusqueda.focus();
+		});
+
+		filtrarConceptos();
+	</script>
+</body>
+
+</html>

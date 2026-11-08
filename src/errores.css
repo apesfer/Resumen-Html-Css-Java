@@ -1,0 +1,43 @@
+/*
+Estilos de la guía de errores típicos.
+Se carga después de css.css y sustituye su paleta por la propia de esta guía.
+Autor: apesfer
+*/
+
+.guia-css.guia-errores {
+    --guia-tinta: #2b2220;
+    --guia-papel: #fbf3ee;
+    --guia-blanco: #fffdfb;
+    --guia-verde: #9b2c1a;
+    --guia-linea: #ead8cf;
+    --guia-suave: #6b5750;
+    background: var(--guia-papel);
+    color: var(--guia-tinta);
+}
+
+.guia-css.guia-errores a:hover { color: #1f5f7a; }
+.guia-css.guia-errores :focus-visible { outline-color: #1f5f7a; }
+.guia-css.guia-errores .guia-portada { background: linear-gradient(115deg, #3b1a14, #8c2f1c 70%, #b5532e); }
+.guia-css.guia-errores .mini-nav-guias { background: #3b1a14; }
+.guia-css.guia-errores .mini-nav-guias a[aria-current="page"] { background: #ffd2a8; color: #3b1a14; }
+.guia-css.guia-errores .mini-nav-guias a[aria-current="page"]:hover { background: #ffe1c6; color: #3b1a14; }
+.guia-css.guia-errores .guia-etiqueta,
+.guia-css.guia-errores .pie-guia a { color: #ffd2a8; }
+.guia-css.guia-errores .guia-portada h1 em { color: #ffd9bf; }
+.guia-css.guia-errores .campo-busqueda > span,
+.guia-css.guia-errores .atajos-css a { color: #9b2c1a; }
+.guia-css.guia-errores .atajos-css a { background: #f3e3da; }
+.guia-css.guia-errores .atajos-css a:hover { border-color: #e0c6b8; background: #ead3c6; }
+.guia-css.guia-errores #resultado-errores { margin: 7px 0 0; color: #f6dfd1; font-size: .82rem; }
+.guia-css.guia-errores .nota-css { border-left-color: #1f5f7a; background: #f3e3da; }
+.guia-css.guia-errores .nota-css code,
+.guia-css.guia-errores .regla-practica code { background: #ecd6c9; color: #3b1a14; }
+.guia-css.guia-errores .cabecera-categoria > span { color: #1f5f7a; }
+.guia-css.guia-errores .cabecera-categoria h2,
+.guia-css.guia-errores .regla-practica h2,
+.guia-css.guia-errores .sin-resultados-css h2,
+.guia-css.guia-errores .concepto-css h3 { color: #9b2c1a; }
+.guia-css.guia-errores .concepto-css pre { background: #2a1f1c; }
+.guia-css.guia-errores .concepto-css .propiedad code { color: #9b2c1a; }
+.guia-css.guia-errores .regla-practica { background: #f3e3da; }
+.guia-css.guia-errores .pie-guia { background: #3b1a14; }

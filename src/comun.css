@@ -1,0 +1,37 @@
+/*
+Estilos comunes a todas las guías.
+- Margen y resaltado al saltar a un concepto desde el buscador de la página de inicio.
+- Menú de guías con desplazamiento horizontal en pantallas estrechas.
+Autor: apesfer
+*/
+
+.concepto-css {
+    scroll-margin-top: 76px;
+}
+
+.concepto-css:target {
+    outline: 3px solid #bd573d;
+    outline-offset: 3px;
+}
+
+.mini-nav-guias {
+    max-width: calc(100% - 24px);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.mini-nav-guias::-webkit-scrollbar {
+    display: none;
+}
+
+.mini-nav-guias a {
+    flex: none;
+    white-space: nowrap;
+}
+
+.concepto-css:target h3::after {
+    content: "  ← encontrado";
+    color: #bd573d;
+    font-size: .75rem;
+    font-weight: 400;
+}

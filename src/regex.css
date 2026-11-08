@@ -1,0 +1,85 @@
+/*
+Estilos de la guía de expresiones regulares.
+Se carga después de css.css y sustituye su paleta por la propia de esta guía.
+Autor: apesfer
+*/
+
+.guia-css.guia-regex {
+    --guia-tinta: #2d2226;
+    --guia-papel: #f9f2f4;
+    --guia-blanco: #fffefe;
+    --guia-verde: #8a1f4b;
+    --guia-linea: #e6d3d9;
+    --guia-suave: #6a5560;
+    background: var(--guia-papel);
+    color: var(--guia-tinta);
+}
+
+.guia-css.guia-regex a:hover { color: #1f6f6b; }
+.guia-css.guia-regex :focus-visible { outline-color: #1f6f6b; }
+.guia-css.guia-regex .guia-portada { background: linear-gradient(115deg, #3a1426, #7a1f4b 70%, #a3425f); }
+.guia-css.guia-regex .mini-nav-guias { background: #3a1426; }
+.guia-css.guia-regex .mini-nav-guias a[aria-current="page"] { background: #ffd1e0; color: #3a1426; }
+.guia-css.guia-regex .mini-nav-guias a[aria-current="page"]:hover { background: #ffe3ec; color: #3a1426; }
+.guia-css.guia-regex .guia-etiqueta,
+.guia-css.guia-regex .pie-guia a { color: #ffd1e0; }
+.guia-css.guia-regex .guia-portada h1 em { color: #ffd9e6; }
+.guia-css.guia-regex .campo-busqueda > span,
+.guia-css.guia-regex .atajos-css a { color: #8a1f4b; }
+.guia-css.guia-regex .atajos-css a { background: #f1e1e7; }
+.guia-css.guia-regex .atajos-css a:hover { border-color: #dcc0cb; background: #e8cfd9; }
+.guia-css.guia-regex #resultado-regex { margin: 7px 0 0; color: #f3dae3; font-size: .82rem; }
+.guia-css.guia-regex .nota-css { border-left-color: #1f6f6b; background: #f1e1e7; }
+.guia-css.guia-regex .nota-css code,
+.guia-css.guia-regex .regla-practica code { background: #ecd3dc; color: #3a1426; }
+.guia-css.guia-regex .cabecera-categoria > span { color: #1f6f6b; }
+.guia-css.guia-regex .cabecera-categoria h2,
+.guia-css.guia-regex .regla-practica h2,
+.guia-css.guia-regex .sin-resultados-css h2,
+.guia-css.guia-regex .concepto-css h3 { color: #8a1f4b; }
+.guia-css.guia-regex .concepto-css pre { background: #2a1d23; }
+.guia-css.guia-regex .concepto-css .propiedad code { color: #8a1f4b; }
+.guia-css.guia-regex .regla-practica { background: #f1e1e7; }
+.guia-css.guia-regex .pie-guia { background: #3a1426; }
+
+/* Probador */
+.guia-css.guia-regex .probador {
+    margin: 24px 0 8px;
+    padding: 20px;
+    border: 1px solid var(--guia-linea);
+    background: var(--guia-blanco);
+}
+.guia-css.guia-regex .probador h2 { margin: 0 0 4px; color: #8a1f4b; font: 500 1.4rem Georgia, serif; }
+.guia-css.guia-regex .probador-ayuda { margin: 0 0 14px; color: var(--guia-suave); font-size: .9rem; }
+.guia-css.guia-regex .probador label { display: block; margin: 10px 0 4px; font-size: .85rem; font-weight: 700; }
+.guia-css.guia-regex .probador-fila { display: flex; flex-wrap: wrap; gap: 0 14px; }
+.guia-css.guia-regex .probador-fila > div { min-width: 0; }
+.guia-css.guia-regex .probador-fila .grande { flex: 1 1 320px; }
+.guia-css.guia-regex .probador-fila .pequeno { flex: 0 0 110px; }
+.guia-css.guia-regex .probador-fila .medio { flex: 0 1 220px; }
+.guia-css.guia-regex .probador input,
+.guia-css.guia-regex .probador select,
+.guia-css.guia-regex .probador textarea {
+    width: 100%;
+    padding: 9px 11px;
+    border: 1px solid #c9b0ba;
+    border-radius: 4px;
+    background: #fff;
+    color: var(--guia-tinta);
+    font: .95rem/1.5 Consolas, "Courier New", monospace;
+}
+.guia-css.guia-regex .probador select { font-family: inherit; }
+.guia-css.guia-regex .probador textarea { resize: vertical; }
+.guia-css.guia-regex #rx-estado { margin: 12px 0 6px; font-weight: 700; color: #8a1f4b; }
+.guia-css.guia-regex .probador-salida {
+    margin: 0;
+    padding: 12px 14px;
+    overflow-x: auto;
+    background: #2a1d23;
+    color: #f3e8ec;
+    font: .9rem/1.6 Consolas, "Courier New", monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.guia-css.guia-regex .probador-salida mark { background: #ffd1e0; color: #3a1426; padding: 0 2px; border-radius: 2px; }
+.guia-css.guia-regex .probador-grupos { margin: 12px 0 0; padding-left: 22px; font: .85rem/1.6 Consolas, monospace; color: var(--guia-suave); }

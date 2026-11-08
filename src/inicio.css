@@ -1,0 +1,114 @@
+/*
+Estilos de la guía de la página de inicio.
+Se carga después de css.css y sustituye su paleta por la propia de esta guía.
+Autor: apesfer
+*/
+
+.guia-css.guia-inicio {
+    --guia-tinta: #1f2937;
+    --guia-papel: #f3f4f6;
+    --guia-blanco: #ffffff;
+    --guia-verde: #1f3a5f;
+    --guia-linea: #d5d9e0;
+    --guia-suave: #4b5563;
+    background: var(--guia-papel);
+    color: var(--guia-tinta);
+}
+
+.guia-css.guia-inicio a:hover { color: #b45309; }
+.guia-css.guia-inicio :focus-visible { outline-color: #b45309; }
+.guia-css.guia-inicio .guia-portada { background: linear-gradient(115deg, #111827, #1f3a5f 70%, #2f5d62); }
+.guia-css.guia-inicio .mini-nav-guias { background: #111827; }
+.guia-css.guia-inicio .mini-nav-guias a[aria-current="page"] { background: #7dd3c0; color: #111827; }
+.guia-css.guia-inicio .mini-nav-guias a[aria-current="page"]:hover { background: #a7e3d5; color: #111827; }
+.guia-css.guia-inicio .guia-etiqueta,
+.guia-css.guia-inicio .pie-guia a { color: #7dd3c0; }
+.guia-css.guia-inicio .guia-portada h1 em { color: #a7e3d5; }
+.guia-css.guia-inicio .campo-busqueda > span,
+.guia-css.guia-inicio .atajos-css a { color: #1f3a5f; }
+.guia-css.guia-inicio .atajos-css a { background: #e5e7eb; }
+.guia-css.guia-inicio .atajos-css a:hover { border-color: #cbd0d8; background: #d9dde3; }
+.guia-css.guia-inicio #resultado-inicio { margin: 7px 0 0; color: #d9e2ec; font-size: .82rem; }
+.guia-css.guia-inicio .nota-css { border-left-color: #b45309; background: #e5e9f0; }
+.guia-css.guia-inicio .nota-css code,
+.guia-css.guia-inicio .regla-practica code { background: #d9dde3; color: #111827; }
+.guia-css.guia-inicio .cabecera-categoria > span { color: #b45309; }
+.guia-css.guia-inicio .cabecera-categoria h2,
+.guia-css.guia-inicio .regla-practica h2,
+.guia-css.guia-inicio .sin-resultados-css h2,
+.guia-css.guia-inicio .concepto-css h3 { color: #1f3a5f; }
+.guia-css.guia-inicio .concepto-css pre { background: #111827; }
+.guia-css.guia-inicio .concepto-css .propiedad code { color: #9a3412; }
+.guia-css.guia-inicio .regla-practica { background: #e5e9f0; }
+.guia-css.guia-inicio .pie-guia { background: #111827; }
+
+.guia-css.guia-inicio .titulo-seccion {
+    margin: 34px 0 14px;
+    color: #1f3a5f;
+    font: 500 1.6rem Georgia, "Times New Roman", serif;
+}
+.guia-css.guia-inicio .tarjetas-guias {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+.guia-css.guia-inicio .tarjeta-guia {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 18px 18px 16px;
+    border: 1px solid var(--guia-linea);
+    border-top: 6px solid var(--color-guia);
+    background: #fff;
+    color: var(--guia-tinta);
+    text-decoration: none;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+.guia-css.guia-inicio .tarjeta-guia:hover {
+    color: var(--guia-tinta);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgb(0 0 0 / 12%);
+}
+.guia-css.guia-inicio .tarjeta-nombre { color: var(--color-guia); font: 500 1.5rem Georgia, serif; }
+.guia-css.guia-inicio .tarjeta-desc { color: var(--guia-suave); font-size: .92rem; flex: 1; }
+.guia-css.guia-inicio .tarjeta-cuenta { font-size: .8rem; font-weight: 700; color: var(--color-guia); }
+.guia-css.guia-inicio .chips, .guia-css.guia-inicio .filtros { display: flex; flex-wrap: wrap; gap: 8px; }
+.guia-css.guia-inicio .chip, .guia-css.guia-inicio .filtro, .guia-css.guia-inicio .boton-mas {
+    padding: 6px 14px;
+    border: 1px solid #b9c0cb;
+    border-radius: 999px;
+    background: #fff;
+    color: #1f3a5f;
+    font: 700 .85rem/1.4 inherit;
+    font-family: inherit;
+    cursor: pointer;
+}
+.guia-css.guia-inicio .chip:hover, .guia-css.guia-inicio .filtro:hover, .guia-css.guia-inicio .boton-mas:hover { background: #e5e9f0; }
+.guia-css.guia-inicio .filtro[aria-pressed="true"] { background: #1f3a5f; border-color: #1f3a5f; color: #fff; }
+.guia-css.guia-inicio .resultados { display: grid; gap: 10px; margin: 16px 0; padding: 0; list-style: none; }
+.guia-css.guia-inicio .resultados a {
+    display: grid;
+    gap: 3px;
+    padding: 12px 16px;
+    border: 1px solid var(--guia-linea);
+    border-left: 6px solid var(--color-guia);
+    background: #fff;
+    color: var(--guia-tinta);
+    text-decoration: none;
+}
+.guia-css.guia-inicio .resultados a:hover { background: #f8fafc; }
+.guia-css.guia-inicio .resultados strong { color: #1f3a5f; font-size: 1.05rem; }
+.guia-css.guia-inicio .insignia {
+    justify-self: start;
+    padding: 1px 9px;
+    border-radius: 999px;
+    background: var(--color-guia);
+    color: #fff;
+    font-size: .72rem;
+    font-weight: 700;
+}
+.guia-css.guia-inicio .cat { color: var(--guia-suave); font-size: .8rem; }
+.guia-css.guia-inicio .resumen { color: #374151; font-size: .9rem; }
+.guia-css.guia-inicio .vacio { padding: 30px 10px; text-align: center; color: var(--guia-suave); }
+.guia-css.guia-inicio kbd { padding: 1px 6px; border: 1px solid #aab; border-radius: 4px; background: #fff; font-size: .85em; }
+.guia-css.guia-inicio .nota-css { margin-top: 34px; }
