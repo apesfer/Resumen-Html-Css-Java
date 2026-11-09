@@ -16,14 +16,30 @@ El repositorio está compuesto por los siguientes módulos didácticos:
 
 ## 🛠️ Estructura de Archivos
 
-La organización del código se distribuye de la siguiente manera para mantener cada tema aislado y ordenado:
+La organización del proyecto es la siguiente:
 
-├── index.html      # Documento principal de HTML
-├── index.css       # Estilos exclusivos para el resumen de HTML
-├── css.html        # Documento principal de CSS
-├── css.css         # Estilos exclusivos para el resumen de CSS
-├── java.html       # Documento principal de Java
-└── java.css        # Estilos exclusivos para el resumen de Java
+```text
+.
+├── index.html       # Página de inicio y buscador de todas las guías
+├── html.html        # Guía de HTML
+├── css.html         # Guía de CSS
+├── js.html          # Guía de JavaScript
+├── java.html        # Guía de Java
+├── python.html      # Guía de Python
+├── regex.html       # Guía de expresiones regulares
+├── errores.html     # Guía de errores habituales
+├── src/
+│   ├── comun.css    # Estilos compartidos por las guías
+│   ├── css.css      # Estilos base y de la guía de CSS
+│   ├── inicio.css   # Estilos de la página de inicio
+│   ├── index.css    # Estilos de la guía de HTML
+│   ├── js.css       # Estilos de la guía de JavaScript
+│   ├── java.css     # Estilos de la guía de Java
+│   ├── python.css   # Estilos de la guía de Python
+│   ├── regex.css    # Estilos de la guía de expresiones regulares
+│   └── errores.css  # Estilos de la guía de errores
+└── LICENSE.txt      # Licencia del proyecto
+```
 
 ## Para leer y navegar por los resúmenes, no necesitas instalar nada:
 1. Descarga o clona este repositorio en tu ordenador.
